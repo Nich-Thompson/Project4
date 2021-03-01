@@ -17,6 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', function () {
-    return view('home');
+Route::group(['middleware' => ['role:admin']], function () {
+    Route::get('/home', function () {
+        return view('home');
+    });
 });
