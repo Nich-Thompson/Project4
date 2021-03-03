@@ -47,10 +47,10 @@
                                 <div class="d-flex flex-column w-50">
                                     <div id="name"
                                         class="h5 m-0 fw-bold">Inspecteur {{ $inspector->first_name }} {{ $inspector->last_name }}</div>
-                                    <p>{{ $inspector->phone_number }}</p>
+                                        <p>{{ $inspector->phone_number }}</p>
                                 </div>
                                 <div class="d-flex flex-column justify-content-end w-50 text-right pb-2">
-                                    <a href="{{URL::to('/restaurant/'.$inspector->id.'/details')}}">
+                                    <a href="{{URL::to('/inspector/'.$inspector->id.'/details')}}">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
                                              class="bi bi-arrow-right-short" viewBox="0 0 16 16">
                                             <path fill-rule="evenodd"
