@@ -96,4 +96,18 @@ class InspectorController extends Controller
 
         return redirect()->route('getInspectorIndex');
     }
+
+    public function delete($id)
+    {
+        $user = User::find($id);
+        return view('inspectors.archive', ['user'=>$user, 'id'=>$id]);
+    }
+
+    public function destroy($id, Request $request)
+    {
+        // TODO: archive the user
+        error_log("archived");
+
+        return redirect()->route('getInspectorIndex');
+    }
 }

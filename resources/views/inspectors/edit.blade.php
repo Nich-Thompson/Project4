@@ -10,7 +10,7 @@
             </div>
             <div class="col-xs-12 col-sm-6 col-md-12 text-right">
                 <h1>
-                    <button id="archiveButton" class="btn btn-primary" hidden>Archiveren</button>
+                    <a href="{{ route('getInspectorDelete', $id) }}" id="archiveButton" class="btn btn-primary" hidden>Archiveren</a>
                     <button id="switchButton" onclick="enableInput()" class="btn btn-primary">Bewerken</button>
                 </h1>
             </div>
