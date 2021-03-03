@@ -53,6 +53,29 @@ class InspectorController extends Controller
             'password' => $password,
         ]);
 
+        $inspecteur->assignRole('inspecteur');
+
+        return redirect()->route('getInspectorIndex');
+    }
+
+    public function edit(User $user)
+    {
+        return view('inspectors.edit', compact('user'));
+    }
+
+    public function update(Request $request, User $user)
+    {
+        $request->validate([
+            'email' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'phone_number' => 'required',
+            'password' => 'required_with:password_confirmation|same:password_confirmation|min:8',
+            'password_confirmation' => 'min:8'
+        ]);
+
+        $request->update($request->all());
+
         return redirect()->route('getInspectorIndex');
     }
 }

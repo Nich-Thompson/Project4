@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="py-12 px-4">
-        <h1>CREATE</h1>
+        <h1>Nieuwe inspecteur aanmaken</h1>
 
         @if ($errors->any())
             <div class="alert alert-danger">
