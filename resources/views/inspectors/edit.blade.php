@@ -17,7 +17,33 @@
 
         <form action="{{ route('postInspectorEdit', $id ) }}" method="post">
             @csrf
-            
+            {{--@method('POST')--}}
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <input type="text" name="first_name" value="{{ $user->first_name }}" class="form-control">
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <input type="text" name="last_name" value="{{ $user->last_name }}" class="form-control">
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <input type="text" name="email" value="{{ $user->email }}" class="form-control">
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <input type="text" name="phone_number" value="{{ $user->phone_number }}" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
         </form>
     </div>
 @endsection

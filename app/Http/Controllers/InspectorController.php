@@ -64,7 +64,7 @@ class InspectorController extends Controller
         return view('inspectors.edit', ['user'=>$user, 'id'=>$id]);
     }
 
-    public function update(Request $request, $id)
+    public function update($id, Request $request)
     {
         $request->validate([
             'email' => 'required',
