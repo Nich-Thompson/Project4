@@ -10,7 +10,11 @@
                 <a href="{{ route('getInspectorEdit', $id) }}" class="btn btn-default">Terug</a>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-10 text-left">
-                <a href="{{ route('postInspectorDelete', $id) }}" class="btn btn-primary">Archiveren</a>
+                <form action="{{ route('postInspectorDelete', $id) }}" method="post">
+                    @csrf
+                    <button type="submit" class="btn btn-primary">Archiveren</button>
+                </form>
+                {{--<a href="{{ route('postInspectorDelete', $id) }}" class="btn btn-primary">Archiveren</a>--}}
             </div>
         </div>
     </div>
