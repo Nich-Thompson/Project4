@@ -20,42 +20,44 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <strong>First Name:</strong>
-                        <input type="text" name="first_name" class="form-control" placeholder="First Name">
+                        <input type="text" name="first_name" class="form-control" placeholder="Voornaam*">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <strong>Last Name:</strong>
-                        <input type="text" name="last_name" class="form-control" placeholder="Last Name">
+                        <input type="text" name="last_name" class="form-control" placeholder="Achternaam*">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <strong>Telephone Number:</strong>
-                        <input type="text" name="phone_number" class="form-control" placeholder="Telephone Number">
+                        <input type="text" name="phone_number" class="form-control" placeholder="Telefoonnummer*">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <strong>E-mail address:</strong>
-                        <input type="text" name="email" class="form-control" placeholder="E-mail">
+                        <input type="text" name="email" class="form-control" placeholder="E-mailadres*">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <strong>Password:</strong>
-                        <input type="text" name="password" class="form-control" placeholder="">
+                        <input type="text" name="password" class="form-control" placeholder="Wachtwoord*">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <strong>Repeat Password:</strong>
-                        <input type="text" name="password_confirmation" class="form-control" placeholder="">
+                        <input type="text" name="password_confirmation" class="form-control" placeholder="Herhaal wachtwoord*">
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    Velden met een ster(*) zijn verplicht.
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-12 text-leftf">
+                    <a href="{{ url()->previous() }}" class="btn btn-default">Terug</a>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 text-right">
+                    <button type="submit" class="btn btn-primary">Aanmaken</button>
                 </div>
             </div>
         </form>
