@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@push('head')
+    <!-- Scripts -->
+    <script src="{{ asset('js/components/pizza.js')}}"></script>
+@endpush
+
 @section('content')
     <div class="py-12">
         <div class="px-4">
@@ -14,32 +19,33 @@
                         </svg>Toevoegen</a>
                     <p class="mb-5"></p>
                     <hr/>
-                    <form action="" method="post">
-                        @csrf
-                        <div class="input-group border w-25">
-                            <input type="text" id="search" name="search" value="{{ old('search') }}"
-                                   class="form-control"
-                                   placeholder="Inspecteur zoeken"/>
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="submit">
+
+                    <div class="input-group border w-25">
+                        <input type="text" id="search" name="search" value="{{ old('search') }}"
+                               class="form-control"
+                               placeholder="Inspecteur zoeken"/>
+                        <span class="input-group-btn">
+                                <button id = 'searchBtn' class="btn btn-default" type="submit">
                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-search" viewBox="0 0 16 16"><path
                                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                                     </svg>
                                 </button>
                             </span>
-                        </div>
-                        <p class="font-italic">Zoek op voornaam, achternaam, telefoonnummer of e-mailadres</p>
-                    </form>
+                    </div>
+                    <p class="font-italic">Zoek op voornaam, achternaam, telefoonnummer of e-mailadres</p>
+                    <div id = "inspectors">
+
+                    </div>
                     @if(count($inspectors) === 0)
                         <div class="mt-4 bg-white">
-                            <p class="float-left h3">No inspectors available</p>
+                            <p class="float-left h3">No inspectors found</p>
                         </div>
                     @else
                         @foreach ($inspectors as $inspector)
-                            <div class="row m-2 p-3 rounded border border-light shadow-sm bg-white">
+                            <div id = 'inspector-field' class="row m-2 p-3 rounded border border-light shadow-sm bg-white">
                                 <div class="d-flex flex-column w-50">
-                                    <div
+                                    <div id="name"
                                         class="h5 m-0 fw-bold">Inspecteur {{ $inspector->first_name }} {{ $inspector->last_name }}</div>
                                     <p>{{ $inspector->phone_number }}</p>
                                 </div>
@@ -61,3 +67,4 @@
     </div>
 @endsection
 
+<script src="{{ asset('js/search.js') }}"></script>
