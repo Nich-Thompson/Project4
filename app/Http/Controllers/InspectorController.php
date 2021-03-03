@@ -71,8 +71,8 @@ class InspectorController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'phone_number' => 'required',
-            'password' => 'required_with:password_confirmation|same:password_confirmation|min:8',
-            'password_confirmation' => 'min:8'
+            /*'password' => 'required_with:password_confirmation|same:password_confirmation|min:8',
+            'password_confirmation' => 'min:8'*/
         ]);
 
         //$request->update($request->all());
@@ -82,7 +82,16 @@ class InspectorController extends Controller
         $user->phone_number = $request->input('phone_number');
         $user->first_name = $request->input('first_name');
         $user->last_name = $request->input('last_name');
-        $user->password = Hash::make($request->input('password'));
+
+        if($request->password != null)
+        {
+            $request->validate([
+                'password' => 'required_with:password_confirmation|same:password_confirmation|min:8',
+                'password_confirmation' => 'min:8'
+            ]);
+            $user->password = Hash::make($request->input('password'));
+        }
+
         $user->save();
 
         return redirect()->route('getInspectorIndex');

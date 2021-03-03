@@ -51,6 +51,10 @@
                     </div>
                 </div>
 
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    Door de wachtwoorden leeg te laten worden deze niet veranderd.
+                </div>
+
                 <div class="col-xs-12 col-sm-12 col-md-12 text-leftf">
                     <a href="{{ url()->previous() }}" class="btn btn-default">Terug</a>
                 </div>
