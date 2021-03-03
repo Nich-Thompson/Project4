@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\Project;
 
 class InspectorController extends Controller
 {
@@ -17,5 +18,39 @@ class InspectorController extends Controller
         return view('inspectors.index', [
             'inspectors' => $inspectors
         ]);
+    }
+
+    public function create()
+    {
+        return view('inspectors.create');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'email' => ['required'],
+            'first_name' => ['required'],
+            'last_name' => ['required'],
+            'phone_number' => ['required'],
+            'password' => ['required', 'min:8'],
+        ]);
+
+        $name = "inspecteur";
+        $email = $request->input('email');
+        $phone_number = $request->input('phone_number');
+        $first_name = $request->input('first_name');
+        $last_name = $request->input('last_name');
+        $password = $request->input('password');
+
+        $inspecteur = User::create([
+            'name' => $name,
+            'email' => $email,
+            'phone_number' => $phone_number,
+            'first_name' => $first_name,
+            'last_name' => $last_name,
+            'password' => $password,
+        ]);
+
+        return redirect()->route('getInspectorIndex');
     }
 }
