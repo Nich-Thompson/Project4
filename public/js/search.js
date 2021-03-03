@@ -7,7 +7,7 @@ window.onload = function () {
         search();
     });
     document.getElementById('searchBtn').addEventListener('click', (e) => {
-        e.preventDefault();
+        e.preventDefault()
     })
     inspectorFields = document.querySelectorAll('[id=inspector-field]');
 };
