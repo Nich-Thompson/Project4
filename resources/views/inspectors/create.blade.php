@@ -48,12 +48,12 @@
                         <input type="text" name="password" class="form-control" placeholder="">
                     </div>
                 </div>
-                {{--<div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Repeat Password:</strong>
-                        <input type="text" name="" class="form-control" placeholder="">
+                        <input type="text" name="password_confirmation" class="form-control" placeholder="">
                     </div>
-                </div>--}}
+                </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use phpDocumentor\Reflection\Project;
 
 class InspectorController extends Controller
@@ -28,11 +29,12 @@ class InspectorController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'email' => ['required'],
-            'first_name' => ['required'],
-            'last_name' => ['required'],
-            'phone_number' => ['required'],
-            'password' => ['required', 'min:8'],
+            'email' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'phone_number' => 'required',
+            'password' => 'required_with:password_confirmation|same:password_confirmation|min:8',
+            'password_confirmation' => 'min:8'
         ]);
 
         $name = "inspecteur";
@@ -40,7 +42,7 @@ class InspectorController extends Controller
         $phone_number = $request->input('phone_number');
         $first_name = $request->input('first_name');
         $last_name = $request->input('last_name');
-        $password = $request->input('password');
+        $password = Hash::make($request->input('password'));
 
         $inspecteur = User::create([
             'name' => $name,
