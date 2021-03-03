@@ -17,7 +17,8 @@
 
         <form action="{{ route('postInspectorEdit', $id ) }}" method="post">
             @csrf
-            {{--@method('POST')--}}
+            {{--@method('PUT')--}}
+
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
@@ -39,9 +40,22 @@
                         <input type="text" name="phone_number" value="{{ $user->phone_number }}" class="form-control">
                     </div>
                 </div>
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <input type="text" name="password" value="" class="form-control" placeholder="Wachtwoord*">
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <input type="text" name="password_confirmation" value="" class="form-control" placeholder="Herhaal wachtwoord*">
+                    </div>
+                </div>
 
-                <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="col-xs-12 col-sm-12 col-md-12 text-leftf">
+                    <a href="{{ url()->previous() }}" class="btn btn-default">Terug</a>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 text-right">
+                    <button type="submit" class="btn btn-primary">Opslaan</button>
                 </div>
             </div>
         </form>

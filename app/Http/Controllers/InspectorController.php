@@ -75,7 +75,15 @@ class InspectorController extends Controller
             'password_confirmation' => 'min:8'
         ]);
 
-        $request->update($request->all());
+        //$request->update($request->all());
+        $user = User::find($id);
+        $user->first_name = $request->input('first_name');
+        $user->email = $request->input('email');
+        $user->phone_number = $request->input('phone_number');
+        $user->first_name = $request->input('first_name');
+        $user->last_name = $request->input('last_name');
+        $user->password = Hash::make($request->input('password'));
+        $user->save();
 
         return redirect()->route('getInspectorIndex');
     }
