@@ -14,10 +14,10 @@
                 </ul>
             </div>
         @endif
-{{--
+
         <form action="{{ route('postInspectorEdit', $id ) }}" method="post">
             @csrf
-
-        </form>--}}
+            
+        </form>
     </div>
 @endsection

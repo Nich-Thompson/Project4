@@ -58,12 +58,13 @@ class InspectorController extends Controller
         return redirect()->route('getInspectorIndex');
     }
 
-    public function edit(User $user)
+    public function edit($id)
     {
-        return view('inspectors.edit', compact('user'));
+        $user = User::find($id);
+        return view('inspectors.edit', ['user'=>$user, 'id'=>$id]);
     }
 
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'email' => 'required',
