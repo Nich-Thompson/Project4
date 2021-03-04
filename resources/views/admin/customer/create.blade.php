@@ -7,51 +7,53 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
-                    <span class="float-left h2">Create new customer</span>
+                    <span class="float-left h2">Nieuwe klant aanmaken</span>
                     <br><br>
+                    <hr>
                     <form action="{{ route('postCustomerCreate') }}" method="post">
                         @csrf
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter customer name">
+                        <div class="row text-center">
+                            <div class="form-group ml-3">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Naam*">
+                            </div>
+                            <div class="form-group ml-3">
+                                <input type="text" class="form-control" id="contact_phone_number" name="contact_phone_number" placeholder="Telefoonnummer">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="city">City</label>
-                            <input type="text" class="form-control" id="city" name="city" placeholder="Enter city name">
+                        <div class="row text-center">
+                            <div class="form-group ml-3">
+                                <input type="number" class="form-control" id="number" name="number" placeholder="Huisnummer">
+                            </div>
+                            <div class="form-group ml-3">
+                                <input type="text" class="form-control" id="street" name="street" placeholder="Straatnaam">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="street">Street</label>
-                            <input type="text" class="form-control" id="street" name="street" placeholder="Enter street name">
-                        </div>
-                        <div class="form-group">
-                            <label for="number">House number</label>
-                            <input type="number" class="form-control" id="number" name="number" placeholder="Enter house number">
-                        </div>
-                        <div class="form-group">
-                            <label for="postal_code">Postal code</label>
-                            <input type="text" class="form-control" id="postal_code" name="postal_code" placeholder="1234AA">
-                        </div>
-                        <div class="form-group">
-                            <label for="contact_name">Contact name</label>
-                            <input type="text" class="form-control" id="contact_name" name="contact_name" placeholder="Enter contact name">
-                        </div>
-                        <div class="form-group">
-                            <label for="contact_phone_number">Contact phone number</label>
-                            <input type="text" class="form-control" id="contact_phone_number" name="contact_phone_number" placeholder="06 12345678">
-                        </div>
-                        <div class="form-group">
-                            <label for="contact_email">Contact email</label>
-                            <input type="text" class="form-control" id="contact_email" name="contact_email" placeholder="name@provider.com">
+                        <div class="row text-center">
+                            <div class="form-group ml-3">
+                                <input type="text" class="form-control" id="postal_code" name="postal_code" placeholder="1234AA">
+                            </div>
+                            <div class="form-group ml-3">
+                                <input type="text" class="form-control" id="city" name="city" placeholder="Enter city name">
+                            </div>
                         </div>
                         <br>
-                        <button type="submit" class="btn btn-success">Create</button>
+                        <p class="ml-1">Contactpersoon</p>
+                        <div class="row text-center">
+                            <div class="form-group ml-3">
+                                <input type="text" class="form-control" id="contact_name" name="contact_name" placeholder="Contactpersoon naam">
+                            </div>
+                            <div class="form-group ml-3">
+                                <input type="text" class="form-control" id="contact_email" name="contact_email" placeholder="Contactpersoon e-mail">
+                            </div>
+                        </div>
+                        <p class="ml-1">Velden met een ster (*) zijn verplicht</p>
+                        <br>
+                            <a href="{{URL::to('/customer')}}" class="btn">Terug</a>
+                            <button type="submit" class="float-right btn btn-secondary text-light">Aanmaken</button>
                     </form>
-                    <a href="{{URL::to('/customer')}}">
-                        <button class="mt-3 btn btn-primary">Back</button>
-                    </a>
-                    <div>
-                    </div>
                 </div>
             </div>
         </div>
-        @endsection
+    </div>
+</div>
+@endsection
