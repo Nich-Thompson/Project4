@@ -3,7 +3,7 @@ let inspectorFields;
 
 window.onload = function () {
     searchInput = document.getElementById('search');
-    searchInput.addEventListener('input',(e) => {
+    searchInput.addEventListener('keyup',(e) => {
         search();
     });
     document.getElementById('searchBtn').addEventListener('click', (e) => {
