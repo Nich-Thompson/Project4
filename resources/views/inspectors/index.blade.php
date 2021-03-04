@@ -33,13 +33,13 @@
                                 </button>
                             </span>
                     </div>
-                    <p class="font-italic">Zoek op voornaam, achternaam, telefoonnummer of e-mailadres</p>
+                    <p class="font-italic">Zoek op voornaam of achternaam</p>
                     <div id = "inspectors">
 
                     </div>
                     @if(count($inspectors) === 0)
                         <div class="mt-4 bg-white">
-                            <p class="float-left h3">No inspectors found</p>
+                            <p class="float-left h3">Geen inspecteurs gevonden</p>
                         </div>
                     @else
                         @foreach ($inspectors as $inspector)
