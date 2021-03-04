@@ -43,7 +43,7 @@ function showFilteredFields(filteredFields){
     inspectors.innerHTML = null;
     if(filteredFields.length === 0){
         inspectors.innerHTML = ' <div class="mt-4 bg-white">\n' +
-            '                            <p class="float-left h3">No inspectors available</p>\n' +
+            '                            <p class="float-left h3">Geen inspecteurs beschikbaar</p>\n' +
             '                        </div>';
         return;
     }
