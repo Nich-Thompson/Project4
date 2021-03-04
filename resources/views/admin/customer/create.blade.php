@@ -8,7 +8,6 @@
             <div class="card">
                 <div class="card-body">
                     <span class="float-left h2">Create new customer</span>
-                    <a href="{{URL::to('/customer')}}" class="w-25 btn btn-primary">Back</a>
                     <br><br>
                     <form action="{{ route('postCustomerCreate') }}" method="post">
                         @csrf
@@ -47,6 +46,9 @@
                         <br>
                         <button type="submit" class="btn btn-success">Create</button>
                     </form>
+                    <a href="{{URL::to('/customer')}}">
+                        <button class="mt-3 btn btn-primary">Back</button>
+                    </a>
                     <div>
                     </div>
                 </div>

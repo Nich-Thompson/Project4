@@ -5,11 +5,11 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card text-center">
+            <div class="card">
                 <div class="card-body">
-                    <span class="float-left h2">Customers</span>
+                    <span class="h2">Customers</span>
                     <a href="customer/create">
-                    <button class="btn bg-success">Aanmaken</button>
+                    <button class="btn float-right bg-success">Aanmaken</button>
                     </a>
                 </div>
                 <div class="mx-4">
