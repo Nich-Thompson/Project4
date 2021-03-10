@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreInspectorRequest extends FormRequest
@@ -39,5 +40,16 @@ class StoreInspectorRequest extends FormRequest
             'password.same' => 'De wachtwoorden komen niet overeen.',
             'password.min' => 'Je wachtwoord moet minstens 8 tekens lang zijn.'
         ];
+    }
+
+    public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+            $email = $this->email;
+            $user = User::where('email', $email)->get();
+            if ($user != null) {
+                $validator->errors()->add('field', 'Dit e-mailadres is al in gebruik.');
+            }
+        });
     }
 }

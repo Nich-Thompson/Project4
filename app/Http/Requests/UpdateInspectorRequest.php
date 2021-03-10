@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateInspectorRequest extends FormRequest
@@ -50,5 +51,23 @@ class UpdateInspectorRequest extends FormRequest
             'password.same' => 'De wachtwoorden komen niet overeen.',
             'password.min' => 'Je wachtwoord moet minstens 8 tekens lang zijn.'
         ];
+    }
+
+    public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+            $oldEmail = $this->old_email;
+            $email = $this->email;
+            print $oldEmail;
+            print $email;
+            // Check if the email has changed
+            if (strcmp($oldEmail, $email) != 0) {
+                // Check if another user with this email exists TODO: this currently always triggers
+                $user = User::where('email', $email)->get();
+                if ($user != null) {
+                    $validator->errors()->add('field', 'Dit e-mailadres is al in gebruik.');
+                }
+            }
+        });
     }
 }
