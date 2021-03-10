@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreInspectorRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -26,17 +27,8 @@ class InspectorController extends Controller
         return view('inspectors.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreInspectorRequest $request)
     {
-        $request->validate([
-            'email' => 'required',
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'phone_number' => 'required',
-            'password' => 'required_with:password_confirmation|same:password_confirmation|min:8',
-            'password_confirmation' => 'min:8'
-        ]);
-
         $name = "inspecteur";
         $email = $request->input('email');
         $phone_number = $request->input('phone_number');
