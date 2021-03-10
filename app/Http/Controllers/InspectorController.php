@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreInspectorRequest;
+use App\Http\Requests\UpdateInspectorRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -29,20 +30,13 @@ class InspectorController extends Controller
 
     public function store(StoreInspectorRequest $request)
     {
-        $name = "inspecteur";
-        $email = $request->input('email');
-        $phone_number = $request->input('phone_number');
-        $first_name = $request->input('first_name');
-        $last_name = $request->input('last_name');
-        $password = Hash::make($request->input('password'));
-
         $inspecteur = User::create([
-            'name' => $name,
-            'email' => $email,
-            'phone_number' => $phone_number,
-            'first_name' => $first_name,
-            'last_name' => $last_name,
-            'password' => $password,
+            'name' => "inspecteur",
+            'email' => $request->input('email'),
+            'phone_number' => $request->input('phone_number'),
+            'first_name' => $request->input('first_name'),
+            'last_name' => $request->input('last_name'),
+            'password' => Hash::make($request->input('password')),
         ]);
 
         $inspecteur->assignRole('inspecteur');
@@ -56,18 +50,8 @@ class InspectorController extends Controller
         return view('inspectors.edit', ['user'=>$user, 'id'=>$id]);
     }
 
-    public function update($id, Request $request)
+    public function update($id, UpdateInspectorRequest $request)
     {
-        $request->validate([
-            'email' => 'required',
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'phone_number' => 'required',
-            /*'password' => 'required_with:password_confirmation|same:password_confirmation|min:8',
-            'password_confirmation' => 'min:8'*/
-        ]);
-
-        //$request->update($request->all());
         $user = User::find($id);
         $user->first_name = $request->input('first_name');
         $user->email = $request->input('email');
@@ -77,10 +61,6 @@ class InspectorController extends Controller
 
         if($request->password != null)
         {
-            $request->validate([
-                'password' => 'required_with:password_confirmation|same:password_confirmation|min:8',
-                'password_confirmation' => 'min:8'
-            ]);
             $user->password = Hash::make($request->input('password'));
         }
 

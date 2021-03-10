@@ -20,32 +20,32 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <input type="text" name="first_name" class="form-control" placeholder="Voornaam*">
+                        <input type="text" name="first_name" class="form-control" placeholder="Voornaam*" required oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" oninput="this.setCustomValidity('')">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <input type="text" name="last_name" class="form-control" placeholder="Achternaam*">
+                        <input type="text" name="last_name" class="form-control" placeholder="Achternaam*" required oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" oninput="this.setCustomValidity('')">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <input type="text" name="phone_number" class="form-control" placeholder="Telefoonnummer*">
+                        <input type="text" name="phone_number" class="form-control" placeholder="Telefoonnummer*" required oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" oninput="this.setCustomValidity('')">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <input type="text" name="email" class="form-control" placeholder="E-mailadres*">
+                        <input type="text" name="email" class="form-control" placeholder="E-mailadres*" required oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" oninput="this.setCustomValidity('')">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <input type="text" name="password" class="form-control" placeholder="Wachtwoord*">
+                        <input type="text" name="password" class="form-control" placeholder="Wachtwoord*" required oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" oninput="this.setCustomValidity('')">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <input type="text" name="password_confirmation" class="form-control" placeholder="Herhaal wachtwoord*">
+                        <input type="text" name="password_confirmation" class="form-control" placeholder="Herhaal wachtwoord*" required oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" oninput="this.setCustomValidity('')">
                     </div>
                 </div>
 

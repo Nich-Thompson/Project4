@@ -34,22 +34,22 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <input type="text" name="first_name" value="{{ $user->first_name }}" class="form-control" disabled>
+                        <input type="text" name="first_name" value="{{ $user->first_name }}" class="form-control" disabled required oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" oninput="this.setCustomValidity('')">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <input type="text" name="last_name" value="{{ $user->last_name }}" class="form-control" disabled>
+                        <input type="text" name="last_name" value="{{ $user->last_name }}" class="form-control" disabled required oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" oninput="this.setCustomValidity('')">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <input type="text" name="email" value="{{ $user->email }}" class="form-control" disabled>
+                        <input type="text" name="email" value="{{ $user->email }}" class="form-control" disabled required oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" oninput="this.setCustomValidity('')">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <input type="text" name="phone_number" value="{{ $user->phone_number }}" class="form-control" disabled>
+                        <input type="text" name="phone_number" value="{{ $user->phone_number }}" class="form-control" disabled required oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" oninput="this.setCustomValidity('')">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
@@ -71,7 +71,7 @@
                     <a href="{{ url()->previous() }}" class="btn btn-default">Terug</a>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-6 text-right">
-                    <button type="submit" class="btn btn-primary">Opslaan</button>
+                    <button type="submit" id="saveButton" class="btn btn-primary" hidden>Opslaan</button>
                 </div>
             </div>
         </form>
