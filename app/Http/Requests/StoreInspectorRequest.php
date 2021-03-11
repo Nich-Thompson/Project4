@@ -46,7 +46,7 @@ class StoreInspectorRequest extends FormRequest
     {
         $validator->after(function ($validator) {
             $email = $this->email;
-            $user = User::where('email', '=', $email)->get()->first();
+            $user = User::query()->where('email', '=', $email)->get()->first();
             if ($user != null) {
                 $validator->errors()->add('field', 'Dit e-mailadres is al in gebruik.');
             }
