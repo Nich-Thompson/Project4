@@ -57,6 +57,13 @@ class StoreInspectorRequest extends FormRequest
                 $validator->errors()->add('field', 'Dit e-mailadres is niet correct geformatteerd.');
             }
 
+            // Check if the phone number is valid
+            $phone = $this->phone_number;
+            $phoneNumbersOnly = preg_replace("/[^0-9]/", '', $phone);
+            if(!preg_match("/^[0-9]{10}$/", $phoneNumbersOnly)) {
+                $validator->errors()->add('field', 'Dit telefoonnummer is niet correct geformatteerd.');
+            }
+
             // Check if password contains at least 1 lowercase, uppercase, number and special character
             $password = $this->password;
             $uppercase = preg_match('@[A-Z]@', $password);

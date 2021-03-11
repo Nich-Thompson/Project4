@@ -30,10 +30,11 @@ class InspectorController extends Controller
 
     public function store(StoreInspectorRequest $request)
     {
+        $phoneNumbersOnly = preg_replace("/[^0-9]/", '', $request->input('phone_number'));
         $inspecteur = User::create([
             'name' => "inspecteur",
             'email' => $request->input('email'),
-            'phone_number' => $request->input('phone_number'),
+            'phone_number' => $phoneNumbersOnly,
             'first_name' => $request->input('first_name'),
             'last_name' => $request->input('last_name'),
             'password' => Hash::make($request->input('password')),
@@ -55,7 +56,8 @@ class InspectorController extends Controller
         $user = User::find($id);
         $user->first_name = $request->input('first_name');
         $user->email = $request->input('email');
-        $user->phone_number = $request->input('phone_number');
+        $phoneNumbersOnly = preg_replace("/[^0-9]/", '', $request->input('phone_number'));
+        $user->phone_number = $phoneNumbersOnly;
         $user->first_name = $request->input('first_name');
         $user->last_name = $request->input('last_name');
 
