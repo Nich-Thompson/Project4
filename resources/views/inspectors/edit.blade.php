@@ -53,12 +53,12 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <input type="password" name="password" value="" class="form-control" placeholder="Wachtwoord*" disabled>
+                        <input type="password" name="password" value="" class="form-control" placeholder="Wachtwoord*" disabled hidden> {{--TODO: remove hidden--}}
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <input type="password" name="password_confirmation" value="" class="form-control" placeholder="Herhaal wachtwoord*" disabled>
+                        <input type="password" name="password_confirmation" value="" class="form-control" placeholder="Herhaal wachtwoord*" disabled hidden> {{--TODO: remove hidden--}}
                     </div>
                 </div>
 
