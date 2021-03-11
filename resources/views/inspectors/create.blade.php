@@ -40,12 +40,12 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <input type="text" name="password" class="form-control" placeholder="Wachtwoord*" required oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" oninput="this.setCustomValidity('')">
+                        <input type="password" name="password" class="form-control" placeholder="Wachtwoord*" required oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" oninput="this.setCustomValidity('')">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <input type="text" name="password_confirmation" class="form-control" placeholder="Herhaal wachtwoord*" required oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" oninput="this.setCustomValidity('')">
+                        <input type="password" name="password_confirmation" class="form-control" placeholder="Herhaal wachtwoord*" required oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" oninput="this.setCustomValidity('')">
                     </div>
                 </div>
 
