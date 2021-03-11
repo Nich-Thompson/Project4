@@ -51,6 +51,10 @@ class StoreInspectorRequest extends FormRequest
             if ($user != null) {
                 $validator->errors()->add('field', 'Dit e-mailadres is al in gebruik.');
             }
+            // Check if the email is formatted correctly
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $validator->errors()->add('field', 'Dit e-mailadres is niet correct geformatteerd.');
+            }
         });
     }
 }
