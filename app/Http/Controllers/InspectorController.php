@@ -17,7 +17,7 @@ class InspectorController extends Controller
             'roles', function($q){
             $q->where('name', 'inspecteur');
         }
-        )->get();
+        )->orderBy('first_name', 'ASC')->orderBy('last_name', 'ASC')->get();
         return view('inspectors.index', [
             'inspectors' => $inspectors
         ]);
