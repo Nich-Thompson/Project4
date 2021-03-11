@@ -62,7 +62,7 @@ class UpdateInspectorRequest extends FormRequest
             print $email;
             // Check if the email has changed
             if (strcmp($oldEmail, $email) != 0) {
-                // Check if another user with this email exists TODO: this currently always triggers
+                // Check if another user with this email exists
                 $user = User::query()->where('email', '=', $email)->get()->first();
                 if ($user != null) {
                     $validator->errors()->add('field', 'Dit e-mailadres is al in gebruik.');
