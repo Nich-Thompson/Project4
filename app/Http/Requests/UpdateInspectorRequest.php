@@ -27,9 +27,9 @@ class UpdateInspectorRequest extends FormRequest
         if ($this->password != null)
         {
             return [
-                'email' => 'required',
-                'first_name' => 'required',
-                'last_name' => 'required',
+                'email' => 'required|max:80',
+                'first_name' => 'required|max:80',
+                'last_name' => 'required|max:80',
                 'phone_number' => 'required',
                 'password' => 'required_with:password_confirmation|same:password_confirmation|min:6|max:45',
             ];
@@ -37,9 +37,9 @@ class UpdateInspectorRequest extends FormRequest
         else
         {
             return [
-                'email' => 'required',
-                'first_name' => 'required',
-                'last_name' => 'required',
+                'email' => 'required|max:80',
+                'first_name' => 'required|max:80',
+                'last_name' => 'required|max:80',
                 'phone_number' => 'required',
             ];
         }
@@ -50,7 +50,10 @@ class UpdateInspectorRequest extends FormRequest
         return [
             'password.same' => 'De wachtwoorden komen niet overeen.',
             'password.min' => 'Je wachtwoord moet minstens 6 tekens lang zijn.',
-            'password.max' => 'Je wachtwoord mag maximaal 45 tekens lang zijn.'
+            'password.max' => 'Je wachtwoord mag maximaal 45 tekens lang zijn.',
+            'email.max' => 'Je e-mailadres is te lang.',
+            'first_name.max' => 'Je voornaam is te lang',
+            'last_name.max' => 'Je voornaam is te lang',
         ];
     }
 
