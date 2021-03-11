@@ -20,7 +20,8 @@
                     <p class="mb-5"></p>
                     <hr/>
 
-                    {{--<div class="input-group border w-25">
+                    {{--
+                    <div class="input-group border w-25">
                         <input type="text" id="search" name="search" value="{{ old('search') }}"
                                class="form-control"
                                placeholder="Inspecteur zoeken"/>
@@ -34,8 +35,8 @@
                             </span>
                     </div>
                     <p class="font-italic">Zoek op voornaam of achternaam</p>
-                    <div id = "inspectors">--}} {{--TODO: Reinstate this--}}
-
+                    <div id = "inspectors">
+                    --}} {{--TODO: Reinstate this--}}
                     </div>
                     @if(count($inspectors) === 0)
                         <div class="mt-4 bg-white">
