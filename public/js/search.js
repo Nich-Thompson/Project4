@@ -8,6 +8,7 @@ window.onload = function () {
     });
     document.getElementById('searchBtn').addEventListener('click', (e) => {
         e.preventDefault();
+        search();
     })
     inspectorFields = document.querySelectorAll('[id=inspector-field]');
 };
