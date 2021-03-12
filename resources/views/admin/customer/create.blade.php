@@ -10,6 +10,19 @@
                     <span class="float-left h2">Nieuwe klant aanmaken</span>
                     <br><br>
                     <hr>
+
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <strong>Er waren wat problemen met uw data</strong><br><br>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+
                     <form action="{{ route('postCustomerCreate') }}" method="post">
                         @csrf
                         <div class="row text-center">

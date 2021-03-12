@@ -9,6 +9,18 @@
                     <span class="float-left h2">Edit customer</span>
                     <a href="{{URL::to('/customer')}}" class="float-right btn btn-primary">Back</a>
                     <br><br>
+
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <strong>Er waren wat problemen met uw data</strong><br><br>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                     <form action="{{ route('postCustomerEdit', $id) }}" method="post">
                         @csrf
                         <div class="form-group">

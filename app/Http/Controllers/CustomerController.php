@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCustomerRequest;
+use App\Http\Requests\UpdateCustomerRequest;
 use App\Models\customer;
 use Illuminate\Http\Request;
 
@@ -18,7 +20,7 @@ class customerController extends Controller
         return view('admin.customer.create');
     }
 
-    public function store(Request $request) {
+    public function store(StoreCustomerRequest $request) {
         $name = $request->input('name');
         $city = $request->input('city');
         $street = $request->input('street');
@@ -52,7 +54,7 @@ class customerController extends Controller
         ]);
     }
 
-    public function update($id, Request $request) {
+    public function update($id, UpdateCustomerRequest $request) {
         $customer = customer::find($id);
 
         $customer->name = $request->input('name');
