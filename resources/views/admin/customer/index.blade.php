@@ -1,37 +1,4 @@
-Skip to content
-Search or jump to…
 
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@DaanGroot536 
-Nich-Thompson
-/
-Project4
-1
-1
-0
-Code
-Issues
-Pull requests
-1
-Actions
-Projects
-Wiki
-Security
-Insights
-Project4/resources/views/inspectors/index.blade.php
-@Nich-Thompson
-Nich-Thompson Merge branch 'feature/inspectorCRUD' of https://github.com/Nich-Thomp…
-…
-Latest commit 104f906 3 days ago
- History
- 2 contributors
-@Nich-Thompson@milovdpas
-70 lines (67 sloc)  4.1 KB
-  
 @extends('layouts.app')
 
 @push('head')
@@ -70,7 +37,7 @@ Latest commit 104f906 3 days ago
                     <p class="font-italic">Zoek op naam</p>
                     --}}
                     <div id = "customers">
-                        @if(count($klanten) === 0)
+                        @if(count($customers) === 0)
                             <div class="mt-4 bg-white">
                                 <p class="float-left h3">Geen klanten gevonden</p>
                             </div>
