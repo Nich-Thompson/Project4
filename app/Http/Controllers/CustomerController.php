@@ -68,7 +68,7 @@ class customerController extends Controller
 
         $customer->save();
 
-        return redirect(route('getCustomerEdit', $id));
+        return redirect(route('getCustomerIndex', $id));
     }
 
 
