@@ -46,7 +46,7 @@
                                 <input type="text" class="form-control" id="postal_code" name="postal_code" placeholder="1234AA">
                             </div>
                             <div class="form-group ml-3">
-                                <input type="text" class="form-control" id="city" name="city" placeholder="Enter city name">
+                                <input type="text" class="form-control" id="city" name="city" placeholder="Stadsnaam">
                             </div>
                         </div>
                         <br>
