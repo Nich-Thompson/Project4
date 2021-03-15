@@ -25,41 +25,45 @@
 
                     <form action="{{ route('postCustomerCreate') }}" method="post">
                         @csrf
-                        <div class="row text-center">
-                            <div class="form-group ml-3">
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Naam*">
+                        <div class="row">
+                            <div class="col text-center">
+                                <div class="form-group ml-3">
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Naam*">
+                                </div>
+                                <div class="form-group ml-3">
+                                    <input type="text" class="form-control" id="street" name="street" placeholder="Straatnaam">
+                                </div>
+                                <div class="form-group ml-3">
+                                    <input type="text" class="form-control" id="postal_code" name="postal_code" placeholder="1234AA">
+                                </div>
                             </div>
-                            <div class="form-group ml-3">
-                                <input type="text" class="form-control" id="contact_phone_number" name="contact_phone_number" placeholder="Telefoonnummer">
-                            </div>
-                        </div>
-                        <div class="row text-center">
-                            <div class="form-group ml-3">
-                                <input type="number" class="form-control" id="number" name="number" placeholder="Huisnummer">
-                            </div>
-                            <div class="form-group ml-3">
-                                <input type="text" class="form-control" id="street" name="street" placeholder="Straatnaam">
-                            </div>
-                        </div>
-                        <div class="row text-center">
-                            <div class="form-group ml-3">
-                                <input type="text" class="form-control" id="postal_code" name="postal_code" placeholder="1234AA">
-                            </div>
-                            <div class="form-group ml-3">
-                                <input type="text" class="form-control" id="city" name="city" placeholder="Stadsnaam">
+                            <div class="col text-center">
+                                <div class="form-group ml-3">
+                                    <input type="text" class="form-control" id="contact_phone_number" name="contact_phone_number" placeholder="Telefoonnummer">
+                                </div>
+                                <div class="form-group ml-3">
+                                    <input type="number" class="form-control" id="number" name="number" placeholder="Huisnummer">
+                                </div>
+                                <div class="form-group ml-3">
+                                    <input type="text" class="form-control" id="city" name="city" placeholder="Plaatsnaam">
+                                </div>
                             </div>
                         </div>
                         <br>
-                        <p class="ml-1">Contactpersoon</p>
-                        <div class="row text-center">
-                            <div class="form-group ml-3">
-                                <input type="text" class="form-control" id="contact_name" name="contact_name" placeholder="Contactpersoon naam">
+                        <p class="ml-3">Contactpersoon</p>
+                        <div class="row">
+                            <div class="col text-center">
+                                <div class="form-group ml-3">
+                                    <input type="text" class="form-control" id="contact_name" name="contact_name" placeholder="Contactpersoon naam">
+                                </div>
                             </div>
-                            <div class="form-group ml-3">
-                                <input type="text" class="form-control" id="contact_email" name="contact_email" placeholder="Contactpersoon e-mail">
+                            <div class="col text-center">
+                                <div class="form-group ml-3">
+                                    <input type="text" class="form-control" id="contact_email" name="contact_email" placeholder="Contactpersoon e-mail">
+                                </div>
                             </div>
                         </div>
-                        <p class="ml-1">Velden met een ster (*) zijn verplicht</p>
+                        <p class="ml-3 mt-3">Velden met een ster (*) zijn verplicht</p>
                         <br>
                             <a href="{{URL::to('/customer')}}" class="btn">Terug</a>
                             <button type="submit" class="float-right btn btn-secondary text-light">Aanmaken</button>
