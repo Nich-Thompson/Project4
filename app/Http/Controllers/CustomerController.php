@@ -27,7 +27,8 @@ class customerController extends Controller
         $number = $request->input('number');
         $postal_code = $request->input('postal_code');
         $contact_name = $request->input('contact_name');
-        $contact_phone_number = $request->input('contact_phone_number');
+        $phoneNumbersOnly = preg_replace("/[^0-9]/", '', $request->input('contact_phone_number'));
+        $contact_phone_number = $phoneNumbersOnly;
         $contact_email = $request->input('contact_email');
 
         customer::create([
@@ -63,7 +64,8 @@ class customerController extends Controller
         $customer->number = $request->input('number');
         $customer->postal_code = $request->input('postal_code');
         $customer->contact_name = $request->input('contact_name');
-        $customer->contact_phone_number = $request->input('contact_phone_number');
+        $phoneNumbersOnly = preg_replace("/[^0-9]/", '', $request->input('contact_phone_number'));
+        $customer->contact_phone_number = $phoneNumbersOnly;
         $customer->contact_email = $request->input('contact_email');
 
         $customer->save();
