@@ -62,14 +62,18 @@
                             <p class="ml-3">Contactpersoon</p>
                             <div class="row text-center">
                                 <div class="col text-center">
-                                    <input type="text" class="form-control ml-3" id="contact_name" name="contact_name"
-                                           placeholder="Contactpersoon naam"
-                                           value="{{ $customer->contact_name }}">
+                                    <div class="form-group ml-3">
+                                        <input type="text" class="form-control" id="contact_name" name="contact_name"
+                                               placeholder="Contactpersoon naam"
+                                               value="{{ $customer->contact_name }}">
+                                    </div>
                                 </div>
                                 <div class="col text-center">
-                                    <input type="text" class="form-control ml-3" id="contact_email" name="contact_email"
-                                           placeholder="Contactpersoon e-mail"
-                                           value="{{ $customer->contact_email }}">
+                                    <div class="form-group ml-3">
+                                        <input type="text" class="form-control" id="contact_email" name="contact_email"
+                                               placeholder="Contactpersoon e-mail"
+                                               value="{{ $customer->contact_email }}">
+                                    </div>
                                 </div>
                             </div>
                             <p class="ml-3 mt-3">Velden met een ster (*) zijn verplicht</p>
