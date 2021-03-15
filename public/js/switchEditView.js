@@ -4,7 +4,7 @@ function enableInput()
 {
     if(!enabled)
     {
-        document.getElementById("archiveButton").hidden = false;
+        document.getElementById("archiveButton").hidden = true;
         document.getElementById("saveButton").hidden = false;
         document.getElementById("switchButton").textContent = "Bekijken";
         let elements = document.getElementsByClassName("form-control");
