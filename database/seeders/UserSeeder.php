@@ -16,10 +16,21 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $user = User::create(['name' => "admin",
+        $admin = User::create(['name' => "admin",
             'email' => 'admin@inspectietool.nl',
-            'password' => Hash::make('password'),]);
+            'password' => Hash::make('password'),
+            'first_name' => 'admin',
+            'last_name' => 'admin'
+        ]);
 
-        $user->assignRole('admin');
+        $inspector = User::create(['name' => "inspector",
+            'email' => 'inspector@inspectietool.nl',
+            'password' => Hash::make('password'),
+            'first_name' => 'Frans',
+            'last_name' => 'duijts'
+        ]);
+
+        $admin->assignRole('admin');
+        $inspector ->assignRole('inspecteur');
     }
 }
