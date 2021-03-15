@@ -17,7 +17,7 @@
         </div>
 
         @if ($errors->any())
-            <div class="alert alert-danger">
+            <div class="alert alert-danger" id="errors">
                 <strong>Er waren wat problemen met uw data</strong><br><br>
                 <ul>
                     @foreach ($errors->all() as $error)
@@ -33,32 +33,52 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <input type="text" name="first_name" value="{{ $user->first_name }}" class="form-control" disabled required oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" oninput="this.setCustomValidity('')">
+                        <input type="text" name="first_name" placeholder="Voornaam*" class="form-control" disabled required oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" oninput="this.setCustomValidity('')"
+                               @if(old('first_name') != null)
+                               value="{{ old('first_name') }}"
+                               @else
+                               value="{{ $user->first_name }}"
+                            @endif>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <input type="text" name="last_name" value="{{ $user->last_name }}" class="form-control" disabled required oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" oninput="this.setCustomValidity('')">
+                        <input type="text" name="last_name" placeholder="Achternaam*" class="form-control" disabled required oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" oninput="this.setCustomValidity('')"
+                               @if(old('last_name') != null)
+                               value="{{ old('last_name') }}"
+                               @else
+                               value="{{ $user->last_name }}"
+                            @endif>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <input type="text" name="email" value="{{ $user->email }}" class="form-control" disabled required oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" oninput="this.setCustomValidity('')">
+                        <input type="text" name="email" placeholder="E-mailadres*" class="form-control" disabled required oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" oninput="this.setCustomValidity('')"
+                               @if(old('email') != null)
+                               value="{{ old('email') }}"
+                               @else
+                               value="{{ $user->email }}"
+                            @endif>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <input type="text" name="phone_number" value="{{ $user->phone_number }}" class="form-control" disabled required oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" oninput="this.setCustomValidity('')">
+                        <input type="text" name="phone_number" placeholder="Telefoonnummer*" class="form-control" disabled required oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" oninput="this.setCustomValidity('')"
+                               @if(old('phone_number') != null)
+                               value="{{ old('phone_number') }}"
+                               @else
+                               value="{{ $user->phone_number }}"
+                            @endif>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <input type="password" name="password" value="" class="form-control" placeholder="Wachtwoord*" disabled>
+                        <input type="password" name="password" value="" placeholder="Wachtwoord"  class="form-control" placeholder="Wachtwoord*" disabled>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <input type="password" name="password_confirmation" value="" class="form-control" placeholder="Herhaal wachtwoord*" disabled>
+                        <input type="password" name="password_confirmation" value="" placeholder="Herhaal wachtwoord" class="form-control" placeholder="Herhaal wachtwoord*" disabled>
                     </div>
                 </div>
 
@@ -67,7 +87,7 @@
                 </div>
 
                 <div class="col-xs-12 col-sm-12 col-md-6 text-left">
-                    <a href="{{ url()->previous() }}" class="btn btn-default">Terug</a>
+                    <a href="{{URL::to('/inspector')}}" class="btn btn-default">Terug</a>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-6 text-right">
                     <button type="submit" id="saveButton" class="btn btn-primary" hidden>Opslaan</button>

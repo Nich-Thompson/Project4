@@ -46,7 +46,7 @@
                                 <div id = 'customer-field' class="row m-2 p-3 rounded border border-light shadow-sm bg-white">
                                     <div class="d-flex flex-column w-50">
                                         <div id="name"
-                                             class="h5 m-0 fw-bold">Customer {{ $customer->name }}</div>
+                                             class="h5 m-0 fw-bold">{{ $customer->name }}</div>
                                         <p>{{ $customer->contact_phone_number }}</p>
                                     </div>
                                     <div class="d-flex flex-column justify-content-end w-50 text-right pb-2">
