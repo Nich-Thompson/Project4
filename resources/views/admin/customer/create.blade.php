@@ -28,24 +28,24 @@
                         <div class="row">
                             <div class="col text-center">
                                 <div class="form-group ml-3">
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Naam*">
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Naam*" value="{{old('name')}}">
                                 </div>
                                 <div class="form-group ml-3">
-                                    <input type="text" class="form-control" id="street" name="street" placeholder="Straatnaam">
+                                    <input type="text" class="form-control" id="street" name="street" placeholder="Straatnaam" value="{{old('street')}}">
                                 </div>
                                 <div class="form-group ml-3">
-                                    <input type="text" class="form-control" id="postal_code" name="postal_code" placeholder="1234AA">
+                                    <input type="text" class="form-control" id="postal_code" name="postal_code" placeholder="1234AA" value="{{old('postal_code')}}">
                                 </div>
                             </div>
                             <div class="col text-center">
                                 <div class="form-group ml-3">
-                                    <input type="text" class="form-control" id="contact_phone_number" name="contact_phone_number" placeholder="Telefoonnummer">
+                                    <input type="text" class="form-control" id="contact_phone_number" name="contact_phone_number" placeholder="Telefoonnummer" value="{{old('contact_phone_number')}}">
                                 </div>
                                 <div class="form-group ml-3">
-                                    <input type="number" class="form-control" id="number" name="number" placeholder="Huisnummer">
+                                    <input type="number" class="form-control" id="number" name="number" placeholder="Huisnummer" value="{{old('number')}}">
                                 </div>
                                 <div class="form-group ml-3">
-                                    <input type="text" class="form-control" id="city" name="city" placeholder="Plaatsnaam">
+                                    <input type="text" class="form-control" id="city" name="city" placeholder="Plaatsnaam" value="{{old('city')}}">
                                 </div>
                             </div>
                         </div>
