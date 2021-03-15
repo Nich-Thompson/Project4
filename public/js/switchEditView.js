@@ -1,5 +1,12 @@
 let enabled = false;
 
+window.onload = (event) => {
+    let errors = document.getElementById('errors');
+    if (errors != null) {
+        enableInput();
+    }
+};
+
 function enableInput()
 {
     if(!enabled)
