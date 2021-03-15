@@ -12,36 +12,62 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 class TestCustomeredit():
   def setup_method(self, method):
-    self.driver = webdriver.Chrome()
+    self.driver = webdriver.Chrome("chromedriver.exe")
     self.vars = {}
-  
+
   def teardown_method(self, method):
     self.driver.quit()
-  
+
   def test_customeredit(self):
     self.driver.get("http://127.0.0.1:8000/")
+    self.driver.implicitly_wait(3)
     self.driver.set_window_size(1536, 832)
+    self.driver.implicitly_wait(5)
     self.driver.find_element(By.LINK_TEXT, "Log in").click()
+    self.driver.implicitly_wait(5)
     self.driver.find_element(By.ID, "email").click()
+    self.driver.implicitly_wait(5)
     self.driver.find_element(By.ID, "email").send_keys("admin@inspectietool.nl")
+    self.driver.implicitly_wait(5)
+    self.driver.find_element(By.ID, "password").click()
+    self.driver.implicitly_wait(5)
     self.driver.find_element(By.ID, "password").send_keys("password")
+    self.driver.implicitly_wait(5)
     self.driver.find_element(By.CSS_SELECTOR, ".btn").click()
+    self.driver.implicitly_wait(5)
     self.driver.find_element(By.CSS_SELECTOR, ".navbar").click()
+    self.driver.implicitly_wait(5)
     self.driver.find_element(By.LINK_TEXT, "Customers").click()
+    self.driver.implicitly_wait(5)
     self.driver.find_element(By.ID, "2").click()
+    self.driver.implicitly_wait(5)
     self.driver.find_element(By.ID, "contact_email").click()
+    self.driver.implicitly_wait(5)
     self.driver.find_element(By.ID, "contact_email").send_keys("karsten.belt@gmail")
+    self.driver.implicitly_wait(5)
     self.driver.find_element(By.CSS_SELECTOR, ".float-right").click()
+    self.driver.implicitly_wait(5)
     self.driver.find_element(By.CSS_SELECTOR, ".justify-content-center").click()
+    self.driver.implicitly_wait(5)
     self.driver.find_element(By.ID, "name").send_keys(" ")
+    self.driver.implicitly_wait(5)
     self.driver.find_element(By.CSS_SELECTOR, ".float-right").click()
+    self.driver.implicitly_wait(5)
     self.driver.find_element(By.ID, "contact_phone_number").click()
-    self.driver.find_element(By.ID, "contact_phone_number").send_keys("064194")
+    self.driver.implicitly_wait(5)
+    self.driver.find_element(By.ID, "contact_phone_number").send_keys("064594")
+    self.driver.implicitly_wait(5)
     self.driver.find_element(By.CSS_SELECTOR, ".float-right").click()
+    self.driver.implicitly_wait(5)
     self.driver.find_element(By.ID, "street").click()
+    self.driver.implicitly_wait(5)
     self.driver.find_element(By.ID, "street").send_keys("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+    self.driver.implicitly_wait(5)
     self.driver.find_element(By.CSS_SELECTOR, ".float-right").click()
+    self.driver.implicitly_wait(5)
     self.driver.find_element(By.CSS_SELECTOR, ".float-right").click()
+    self.driver.implicitly_wait(5)
     self.driver.find_element(By.ID, "navbarDropdown").click()
+    self.driver.implicitly_wait(5)
     self.driver.find_element(By.LINK_TEXT, "Logout").click()
-  
+
