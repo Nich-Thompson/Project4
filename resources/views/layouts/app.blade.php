@@ -34,9 +34,17 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
+                    @guest
+                        
+                    @else
+                    <ul class="navbar-nav mr-auto">
+                        <a class="nav-link" href="{{ route('getCustomerIndex') }}">Klanten</a>
+                    </ul>
+                    
                     <ul class="navbar-nav mr-auto">
                         <a href="{{ route('getInspectorIndex') }}">Inspecteurs</a>
                     </ul>
+                    @endguest
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
