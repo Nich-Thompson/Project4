@@ -32,6 +32,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
+                        <p class="mb-1">Naam</p>
                         <input type="text" name="name" placeholder="Naam*" class="form-control" disabled required oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" oninput="this.setCustomValidity('')"
                             @if(old('name') != null)
                                 value="{{ old('name') }}"
@@ -42,6 +43,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
+                        <p class="mb-1">Telefoonnummer</p>
                         <input type="text" name="contact_phone_number" placeholder="Telefoonnummer*" class="form-control" disabled required oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" oninput="this.setCustomValidity('')"
                             @if(old('contact_phone_number') != null)
                                 value="{{ old('contact_phone_number') }}"
@@ -52,6 +54,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
+                        <p class="mb-1">Straatnaam</p>
                         <input type="text" name="street" placeholder="Straatnaam" class="form-control" disabled required oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" oninput="this.setCustomValidity('')"
                             @if(old('street') != null)
                                 value="{{ old('street') }}"
@@ -62,6 +65,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
+                        <p class="mb-1">Huisnummer</p>
                         <input type="text" name="number" placeholder="Huisnummer*" class="form-control" disabled required oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" oninput="this.setCustomValidity('')"
                             @if(old('number') != null)
                                 value="{{ old('number') }}"
@@ -72,6 +76,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
+                        <p class="mb-1">Plaatsnaam</p>
                         <input type="text" name="city" placeholder="Plaatsnaam*" class="form-control" disabled required oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" oninput="this.setCustomValidity('')"
                             @if(old('city') != null)
                                 value="{{ old('city') }}"
@@ -82,6 +87,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
+                        <p class="mb-1">Naam Contactpersoon</p>
                         <input type="text" name="contact_name" placeholder="Naam Contactpersoon" class="form-control" disabled required oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" oninput="this.setCustomValidity('')"
                             @if(old('contact_name') != null)
                                 value="{{ old('contact_name') }}"
@@ -92,6 +98,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
+                        <p class="mb-1">E-mail Contactpersoon</p>
                         <input type="text" name="contact_email" placeholder="E-mail Contactpersoon" class="form-control" disabled required oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" oninput="this.setCustomValidity('')"
                             @if(old('contact_email') != null)
                                 value="{{ old('contact_email') }}"
@@ -99,10 +106,6 @@
                                 value="{{ $customer->contact_email }}"
                             @endif>
                     </div>
-                </div>
-
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    Door de wachtwoorden leeg te laten worden deze niet veranderd.
                 </div>
 
                 <div class="col-xs-12 col-sm-12 col-md-6 text-left">
