@@ -53,10 +53,10 @@
                     Velden met een ster(*) zijn verplicht.
                 </div>
 
-                <div class="col-xs-12 col-sm-12 col-md-12 text-leftf">
+                <div class="col-xs-12 col-sm-12 col-md-6 text-left">
                     <a href="{{URL::to('/inspector')}}" class="btn btn-default">Terug</a>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 text-right">
+                <div class="col-xs-12 col-sm-12 col-md-6 text-right">
                     <button type="submit" class="btn btn-primary">Aanmaken</button>
                 </div>
             </div>

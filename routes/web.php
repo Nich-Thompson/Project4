@@ -30,8 +30,8 @@ Route::prefix('customer')->group(function() {
     Route::post('/create', 'CustomerController@store')->middleware(['role:admin'])->name('postCustomerCreate');
     Route::get('/{id}/edit', 'CustomerController@edit')->middleware(['role:admin'])->name('getCustomerEdit');
     Route::post('/{id}/edit', 'CustomerController@update')->middleware(['role:admin'])->name('postCustomerEdit');
-    Route::get('/{id}/archive', 'CustomerController@remove')->middleware(['role:admin'])->name('getCustomerArchive');
-    Route::post('/{id}/archive', 'CustomerController@archive')->middleware(['role:admin'])->name('postCustomerArchive');
+    Route::get('/{id}/delete', 'CustomerController@remove')->middleware(['role:admin'])->name('getCustomerDelete');
+    Route::post('/{id}/delete', 'CustomerController@archive')->middleware(['role:admin'])->name('postCustomerDelete');
 });
 
 //Event routes
