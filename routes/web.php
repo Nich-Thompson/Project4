@@ -30,8 +30,8 @@ Route::prefix('customer')->group(function() {
     Route::post('/create', 'CustomerController@store')->middleware(['role:admin'])->name('postCustomerCreate');
     Route::get('/{id}/edit', 'CustomerController@edit')->middleware(['role:admin'])->name('getCustomerEdit');
     Route::post('/{id}/edit', 'CustomerController@update')->middleware(['role:admin'])->name('postCustomerEdit');
-    Route::get('/{id}/delete', 'CustomerController@remove')->middleware(['role:admin'])->name('getCustomerDelete');
-    Route::post('/{id}/delete', 'CustomerController@archive')->middleware(['role:admin'])->name('postCustomerDelete');
+    Route::get('/{id}/archive', 'CustomerController@remove')->middleware(['role:admin'])->name('getCustomerDelete');
+    Route::post('/{id}/archive', 'CustomerController@archive')->middleware(['role:admin'])->name('postCustomerDelete');
 });
 
 //Event routes
@@ -41,6 +41,6 @@ Route::prefix('inspector')->group(function() {
     Route::post('/create', 'InspectorController@store')->middleware(['role:admin'])->name('postInspectorCreate');
     Route::get('/{id}/edit', 'InspectorController@edit')->middleware(['role:admin'])->name('getInspectorEdit');
     Route::post('/{id}/edit', 'InspectorController@update')->middleware(['role:admin'])->name('postInspectorEdit');
-    Route::get('/{id}/delete', 'InspectorController@delete')->middleware(['role:admin'])->name('getInspectorDelete');
-    Route::post('/{id}/delete', 'InspectorController@destroy')->middleware(['role:admin'])->name('postInspectorDelete');
+    Route::get('/{id}/archive', 'InspectorController@delete')->middleware(['role:admin'])->name('getInspectorDelete');
+    Route::post('/{id}/archive', 'InspectorController@destroy')->middleware(['role:admin'])->name('postInspectorDelete');
 });

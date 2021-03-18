@@ -79,7 +79,7 @@ class customerController extends Controller
         if($customer === null) {
             abort(404, 'customer with that ID does not exist');
         }
-        return view('admin.customer.delete', [
+        return view('admin.customer.archive', [
             'customer' => $customer,
             'id' => $id
         ]);

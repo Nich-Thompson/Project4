@@ -5,7 +5,7 @@
         <h1>Archiveer klant</h1>
 
         Weet je zeker dat je de klant wilt archiveren?
-        <div class="row">
+        <div class="row mt-3">
             <div class="col-xs-12 col-sm-12 col-md-2 text-left">
                 <a href="{{ route('getCustomerEdit', $id) }}" class="btn btn-default">Terug</a>
             </div>
