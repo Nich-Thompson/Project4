@@ -18,14 +18,14 @@ class InspectorController extends Controller
             $q->where('name', 'inspecteur');
         }
         )->orderBy('first_name', 'ASC')->orderBy('last_name', 'ASC')->get();
-        return view('inspectors.index', [
+        return view('admin.inspector.index', [
             'inspectors' => $inspectors
         ]);
     }
 
     public function create()
     {
-        return view('inspectors.create');
+        return view('admin.inspector.create');
     }
 
     public function store(StoreInspectorRequest $request)
@@ -48,7 +48,7 @@ class InspectorController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        return view('inspectors.edit', ['user'=>$user, 'id'=>$id]);
+        return view('admin.inspector.edit', ['user'=>$user, 'id'=>$id]);
     }
 
     public function update($id, UpdateInspectorRequest $request)
@@ -74,7 +74,7 @@ class InspectorController extends Controller
     public function delete($id)
     {
         $user = User::find($id);
-        return view('inspectors.archive', ['user'=>$user, 'id'=>$id]);
+        return view('admin.inspector.archive', ['user'=>$user, 'id'=>$id]);
     }
 
     public function destroy($id, Request $request)
