@@ -13,8 +13,24 @@ class CreateInspectionTypeTable extends Migration
      */
     public function up()
     {
-        Schema::create('inspection_type', function (Blueprint $table) {
+        Schema::create('icons', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->timestamps();
+        });
+
+        Schema::create('inspection_types', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('icon_id');
+
+            $table->string('name');
+            $table->string('description');
+            $table->string('color');
+            $table->foreign('icon_id')
+                ->references('id')
+                ->on('icons')
+                ->onDelete('cascade');
+
             $table->timestamps();
         });
     }
@@ -26,6 +42,7 @@ class CreateInspectionTypeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('inspection_type');
+        Schema::dropIfExists('icons');
+        Schema::dropIfExists('inspection_types');
     }
 }

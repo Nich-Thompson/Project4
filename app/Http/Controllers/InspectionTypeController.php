@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Icon;
 use App\Models\InspectionType;
 use Illuminate\Http\Request;
 
@@ -14,9 +15,11 @@ class InspectionTypeController extends Controller
         return view('inspectors.index', [
             'inspectors' => $inspectors
         ]);*/
-        $types = "cog";
+        $types = InspectionType::all();
+        $icons = Icon::all();
         return view('inspectiontypes.index', [
-            'types' => $types
+            'types' => $types,
+            'icons' => $icons
         ]);
     }
 }

@@ -5,14 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class InspectionType extends Model
+class Icon extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'name',
-        'description',
-        'color',
-        'icon_id',
     ];
 }
