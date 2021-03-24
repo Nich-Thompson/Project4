@@ -45,6 +45,7 @@ Route::prefix('inspector')->group(function() {
     Route::post('/{id}/delete', 'InspectorController@destroy')->middleware(['role:admin'])->name('postInspectorDelete');
 });
 
+//Inspection type routes
 Route::prefix('inspectiontype')->group(function() {
     Route::get('/', 'InspectionTypeController@index')->middleware(['role:admin'])->name('getInspectionTypeIndex');
     Route::get('/create', 'InspectionTypeController@create')->middleware(['role:admin'])->name('getInspectionTypeCreate');
