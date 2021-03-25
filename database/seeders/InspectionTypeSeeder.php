@@ -22,15 +22,21 @@ class InspectionTypeSeeder extends Seeder
             'name' => 'fire-extinguisher'
         ]);
         Icon::create([
-            'name' => 'toolbox'
+            'name' => 'wrench'
         ]);
         Icon::create([
-            'name' => 'wrench'
+            'name' => 'wifi'
+        ]);
+        Icon::create([
+            'name' => 'sitemap'
+        ]);
+        // The following icons don't work
+        /*Icon::create([
+            'name' => 'toolbox'
         ]);
         Icon::create([
             'name' => 'screwdriver'
         ]);
-
         Icon::create([
             'name' => 'hammer'
         ]);
@@ -38,14 +44,8 @@ class InspectionTypeSeeder extends Seeder
             'name' => 'toilet'
         ]);
         Icon::create([
-            'name' => 'wifi'
-        ]);
-        Icon::create([
             'name' => 'route'
-        ]);
-        Icon::create([
-            'name' => 'sitemap'
-        ]);
+        ]);*/
 
         InspectionType::create([
             'name' => 'Brandblussers',
@@ -57,7 +57,7 @@ class InspectionTypeSeeder extends Seeder
             'name' => 'Bedrading',
             'description' => 'De bedrading moet kloppen',
             'color' => '#335BFF',
-            'icon_id' => '10'
+            'icon_id' => '5'
         ]);
     }
 }

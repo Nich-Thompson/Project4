@@ -20,10 +20,13 @@ class InspectionTypeController extends Controller
 
     public function create()
     {
-        return view('inspectiontypes.create');
+        $icons = Icon::all();
+        return view('inspectiontypes.create', [
+            'icons' => $icons
+        ]);
     }
 
-    public function store(StoreInspectorRequest $request)
+    public function store(Request $request)
     {
         $type = InspectionType::create([
             'name' => $request->input('name'),
