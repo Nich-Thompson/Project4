@@ -86,9 +86,11 @@
             @foreach($locations as $location)
             <div class="card">
                 <div class="card-body">
-                    <h3 class="d-inline-block">Naam</h3>
+                <p>Klant-lokaties</p>
+                <hr>
+                    <p class="d-inline-block">Naam:</p>
                     <p class="d-inline-block">{{$location->name}}</p>
-                    <h3 class="d-inline-block">Plaats</h3>
+                    <p class="d-inline-block">Plaats:</p>
                     <p class="d-inline-block">{{$location->city}}</p>
                     <button class="btn btn-primary float-right">Inspectie aanmaken</button>
                 </div>
