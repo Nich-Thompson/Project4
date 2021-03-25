@@ -14,28 +14,34 @@
                 </ul>
             </div>
         @endif
-
+        TODO STYLING
         <form action="{{ route('postInspectionTypeCreate') }}" method="POST">
             @csrf
             <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
                         <input type="text" name="name" class="form-control" value = "{{old('name')}}" placeholder="Naam type*" required oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" oninput="this.setCustomValidity('')">
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
                         <input type="text" name="description" class="form-control" value = "{{old('description')}}" placeholder="Beschrijving*" required oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" oninput="this.setCustomValidity('')">
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
                         <input type="color" name="color" class="form-control" value = "{{old('color')}}" required oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" oninput="this.setCustomValidity('')">
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
-                        <input type="text" name="icon_id" class="form-control" value = "{{old('icon_id')}}" placeholder="icon_id" required oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" oninput="this.setCustomValidity('')">
+                        <select name="icon_id" class="col-xs-12 col-sm-12 col-md-12 form-control">
+                            @foreach($icons as $icon)
+                                <option value="{{ $icon->id }}">
+                                    {{--<i class="fa fa-{{ $icon->name }}" style="font-size:32px;"></i>--}}{{ ucfirst(preg_replace("/[\W]/", ' ',$icon->name)) }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
 

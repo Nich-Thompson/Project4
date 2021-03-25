@@ -54,6 +54,12 @@ class InspectionTypeSeeder extends Seeder
             'icon_id' => '2'
         ]);
         InspectionType::create([
+            'name' => 'Wifi',
+            'description' => 'De wifi moet het doen.',
+            'color' => '#4dff58',
+            'icon_id' => '4'
+        ]);
+        InspectionType::create([
             'name' => 'Bedrading',
             'description' => 'De bedrading moet kloppen',
             'color' => '#335BFF',
