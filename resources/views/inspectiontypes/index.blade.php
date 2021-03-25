@@ -26,7 +26,7 @@
                                 <div id = 'type-field' class="row m-2 p-3 rounded border border-light shadow-sm bg-white">
                                     <div class="d-flex flex-column w-50">
                                         <div id="name" class="h5 m-0 fw-bold">
-                                            <i class="fa fa-{{ \App\Models\Icon::query()->where('id', $type->icon_id)->value('name') }}" style="font-size:32px;"></i> {{ $type->name }}
+                                            <i class="fa fa-{{ \App\Models\Icon::query()->where('id', $type->icon_id)->value('name') }}" style="font-size:32px; color: {{ $type->color }}"></i> {{ $type->name }}
                                         </div>
                                         <p>{{ $type->description }}</p>
                                     </div>
