@@ -92,7 +92,7 @@
                     <p class="d-inline-block">{{$location->name}}</p>
                     <p class="d-inline-block">Plaats:</p>
                     <p class="d-inline-block">{{$location->city}}</p>
-                    <button class="btn btn-primary float-right">Inspectie aanmaken</button>
+                    <a href="{{URL::to('/inspection/create')}}" class="btn btn-primary float-right">Maak inspectie aan</a>
                 </div>
             </div>
             @endforeach
