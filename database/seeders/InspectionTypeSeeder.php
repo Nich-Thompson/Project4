@@ -19,6 +19,9 @@ class InspectionTypeSeeder extends Seeder
             'name' => 'cog'
         ]);
         Icon::create([
+            'name' => 'fire'
+        ]);
+        Icon::create([
             'name' => 'fire-extinguisher'
         ]);
         Icon::create([
@@ -46,9 +49,6 @@ class InspectionTypeSeeder extends Seeder
             'name' => 'file'
         ]);
         Icon::create([
-            'name' => 'fire'
-        ]);
-        Icon::create([
             'name' => 'battery-half'
         ]);
         Icon::create([
@@ -59,19 +59,19 @@ class InspectionTypeSeeder extends Seeder
             'name' => 'Brandblussers',
             'description' => 'Alle brandblussers moeten niet over de datum zijn.',
             'color' => '#FF3333',
-            'icon_id' => '2'
+            'icon_id' => '3'
         ]);
         InspectionType::create([
             'name' => 'Wifi',
             'description' => 'De wifi moet het doen.',
             'color' => '#4dff58',
-            'icon_id' => '4'
+            'icon_id' => '5'
         ]);
         InspectionType::create([
             'name' => 'Bedrading',
             'description' => 'De bedrading moet kloppen',
             'color' => '#335BFF',
-            'icon_id' => '5'
+            'icon_id' => '6'
         ]);
     }
 }
