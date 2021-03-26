@@ -30,22 +30,30 @@ class InspectionTypeSeeder extends Seeder
         Icon::create([
             'name' => 'sitemap'
         ]);
-        // The following icons don't work
-        /*Icon::create([
-            'name' => 'toolbox'
+        Icon::create([
+            'name' => 'plug'
         ]);
         Icon::create([
-            'name' => 'screwdriver'
+            'name' => 'bolt'
         ]);
         Icon::create([
-            'name' => 'hammer'
+            'name' => 'magnet'
         ]);
         Icon::create([
-            'name' => 'toilet'
+            'name' => 'folder'
         ]);
         Icon::create([
-            'name' => 'route'
-        ]);*/
+            'name' => 'file'
+        ]);
+        Icon::create([
+            'name' => 'fire'
+        ]);
+        Icon::create([
+            'name' => 'battery-half'
+        ]);
+        Icon::create([
+            'name' => 'bluetooth'
+        ]);
 
         InspectionType::create([
             'name' => 'Brandblussers',
