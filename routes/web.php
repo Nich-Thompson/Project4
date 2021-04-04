@@ -32,6 +32,14 @@ Route::prefix('customer')->group(function() {
     Route::post('/{id}/edit', 'CustomerController@update')->middleware(['role:admin'])->name('postCustomerEdit');
     Route::get('/{id}/archive', 'CustomerController@remove')->middleware(['role:admin'])->name('getCustomerDelete');
     Route::post('/{id}/archive', 'CustomerController@archive')->middleware(['role:admin'])->name('postCustomerDelete');
+    Route::prefix('/{id}/location')->group(function() {
+        Route::get('/create', 'LocationController@create')->middleware(['role:admin'])->name('getLocationCreate');
+        Route::post('/create', 'LocationController@store')->middleware(['role:admin'])->name('postLocationCreate');
+        Route::get('/{id}/edit', 'LocationController@edit')->middleware(['role:admin'])->name('getLocationEdit');
+        Route::post('/{id}/edit', 'LocationController@update')->middleware(['role:admin'])->name('postLocationEdit');
+        Route::get('/{id}/archive', 'LocationController@remove')->middleware(['role:admin'])->name('getLocationDelete');
+        Route::post('/{id}/archive', 'LocationController@archive')->middleware(['role:admin'])->name('postLocationDelete');
+    });
 });
 
 //Event routes

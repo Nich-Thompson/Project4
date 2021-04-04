@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddLoactionsTable extends Migration
+class AddLocationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -21,7 +21,7 @@ class AddLoactionsTable extends Migration
             $table->integer('number');
             $table->string('postal_code');
             $table->string('building_number')->nullable();
-            $table->integer('client_id');
+            $table->integer('customer_id');
             $table->timestamps();
             $table->softDeletes($column = 'deleted_at');
         });

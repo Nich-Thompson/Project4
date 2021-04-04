@@ -8,41 +8,33 @@ use App\Models\customer;
 use App\Models\Location;
 use Illuminate\Http\Request;
 
-class customerController extends Controller
+class LocationController extends Controller
 {
-    public function index() {
-        $customers = customer::all();
-        return view('admin.customer.index', [
-            'customers' => $customers,
+
+    public function create($id) {
+        return view('admin.customer.locations.create', [
+            'id' => $id
         ]);
     }
 
-    public function create() {
-        return view('admin.customer.create');
-    }
-
-    public function store(StoreCustomerRequest $request) {
+    public function store(Request $request, $id) {
         $name = $request->input('name');
         $city = $request->input('city');
         $street = $request->input('street');
         $number = $request->input('number');
         $postal_code = $request->input('postal_code');
-        $contact_name = $request->input('contact_name');
-        $phoneNumbersOnly = preg_replace("/[^0-9]/", '', $request->input('contact_phone_number'));
-        $contact_phone_number = $phoneNumbersOnly;
-        $contact_email = $request->input('contact_email');
+        $building_number = $request->input('building_number');
 
-        customer::create([
+        Location::create([
             'name' => $name,
             'city' => $city,
             'street' => $street,
             'number' => $number,
             'postal_code' => $postal_code,
-            'contact_name' => $contact_name,
-            'contact_phone_number' => $contact_phone_number,
-            'contact_email' => $contact_email,
+            'building_number' => $building_number,
+            'customer_id' => $id
         ]);
-        return redirect(route('getCustomerIndex'));
+        return redirect(route('getCustomerEdit', $id));
     }
 
     public function edit($id) {

@@ -17,6 +17,6 @@ class Location extends Model
         'number',
         'postal_code',
         'building_number',
-        'client_id'
+        'customer_id'
     ];
 }
