@@ -37,52 +37,48 @@ class LocationController extends Controller
         return redirect(route('getCustomerEdit', $id));
     }
 
-    public function edit($id) {
-        $customer = customer::find($id);
-        $locations = Location::query()->where('customer_id', '=', $id)->get();
-        if($customer === null) {
-            abort(404, 'customer with that ID does not exist');
+    public function edit($id, $location_id) {
+        $location = Location::find($location_id);
+        if($location === null) {
+            abort(404, 'location with that ID does not exist');
         }
-        return view('admin.customer.edit', [
-            'locations' => $locations,
-            'customer' => $customer,
-            'id' => $id
+        return view('admin.customer.locations.edit', [
+            'location' => $location,
+            'customer_id' => $id,
         ]);
     }
 
-    public function update($id, UpdateCustomerRequest $request) {
-        $customer = customer::find($id);
+    public function update($id, $location_id, Request $request) {
+        $location = Location::find($location_id);
 
-        $customer->name = $request->input('name');
-        $customer->city = $request->input('city');
-        $customer->street = $request->input('street');
-        $customer->number = $request->input('number');
-        $customer->postal_code = $request->input('postal_code');
-        $customer->contact_name = $request->input('contact_name');
-        $phoneNumbersOnly = preg_replace("/[^0-9]/", '', $request->input('contact_phone_number'));
-        $customer->contact_phone_number = $phoneNumbersOnly;
-        $customer->contact_email = $request->input('contact_email');
+        $location->name = $request->input('name');
+        $location->city = $request->input('city');
+        $location->street = $request->input('street');
+        $location->number = $request->input('number');
+        $location->postal_code = $request->input('postal_code');
+        $location->building_number = $request->input('building_number');
+        $location->customer_id = $id;
 
-        $customer->save();
+        $location->save();
 
-        return redirect(route('getCustomerIndex', $id));
+        return redirect(route('getCustomerEdit', $id));
     }
 
 
-    public function remove($id) {
-        $customer = customer::find($id);
-        if($customer === null) {
-            abort(404, 'customer with that ID does not exist');
+    public function remove($id, $location_id) {
+        $location = Location::find($location_id);
+        if($location === null) {
+            abort(404, 'location with that ID does not exist');
         }
-        return view('admin.customer.archive', [
-            'customer' => $customer,
-            'id' => $id
+        return view('admin.customer.locations.archive', [
+            'location' => $location,
+            'customer_id' => $id
         ]);
     }
 
-    public function archive($id) {
-        $customer = customer::find($id);
-        $customer->delete();
-        return redirect(route('getCustomerIndex'));
+    public function archive($id, $location_id) {
+        $location = Location::find($location_id);
+        $location->delete();
+        return redirect(route('getCustomerEdit', $id));
     }
 }

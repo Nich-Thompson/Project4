@@ -28,21 +28,26 @@
                         <div class="row">
                             <div class="col text-center">
                                 <div class="form-group ml-3">
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Naam*" value="{{old('name')}}">
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Naam*" value="{{old('name')}}" required
+                                           oninput="this.setCustomValidity('')" oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')">
                                 </div>
                                 <div class="form-group ml-3">
-                                    <input type="text" class="form-control" id="street" name="street" placeholder="Straatnaam*" value="{{old('street')}}">
+                                    <input type="text" class="form-control" id="street" name="street" placeholder="Straatnaam*" value="{{old('street')}}" required
+                                           oninput="this.setCustomValidity('')" oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')">
                                 </div>
                                 <div class="form-group ml-3">
-                                    <input type="text" class="form-control" id="postal_code" name="postal_code" placeholder="1234AA*" value="{{old('postal_code')}}">
+                                    <input type="text" class="form-control" id="postal_code" name="postal_code" placeholder="1234AA*" value="{{old('postal_code')}}" required
+                                           oninput="this.setCustomValidity('')" oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')">
                                 </div>
                             </div>
                             <div class="col text-center">
                                 <div class="form-group ml-3">
-                                    <input type="text" class="form-control" id="city" name="city" placeholder="Plaatsnaam*" value="{{old('city')}}">
+                                    <input type="text" class="form-control" id="city" name="city" placeholder="Plaatsnaam*" value="{{old('city')}}" required
+                                           oninput="this.setCustomValidity('')" oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')">
                                 </div>
                                 <div class="form-group ml-3">
-                                    <input type="number" class="form-control" id="number" name="number" placeholder="Huisnummer*" value="{{old('number')}}">
+                                    <input type="number" class="form-control" id="number" name="number" placeholder="Huisnummer*" value="{{old('number')}}" required
+                                           oninput="this.setCustomValidity('')" oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')">
                                 </div>
                                 <div class="form-group ml-3">
                                     <input type="text" class="form-control" id="building_number" name="building_number" placeholder="Gebouwnummer" value="{{old('building_number')}}">
