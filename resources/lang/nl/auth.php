@@ -13,7 +13,7 @@ return [
 |
 */
 
-    'failed' => 'Deze gegevens komen niet overeen met onze gegevens.',
+    'failed' => 'Deze inloggegevens matchen niet met degene in ons archief.',
     'password' => 'Het gegeven wachtwoord is incorrect',
     'throttle' => 'Te veel login pogingen. Probeer opnieuw over :seconds seconden.',
     'Logout' => 'Uitloggen'
