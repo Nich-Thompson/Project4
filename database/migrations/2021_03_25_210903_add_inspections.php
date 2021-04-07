@@ -14,7 +14,7 @@ class AddInspections extends Migration
      */
     public function up()
     {
-        Schema::create('inspection', function (Blueprint $table) {
+        Schema::create('inspections', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('creator');

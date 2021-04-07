@@ -20,18 +20,18 @@ class inspectionController extends Controller
     }
 
     public function create() {
-        return view('admin.inspection.create');
+        return view('inspection.create');
     }
 
     public function store(StoreCustomerRequest $request) {
         $name = $request->input('name');
         $creator = $request->input('creator');
 
-        customer::create([
+        inspection::create([
             'name' => $name,
             'creator' => $creator
         ]);
-        return redirect(route('getInspectionIndex'));
+        return redirect(route('getCustomerIndex'));
     }
 
     public function edit($id) {

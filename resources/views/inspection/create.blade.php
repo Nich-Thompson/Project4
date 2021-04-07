@@ -31,7 +31,7 @@
                                     <input type="text" class="form-control" id="name" name="name" placeholder="Naam*" value="{{old('name')}}">
                                 </div>
                                 <div class="form-group ml-3">
-                                    <input type="text" class="form-control" id="street" name="street" value="{{user()->name}}" disabled>
+                                    <input type="text" class="form-control" id="creator" name="creator" placeholder="{{Auth::user()->name}}">
                                 </div>
                             </div>
                         </div>

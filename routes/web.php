@@ -57,5 +57,5 @@ Route::prefix('inspector')->group(function() {
 Route::prefix('inspection')->group(function() {
     Route::get('/', 'InspectionController@index')->middleware(['role:admin'])->name('getInspectionIndex');
     Route::get('/create', 'InspectionController@create')->middleware(['role:admin'])->name('getInspectionCreate');
-    Route::get('/create', 'InspectionController@store')->middleware(['role:admin'])->name('postInspectionCreate');
+    Route::post('/create', 'InspectionController@store')->middleware(['role:admin'])->name('postInspectionCreate');
 });
