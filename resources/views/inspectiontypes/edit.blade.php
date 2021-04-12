@@ -31,6 +31,7 @@
             @csrf
             <div class="row">
                 <div class="col-xs-6 col-sm-6 col-md-6">
+                    <label>Naam van het insspectietype:</label>
                     <div class="form-group">
                         <input type="text" name="name" class="form-control" disabled required oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" oninput="this.setCustomValidity('')"
                                @if(old('name') != null)
@@ -41,6 +42,7 @@
                     </div>
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6">
+                    <label>Beschrijving:</label>
                     <div class="form-group">
                         <input type="text" name="description" class="form-control" disabled required oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" oninput="this.setCustomValidity('')"
                                @if(old('description') != null)
@@ -51,6 +53,7 @@
                     </div>
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6">
+                    <label>Kleur:</label>
                     <div class="form-group">
                         <input type="color" name="color" class="form-control" disabled required oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" oninput="this.setCustomValidity('')"
                                @if(old('color') != null)
@@ -61,6 +64,7 @@
                     </div>
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6">
+                    <label>Icoon:</label>
                     <div class="form-group">
                         <select name="icon_id" class="col-xs-12 col-sm-12 col-md-12 form-control" disabled>
                             @foreach($icons as $icon)
