@@ -10,7 +10,7 @@
                 <a href="{{ route('getLocationEdit', [$customer_id, $location->id]) }}" class="btn btn-default">Terug</a>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-10 text-left">
-                <form action="{{ route('postLocationDelete', [$customer_id, $location->id]) }}" method="post">
+                <form action="{{ route('postLocationArchive', [$customer_id, $location->id]) }}" method="post">
                     @csrf
                     <button type="submit" class="btn btn-primary">Archiveren</button>
                 </form>

@@ -29,15 +29,15 @@ Route::prefix('customer')->group(function() {
     Route::post('/create', 'CustomerController@store')->middleware(['role:admin'])->name('postCustomerCreate');
     Route::get('/{id}/edit', 'CustomerController@edit')->middleware(['role:admin'])->name('getCustomerEdit');
     Route::post('/{id}/edit', 'CustomerController@update')->middleware(['role:admin'])->name('postCustomerEdit');
-    Route::get('/{id}/archive', 'CustomerController@remove')->middleware(['role:admin'])->name('getCustomerDelete');
-    Route::post('/{id}/archive', 'CustomerController@archive')->middleware(['role:admin'])->name('postCustomerDelete');
+    Route::get('/{id}/archive', 'CustomerController@remove')->middleware(['role:admin'])->name('getCustomerArchive');
+    Route::post('/{id}/archive', 'CustomerController@archive')->middleware(['role:admin'])->name('postCustomerArchive');
     Route::prefix('/{id}/location')->group(function() {
         Route::get('/create', 'LocationController@create')->middleware(['role:admin'])->name('getLocationCreate');
         Route::post('/create', 'LocationController@store')->middleware(['role:admin'])->name('postLocationCreate');
         Route::get('/{location_id}/edit', 'LocationController@edit')->middleware(['role:admin'])->name('getLocationEdit');
         Route::post('/{location_id}/edit', 'LocationController@update')->middleware(['role:admin'])->name('postLocationEdit');
-        Route::get('/{location_id}/archive', 'LocationController@remove')->middleware(['role:admin'])->name('getLocationDelete');
-        Route::post('/{location_id}/archive', 'LocationController@archive')->middleware(['role:admin'])->name('postLocationDelete');
+        Route::get('/{location_id}/archive', 'LocationController@remove')->middleware(['role:admin'])->name('getLocationArchive');
+        Route::post('/{location_id}/archive', 'LocationController@archive')->middleware(['role:admin'])->name('postLocationArchive');
     });
 });
 
