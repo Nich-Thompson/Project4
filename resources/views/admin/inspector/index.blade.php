@@ -67,4 +67,4 @@
     </div>
 @endsection
 
-<script src="{{ asset('js/search.js') }}"></script>
+{{--<script src="{{ asset('js/search.js') }}"></script>--}}
