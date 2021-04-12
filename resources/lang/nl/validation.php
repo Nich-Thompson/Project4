@@ -146,6 +146,12 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'first_name' => 'voornaam',
+        'last_name' => 'achternaam',
+        'phone_number' => 'telefoonnummer',
+        'password' => 'wachtwoord',
+        'password_confirmation' => 'herhaalde wachtwoord'
+    ],
 
 ];

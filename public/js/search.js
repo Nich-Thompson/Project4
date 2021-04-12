@@ -40,7 +40,7 @@ function check(inspectorField){
 }
 
 function showFilteredFields(filteredFields){
-    let inspectors = document.getElementById('inspectors');
+    let inspectors = document.getElementById('inspector');
     inspectors.innerHTML = null;
     if(filteredFields.length === 0){
         inspectors.innerHTML = ' <div class="mt-4 bg-white">\n' +
