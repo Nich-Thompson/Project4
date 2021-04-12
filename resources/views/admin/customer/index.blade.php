@@ -20,7 +20,7 @@
                         </svg>Toevoegen</a>
                     <p class="mb-5"></p>
                     <hr/>
-                    {{--
+
                     <div class="input-group border w-25">
                         <input type="text" id="search" name="search" value="{{ old('search') }}"
                                class="form-control"
@@ -34,8 +34,8 @@
                                 </button>
                             </span>
                     </div>
-                    <p class="font-italic">Zoek op naam</p>
-                    --}}
+                    <p class="font-italic">Zoek op eerste letter van de naam</p>
+
                     <div id = "customers">
                         @if(count($customers) === 0)
                             <div class="mt-4 bg-white">

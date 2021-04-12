@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,13 +15,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
 })->name('index');
 
-Route::group(['middleware' => ['role:admin']], function () {
-    Route::get('/home', function () {
-        return view('home');
-    });
+Route::group(['middleware' => ['role:admin|inspecteur']], function () {
+    Route::get('/home', 'HomeController@index')->name('getHomeIndex');
 });
 
 //Customer routes

@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class customerController extends Controller
 {
     public function index() {
-        $customers = customer::all();
+        $customers = customer::orderBy('name', 'ASC')->get();
         return view('admin.customer.index', [
             'customers' => $customers,
         ]);
@@ -27,6 +27,8 @@ class customerController extends Controller
         $street = $request->input('street');
         $number = $request->input('number');
         $postal_code = $request->input('postal_code');
+        $phoneNumbersOnly = preg_replace("/[^0-9]/", '', $request->input('phone_number'));
+        $phone_number = $phoneNumbersOnly;
         $contact_name = $request->input('contact_name');
         $phoneNumbersOnly = preg_replace("/[^0-9]/", '', $request->input('contact_phone_number'));
         $contact_phone_number = $phoneNumbersOnly;
@@ -38,6 +40,7 @@ class customerController extends Controller
             'street' => $street,
             'number' => $number,
             'postal_code' => $postal_code,
+            'phone_number' => $phone_number,
             'contact_name' => $contact_name,
             'contact_phone_number' => $contact_phone_number,
             'contact_email' => $contact_email,
@@ -66,6 +69,8 @@ class customerController extends Controller
         $customer->street = $request->input('street');
         $customer->number = $request->input('number');
         $customer->postal_code = $request->input('postal_code');
+        $phoneNumbersOnly = preg_replace("/[^0-9]/", '', $request->input('phone_number'));
+        $customer -> phone_number = $phoneNumbersOnly;
         $customer->contact_name = $request->input('contact_name');
         $phoneNumbersOnly = preg_replace("/[^0-9]/", '', $request->input('contact_phone_number'));
         $customer->contact_phone_number = $phoneNumbersOnly;

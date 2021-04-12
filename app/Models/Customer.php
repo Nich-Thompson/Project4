@@ -16,6 +16,7 @@ class Customer extends Model
         'street',
         'number',
         'postal_code',
+        'phone_number',
         'contact_name',
         'contact_phone_number',
         'contact_email'
