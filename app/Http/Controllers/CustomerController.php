@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCustomerRequest;
 use App\Http\Requests\UpdateCustomerRequest;
 use App\Models\customer;
+use App\Models\Location;
 use Illuminate\Http\Request;
 
 class customerController extends Controller
@@ -49,10 +50,12 @@ class customerController extends Controller
 
     public function edit($id) {
         $customer = customer::find($id);
+        $locations = Location::query()->where('customer_id', '=', $id)->get();
         if($customer === null) {
             abort(404, 'customer with that ID does not exist');
         }
         return view('admin.customer.edit', [
+            'locations' => $locations,
             'customer' => $customer,
             'id' => $id
         ]);
@@ -84,7 +87,7 @@ class customerController extends Controller
         if($customer === null) {
             abort(404, 'customer with that ID does not exist');
         }
-        return view('admin.customer.delete', [
+        return view('admin.customer.archive', [
             'customer' => $customer,
             'id' => $id
         ]);

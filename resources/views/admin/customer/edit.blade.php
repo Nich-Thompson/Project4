@@ -143,9 +143,5 @@
                         </button>
                     </form>
                 </div>
-            </div>
-        </div>
-    </div>
-@endsection
-
-<script src="{{ asset('js/switchEditView.js') }}"></script>
+                @endsection
+                <script src="{{ asset('js/switchEditView.js') }}"></script>

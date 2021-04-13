@@ -31,6 +31,14 @@ Route::prefix('customer')->group(function() {
     Route::post('/{id}/edit', 'CustomerController@update')->middleware(['role:admin'])->name('postCustomerEdit');
     Route::get('/{id}/archive', 'CustomerController@remove')->middleware(['role:admin'])->name('getCustomerArchive');
     Route::post('/{id}/archive', 'CustomerController@archive')->middleware(['role:admin'])->name('postCustomerArchive');
+    Route::prefix('/{id}/location')->group(function() {
+        Route::get('/create', 'LocationController@create')->middleware(['role:admin'])->name('getLocationCreate');
+        Route::post('/create', 'LocationController@store')->middleware(['role:admin'])->name('postLocationCreate');
+        Route::get('/{location_id}/edit', 'LocationController@edit')->middleware(['role:admin'])->name('getLocationEdit');
+        Route::post('/{location_id}/edit', 'LocationController@update')->middleware(['role:admin'])->name('postLocationEdit');
+        Route::get('/{location_id}/archive', 'LocationController@remove')->middleware(['role:admin'])->name('getLocationArchive');
+        Route::post('/{location_id}/archive', 'LocationController@archive')->middleware(['role:admin'])->name('postLocationArchive');
+    });
 });
 
 //Event routes
@@ -40,8 +48,15 @@ Route::prefix('inspector')->group(function() {
     Route::post('/create', 'InspectorController@store')->middleware(['role:admin'])->name('postInspectorCreate');
     Route::get('/{id}/edit', 'InspectorController@edit')->middleware(['role:admin'])->name('getInspectorEdit');
     Route::post('/{id}/edit', 'InspectorController@update')->middleware(['role:admin'])->name('postInspectorEdit');
-    Route::get('/{id}/delete', 'InspectorController@delete')->middleware(['role:admin'])->name('getInspectorDelete');
-    Route::post('/{id}/delete', 'InspectorController@destroy')->middleware(['role:admin'])->name('postInspectorDelete');
+    Route::get('/{id}/archive', 'InspectorController@delete')->middleware(['role:admin'])->name('getInspectorDelete');
+    Route::post('/{id}/archive', 'InspectorController@destroy')->middleware(['role:admin'])->name('postInspectorDelete');
+});
+
+//Inspection routes
+Route::prefix('inspection')->group(function() {
+    Route::get('/', 'InspectionController@index')->middleware(['role:admin'])->name('getInspectionIndex');
+    Route::get('/create', 'InspectionController@create')->middleware(['role:admin'])->name('getInspectionCreate');
+    Route::post('/create', 'InspectionController@store')->middleware(['role:admin'])->name('postInspectionCreate');
 });
 
 //Inspection type routes
