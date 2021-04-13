@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCustomerRequest;
+use App\Http\Requests\StoreLocationRequest;
 use App\Http\Requests\UpdateCustomerRequest;
 use App\Models\customer;
 use App\Models\Location;
@@ -17,7 +18,7 @@ class LocationController extends Controller
         ]);
     }
 
-    public function store(Request $request, $id) {
+    public function store(StoreLocationRequest $request, $id) {
         $name = $request->input('name');
         $city = $request->input('city');
         $street = $request->input('street');
@@ -48,7 +49,7 @@ class LocationController extends Controller
         ]);
     }
 
-    public function update($id, $location_id, Request $request) {
+    public function update($id, $location_id, StoreLocationRequest $request) {
         $location = Location::find($location_id);
 
         $location->name = $request->input('name');

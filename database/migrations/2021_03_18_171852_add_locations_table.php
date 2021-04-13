@@ -16,10 +16,10 @@ class AddLocationsTable extends Migration
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('city');
-            $table->string('street');
-            $table->integer('number');
-            $table->string('postal_code');
+            $table->string('city')->nullable();
+            $table->string('street')->nullable();
+            $table->integer('number')->nullable();
+            $table->string('postal_code')->nullable();
             $table->string('building_number')->nullable();
             $table->integer('customer_id');
             $table->timestamps();

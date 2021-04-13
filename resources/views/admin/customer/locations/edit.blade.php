@@ -33,30 +33,24 @@
             <div class="row">
                 <div class="col text-center">
                     <div class="form-group ml-3">
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Naam*" required disabled
-                               oninput="this.setCustomValidity('')" oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" @if(old('name') !=null) value="{{ old('name') }}" @else value="{{ $location->name }}" @endif>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Naam*" disabled @if(old('name') !=null) value="{{ old('name') }}" @else value="{{ $location->name }}" @endif>
                     </div>
                     <div class="form-group ml-3">
-                        <input type="text" class="form-control" id="street" name="street" placeholder="Straatnaam*" required disabled
-                               oninput="this.setCustomValidity('')" oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" @if(old('street') !=null) value="{{ old('street') }}" @else value="{{ $location->street }}" @endif>
+                        <input type="text" class="form-control" id="street" name="street" placeholder="Straatnaam" disabled @if(old('street') !=null) value="{{ old('street') }}" @else value="{{ $location->street }}" @endif>
                     </div>
                     <div class="form-group ml-3">
-                        <input type="text" class="form-control" id="postal_code" name="postal_code" placeholder="1234AA*" required disabled
-                               oninput="this.setCustomValidity('')" oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" @if(old('postal_code') !=null) value="{{ old('postal_code') }}" @else value="{{ $location->postal_code }}" @endif>
+                        <input type="text" class="form-control" id="postal_code" name="postal_code" placeholder="1234AA" disabled @if(old('postal_code') !=null) value="{{ old('postal_code') }}" @else value="{{ $location->postal_code }}" @endif>
                     </div>
                 </div>
                 <div class="col text-center">
                     <div class="form-group ml-3">
-                        <input type="text" class="form-control" id="city" name="city" placeholder="Plaatsnaam*" required disabled
-                               oninput="this.setCustomValidity('')" oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" @if(old('city') !=null) value="{{ old('city') }}" @else value="{{ $location->city }}" @endif>
+                        <input type="text" class="form-control" id="city" name="city" placeholder="Plaatsnaam" disabled @if(old('city') !=null) value="{{ old('city') }}" @else value="{{ $location->city }}" @endif>
                     </div>
                     <div class="form-group ml-3">
-                        <input type="number" class="form-control" id="number" name="number" placeholder="Huisnummer*" required disabled
-                               oninput="this.setCustomValidity('')" oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" @if(old('number') !=null) value="{{ old('number') }}" @else value="{{ $location->number }}" @endif>
+                        <input type="number" class="form-control" id="number" name="number" placeholder="Huisnummer" disabled @if(old('number') !=null) value="{{ old('number') }}" @else value="{{ $location->number }}" @endif>
                     </div>
                     <div class="form-group ml-3">
-                        <input type="text" class="form-control" id="building_number" name="building_number" placeholder="Gebouwnummer" disabled
-                               oninput="this.setCustomValidity('')" oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" @if(old('building_number') !='') value="{{ old('building_number') }}" @else value="{{ $location->building_number }}" @endif>
+                        <input type="text" class="form-control" id="building_number" name="building_number" placeholder="Gebouwnummer" disabled @if(old('building_number') !='') value="{{ old('building_number') }}" @else value="{{ $location->building_number }}" @endif>
                     </div>
                 </div>
             </div>
