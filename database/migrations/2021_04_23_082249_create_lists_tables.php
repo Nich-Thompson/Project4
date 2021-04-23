@@ -13,14 +13,14 @@ class CreateListsTables extends Migration
      */
     public function up()
     {
-        Schema::create('lists', function (Blueprint $table) {
+        Schema::create('list_models', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('sublist_of')->nullable();
             $table->string('name');
 
             $table->foreign('sublist_of')
                 ->references('id')
-                ->on('lists');
+                ->on('list_models');
 
             $table->timestamps();
         });
@@ -45,6 +45,7 @@ class CreateListsTables extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lists');
+        Schema::dropIfExists('list_models');
+        Schema::dropIfExists('list_values');
     }
 }
