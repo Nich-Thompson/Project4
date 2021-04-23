@@ -15,10 +15,10 @@ class CreateListsTables extends Migration
     {
         Schema::create('list_models', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('sublist_of')->nullable();
+            $table->unsignedBigInteger('list_model_id')->nullable();
             $table->string('name');
 
-            $table->foreign('sublist_of')
+            $table->foreign('list_model_id')
                 ->references('id')
                 ->on('list_models');
 

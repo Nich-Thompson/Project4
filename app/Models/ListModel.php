@@ -18,4 +18,8 @@ class ListModel extends Model
     public function values(): \Illuminate\Database\Eloquent\Relations\HasMany {
         return $this->hasMany(ListValue::class);
     }
+
+    public function sublistOf(): \Illuminate\Database\Eloquent\Relations\BelongsTo {
+        return $this->belongsTo(ListModel::class);
+    }
 }
