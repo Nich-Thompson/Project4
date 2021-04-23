@@ -12,7 +12,7 @@ class ListModel extends Model
     use HasFactory;
     protected $fillable = [
         'name',
-        'sublist_of'
+        'list_model_id'
     ];
 
     public function values(): \Illuminate\Database\Eloquent\Relations\HasMany {

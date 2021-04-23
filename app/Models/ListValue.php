@@ -11,6 +11,6 @@ class ListValue extends Model
     use HasFactory;
     protected $fillable = [
         'name',
-        'list_id'
+        'list_model_id'
     ];
 }
