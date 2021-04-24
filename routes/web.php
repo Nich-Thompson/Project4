@@ -76,4 +76,8 @@ Route::prefix('list')->group(function() {
     Route::post('/create', 'ListController@store')->middleware(['role:admin'])->name('postListCreate');
     Route::get('/{id}/edit', 'ListController@edit')->middleware(['role:admin'])->name('getListEdit');
     Route::post('/{id}/edit', 'ListController@update')->middleware(['role:admin'])->name('postListEdit');
+    Route::get('/{id}/create-value', 'ListController@createValue')->middleware(['role:admin'])->name('getListValueCreate');
+    Route::post('/{id}/create-value', 'ListController@storeValue')->middleware(['role:admin'])->name('postListValueCreate');
+    Route::get('/{id}/edit-value', 'ListController@editValue')->middleware(['role:admin'])->name('getListValueEdit');
+    Route::post('/{id}/edit-value', 'ListController@updateValue')->middleware(['role:admin'])->name('postListValueEdit');
 });
