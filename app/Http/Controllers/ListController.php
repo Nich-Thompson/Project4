@@ -15,7 +15,7 @@ class ListController extends Controller
     public function edit($id)
     {
         $list = ListModel::find($id);
-
-        return view('admin.list.edit', ['list'=>$list, 'id'=>$id]);
+        $values = $list->values()->get();
+        return view('admin.list.edit', ['list'=>$list, 'values'=>$values, 'id'=>$id]);
     }
 }
