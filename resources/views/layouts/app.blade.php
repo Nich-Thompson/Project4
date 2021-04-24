@@ -49,6 +49,20 @@
                         <ul class="navbar-nav">
                             <a class="nav-link" href="{{ route('getInspectionTypeIndex') }}">Inspectietypes</a>
                         </ul>
+
+                        <ul class="navbar-nav dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Dropdown
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                @php
+                                    $lists = \App\Models\ListModel::all();
+                                @endphp
+                                @foreach($lists as $list)
+                                    <a class="dropdown-item" href="#">{{ $list->name }}</a>
+                                @endforeach
+                            </div>
+                        </ul>
                     @endguest
 
                     <!-- Right Side Of Navbar -->
