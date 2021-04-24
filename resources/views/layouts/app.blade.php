@@ -55,6 +55,8 @@
                                 Dropdown
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('getListCreate') }}">+ Nieuwe lijst</a>
+                                <div class="dropdown-divider"></div>
                                 @php
                                     $lists = \App\Models\ListModel::all();
                                 @endphp
