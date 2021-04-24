@@ -61,7 +61,7 @@
                                     $lists = \App\Models\ListModel::all();
                                 @endphp
                                 @foreach($lists as $list)
-                                    <a class="dropdown-item" href="#">{{ $list->name }}</a>
+                                    <a class="dropdown-item" href="{{ route('getListEdit', $list->id) }}">{{ $list->name }}</a>
                                 @endforeach
                             </div>
                         </ul>
