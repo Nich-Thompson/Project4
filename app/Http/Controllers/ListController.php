@@ -63,7 +63,7 @@ class ListController extends Controller
 
     public function storeValue(StoreListValueRequest $request, $id){
         $name = $request->input('name');
-        $list_value_id = $request->input('sublist_value_0');
+        $list_value_id = $request->input('sublist_value');
         ListValue::create([
             'name' => $name,
             'list_model_id' => $id,
@@ -71,5 +71,39 @@ class ListController extends Controller
         ]);
 
         return redirect(route('getListEdit', $id));
+    }
+
+    public function editValue($list_id, $id){
+        $listValue = ListValue::find($id);
+        $list = ListModel::find($list_id);
+        $sublists = [];
+        $sublistvalues = [];
+        $sublist = $list -> sublist() -> first();
+        while(!is_null($sublist)){
+            array_push($sublists, $sublist ->toArray());
+            array_push($sublistvalues, $sublist -> values() -> get() ->toArray());
+            $sublist = $sublist -> sublist() -> first();
+        }
+        Log::debug($listValue);
+        Log::debug($sublistvalues);
+        return view('admin.list.editValue', [
+            'list'=>$list,
+            'sublists'=>$sublists,
+            'sublistvalues' => $sublistvalues,
+            'listValue' => $listValue
+        ]);
+    }
+
+    public function updateValue(StoreListValueRequest $request, $list_id, $id){
+        $name = $request->input('name');
+        $list_value_id = $request->input('sublist_value');
+
+        $listValue = ListValue::find($id);
+        $listValue -> list_value_id = $list_value_id;
+        $listValue -> name = $name;
+
+        $listValue->save();
+
+        return redirect(route('getListEdit', $list_id));
     }
 }

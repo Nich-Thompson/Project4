@@ -36,6 +36,7 @@ function showValues(){
             label.textContent = sublistvalues[0][index].name;
             const value = document.createElement('input');
             value.className = 'form-control';
+            value.id = 'notEnabled';
             value.disabled = true;
             value.type = 'text';
             value.value = showValue.name

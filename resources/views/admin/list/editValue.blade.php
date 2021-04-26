@@ -6,6 +6,11 @@
             <div class="card">
                 <div class="card-body">
                     <span class="float-left h2">Nieuwe {{ $list -> name }} maken</span>
+                    <button id="switchButton" onclick="enableInput()" class="btn btn-primary float-right ml-2">
+                        Bewerken
+                    </button>
+                    <a href="#" id="archiveButton"
+                       class="btn btn-primary float-right">Archiveren</a>
                     <p class="mb-5"></p>
                     <hr/>
                     @if ($errors->any())
@@ -18,19 +23,22 @@
                             </ul>
                         </div>
                     @endif
-                    <form action="{{ route('postListValueCreate', $list  -> id) }}" method="POST">
+                    <form action="{{ route('postListValueEdit', [
+                                            'id' => $listValue->id,
+                                            'list_id' => $list -> id
+                                        ]) }}" method="POST">
                         @csrf
                         <div class="row">
                             <div class="col">
                                 @if(!empty($sublists))
                                     <div class="form-group">
                                         <label for="sublist_value"> {{$sublists[0]['name']}} </label>
-                                        <select  class="form-control" name="sublist_value" id="sublist_value">
+                                        <select  class="form-control" name="sublist_value" id="sublist_value" disabled>
                                             @foreach($sublistvalues[0] as $value)
-                                                @if(old('sublist_value') == $value['name'])
-                                                    <option value="{{$value['id']}}" selected>{{$value['name']}}</option>
+                                                @if(old('sublist_value') != null)
+                                                    <option value="{{$value['id']}}" {{old('sublist_value') == $value['name'] ? 'selected' : ''}}>{{$value['name']}}</option>
                                                 @else
-                                                    <option value="{{$value['id']}}">{{$value['name']}}</option>
+                                                    <option value="{{$value['id']}}" {{$listValue -> list_value_id == $value['id'] ? 'selected' : ''}}>{{$value['name']}}</option>
                                                 @endif
                                             @endforeach
                                         </select>
@@ -43,12 +51,18 @@
                             </div>
                             <div class="form-group">
                                 <label class="ml-1">Typenaam*</label>
-                                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value = "{{old('name')}}" placeholder="Vul type naam in">
+                                <input type="text" name="name" placeholder="Vul type naam in"
+                                       class="form-control @error('name') is-invalid @enderror" disabled
+                                       @if(old('name') != null)
+                                       value="{{ old('name') }}"
+                                       @else
+                                       value="{{ $listValue->name }}"
+                                    @endif>
                             </div>
                         </div>
                         <p class="mt-3">Velden met een ster (*) zijn verplicht</p>
                         <a href="{{URL::to('/list/'.$list -> id.'/edit')}}" class="btn btn-default">Terug</a>
-                        <button type="submit" class="float-right btn btn-primary text-light">Aanmaken</button>
+                        <button type="submit" id="saveButton" class="float-right btn btn-primary text-light">Aanpassen</button>
                     </form>
                 </div>
             </div>
@@ -59,3 +73,4 @@
 <script> window.count = '<?php echo  json_encode([$sublists, $sublistvalues]); ?>'; </script>
 <script src="{{ asset('js/showListValues.js') }}"></script>
 
+<script src="{{ asset('js/switchEditView.js') }}"></script>
