@@ -14,6 +14,24 @@
                         </svg>Toevoegen</a>
                     <p class="mb-5"></p>
                     <hr/>
+
+{{--                    <label class="ml-1">Lijstnaam:</label>--}}
+                    <div class="d-flex flex-column">
+                        <form action="{{ route('postListEdit', $id ) }}" method="post">
+                            @csrf
+                            <button type="submit" id="saveButton" class="float-right btn btn-primary text-light">Opslaan</button>
+                            <div class="form-group ml-2 w-75">
+                                <input type="text" name="name" placeholder="Lijstnaam"
+                                       class="form-control @error('first_name') is-invalid @enderror"
+                                       @if(old('name') != null)
+                                       value="{{ old('name') }}"
+                                       @else
+                                       value="{{ $list->name }}"
+                                    @endif>
+                            </div>
+                        </form>
+                    </div>
+
                     @if(count($values) === 0)
                         <div class="mt-4 bg-white">
                             <p class="float-left h3">Deze lijst heeft geen waardes</p>
