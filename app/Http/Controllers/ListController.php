@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreListValueRequest;
 use App\Models\ListModel;
+use App\Models\ListValue;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -35,5 +37,14 @@ class ListController extends Controller
             'sublists'=>$sublists,
             'sublistvalues' => $sublistvalues
         ]);
+    }
+
+    public function storeValue(StoreListValueRequest $request, $id){
+        $name = $request->input('name');
+        ListValue::create([
+            'name' => $name,
+            'list_model_id' => $id
+        ]);
+        return redirect(route('getListEdit', $id));
     }
 }
