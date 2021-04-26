@@ -47,6 +47,7 @@ class ListController extends Controller
             'name' => $name,
             'list_model_id' => $id
         ]);
+
         return redirect(route('getListEdit', $id));
     }
 }
