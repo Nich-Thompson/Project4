@@ -12,7 +12,9 @@ class ListController extends Controller
 {
     public function create()
     {
-        return view('admin.list.create');
+        $headlists = ListModel::query()->whereNotNull('list_model_id')->pluck('list_model_id')->all();
+        $listsWithNoSublist = ListModel::query()->whereNotIn('id', $headlists)->get();
+        return view('admin.list.create', ['lists'=>$listsWithNoSublist]);
     }
 
     public function edit($id)
