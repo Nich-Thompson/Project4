@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreListValueRequest;
-use App\Http\Requests\UpdateListRequest;
+use App\Http\Requests\ListRequest;
 use App\Models\ListModel;
 use App\Models\ListValue;
 use Illuminate\Http\Request;
@@ -18,7 +18,7 @@ class ListController extends Controller
         return view('admin.list.create', ['lists'=>$listsWithNoSublist]);
     }
 
-    public function store(Request $request)
+    public function store(ListRequest $request)
     {
         ListModel::create([
             'name' => $request->input('name'),
@@ -35,7 +35,7 @@ class ListController extends Controller
         return view('admin.list.edit', ['list'=>$list, 'values'=>$values, 'id'=>$id]);
     }
 
-    public function update($id, UpdateListRequest $request)
+    public function update($id, ListRequest $request)
     {
         $list = ListModel::find($id);
         $list->name = $request->input('name');
