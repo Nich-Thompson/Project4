@@ -15,6 +15,7 @@ class listSeeder extends Seeder
      */
     public function run()
     {
+        // Blus
         ListModel::create([
             'name' => 'Blus - Merken'
         ]);
@@ -49,5 +50,18 @@ class listSeeder extends Seeder
             'list_model_id' => '3',
             'list_value_id' => '3'
         ]);
+
+        // Keerkleppen
+        ListModel::create([
+            'name' => 'Keer. Toestellen'
+        ]);
+
+        ListValue::create([
+            'name' => 'BA 4760',
+            'list_model_id' => '4'
+        ]);
+
+        // Noodverlichting
+        //
     }
 }
