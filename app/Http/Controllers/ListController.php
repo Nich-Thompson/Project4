@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreListValueRequest;
+use App\Http\Requests\ListRequest;
 use App\Models\ListModel;
 use App\Models\ListValue;
 use Illuminate\Http\Request;
@@ -17,11 +18,30 @@ class ListController extends Controller
         return view('admin.list.create', ['lists'=>$listsWithNoSublist]);
     }
 
+    public function store(ListRequest $request)
+    {
+        ListModel::create([
+            'name' => $request->input('name'),
+            'list_model_id' => $request->input('list_model_id'),
+        ]);
+
+        return redirect()->route('getCustomerIndex');
+    }
+
     public function edit($id)
     {
         $list = ListModel::find($id);
         $values = $list->values()->get();
         return view('admin.list.edit', ['list'=>$list, 'values'=>$values, 'id'=>$id]);
+    }
+
+    public function update($id, ListRequest $request)
+    {
+        $list = ListModel::find($id);
+        $list->name = $request->input('name');
+        $list->save();
+
+        return redirect()->route('getListEdit', $id);
     }
 
     public function createValue($id){
