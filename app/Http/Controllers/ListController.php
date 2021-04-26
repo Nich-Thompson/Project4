@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ListModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ListController extends Controller
 {
@@ -17,5 +18,22 @@ class ListController extends Controller
         $list = ListModel::find($id);
         $values = $list->values()->get();
         return view('admin.list.edit', ['list'=>$list, 'values'=>$values, 'id'=>$id]);
+    }
+
+    public function createValue($id){
+        $list = ListModel::find($id);
+        $sublists = [];
+        $sublistvalues = [];
+        $sublist = $list -> sublist() -> first();
+        while(!is_null($sublist)){
+            array_push($sublists, $sublist ->toArray());
+            array_push($sublistvalues, $sublist -> values() -> get() ->toArray());
+            $sublist = $sublist -> sublist() -> first();
+        }
+        return view('admin.list.createValue', [
+            'list'=>$list,
+            'sublists'=>$sublists,
+            'sublistvalues' => $sublistvalues
+        ]);
     }
 }
