@@ -28,11 +28,15 @@ class CreateListsTables extends Migration
         Schema::create('list_values', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('list_model_id');
+            $table->unsignedBigInteger('list_value_id')->nullable();
             $table->string('name');
 
             $table->foreign('list_model_id')
                 ->references('id')
                 ->on('list_models');
+            $table->foreign('list_value_id')
+                ->references('id')
+                ->on('list_values');
 
             $table->timestamps();
         });

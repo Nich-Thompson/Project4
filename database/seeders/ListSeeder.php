@@ -32,24 +32,22 @@ class listSeeder extends Seeder
             'list_model_id' => '1'
         ]);
         ListValue::create([
-            'name' => 'BCO2',
+            'name' => 'Ajax',
             'list_model_id' => '1'
         ]);
         ListValue::create([
-            'name' => 'Blusstof 1',
+            'name' => 'Schuim',
+            'list_model_id' => '2',
+            'list_value_id' => '1'
+        ]);
+        ListValue::create([
+            'name' => 'Poeder',
             'list_model_id' => '2'
         ]);
         ListValue::create([
-            'name' => 'Blusstof 2',
-            'list_model_id' => '2'
-        ]);
-        ListValue::create([
-            'name' => 'Blustype 1',
-            'list_model_id' => '3'
-        ]);
-        ListValue::create([
-            'name' => 'Blustype 2',
-            'list_model_id' => '3'
+            'name' => 'EPS6',
+            'list_model_id' => '3',
+            'list_value_id' => '3'
         ]);
     }
 }
