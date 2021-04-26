@@ -15,6 +15,16 @@ class ListController extends Controller
         return view('admin.list.create', ['lists'=>$listsWithNoSublist]);
     }
 
+    public function store(Request $request)
+    {
+        ListModel::create([
+            'name' => $request->input('name'),
+            'list_model_id' => $request->input('list_model_id'),
+        ]);
+
+        return redirect()->route('getCustomerIndex');
+    }
+
     public function edit($id)
     {
         $list = ListModel::find($id);
