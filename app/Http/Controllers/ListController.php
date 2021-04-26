@@ -43,9 +43,11 @@ class ListController extends Controller
 
     public function storeValue(StoreListValueRequest $request, $id){
         $name = $request->input('name');
+        $list_value_id = $request->input('sublist_value_0');
         ListValue::create([
             'name' => $name,
-            'list_model_id' => $id
+            'list_model_id' => $id,
+            'list_value_id' => $list_value_id
         ]);
 
         return redirect(route('getListEdit', $id));
