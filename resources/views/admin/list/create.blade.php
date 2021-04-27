@@ -46,7 +46,6 @@
                         <br>
                         <p class="ml-3 mt-3">Velden met een ster (*) zijn verplicht</p>
                         <br>
-                        <a href="{{URL::to('/list')}}" class="btn btn-default">Terug</a>
                         <button type="submit" class="float-right btn btn-primary text-light">Aanmaken</button>
                     </form>
                 </div>
