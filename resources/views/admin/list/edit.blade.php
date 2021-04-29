@@ -6,6 +6,12 @@
             <div class="bg-white overflow-hidden shadow-sm">
                 <div class="p-4 bg-white border-b border-gray-200">
                     <span class="float-left h2">{{ $list->name }}</span>
+                    <br><br>
+                    @if($headlist != null)
+                        <span class="float-left h4">Sublijst van: {{ $headlist->name }}</span>
+                    @else
+                        <span class="float-left h4">Hoofdlijst</span>
+                    @endif
                     <a href="{{ route('getListValueCreate', $list->id) }}" class="float-right btn border">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                              class="bi bi-plus" viewBox="0 0 16 16">
