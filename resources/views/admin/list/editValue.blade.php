@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="card">
                 <div class="card-body">
-                    <span class="float-left h2">Nieuwe {{ $list -> name }} maken</span>
+                    <span class="float-left h2">{{ $list -> name }} aanpassen</span>
                     <button id="switchButton" onclick="enableInput()" class="btn btn-primary float-right ml-2">
                         Bewerken
                     </button>
