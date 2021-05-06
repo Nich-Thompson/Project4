@@ -28,15 +28,6 @@ class ListCRUDTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        ListModel::create([
-            'name' => 'test',
-            'list_model_id' => null
-        ]);
-        ListValue::create([
-            'name' => 'test_value_1',
-            'list_model_id' => 1,
-            'list_value_id' => null
-        ]);
         $user = User::factory()->create();
         \Spatie\Permission\Models\Role::create(["name" => "admin"]);
         \Spatie\Permission\Models\Role::create(["name" => "inspecteur"]);
@@ -54,6 +45,10 @@ class ListCRUDTest extends TestCase
 
     public function test_new_list_can_be_created()
     {
+        ListModel::create([
+            'name' => 'test',
+            'list_model_id' => null
+        ]);
         $lists = ListModel::all();
         $oldList = $lists[count($lists)-1];
         $controller = new ListController();
@@ -62,14 +57,18 @@ class ListCRUDTest extends TestCase
             'list_model_id' => 1
         ]));
 
-        $lists = User::all();
+        $lists = ListModel::all();
         $newlist = $lists[count($lists)-1];
         $this->assertFalse($oldList->is($newlist));
     }
 
     public function test_edit_screen_can_be_rendered()
     {
-        $response = $this->get('/list/1/edit');
+        $list = ListModel::create([
+            'name' => 'test',
+            'list_model_id' => null
+        ]);
+        $response = $this->get('/list/'.$list->id.'/edit');
 
         $response->assertStatus(200);
     }
@@ -78,7 +77,7 @@ class ListCRUDTest extends TestCase
     {
         $oldList = ListModel::create([
             'name' => 'test_list',
-            'list_model_id' => 1
+            'list_model_id' => null
         ]);
 
         $controller = new ListController();
@@ -93,20 +92,33 @@ class ListCRUDTest extends TestCase
 
     public function test_createValue_screen_can_be_rendered()
     {
-        $response = $this->get('/list/1/create-value');
+        $list = ListModel::create([
+            'name' => 'test',
+            'list_model_id' => null
+        ]);
+        $response = $this->get('/list/'.$list->id.'/create-value');
 
         $response->assertStatus(200);
     }
 
     public function test_new_listValue_can_be_created()
     {
+        $list = ListModel::create([
+            'name' => 'test',
+            'list_model_id' => null
+        ]);
+        $listValue = ListValue::create([
+            'name' => 'test',
+            'list_model_id' => $list->id,
+            'list_value_id' => null
+        ]);
         $listValues = ListValue::all();
         $oldValue = $listValues[count($listValues)-1];
         $controller = new ListController();
         $controller->storeValue(new StoreListValueRequest([
             'name' => 'test_value_2',
             'sublist_value' => null
-        ]), 1);
+        ]), $list->id);
 
         $listValues = ListValue::all();
         $newValue = $listValues[count($listValues)-1];
@@ -115,17 +127,30 @@ class ListCRUDTest extends TestCase
 
     public function test_editValue_screen_can_be_rendered()
     {
-        $response = $this->get('/list/1/1/edit-value');
+        $list = ListModel::create([
+            'name' => 'test',
+            'list_model_id' => null
+        ]);
+        $listValue = ListValue::create([
+            'name' => 'test',
+            'list_model_id' => $list->id,
+            'list_value_id' => null
+        ]);
+        $response = $this->get('/list/'.$list->id.'/'.$listValue->id.'/edit-value');
 
         $response->assertStatus(200);
     }
 
     public function test_listValue_can_be_edited()
     {
+        $list = ListModel::create([
+            'name' => 'test',
+            'list_model_id' => null
+        ]);
         $oldValue = ListValue::create([
             'name' => 'test_value_2',
-            'list_model_id' => 1,
-            'list_value_id' => 1
+            'list_model_id' => $list->id,
+            'list_value_id' => null
         ]);
 
         $controller = new ListController();
@@ -137,6 +162,6 @@ class ListCRUDTest extends TestCase
         $newValue = ListValue::find($oldValue->id);
 
         $this->assertFalse($oldValue->name === $newValue->name);
-        $this->assertFalse($oldValue->list_value_id === $newValue->list_value_id);
+        $this->assertTrue($oldValue->list_value_id === $newValue->list_value_id);
     }
 }
