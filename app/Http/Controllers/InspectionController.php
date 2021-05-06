@@ -6,6 +6,7 @@ use App\Http\Requests\StoreCustomerRequest;
 use App\Http\Requests\UpdateCustomerRequest;
 use App\Models\Inspection;
 use App\Models\Customer;
+use App\Models\InspectionType;
 use App\Models\Location;
 use App\Models\Inspector;
 use Illuminate\Http\Request;
@@ -14,16 +15,21 @@ class inspectionController extends Controller
 {
     public function index() {
         $inspections = Inspection::all();
-        return view('admin.customer.index', [
+        $inspectionTypes = InspectionType::all();
+        return view('inspection.index', [
             'inspections' => $inspections,
+            'inspectionTypes' => $inspectionTypes,
         ]);
     }
 
     public function create() {
-        return view('inspection.create');
+        $inspectionTypes = InspectionType::all();
+        return view('inspection.create', [
+            'inspectionTypes' => $inspectionTypes,
+        ]);
     }
 
-    public function store(StoreCustomerRequest $request) {
+    public function store(request $request) {
         $name = $request->input('name');
         $creator = $request->input('creator');
 

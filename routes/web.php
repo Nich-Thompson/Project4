@@ -57,6 +57,8 @@ Route::prefix('inspection')->group(function() {
     Route::get('/', 'InspectionController@index')->middleware(['role:admin'])->name('getInspectionIndex');
     Route::get('/create', 'InspectionController@create')->middleware(['role:admin'])->name('getInspectionCreate');
     Route::post('/create', 'InspectionController@store')->middleware(['role:admin'])->name('postInspectionCreate');
+    Route::get('/{id}/edit', 'InspectionController@edit')->middleware(['role:admin'])->name('getInspectionEdit');
+    Route::post('/{id}/edit', 'InspectionController@update')->middleware(['role:admin'])->name('postInspectionEdit');
 });
 
 //Inspection type routes

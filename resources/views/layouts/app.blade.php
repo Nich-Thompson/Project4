@@ -49,6 +49,10 @@
                         <ul class="navbar-nav">
                             <a class="nav-link" href="{{ route('getInspectionTypeIndex') }}">Inspectietypes</a>
                         </ul>
+
+                        <ul class="navbar-nav">
+                            <a class="nav-link" href="{{ route('getInspectionIndex') }}">Inspectie Starten ></a>
+                        </ul>
                     @endguest
 
                     <!-- Right Side Of Navbar -->

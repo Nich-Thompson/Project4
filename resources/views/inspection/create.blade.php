@@ -4,10 +4,10 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-11">
             <div class="card">
                 <div class="card-body">
-                    <span class="float-left h2">Nieuwe inspectie aanmaken</span>
+                    <span class="float-left h2">Nieuwe inspectie uitvoeren</span>
                     <br><br>
                     <hr>
 
@@ -26,20 +26,79 @@
                     <form action="{{ route('postInspectionCreate') }}" method="post">
                         @csrf
                         <div class="row">
-                            <div class="col text-center">
-                                <div class="form-group ml-3">
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Naam*" value="{{old('name')}}">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="form-group ml-3 col">
+                                        <p class="mb-0">Naam</p>
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="Naam">
+                                    </div>
+                                    <div class="form-group ml-3 col">
+                                        <p class="mb-0">Aanmaker</p>
+                                        <input type="text" class="form-control" id="creator" name="creator" placeholder="Aanmaker">
+                                    </div>
                                 </div>
+                                <div class="row">
+                                    <div class="form-group ml-3 col">
+                                        <p class="mb-0">Pos.</p>
+                                        <input type="text" class="form-control" id="testData" name="testData" placeholder="testData">
+                                    </div>
+                                    <div class="form-group ml-3 col">
+                                        <p class="mb-0">Merk</p>
+                                        <input type="text" class="form-control" id="testData" name="testData" placeholder="testData">
+                                    </div>
+                                    <div class="form-group ml-3 col">
+                                        <p class="mb-0">Fabricatie jaar</p>
+                                        <input type="text" class="form-control" id="testData" name="testData" placeholder="testData">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group ml-3 col">
+                                        <p class="mb-0">Etage</p>
+                                        <input type="text" class="form-control" id="testData" name="testData" placeholder="testData">
+                                    </div>
+                                    <div class="form-group ml-3 col">
+                                        <p class="mb-0">InspectieType-specifiek-veld</p>
+                                        <input type="text" class="form-control" id="testData" name="testData" placeholder="testData">
+                                    </div>
+                                    <div class="form-group ml-3 col">
+                                        <p class="mb-0">InspectieType-specifiek-veld</p>
+                                        <input type="text" class="form-control" id="testData" name="testData" placeholder="testData">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group ml-3 col">
+                                        <p class="mb-0">Locatie</p>
+                                        <input type="text" class="form-control" id="testData" name="testData" placeholder="testData">
+                                    </div>
+                                    <div class="form-group ml-3 col">
+                                        <p class="mb-0">Type</p>
+                                        <input type="text" class="form-control" id="testData" name="testData" placeholder="testData">
+                                    </div>
+                                    <div class="form-group ml-3 col">
+                                        <p class="mb-0">Debiet</p>
+                                        <input type="text" class="form-control" id="testData" name="testData" placeholder="testData">
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group col">
+                                        <p class="mb-0">Opmerkingen</p>
+                                        <input type="text" class="form-control" id="testData" name="testData" placeholder="testData">
+                                    </div>
+                                </div>
+
                                 <div class="form-group ml-3">
-                                    <input type="text" class="form-control" id="creator" name="creator" placeholder="{{Auth::user()->name}}">
+                                    <label>Selecteer InspectieType</label>
+                                    <select>
+                                        @foreach($inspectionTypes as $inspectionType)
+                                            <option class="form-select">{{$inspectionType->name}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                         </div>
                         <br>
-                        <p class="ml-3 mt-3">Velden met een ster (*) zijn verplicht</p>
-                        <br>
-                            <a href="{{URL::to('/customer')}}" class="btn">Terug</a>
-                            <button type="submit" class="float-right btn btn-secondary text-light">Aanmaken</button>
+                            <a href="{{URL::to('/customer')}}" class="btn">Uitchecken</a>
+                            <button type="submit" class="float-right btn btn-secondary text-light">Invoeren</button>
                     </form>
                 </div>
             </div>
