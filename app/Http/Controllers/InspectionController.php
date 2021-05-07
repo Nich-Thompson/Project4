@@ -53,16 +53,24 @@ class inspectionController extends Controller
     }
 
 
-//    public function store(request $request)
-//    {
-//        $name = $request->input('name');
-//
-//        Inspection::create([
-//            'name' => $name,
-//        ]);
-//
-//        return redirect(route('getCustomerIndex'));
-//    }
+    public function save(Request $request, $id)
+    {
+        $payload = json_decode($request->getContent(), true);
+
+        $inspection = Inspection::find($id);
+
+        $inspection->json = $payload["json"];
+
+        $inspection->save();
+
+        return response()->json(
+            [
+                'status' => '200',
+                'success' => 'true'
+            ],
+            200
+        );
+    }
 
     public function edit($id)
     {

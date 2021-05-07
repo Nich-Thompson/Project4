@@ -151,7 +151,7 @@
             let type = document.getElementById("8").value;
             let debiet = document.getElementById("9").value;
             let comments = document.getElementById("10").value;
-            let approved = document.getElementById("12").value;
+            let approved = document.getElementById("12").checked;
 
             let object = {
                 "position": position,
@@ -169,8 +169,8 @@
 
             console.log(object);
 
-            // saveNewObject(object);
-            // renderData();
+            saveNewObject(object);
+            renderData();
         });
 
         function saveNewObject(object) {
@@ -186,7 +186,7 @@
         }
 
         function syncData() {
-            fetch("/save/" + data.id, {
+            fetch("/inspection/save/" + data.id, {
                 method: "POST",
                 "Content-type": "application/json",
                 body: JSON.stringify({json: localStorage.getItem("inspections")})
