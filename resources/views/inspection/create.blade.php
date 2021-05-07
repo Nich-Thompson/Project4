@@ -17,7 +17,7 @@
                             De internet connectie is verloren, je werkt nu offline!
                         </div>
 
-                        <form id="form" name="form">
+                        <form id="form" name="form" action="post" class="mb-5">
                             <div class="row">
                                 <div class="col-12">
                                     <div class="row">
@@ -80,15 +80,6 @@
                                     </div>
 
                                     <div class="row">
-                                        {{--                                        <div class="form-group ml-3">--}}
-                                        {{--                                            <label>Selecteer Inspectietype</label>--}}
-                                        {{--                                            <br>--}}
-                                        {{--                                            <select id="11" name="11">--}}
-                                        {{--                                                @foreach($inspection_types as $inspection_type)--}}
-                                        {{--                                                    <option class="form-select">{{$inspection_type->name}}</option>--}}
-                                        {{--                                                @endforeach--}}
-                                        {{--                                            </select>--}}
-                                        {{--                                        </div>--}}
                                         <div class="form-group ml-3">
                                             <input type="checkbox" id="12" name="12"
                                                    checked>
@@ -103,8 +94,26 @@
                             </button>
                         </form>
 
-                        <div id="inspections">
-                        </div>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Positie</th>
+                                <th>Merk</th>
+                                <th>Fabricatie jaar</th>
+                                <th>Etage</th>
+                                <th>Blusstof</th>
+                                <th>Laatst afgeperst</th>
+                                <th>Locatie</th>
+                                <th>Type</th>
+                                <th>Debiet</th>
+                                <th>Opmerkingen</th>
+                                <th>Goedgekeurd</th>
+                            </tr>
+                            </thead>
+                            <tbody id="inspections">
+
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -133,11 +142,42 @@
                     inspections = [inspections];
 
                 inspections.forEach(element => {
-                    let p = document.createElement("p");
-                    p.textContent = "Positie: " + element.position + " merk: " + element.brand + " fabricagejaar: " + element.fabrication_year +
-                        " opmerkingen: " + element.comments;
+                    let tr = document.createElement("tr");
+                    let position = document.createElement("td");
+                    let brand = document.createElement("td");
+                    let fabrication_year = document.createElement("td");
+                    let floor = document.createElement("td");
+                    let blusstof = document.createElement("td");
+                    let lastchecked = document.createElement("td");
+                    let location = document.createElement("td");
+                    let type = document.createElement("td");
+                    let debiet = document.createElement("td");
+                    let comments = document.createElement("td");
+                    let approved = document.createElement("td");
 
-                    div.appendChild(p);
+                    position.textContent = element.position;
+                    brand.textContent = element.brand;
+                    fabrication_year.textContent = element.fabrication_year;
+                    floor.textContent = element.floor;
+                    blusstof.textContent = element.blusstof;
+                    lastchecked.textContent = element.lastchecked;
+                    location.textContent = element.location;
+                    type.textContent = element.type;
+                    debiet.textContent = element.debiet;
+                    comments.textContent = element.comments;
+
+                    if (element.approved === true) {
+                        approved.textContent = "Ja";
+                        approved.className = "text-success font-weight-bold";
+                    } else {
+                        approved.textContent = "Nee";
+                        approved.className = "text-danger font-weight-bold";
+                    }
+
+                    tr.append(position, brand, fabrication_year, floor, blusstof, lastchecked, location, type,
+                        debiet, comments, approved);
+
+                    div.appendChild(tr);
                 })
             }
         }
@@ -146,33 +186,43 @@
         document.getElementById("form").addEventListener("submit", function (event) {
             event.preventDefault();
 
-            let position = document.getElementById("1").value;
-            let brand = document.getElementById("2").value;
-            let fabrication_year = document.getElementById("3").value;
-            let floor = document.getElementById("4").value;
-            let blusstof = document.getElementById("5").value;
-            let lastchecked = document.getElementById("6").value;
-            let location = document.getElementById("7").value;
-            let type = document.getElementById("8").value;
-            let debiet = document.getElementById("9").value;
-            let comments = document.getElementById("10").value;
-            let approved = document.getElementById("12").checked;
+            let position = document.getElementById("1");
+            let brand = document.getElementById("2");
+            let fabrication_year = document.getElementById("3");
+            let floor = document.getElementById("4");
+            let blusstof = document.getElementById("5");
+            let lastchecked = document.getElementById("6");
+            let location = document.getElementById("7");
+            let type = document.getElementById("8");
+            let debiet = document.getElementById("9");
+            let comments = document.getElementById("10");
+            let approved = document.getElementById("12");
 
             let object = {
-                "position": position,
-                "brand": brand,
-                "fabrication_year": fabrication_year,
-                "floor": floor,
-                "blusstof": blusstof,
-                "lastchecked": lastchecked,
-                "location": location,
-                "type": type,
-                "debiet": debiet,
-                "comments": comments,
-                "approved": approved,
+                "position": position.value,
+                "brand": brand.value,
+                "fabrication_year": fabrication_year.value,
+                "floor": floor.value,
+                "blusstof": blusstof.value,
+                "lastchecked": lastchecked.value,
+                "location": location.value,
+                "type": type.value,
+                "debiet": debiet.value,
+                "comments": comments.value,
+                "approved": approved.checked,
             };
 
-            console.log(object);
+            position.value = "";
+            brand.value = "";
+            fabrication_year.value = "";
+            floor.value = "";
+            blusstof.value = "";
+            lastchecked.value = "";
+            location.value = "";
+            type.value = "";
+            debiet.value = "";
+            comments.value = "";
+            approved.checked = true;
 
             saveNewObject(object);
             renderData();
