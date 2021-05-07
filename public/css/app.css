@@ -10904,3 +10904,7 @@ a.text-dark:focus {
     border-radius: 5px;
     font-weight: bold;
 }
+
+.fontawesomeselect {
+    font-family: fontAwesome
+}

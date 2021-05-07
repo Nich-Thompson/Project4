@@ -16,6 +16,7 @@ class CreateInspectionTypeTable extends Migration
         Schema::create('icons', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('unicode');
             $table->timestamps();
         });
 

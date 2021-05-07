@@ -11,5 +11,6 @@ class Icon extends Model
 
     protected $fillable = [
         'name',
+        'unicode'
     ];
 }
