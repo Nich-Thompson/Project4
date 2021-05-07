@@ -75,8 +75,6 @@ class StoreInspectorRequestTest extends TestCase
 
     public function provideInvalidData(): array
     {
-        $faker = Factory::create(Factory::DEFAULT_LOCALE);
-
         return [
             [[]],//missing fields
             [[

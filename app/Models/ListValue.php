@@ -4,13 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Icon extends Model
+class ListValue extends Model
 {
     use HasFactory;
-
     protected $fillable = [
         'name',
-        'unicode'
+        'list_model_id',
+        'list_value_id'
     ];
 }
