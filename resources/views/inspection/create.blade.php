@@ -125,6 +125,7 @@
 
         if (data.json === "") {
             localStorage.setItem("inspections", JSON.stringify([]));
+            document.getElementById("1").value = 1;
         } else {
             localStorage.setItem("inspections", data.json);
             renderData();
@@ -134,6 +135,7 @@
         function renderData() {
             if (localStorage.getItem("inspections") !== null && localStorage.getItem("inspections") !== "") {
                 let inspections = JSON.parse(localStorage.getItem("inspections"));
+                document.getElementById("1").value = inspections.length + 1;
                 let div = document.getElementById("inspections");
 
                 div.innerHTML = "";
