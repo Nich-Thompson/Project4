@@ -34,8 +34,8 @@
                     {{--                                </button>--}}
                     {{--                            </span>--}}
                     {{--                    </div>--}}
-                    <p class="font-italic">Zoek op InspectieType</p>
-                    <label>Selecteer InspectieType</label>
+                    <p class="font-italic">Zoek op Inspectietype</p>
+                    <label>Selecteer Inspectietype</label>
                     <select>
                         @foreach($inspectionTypes as $inspectionType)
                             <option class="form-select">{{$inspectionType->name}}</option>
