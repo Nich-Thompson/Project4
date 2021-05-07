@@ -13,6 +13,10 @@
                         <p>Aangemaakt op: {{date("d-m-Y",strtotime($inspection->created_at))}} door {{$username}}</p>
                         <hr>
 
+                        <div class="alert alert-danger" role="alert" id="offline">
+                            De internet connectie is verloren, je werkt nu offline!
+                        </div>
+
                         <form id="form" name="form">
                             <div class="row">
                                 <div class="col-12">
@@ -108,6 +112,7 @@
     </div>
     <script>
         let data = {!! json_encode($inspection, JSON_HEX_TAG) !!};
+        document.getElementById("offline").style.display = "none";
 
         if (data.json === "") {
             localStorage.setItem("inspections", JSON.stringify([]));
@@ -196,13 +201,11 @@
         }
 
         window.addEventListener('online', () => {
-            document.getElementById("internet").textContent = "Online";
-            document.getElementById("internet").classList.remove('offline');
+            document.getElementById("offline").style.display = "none";
             syncData();
         });
         window.addEventListener('offline', () => {
-            document.getElementById("internet").textContent = "Offline";
-            document.getElementById("internet").classList.add('offline');
+            document.getElementById("offline").style.display = "block";
         });
     </script>
 @endsection
