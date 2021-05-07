@@ -39,15 +39,27 @@
 
                     @else
                         <ul class="navbar-nav">
-                            <a class="nav-link" href="{{ route('getCustomerIndex') }}">Klanten</a>
+                            @if(\Illuminate\Support\Facades\Route::current()->getPrefix() == '/customer')
+                                <a class="nav-link activemenu" href="{{ route('getCustomerIndex') }}">Klanten</a>
+                            @else
+                                <a class="nav-link" href="{{ route('getCustomerIndex') }}">Klanten</a>
+                            @endif
                         </ul>
 
                         <ul class="navbar-nav">
-                            <a class="nav-link" href="{{ route('getInspectorIndex') }}">Inspecteurs</a>
+                            @if(\Illuminate\Support\Facades\Route::current()->getPrefix() == '/inspector')
+                                <a class="nav-link activemenu" href="{{ route('getInspectorIndex') }}">Inspecteurs</a>
+                            @else
+                                <a class="nav-link" href="{{ route('getInspectorIndex') }}">Inspecteurs</a>
+                            @endif
                         </ul>
 
                         <ul class="navbar-nav">
-                            <a class="nav-link" href="{{ route('getInspectionTypeIndex') }}">Inspectietypes</a>
+                            @if(\Illuminate\Support\Facades\Route::current()->getPrefix() == '/inspectiontype')
+                                <a class="nav-link activemenu" href="{{ route('getInspectionTypeIndex') }}">Inspectietypes</a>
+                            @else
+                                <a class="nav-link" href="{{ route('getInspectionTypeIndex') }}">Inspectietypes</a>
+                            @endif
                         </ul>
 
                         <ul class="navbar-nav dropdown">
