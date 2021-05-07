@@ -16,8 +16,9 @@ class AddInspections extends Migration
     {
         Schema::create('inspections', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('creator');
+            $table->integer('user_id');
+            $table->text('json')->nullable();
+            $table->boolean("locked")->default('0');
             $table->timestamps();
             $table->softDeletes($column = 'deleted_at');
         });

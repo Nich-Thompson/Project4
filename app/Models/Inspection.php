@@ -10,8 +10,10 @@ class Inspection extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
     protected $fillable = [
-        'name',
-        'creator'
+        'user_id',
+        "json",
+        "locked",
     ];
 }

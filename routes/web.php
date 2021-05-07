@@ -23,7 +23,7 @@ Route::group(['middleware' => ['role:admin|inspecteur']], function () {
 });
 
 //Customer routes
-Route::prefix('customer')->group(function() {
+Route::prefix('customer')->group(function () {
     Route::get('/', 'CustomerController@index')->middleware(['role:admin'])->name('getCustomerIndex');
     Route::get('/create', 'CustomerController@create')->middleware(['role:admin'])->name('getCustomerCreate');
     Route::post('/create', 'CustomerController@store')->middleware(['role:admin'])->name('postCustomerCreate');
@@ -31,7 +31,7 @@ Route::prefix('customer')->group(function() {
     Route::post('/{id}/edit', 'CustomerController@update')->middleware(['role:admin'])->name('postCustomerEdit');
     Route::get('/{id}/archive', 'CustomerController@remove')->middleware(['role:admin'])->name('getCustomerArchive');
     Route::post('/{id}/archive', 'CustomerController@archive')->middleware(['role:admin'])->name('postCustomerArchive');
-    Route::prefix('/{id}/location')->group(function() {
+    Route::prefix('/{id}/location')->group(function () {
         Route::get('/create', 'LocationController@create')->middleware(['role:admin'])->name('getLocationCreate');
         Route::post('/create', 'LocationController@store')->middleware(['role:admin'])->name('postLocationCreate');
         Route::get('/{location_id}/edit', 'LocationController@edit')->middleware(['role:admin'])->name('getLocationEdit');
@@ -42,7 +42,7 @@ Route::prefix('customer')->group(function() {
 });
 
 //Event routes
-Route::prefix('inspector')->group(function() {
+Route::prefix('inspector')->group(function () {
     Route::get('/', 'InspectorController@index')->middleware(['role:admin'])->name('getInspectorIndex');
     Route::get('/create', 'InspectorController@create')->middleware(['role:admin'])->name('getInspectorCreate');
     Route::post('/create', 'InspectorController@store')->middleware(['role:admin'])->name('postInspectorCreate');
@@ -53,16 +53,17 @@ Route::prefix('inspector')->group(function() {
 });
 
 //Inspection routes
-Route::prefix('inspection')->group(function() {
+Route::prefix('inspection')->group(function () {
     Route::get('/', 'InspectionController@index')->middleware(['role:admin'])->name('getInspectionIndex');
     Route::get('/create', 'InspectionController@create')->middleware(['role:admin'])->name('getInspectionCreate');
     Route::post('/create', 'InspectionController@store')->middleware(['role:admin'])->name('postInspectionCreate');
     Route::get('/{id}/edit', 'InspectionController@edit')->middleware(['role:admin'])->name('getInspectionEdit');
     Route::post('/{id}/edit', 'InspectionController@update')->middleware(['role:admin'])->name('postInspectionEdit');
+    Route::get('/inspect/{id}', 'InspectionController@inspect')->middleware(['role:admin|inspecteur'])->name('getInspection');
 });
 
 //Inspection type routes
-Route::prefix('inspectiontype')->group(function() {
+Route::prefix('inspectiontype')->group(function () {
     Route::get('/', 'InspectionTypeController@index')->middleware(['role:admin'])->name('getInspectionTypeIndex');
     Route::get('/create', 'InspectionTypeController@create')->middleware(['role:admin'])->name('getInspectionTypeCreate');
     Route::post('/create', 'InspectionTypeController@store')->middleware(['role:admin'])->name('postInspectionTypeCreate');

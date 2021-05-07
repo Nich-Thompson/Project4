@@ -9,11 +9,14 @@ use App\Models\Customer;
 use App\Models\InspectionType;
 use App\Models\Location;
 use App\Models\Inspector;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class inspectionController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $inspections = Inspection::all();
         $inspectionTypes = InspectionType::all();
         return view('inspection.index', [
@@ -22,36 +25,58 @@ class inspectionController extends Controller
         ]);
     }
 
-    public function create() {
-        $inspectionTypes = InspectionType::all();
+    public function create()
+    {
+        $user_id = Auth::id();
+
+        $inspection = Inspection::create([
+            'user_id' => $user_id,
+            "json" => "",
+            "locked" => true,
+        ]);
+
+        return redirect()->to("inspection/inspect/" . $inspection->id);
+    }
+
+    public function inspect($id)
+    {
+        $inspection = Inspection::find($id);
+        $inspection_types = InspectionType::all();
+        $user = User::find($inspection->user_id);
+
         return view('inspection.create', [
-            'inspectionTypes' => $inspectionTypes,
+            "id" => $id,
+            "inspection" => $inspection,
+            "username" => $user->name,
+            'inspection_types' => $inspection_types,
         ]);
     }
 
-    public function store(request $request) {
-        $name = $request->input('name');
-        $creator = $request->input('creator');
 
-        inspection::create([
-            'name' => $name,
-            'creator' => $creator
-        ]);
-        return redirect(route('getCustomerIndex'));
-    }
+//    public function store(request $request)
+//    {
+//        $name = $request->input('name');
+//
+//        Inspection::create([
+//            'name' => $name,
+//        ]);
+//
+//        return redirect(route('getCustomerIndex'));
+//    }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         $inspection = Inspection::find($id);
         return view('admin.location.edit', [
             'id' => $id
         ]);
     }
 
-    public function update($id, UpdateCustomerRequest $request) {
+    public function update($id, UpdateCustomerRequest $request)
+    {
         $customer = customer::find($id);
 
-        $customer->name = $request->input('name');
-        $customer->city = $request->input('creator');
+        $customer->user_id = $request->input('user_id');
 
         $customer->save();
 
@@ -59,9 +84,10 @@ class inspectionController extends Controller
     }
 
 
-    public function remove($id) {
+    public function remove($id)
+    {
         $inspection = Inspection::find($id);
-        if($inspection === null) {
+        if ($inspection === null) {
             abort(404, 'customer with that ID does not exist');
         }
         return view('admin.inspection.archive', [
@@ -70,7 +96,8 @@ class inspectionController extends Controller
         ]);
     }
 
-    public function archive($id) {
+    public function archive($id)
+    {
         $inspection = Inspection::find($id);
         $inspection->delete();
         return redirect(route('getLocationIndex'));
