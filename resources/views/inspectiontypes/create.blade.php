@@ -42,10 +42,11 @@
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <label>Icoon:</label>
                                 <div class="form-group">
-                                    <select name="icon_id" class="col-xs-12 col-sm-12 col-md-12 form-control">
+                                    <select name="icon_id" class="fontawesomeselect col-xs-12 col-sm-12 col-md-12 form-control">
                                         @foreach($icons as $icon)
                                             <option value="{{ $icon->id }}">
-                                                {{--<i class="fa fa-{{ $icon->name }}" style="font-size:32px;"></i>--}}{{ ucfirst(preg_replace("/[\W]/", ' ',$icon->name)) }}
+                                                &#x{{ $icon->unicode }};
+                                                {{ ucfirst(preg_replace("/[\W]/", ' ',$icon->name)) }}
                                             </option>
                                         @endforeach
                                     </select>
