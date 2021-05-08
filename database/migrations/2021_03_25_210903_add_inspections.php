@@ -16,7 +16,10 @@ class AddInspections extends Migration
     {
         Schema::create('inspections', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users');
             $table->text('json')->nullable();
             $table->boolean("locked")->default('0');
             $table->timestamps();
@@ -31,6 +34,6 @@ class AddInspections extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('inspection');
+        Schema::dropIfExists('inspections');
     }
 }

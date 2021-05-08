@@ -16,4 +16,9 @@ class Inspection extends Model
         "json",
         "locked",
     ];
+
+    public function user()
+    {
+        return User::where('id', $this->user_id)->first();
+    }
 }

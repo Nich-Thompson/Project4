@@ -35,21 +35,36 @@ class inspectionController extends Controller
             "locked" => true,
         ]);
 
-        return redirect()->to("inspection/inspect/" . $inspection->id);
+        return redirect()->to("inspection/inspect/" . $inspection->id . "/" . "create" );
     }
 
-    public function inspect($id)
+    public function inspect($id, $type)
     {
         $inspection = Inspection::find($id);
         $inspection_types = InspectionType::all();
         $user = User::find($inspection->user_id);
 
-        return view('inspection.create', [
-            "id" => $id,
-            "inspection" => $inspection,
-            "username" => $user->name,
-            'inspection_types' => $inspection_types,
-        ]);
+        if($type == "create"){
+            return view('inspection.create', [
+                "id" => $id,
+                "inspection" => $inspection,
+                "username" => $user->name,
+                'inspection_types' => $inspection_types,
+            ]);
+        }else if($type == "edit"){
+            $inspectors = User::whereHas(
+                'roles', function($q){
+                $q->where('name', 'inspecteur')->orWhere('name', 'admin');;
+            }
+            )->get();
+            return view('inspection.edit', [
+                "id" => $id,
+                "inspection" => $inspection,
+                "username" => $user->name,
+                'inspection_types' => $inspection_types,
+                'inspectors' => $inspectors
+            ]);
+        }
     }
 
 
@@ -60,6 +75,7 @@ class inspectionController extends Controller
         $inspection = Inspection::find($id);
 
         $inspection->json = $payload["json"];
+
 
         $inspection->save();
 
@@ -75,20 +91,33 @@ class inspectionController extends Controller
     public function edit($id)
     {
         $inspection = Inspection::find($id);
-        return view('admin.location.edit', [
-            'id' => $id
-        ]);
+        return redirect()->to("inspection/inspect/" . $inspection->id . "/" . "edit" );
     }
 
     public function update($id, UpdateCustomerRequest $request)
     {
-        $customer = customer::find($id);
+        $inspection = Inspection::find($id);
 
-        $customer->user_id = $request->input('user_id');
 
-        $customer->save();
 
-        return redirect(route('getLocationIndex', $id));
+        return response()->json(
+            [
+                'status' => '200',
+                'success' => 'true'
+            ],
+            200
+        );
+    }
+
+    public function updateInspector($id, Request $request)
+    {
+        $inspection = Inspection::find($id);
+
+        $inspection->user_id = $request->input('inspector');
+
+        $inspection->save();
+
+        return redirect()->to("inspection/inspect/" . $inspection->id . "/" . "edit" );
     }
 
 
