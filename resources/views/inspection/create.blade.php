@@ -89,26 +89,26 @@
                                 </div>
                             </div>
                             <br>
-                            <a href="{{URL::to('/inspection')}}" class="btn">Uitchecken</a>
+                            <a href="{{URL::to('/inspection/'.$inspection->customer_id.')}}" class="btn">Uitchecken</a>
                             <button type="submit" class="float-right btn btn-primary text-light">Invoeren
                             </button>
                         </form>
 
                         <table class="table">
                             <thead>
-                            <tr>
-                                <th>Positie</th>
-                                <th>Merk</th>
-                                <th>Fabricatie jaar</th>
-                                <th>Etage</th>
-                                <th>Blusstof</th>
-                                <th>Laatst afgeperst</th>
-                                <th>Locatie</th>
-                                <th>Type</th>
-                                <th>Debiet</th>
-                                <th>Opmerkingen</th>
-                                <th>Goedgekeurd</th>
-                            </tr>
+                                <tr>
+                                    <th>Positie</th>
+                                    <th>Merk</th>
+                                    <th>Fabricatie jaar</th>
+                                    <th>Etage</th>
+                                    <th>Blusstof</th>
+                                    <th>Laatst afgeperst</th>
+                                    <th>Locatie</th>
+                                    <th>Type</th>
+                                    <th>Debiet</th>
+                                    <th>Opmerkingen</th>
+                                    <th>Goedgekeurd</th>
+                                </tr>
                             </thead>
                             <tbody id="inspections">
 
@@ -249,7 +249,7 @@
                 body: JSON.stringify({json: localStorage.getItem("inspections")})
             }).then(res => {
                 console.log("Request complete! Data saved in database!");
-            }).catch(err => console.log(err))
+            }).catch(err => console.log(err));
         }
 
         window.addEventListener('online', () => {

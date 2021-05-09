@@ -13,6 +13,8 @@ class Inspection extends Model
 
     protected $fillable = [
         'user_id',
+        'customer_id',
+        'location_id',
         "json",
         "locked",
     ];

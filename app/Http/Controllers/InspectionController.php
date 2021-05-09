@@ -15,8 +15,9 @@ use Illuminate\Support\Facades\Auth;
 
 class inspectionController extends Controller
 {
-    public function index()
+    public function index($Customer_id)
     {
+        $customer_id = $Customer_id;
         $inspections = Inspection::all();
         $inspectionTypes = InspectionType::all();
         return view('inspection.index', [
@@ -25,12 +26,15 @@ class inspectionController extends Controller
         ]);
     }
 
-    public function create()
+    public function create($Customer_id, $Location_id)
     {
         $user_id = Auth::id();
-
+        $customer_id = $Customer_id;
+        $location_id = $Location_id;
         $inspection = Inspection::create([
             'user_id' => $user_id,
+            'customer_id' => $customer_id,
+            'location_id' => $location_id,
             "json" => "",
             "locked" => true,
         ]);

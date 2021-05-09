@@ -20,6 +20,8 @@ class AddInspections extends Migration
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users');
+            $table->integer('customer_id');
+            $table->integer('location_id');
             $table->text('json')->nullable();
             $table->boolean("locked")->default('0');
             $table->timestamps();
