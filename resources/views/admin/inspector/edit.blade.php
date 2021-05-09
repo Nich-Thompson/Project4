@@ -10,7 +10,7 @@
                         Bewerken
                     </button>
                     <a href="{{ route('getInspectorArchive', $id) }}" id="archiveButton"
-                       class="btn btn-primary float-right">Archiveren</a>
+                       class="btn btn-primary float-right" hidden>Archiveren</a>
                     <br><br>
                     <hr>
 

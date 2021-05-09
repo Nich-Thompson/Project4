@@ -16,43 +16,56 @@ class InspectionTypeSeeder extends Seeder
     public function run()
     {
         Icon::create([
-            'name' => 'cog'
+            'name' => 'cog',
+            'unicode' => 'f013'
         ]);
         Icon::create([
-            'name' => 'fire'
+            'name' => 'fire',
+            'unicode' => 'f06d'
         ]);
         Icon::create([
-            'name' => 'fire-extinguisher'
+            'name' => 'fire-extinguisher',
+            'unicode' => 'f134'
         ]);
         Icon::create([
-            'name' => 'wrench'
+            'name' => 'wrench',
+            'unicode' => 'f0ad'
         ]);
         Icon::create([
-            'name' => 'wifi'
+            'name' => 'wifi',
+            'unicode' => 'f1eb'
         ]);
         Icon::create([
-            'name' => 'sitemap'
+            'name' => 'sitemap',
+            'unicode' => 'f0e8'
         ]);
         Icon::create([
-            'name' => 'plug'
+            'name' => 'plug',
+            'unicode' => 'f1e6'
         ]);
         Icon::create([
-            'name' => 'bolt'
+            'name' => 'bolt',
+            'unicode' => 'f0e7'
         ]);
         Icon::create([
-            'name' => 'magnet'
+            'name' => 'magnet',
+            'unicode' => 'f076'
         ]);
         Icon::create([
-            'name' => 'folder'
+            'name' => 'folder',
+            'unicode' => 'f07b'
         ]);
         Icon::create([
-            'name' => 'file'
+            'name' => 'file',
+            'unicode' => 'f15b'
         ]);
         Icon::create([
-            'name' => 'battery-half'
+            'name' => 'battery-half',
+            'unicode' => 'f242'
         ]);
         Icon::create([
-            'name' => 'bluetooth'
+            'name' => 'bluetooth',
+            'unicode' => 'f293'
         ]);
 
         InspectionType::create([
