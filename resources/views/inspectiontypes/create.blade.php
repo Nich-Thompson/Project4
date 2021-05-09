@@ -7,7 +7,6 @@
                 <div class="card-body">
                     <h1>Nieuw inspectietype aanmaken</h1>
                     <hr>
-
                     @if ($errors->any())
                         <div class="alert alert-danger">
                             <strong>Er waren wat problemen met uw data</strong><br><br>

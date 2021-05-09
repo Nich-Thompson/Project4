@@ -10,8 +10,17 @@ class Inspection extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
     protected $fillable = [
-        'name',
-        'creator'
+        'user_id',
+        'customer_id',
+        'location_id',
+        "json",
+        "locked",
     ];
+
+    public function user()
+    {
+        return User::where('id', $this->user_id)->first();
+    }
 }
