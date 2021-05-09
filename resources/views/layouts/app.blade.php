@@ -37,23 +37,51 @@
                             aria-label="{{ __('Toggle navigation') }}">
                         <span class="navbar-toggler-icon"></span>
                     </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Left Side Of Navbar -->
+                    @guest
 
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <!-- Left Side Of Navbar -->
-                        @guest
+                    @else
+                    @if(Auth::user()->hasRole('admin'))
+                        <ul class="navbar-nav">
+                            @if(\Illuminate\Support\Facades\Route::current()->getPrefix() == '/customer')
+                                <a class="nav-link activemenu" href="{{ route('getCustomerIndex') }}">Klanten</a>
+                            @else
+                                <a class="nav-link" href="{{ route('getCustomerIndex') }}">Klanten</a>
+                            @endif
+                        </ul>
 
-                        @else
-                            @if(Auth::user()->hasRole('admin'))
-                                <ul class="navbar-nav">
-                                    <a class="nav-link" href="{{ route('getCustomerIndex') }}">Klanten</a>
-                                </ul>
-                                <ul class="navbar-nav">
-                                    <a class="nav-link" href="{{ route('getInspectorIndex') }}">Inspecteurs</a>
-                                </ul>
+                        <ul class="navbar-nav">
+                            @if(\Illuminate\Support\Facades\Route::current()->getPrefix() == '/inspector')
+                                <a class="nav-link activemenu" href="{{ route('getInspectorIndex') }}">Inspecteurs</a>
+                            @else
+                                <a class="nav-link" href="{{ route('getInspectorIndex') }}">Inspecteurs</a>
+                            @endif
+                        </ul>
 
-                                <ul class="navbar-nav">
-                                    <a class="nav-link" href="{{ route('getInspectionTypeIndex') }}">Inspectietypes</a>
-                                </ul>
+                        <ul class="navbar-nav">
+                            @if(\Illuminate\Support\Facades\Route::current()->getPrefix() == '/inspectiontype')
+                                <a class="nav-link activemenu" href="{{ route('getInspectionTypeIndex') }}">Inspectietypes</a>
+                            @else
+                                <a class="nav-link" href="{{ route('getInspectionTypeIndex') }}">Inspectietypes</a>
+                            @endif
+                        </ul>
+                        
+                        <ul class="navbar-nav dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Lijsten
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('getListCreate') }}">+ Nieuwe lijst</a>
+                                <div class="dropdown-divider"></div>
+                                @php
+                                    $lists = \App\Models\ListModel::all();
+                                @endphp
+                                @foreach($lists as $list)
+                                    <a class="dropdown-item" href="{{ route('getListEdit', $list->id) }}">{{ $list->name }}</a>
+                                @endforeach
+                            </div>
+                        </ul>
                         @endif
                     @endguest
 

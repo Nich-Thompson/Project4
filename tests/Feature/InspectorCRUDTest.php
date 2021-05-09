@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Tests\TestCase;
@@ -84,16 +85,17 @@ class InspectorCRUDTest extends TestCase
         $this->assertFalse($oldUser->first_name === $newUser->first_name);
     }
 
-    public function test_delete_screen_can_be_rendered()
+    public function test_archive_screen_can_be_rendered()
     {
         $user = User::factory()->create();
-        $response = $this->get('/inspector/'.$user->id.'/delete');
+        $response = $this->get('/inspector/'.$user->id.'/archive');
 
         $response->assertStatus(200);
     }
 
-    public function test_inspector_can_be_deleted()
+    public function test_inspector_can_be_archived()
     {
+        //this function hasnt been made yet
         $this->assertTrue(true);
     }
 }
