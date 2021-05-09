@@ -14,7 +14,7 @@ class LocationController extends Controller
 
     public function create($id) {
         return view('admin.customer.locations.create', [
-            'id' => $id
+            'customer_id' => $id
         ]);
     }
 

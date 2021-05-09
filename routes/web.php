@@ -79,3 +79,15 @@ Route::prefix('inspectiontype')->group(function() {
     Route::get('/{id}/archive', 'InspectionTypeController@delete')->middleware(['role:admin'])->name('getInspectionTypeDelete');
     Route::post('/{id}/archive', 'InspectionTypeController@destroy')->middleware(['role:admin'])->name('postInspectionTypeDelete');
 });
+
+//List routes
+Route::prefix('list')->group(function() {
+    Route::get('/create', 'ListController@create')->middleware(['role:admin'])->name('getListCreate');
+    Route::post('/create', 'ListController@store')->middleware(['role:admin'])->name('postListCreate');
+    Route::get('/{id}/edit', 'ListController@edit')->middleware(['role:admin'])->name('getListEdit');
+    Route::post('/{id}/edit', 'ListController@update')->middleware(['role:admin'])->name('postListEdit');
+    Route::get('/{id}/create-value', 'ListController@createValue')->middleware(['role:admin'])->name('getListValueCreate');
+    Route::post('/{id}/create-value', 'ListController@storeValue')->middleware(['role:admin'])->name('postListValueCreate');
+    Route::get('/{list_id}/{id}/edit-value', 'ListController@editValue')->middleware(['role:admin'])->name('getListValueEdit');
+    Route::post('/{list_id}/{id}/edit-value', 'ListController@updateValue')->middleware(['role:admin'])->name('postListValueEdit');
+});
