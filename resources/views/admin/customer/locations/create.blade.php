@@ -8,19 +8,16 @@
                     <span class="float-left h2">Nieuwe locatie aanmaken</span>
                     <br><br>
                     <hr>
-
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <strong>Er waren wat problemen met uw data</strong><br><br>
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-
-
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <strong>Er waren wat problemen met uw data</strong><br><br>
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                     <form action="{{ route('postLocationCreate', $customer_id) }}" method="post">
                         @csrf
                         <div class="row">

@@ -7,10 +7,29 @@
             <div class="col-11">
                 <div class="card">
                     <div class="card-body">
-                        <h1 class="float-left h2">Inspectie uitvoeren</h1>
+                        <h1 class="float-left h2">Inspectie aanpassen</h1>
                         <br>
                         <br>
-                        <p>Aangemaakt op: {{date("d-m-Y",strtotime($inspection->created_at))}} door {{$username}}</p>
+
+                        <form action="{{ route('postInspectionEditInspector', $inspection->id) }}" method="POST">
+                            @csrf
+                            <div class="form-group">
+                                <p>Aangemaakt op: {{date("d-m-Y",strtotime($inspection->created_at))}} door {{$username}}</p>
+                                <select class="form-control w-25" name="inspector" id="inspector">
+                                    @foreach($inspectors as $inspector)
+                                        @if(old('inspector') && in_array($inspector->id,old('inspector')))
+                                            <option value="{{$inspector->id}}" selected>{{$inspector->name}}</option>
+                                        @elseif($inspection->user()->id == $inspector->id)
+                                            <option value="{{$inspector->id}}" selected>{{$inspector->name}}</option>
+                                        @else
+                                            <option value="{{$inspector->id}}">{{$inspector->name}}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                                <p class="text-danger">@error('inspector') {{$message}}@enderror</p>
+                            </div>
+                            <button type="submit" class="btn btn-primary text-light">Inspecteur aanpassen</button>
+                        </form>
                         <hr>
 
                         <div class="alert alert-danger" role="alert" id="offline">
@@ -96,19 +115,19 @@
 
                         <table class="table">
                             <thead>
-                                <tr>
-                                    <th>Positie</th>
-                                    <th>Merk</th>
-                                    <th>Fabricatie jaar</th>
-                                    <th>Etage</th>
-                                    <th>Blusstof</th>
-                                    <th>Laatst afgeperst</th>
-                                    <th>Locatie</th>
-                                    <th>Type</th>
-                                    <th>Debiet</th>
-                                    <th>Opmerkingen</th>
-                                    <th>Goedgekeurd</th>
-                                </tr>
+                            <tr>
+                                <th>Positie</th>
+                                <th>Merk</th>
+                                <th>Fabricatie jaar</th>
+                                <th>Etage</th>
+                                <th>Blusstof</th>
+                                <th>Laatst afgeperst</th>
+                                <th>Locatie</th>
+                                <th>Type</th>
+                                <th>Debiet</th>
+                                <th>Opmerkingen</th>
+                                <th>Goedgekeurd</th>
+                            </tr>
                             </thead>
                             <tbody id="inspections">
 
@@ -249,7 +268,7 @@
                 body: JSON.stringify({json: localStorage.getItem("inspections")})
             }).then(res => {
                 console.log("Request complete! Data saved in database!");
-            }).catch(err => console.log(err));
+            }).catch(err => console.log(err))
         }
 
         window.addEventListener('online', () => {

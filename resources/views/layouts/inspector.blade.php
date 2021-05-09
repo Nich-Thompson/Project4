@@ -38,7 +38,7 @@
 
                 @else
                     <ul class="navbar-nav">
-                        <a class="nav-link" href="  ">Inspecties</a>
+                        <a class="nav-link" href="{{ route('getCustomerIndex') }}">Klanten</a>
                     </ul>
             @endguest
 
