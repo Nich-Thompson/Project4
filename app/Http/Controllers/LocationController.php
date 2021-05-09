@@ -93,7 +93,7 @@ class LocationController extends Controller
     public function restore($id, $location_id) {
         $location = Location::withTrashed()->find($location_id);
         $location->restore();
-        return redirect(route('getCustomerEdit', $id));
+        return redirect(route('getLocationArchives', $id));
     }
 
     public function deletes($id){

@@ -26,7 +26,7 @@
                                 <div id = 'customer-field' class="row m-2 p-3 rounded border border-light shadow-sm bg-white">
                                     <div class="d-flex flex-column w-50">
                                         <div id="name"
-                                             class="h5 m-0 fw-bold">{{ $inspector->name }}</div>
+                                             class="h5 m-0 fw-bold">{{ $inspector->first_name}} {{ $inspector->last_name }}</div>
                                         <p class="m-0">{{ date('d-m-Y', strtotime($inspector->updated_at))}}</p>
                                     </div>
                                     <div class="d-flex flex-column justify-content-end w-50 text-right pb-2">

@@ -108,7 +108,7 @@ class customerController extends Controller
     public function restore($id) {
         $customer = customer::withTrashed()->find($id);
         $customer->restore();
-        return redirect(route('getCustomerIndex'));
+        return redirect(route('getCustomerArchives'));
     }
 
     public function deletes(){
