@@ -81,7 +81,6 @@ class customerController extends Controller
         return redirect(route('getCustomerIndex', $id));
     }
 
-
     public function remove($id) {
         $customer = customer::find($id);
         if($customer === null) {
@@ -97,5 +96,29 @@ class customerController extends Controller
         $customer = customer::find($id);
         $customer->delete();
         return redirect(route('getCustomerIndex'));
+    }
+
+    public function archives() {
+        $customers = customer::onlyTrashed()->orderBy('deleted_at', 'ASC')->get();
+        return view('admin.customer.archives', [
+            'customers' => $customers,
+        ]);
+    }
+
+    public function restore($id) {
+        $customer = customer::withTrashed()->find($id);
+        $customer->restore();
+        return redirect(route('getCustomerArchives'));
+    }
+
+    public function deletes(){
+        $customers = customer::onlyTrashed()->orderBy('deleted_at', 'ASC')->get();
+        foreach($customers as $customer){
+            $customer->forceDelete();
+        }
+        return redirect(route('getCustomerIndex'));
+    }
+    public function delete() {
+        return view('admin.customer.delete');
     }
 }

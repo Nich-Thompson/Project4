@@ -9,7 +9,7 @@
                     <button id="switchButton" onclick="enableInput()" class="btn btn-primary float-right ml-2">
                         Bewerken
                     </button>
-                    <a href="{{ route('getInspectorDelete', $id) }}" id="archiveButton"
+                    <a href="{{ route('getInspectorArchive', $id) }}" id="archiveButton"
                        class="btn btn-primary float-right" hidden>Archiveren</a>
                     <br><br>
                     <hr>

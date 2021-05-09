@@ -71,17 +71,32 @@ class InspectorController extends Controller
         return redirect()->route('getInspectorIndex');
     }
 
+    public function remove($id) {
+        $inspector = User::find($id);
+        if($inspector === null) {
+            abort(404, 'inspector with that ID does not exist');
+        }
+        return view('admin.inspector.archive', [
+            'inspector' => $inspector,
+            'id' => $id
+        ]);
+    }
+
+    public function archive($id) {
+        $inspector = User::find($id);
+        $inspector->delete();
+        return redirect(route('getInspectorIndex'));
+    }
+
+    public function archives() {
+        $inspectors = User::onlyTrashed()->orderBy('deleted_at', 'ASC')->get();
+        return view('admin.inspector.archives', [
+            'inspectors' => $inspectors,
+        ]);
+    }
     public function delete($id)
     {
         $user = User::find($id);
         return view('admin.inspector.archive', ['user'=>$user, 'id'=>$id]);
-    }
-
-    public function destroy($id, Request $request)
-    {
-        // TODO: archive the user
-        error_log("archived");
-
-        return redirect()->route('getInspectorIndex');
     }
 }

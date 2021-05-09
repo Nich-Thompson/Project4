@@ -27,7 +27,7 @@ function enableInput()
     }
     else {
         if(document.getElementById("archiveButton") !== null) {
-            document.getElementById("archiveButton").hidden = false;
+            document.getElementById("archiveButton").hidden = true;
         }
         document.getElementById("saveButton").hidden = true;
         document.getElementById("switchButton").textContent = "Bewerken";
