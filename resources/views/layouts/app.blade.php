@@ -43,11 +43,10 @@
                         @guest
 
                         @else
-                            <ul class="navbar-nav">
-                                <a class="nav-link" href="{{ route('getCustomerIndex') }}">Klanten</a>
-                            </ul>
-
                             @if(Auth::user()->hasRole('admin'))
+                                <ul class="navbar-nav">
+                                    <a class="nav-link" href="{{ route('getCustomerIndex') }}">Klanten</a>
+                                </ul>
                                 <ul class="navbar-nav">
                                     <a class="nav-link" href="{{ route('getInspectorIndex') }}">Inspecteurs</a>
                                 </ul>
@@ -55,7 +54,7 @@
                                 <ul class="navbar-nav">
                                     <a class="nav-link" href="{{ route('getInspectionTypeIndex') }}">Inspectietypes</a>
                                 </ul>
-                            @endif
+                        @endif
                     @endguest
 
                     <!-- Right Side Of Navbar -->

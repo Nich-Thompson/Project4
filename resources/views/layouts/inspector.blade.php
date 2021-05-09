@@ -40,9 +40,6 @@
                     <ul class="navbar-nav">
                         <a class="nav-link" href="{{ route('getCustomerIndex') }}">Klanten</a>
                     </ul>
-                    <ul class="navbar-nav">
-                        <a class="nav-link" href="  ">Inspecties</a>
-                    </ul>
             @endguest
 
             <!-- Right Side Of Navbar -->

@@ -11,7 +11,9 @@ function enableInput()
 {
     if(!enabled)
     {
-        document.getElementById("archiveButton").hidden = false;
+        if(document.getElementById("archiveButton") !== null){
+            document.getElementById("archiveButton").hidden = false;
+        }
         document.getElementById("saveButton").hidden = false;
         document.getElementById("switchButton").textContent = "Bekijken";
         let elements = document.getElementsByClassName("form-control");
@@ -22,7 +24,9 @@ function enableInput()
         enabled = !enabled;
     }
     else {
-        document.getElementById("archiveButton").hidden = false;
+        if(document.getElementById("archiveButton") !== null) {
+            document.getElementById("archiveButton").hidden = false;
+        }
         document.getElementById("saveButton").hidden = true;
         document.getElementById("switchButton").textContent = "Bewerken";
         let elements = document.getElementsByClassName("form-control");

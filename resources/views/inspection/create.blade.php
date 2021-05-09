@@ -89,7 +89,7 @@
                                 </div>
                             </div>
                             <br>
-                            <a href="{{URL::to('/inspection/'.$inspection->customer_id.')}}" class="btn">Uitchecken</a>
+                            <a href="{{URL::to('/inspection/'.$inspection->customer_id.'')}}" class="btn">Uitchecken</a>
                             <button type="submit" class="float-right btn btn-primary text-light">Invoeren
                             </button>
                         </form>

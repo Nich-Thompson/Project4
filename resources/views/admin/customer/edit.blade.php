@@ -145,6 +145,7 @@
                         </form>
                     @endif
                     <h1>Klantnaam: {{$customer->name}}</h1>
+                        <a></a>
                     <div class="py-12">
                         <div class="px-4">
                             <div class="bg-white overflow-hidden shadow-sm">
@@ -176,13 +177,11 @@
                                                             , {{ $location->postal_code }} te {{ $location->city }}</p>
                                                     </div>
                                                     <div class="w-50 text-right pb-2">
-                                                        @if(Auth::user()->hasRole('admin'))
-                                                            <a id="{{$location->id}}"
-                                                               href="{{route('getLocationEdit', [$customer->id, $location->id]) }}"
-                                                               class="btn btn-primary">
-                                                                Bewerken
-                                                            </a>
-                                                        @endif
+                                                        <a id="{{$location->id}}"
+                                                           href="{{route('getLocationEdit', [$customer->id, $location->id]) }}"
+                                                           class="btn btn-primary">
+                                                            Bewerken
+                                                        </a>
                                                         <a id="{{$location->id}}"
                                                            href="{{URL::to('/inspection/'.$customer->id.'/'.$location->id.'/create')}}"
                                                            class="btn border float-right ml-2">
