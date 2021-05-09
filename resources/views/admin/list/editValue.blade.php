@@ -10,7 +10,7 @@
                         Bewerken
                     </button>
                     <a href="#" id="archiveButton"
-                       class="btn btn-primary float-right">Archiveren</a>
+                       class="btn btn-primary float-right" hidden>Archiveren</a>
                     <p class="mb-5"></p>
                     <hr/>
                     @if ($errors->any())
