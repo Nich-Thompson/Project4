@@ -65,7 +65,6 @@ class LocationController extends Controller
         return redirect(route('getCustomerEdit', $id));
     }
 
-
     public function remove($id, $location_id) {
         $location = Location::find($location_id);
         if($location === null) {
@@ -81,5 +80,34 @@ class LocationController extends Controller
         $location = Location::find($location_id);
         $location->delete();
         return redirect(route('getCustomerEdit', $id));
+    }
+
+    public function archives($id) {
+        $locations = Location::onlyTrashed()->where('customer_id','=', $id)->orderBy('deleted_at', 'ASC')->get();
+        return view('admin.customer.locations.archives', [
+            'locations' => $locations,
+            'customer_id' => $id
+        ]);
+    }
+
+    public function restore($id, $location_id) {
+        $location = Location::withTrashed()->find($location_id);
+        $location->restore();
+        return redirect(route('getCustomerEdit', $id));
+    }
+
+    public function deletes($id){
+        $locations = Location::onlyTrashed()->where('customer_id','=', $id)->orderBy('deleted_at', 'ASC')->get();
+        foreach($locations as $location){
+            $location->forceDelete();
+        }
+        return redirect(route('getCustomerEdit', $id));
+    }
+
+    public function delete($id) {
+
+        return view('admin.customer.locations.delete',
+            ['customer_id' => $id]
+        );
     }
 }

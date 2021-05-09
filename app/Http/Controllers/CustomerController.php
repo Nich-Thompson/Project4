@@ -98,4 +98,28 @@ class customerController extends Controller
         $customer->delete();
         return redirect(route('getCustomerIndex'));
     }
+
+    public function archives() {
+        $customers = customer::onlyTrashed()->orderBy('deleted_at', 'ASC')->get();
+        return view('admin.customer.archives', [
+            'customers' => $customers,
+        ]);
+    }
+
+    public function restore($id) {
+        $customer = customer::withTrashed()->find($id);
+        $customer->restore();
+        return redirect(route('getCustomerIndex'));
+    }
+
+    public function deletes(){
+        $customers = customer::onlyTrashed()->orderBy('deleted_at', 'ASC')->get();
+        foreach($customers as $customer){
+            $customer->forceDelete();
+        }
+        return redirect(route('getCustomerIndex'));
+    }
+    public function delete() {
+        return view('admin.customer.delete');
+    }
 }

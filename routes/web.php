@@ -31,6 +31,10 @@ Route::prefix('customer')->group(function() {
     Route::post('/{id}/edit', 'CustomerController@update')->middleware(['role:admin'])->name('postCustomerEdit');
     Route::get('/{id}/archive', 'CustomerController@remove')->middleware(['role:admin'])->name('getCustomerArchive');
     Route::post('/{id}/archive', 'CustomerController@archive')->middleware(['role:admin'])->name('postCustomerArchive');
+    Route::get('/archives', 'CustomerController@archives')->middleware(['role:admin'])->name('getCustomerArchives');
+    Route::post('{id}/restore', 'CustomerController@restore')->middleware(['role:admin'])->name('postRestoreCustomer');
+    Route::get('/delete', 'CustomerController@delete')->middleware(['role:admin'])->name('getDeleteArchive');
+    Route::post('/archives', 'CustomerController@deletes')->middleware(['role:admin'])->name('postDeleteArchive');
     Route::prefix('/{id}/location')->group(function() {
         Route::get('/create', 'LocationController@create')->middleware(['role:admin'])->name('getLocationCreate');
         Route::post('/create', 'LocationController@store')->middleware(['role:admin'])->name('postLocationCreate');
@@ -38,6 +42,10 @@ Route::prefix('customer')->group(function() {
         Route::post('/{location_id}/edit', 'LocationController@update')->middleware(['role:admin'])->name('postLocationEdit');
         Route::get('/{location_id}/archive', 'LocationController@remove')->middleware(['role:admin'])->name('getLocationArchive');
         Route::post('/{location_id}/archive', 'LocationController@archive')->middleware(['role:admin'])->name('postLocationArchive');
+        Route::get('/archives', 'LocationController@archives')->middleware(['role:admin'])->name('getLocationArchives');
+        Route::post('/{location_id}/restore', 'LocationController@restore')->middleware(['role:admin'])->name('restoreLocation');
+        Route::get('/delete', 'LocationController@delete')->middleware(['role:admin'])->name('getDeleteArchiveLocation');
+        Route::post('/archives', 'LocationController@deletes')->middleware(['role:admin'])->name('postDeleteArchiveLocation');
     });
 });
 

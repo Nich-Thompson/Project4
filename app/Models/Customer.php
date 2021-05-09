@@ -19,6 +19,7 @@ class Customer extends Model
         'phone_number',
         'contact_name',
         'contact_phone_number',
-        'contact_email'
+        'contact_email',
+        'deleted_at'
     ];
 }

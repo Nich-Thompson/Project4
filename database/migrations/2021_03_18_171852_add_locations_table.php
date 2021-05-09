@@ -21,7 +21,7 @@ class AddLocationsTable extends Migration
             $table->integer('number')->nullable();
             $table->string('postal_code')->nullable();
             $table->string('building_number')->nullable();
-            $table->integer('customer_id');
+            $table->foreignId('customer_id')->constrained('customers')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes($column = 'deleted_at');
         });
