@@ -56,8 +56,10 @@ Route::prefix('inspector')->group(function() {
     Route::post('/create', 'InspectorController@store')->middleware(['role:admin'])->name('postInspectorCreate');
     Route::get('/{id}/edit', 'InspectorController@edit')->middleware(['role:admin'])->name('getInspectorEdit');
     Route::post('/{id}/edit', 'InspectorController@update')->middleware(['role:admin'])->name('postInspectorEdit');
-    Route::get('/{id}/archive', 'InspectorController@delete')->middleware(['role:admin'])->name('getInspectorDelete');
-    Route::post('/{id}/archive', 'InspectorController@destroy')->middleware(['role:admin'])->name('postInspectorDelete');
+    Route::get('/{id}/archive', 'InspectorController@remove')->middleware(['role:admin'])->name('getInspectorArchive');
+    Route::post('/{id}/archive', 'InspectorController@archive')->middleware(['role:admin'])->name('postInspectorArchive');
+    Route::get('/archives', 'InspectorController@archives')->middleware(['role:admin'])->name('getInspectorArchives');
+
 });
 
 //Inspection routes

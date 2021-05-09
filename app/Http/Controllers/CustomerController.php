@@ -81,7 +81,6 @@ class customerController extends Controller
         return redirect(route('getCustomerIndex', $id));
     }
 
-
     public function remove($id) {
         $customer = customer::find($id);
         if($customer === null) {
