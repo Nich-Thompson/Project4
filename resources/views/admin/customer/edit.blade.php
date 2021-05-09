@@ -144,8 +144,9 @@
                             </button>
                         </form>
                     @endif
-                    <h1>Klantnaam: {{$customer->name}}</h1>
-                        <a></a>
+                    <h1 class="d-inline-block">Klantnaam: {{$customer->name}}</h1>
+                        <a href="{{URL::to('/inspection/'.$customer->id.'')}}" class="btn border border-1 d-inline-block float-right">Ga naar inspecties</a>
+                        <hr>
                     <div class="py-12">
                         <div class="px-4">
                             <div class="bg-white overflow-hidden shadow-sm">

@@ -18,7 +18,7 @@ class inspectionController extends Controller
     public function index($Customer_id)
     {
         $customer_id = $Customer_id;
-        $inspections = Inspection::all();
+        $inspections = Inspection::query()->where('customer_id', '=', $customer_id)->get();
         $inspectionTypes = InspectionType::all();
         return view('inspection.index', [
             'inspections' => $inspections,
