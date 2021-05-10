@@ -52,19 +52,19 @@ class inspectionController extends Controller
             return view('inspection.create', [
                 "id" => $id,
                 "inspection" => $inspection,
-                "username" => $user->name,
+                "user" => $user,
                 'inspection_types' => $inspection_types,
             ]);
         }else if($type == "edit"){
             $inspectors = User::whereHas(
                 'roles', function($q){
-                $q->where('name', 'inspecteur')->orWhere('name', 'admin');;
+                $q->where('name', 'inspecteur');
             }
             )->get();
             return view('inspection.edit', [
                 "id" => $id,
                 "inspection" => $inspection,
-                "username" => $user->name,
+                "user" => $user,
                 'inspection_types' => $inspection_types,
                 'inspectors' => $inspectors
             ]);

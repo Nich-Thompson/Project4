@@ -14,7 +14,6 @@
                     <span class="float-left h2">Archief inspecteurs overzicht</span>
                     <p class="mb-5"></p>
                     <hr/>
-                    <div class="input-group border w-25">
                     </div>
                     <div id = "customers">
                         @if(count($inspectors) === 0)
@@ -40,6 +39,4 @@
         </div>
     </div>
 @endsection
-
-<script src="{{ asset('js/searchCustomer.js') }}"></script>
 

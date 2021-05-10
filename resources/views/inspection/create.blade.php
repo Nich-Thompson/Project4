@@ -10,7 +10,7 @@
                         <h1 class="float-left h2">Inspectie uitvoeren</h1>
                         <br>
                         <br>
-                        <p>Aangemaakt op: {{date("d-m-Y",strtotime($inspection->created_at))}} door {{$username}}</p>
+                        <p>Aangemaakt op: {{date("d-m-Y",strtotime($inspection->created_at))}} door {{$user->first_name." ".$user->last_name}}</p>
                         <hr>
 
                         <div class="alert alert-danger" role="alert" id="offline">
