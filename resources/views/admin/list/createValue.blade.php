@@ -25,7 +25,7 @@
                                 @if(!empty($sublists))
                                     <div class="form-group">
                                         <label for="sublist_value"> {{$sublists[0]['name']}} </label>
-                                        <select  class="form-control" name="sublist_value" id="sublist_value">
+                                        <select  class="form-select" name="sublist_value" id="sublist_value">
                                             @foreach($sublistvalues[0] as $value)
                                                 @if(old('sublist_value') == $value['name'])
                                                     <option value="{{$value['id']}}" selected>{{$value['name']}}</option>

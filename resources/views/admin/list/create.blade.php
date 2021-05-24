@@ -30,9 +30,9 @@
                                 </div>
                                 <div class="form-group ml-3">
                                     <label class="ml-1">Sublijst van</label>
-                                    <select name="list_model_id" class="col-xs-12 col-sm-12 col-md-12 form-control">
+                                    <select name="list_model_id" class="form-select col-xs-12 col-sm-12 col-md-12">
                                         <option value="">
-                                            Geen
+                                            Hooflijst aanmaken
                                         </option>
                                         @foreach($lists as $list)
                                             <option value="{{ $list->id }}">

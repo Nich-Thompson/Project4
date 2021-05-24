@@ -21,7 +21,6 @@
                     <p class="mb-5"></p>
                     <hr/>
 
-{{--                    <label class="ml-1">Lijstnaam:</label>--}}
                     <div class="d-flex flex-column">
                         <form action="{{ route('postListEdit', $id ) }}" method="post">
                             @csrf
@@ -43,23 +42,56 @@
                             <p class="float-left h3">Deze lijst heeft geen waardes</p>
                         </div>
                     @else
-                        @foreach($values as $value)
-                            <div class="row m-2 p-3 rounded border border-light shadow-sm bg-white">
-                                <div class="d-flex flex-column w-50">
-                                    <div id="name" class="h5 m-0 fw-bold">{{ $value->name }}</div>
-                                </div>
-                                <div class="d-flex flex-column justify-content-end w-50 text-right pb-2">
-                                    <a id="{{$value->id}}" href="{{ route('getListValueEdit', [
-                                            'id' => $value->id,
-                                            'list_id' => $list -> id
+                        <div class="mt-3 ml-6 d-flex">
+                            <table class="table w-99">
+                                @php
+                                    $list_id = $list->id;
+                                @endphp
+                                <thead>
+                                <tr>
+                                    <th>Type naam</th>
+                                    @while($list->sublist()->first()!==null)
+                                        @php
+                                            $list = $list->sublist()->first();
+                                        @endphp
+                                        <th>{{$list->name}}</th>
+                                    @endwhile
+                                    <th class="w-11">Aanpassen</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach ($values as $value)
+                                    @php
+                                        $id = $value->id;
+                                    @endphp
+                                    <tr>
+                                        <th>
+                                            {{ $value->name }}
+                                        </th>
+                                        @while($value->linked_value() !==null)
+                                            @php
+                                                $value = $value->linked_value();
+                                            @endphp
+                                            <th>{{$value->name}}</th>
+                                        @endwhile
+                                        <th>
+                                            <a id="{{$id}}" href="{{ route('getListValueEdit', [
+                                            'id' => $id,
+                                            'list_id' => $list_id
                                         ]) }}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
-                        @endforeach
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"
+                                                     fill="currentColor" class="bi bi-arrow-right-short"
+                                                     viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd"
+                                                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
+                                                </svg>
+                                            </a>
+                                        </th>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     @endif
                 </div>
             </div>
