@@ -32,7 +32,7 @@
                                     <label class="ml-1">Sublijst van</label>
                                     <select name="list_model_id" class="form-select col-xs-12 col-sm-12 col-md-12">
                                         <option value="">
-                                            Hooflijst aanmaken
+                                            Hoofdlijst aanmaken
                                         </option>
                                         @foreach($lists as $list)
                                             <option value="{{ $list->id }}">
