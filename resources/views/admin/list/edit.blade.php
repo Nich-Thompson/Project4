@@ -8,9 +8,9 @@
                     <h1 class="float-left h2">{{ $list->name }}</h1>
                     <br><br>
                     @if($headlist != null)
-                        <span class="float-left h4">Sublijst van: {{ $headlist->name }}</span>
+                        <h2 class="float-left h4">Sublijst van: {{ $headlist->name }}</h2>
                     @else
-                        <span class="float-left h4">Hoofdlijst</span>
+                        <h2 class="float-left h4">Hoofdlijst</h2>
                     @endif
                     <a href="{{ route('getListValueCreate', $list->id) }}" class="float-right btn border">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -43,7 +43,7 @@
 
                     @if(count($values) === 0)
                         <div class="mt-4 bg-white">
-                            <h3 class="float-left h3">Deze lijst heeft geen waardes</h3>
+                            <h2 class="float-left h3">Deze lijst heeft geen waardes</h2>
                         </div>
                     @else
                         @foreach($values as $value)

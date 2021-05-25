@@ -20,7 +20,7 @@
                     <div id="types">
                         @if(count($types) === 0)
                             <div class="mt-4 bg-white">
-                                <h3 class="float-left h3">Geen types gevonden</h3>
+                                <h2 class="float-left h3">Geen types gevonden</h2>
                             </div>
                         @else
                             @foreach ($types as $type)

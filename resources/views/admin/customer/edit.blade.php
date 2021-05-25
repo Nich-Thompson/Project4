@@ -172,7 +172,7 @@
                                     <div id="customers">
                                         @if(count($locations) === 0)
                                             <div class="mt-4 bg-white">
-                                                <h3 class="float-left h3">Geen locaties gevonden</h3>
+                                                <h2 class="float-left h3">Geen locaties gevonden</h2>
                                             </div>
                                         @else
                                             @foreach ($locations as $location)

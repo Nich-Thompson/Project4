@@ -13,12 +13,10 @@
                     <h1 class="float-left h2">Archief inspecteurs overzicht</h1>
                     <p class="mb-5"></p>
                     <hr/>
-                    <div class="input-group border w-25">
-                    </div>
                     <div id="customers">
                         @if(count($inspectors) === 0)
                             <div class="mt-4 bg-white">
-                                <h3 class="float-left h3">Geen inspecteurs gevonden</h3>
+                                <h2 class="float-left h3">Geen inspecteurs gevonden</h2>
                             </div>
                         @else
                             @foreach ($inspectors as $inspector)
@@ -40,6 +38,4 @@
         </div>
     </div>
 @endsection
-
-<script src="{{ asset('js/searchCustomer.js') }}"></script>
 

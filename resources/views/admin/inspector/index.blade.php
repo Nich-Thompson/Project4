@@ -41,7 +41,7 @@
                     <div id="inspectors">
                         @if(count($inspectors) === 0)
                             <div class="mt-4 bg-white">
-                                <h3 class="float-left h3">Geen inspecteurs gevonden</h3>
+                                <h2 class="float-left h3">Geen inspecteurs gevonden</h2>
                             </div>
                         @else
                             @foreach ($inspectors as $inspector)
