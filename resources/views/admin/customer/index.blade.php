@@ -11,6 +11,7 @@
             <div class="bg-white overflow-hidden shadow-sm">
                 <div class="p-4 bg-white border-b border-gray-200">
                     <span class="float-left h2">Klanten overzicht</span>
+                    @include('components.help-component')
 
                     @if(Auth::user()->hasRole('admin'))
                         <a href="{{URL::to('/customer/create')}}" class="float-right btn border">
