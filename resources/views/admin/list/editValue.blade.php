@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="card">
                 <div class="card-body">
-                    <span class="float-left h2">{{ $list -> name }} aanpassen</span>
+                    <h1 class="float-left h2">{{ $list -> name }} aanpassen</h1>
                     <button id="switchButton" onclick="enableInput()" class="btn btn-primary float-right ml-2">
                         Bewerken
                     </button>
@@ -33,12 +33,14 @@
                                 @if(!empty($sublists))
                                     <div class="form-group">
                                         <label for="sublist_value"> {{$sublists[0]['name']}} </label>
-                                        <select  class="form-control" name="sublist_value" id="sublist_value" disabled>
+                                        <select class="form-control" name="sublist_value" id="sublist_value" disabled>
                                             @foreach($sublistvalues[0] as $value)
                                                 @if(old('sublist_value') != null)
-                                                    <option value="{{$value['id']}}" {{old('sublist_value') == $value['name'] ? 'selected' : ''}}>{{$value['name']}}</option>
+                                                    <option
+                                                        value="{{$value['id']}}" {{old('sublist_value') == $value['name'] ? 'selected' : ''}}>{{$value['name']}}</option>
                                                 @else
-                                                    <option value="{{$value['id']}}" {{$listValue -> list_value_id == $value['id'] ? 'selected' : ''}}>{{$value['name']}}</option>
+                                                    <option
+                                                        value="{{$value['id']}}" {{$listValue -> list_value_id == $value['id'] ? 'selected' : ''}}>{{$value['name']}}</option>
                                                 @endif
                                             @endforeach
                                         </select>
@@ -46,7 +48,7 @@
                                     </div>
                                 @endif
                             </div>
-                            <div id = "values-box">
+                            <div id="values-box">
 
                             </div>
                             <div class="form-group">
@@ -62,7 +64,8 @@
                         </div>
                         <p class="mt-3">Velden met een ster (*) zijn verplicht</p>
                         <a href="{{URL::to('/list/'.$list -> id.'/edit')}}" class="btn btn-default">Terug</a>
-                        <button type="submit" id="saveButton" class="float-right btn btn-primary text-light">Aanpassen</button>
+                        <button type="submit" id="saveButton" class="float-right btn btn-primary text-light">Aanpassen
+                        </button>
                     </form>
                 </div>
             </div>
@@ -70,7 +73,7 @@
     </div>
 @endsection
 
-<script> window.count = '<?php echo  json_encode([$sublists, $sublistvalues]); ?>'; </script>
+<script> window.count = '<?php echo json_encode([$sublists, $sublistvalues]); ?>'; </script>
 <script src="{{ asset('js/showListValues.js') }}"></script>
 
 <script src="{{ asset('js/switchEditView.js') }}"></script>

@@ -12,7 +12,7 @@
             <div class="col-xs-12 col-sm-12 col-md-10 text-left">
                 <form action="{{ route('postInspectionTypeDelete', $id) }}" method="post">
                     @csrf
-                    <button type="submit" class="btn btn-primary">Archiveren</button>
+                    <button type="submit" class="btn btn-primary" title="Archiveren">Archiveren</button>
                 </form>
             </div>
         </div>

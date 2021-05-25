@@ -14,7 +14,7 @@
             <div class="col-xs-12 col-sm-12 col-md-10 text-left">
                 <form action="{{ route('postDeleteArchive') }}" method="post">
                     @csrf
-                    <button type="submit" class="btn btn-primary">Alles verwijderen</button>
+                    <button type="submit" class="btn btn-primary" title="Alles verwijderen">Alles verwijderen</button>
                 </form>
                 {{--<a href="{{ route('postCustomerDelete', $id) }}" class="btn btn-primary">Archiveren</a>--}}
             </div>

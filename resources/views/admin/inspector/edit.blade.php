@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="card">
                 <div class="card-body">
-                    <span class="float-left h2">Inspecteur bewerken</span>
+                    <h1 class="float-left h2">Inspecteur bewerken</h1>
                     <button id="switchButton" onclick="enableInput()" class="btn btn-primary float-right ml-2">
                         Bewerken
                     </button>
@@ -90,7 +90,9 @@
                         <p class="ml-3 mt-3">Door de wachtwoorden leeg te laten worden deze niet veranderd.</p>
                         <br>
                         <a href="{{URL::to('/inspector')}}" class="btn btn-default">Terug</a>
-                        <button type="submit" id="saveButton" class="float-right btn btn-primary text-light" hidden>Opslaan</button>
+                        <button type="submit" id="saveButton" class="float-right btn btn-primary text-light" hidden>
+                            Opslaan
+                        </button>
                     </form>
                 </div>
             </div>

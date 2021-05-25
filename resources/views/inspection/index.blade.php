@@ -10,7 +10,7 @@
         <div class="px-4">
             <div class="bg-white overflow-hidden shadow-sm">
                 <div class="p-4 bg-white border-b border-gray-200">
-                    <span class="float-left h2">Inspecties overzicht</span>
+                    <h1 class="float-left h2">Inspecties overzicht</h1>
                     <p class="mb-5"></p>
                     <hr/>
                     <p class="font-italic">Zoek op Inspectietype</p>
@@ -24,7 +24,7 @@
                     <div id="customers">
                         @if(count($inspections) === 0)
                             <div class="mt-4 bg-white">
-                                <p class="float-left h3">Geen Inspecties gevonden</p>
+                                <h3 class="float-left h3">Geen Inspecties gevonden</h3>
                             </div>
                         @else
                             @foreach ($inspections as $inspectie)

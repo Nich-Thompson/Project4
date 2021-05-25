@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="card">
                 <div class="card-body">
-                    <span class="float-left h2">Nieuwe lijst maken</span>
+                    <h1 class="float-left h2">Nieuwe lijst maken</h1>
                     <p class="mb-5"></p>
                     <hr/>
 
@@ -26,11 +26,14 @@
                             <div class="col">
                                 <div class="form-group ml-3">
                                     <label class="ml-1">Lijstnaam*</label>
-                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value = "{{old('name')}}" placeholder="Vul de lijstnaam in">
+                                    <input type="text" name="name"
+                                           class="form-control @error('name') is-invalid @enderror"
+                                           value="{{old('name')}}" placeholder="Vul de lijstnaam in">
                                 </div>
                                 <div class="form-group ml-3">
                                     <label class="ml-1">Sublijst van</label>
-                                    <select name="list_model_id" class="col-xs-12 col-sm-12 col-md-12 form-control">
+                                    <select name="list_model_id" class="col-xs-12 col-sm-12 col-md-12 form-control"
+                                            title="Sublijst van">
                                         <option value="">
                                             Geen
                                         </option>

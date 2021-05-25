@@ -96,19 +96,19 @@
 
                         <table class="table">
                             <thead>
-                                <tr>
-                                    <th>Positie</th>
-                                    <th>Merk</th>
-                                    <th>Fabricatie jaar</th>
-                                    <th>Etage</th>
-                                    <th>Blusstof</th>
-                                    <th>Laatst afgeperst</th>
-                                    <th>Locatie</th>
-                                    <th>Type</th>
-                                    <th>Debiet</th>
-                                    <th>Opmerkingen</th>
-                                    <th>Goedgekeurd</th>
-                                </tr>
+                            <tr>
+                                <th>Positie</th>
+                                <th>Merk</th>
+                                <th>Fabricatie jaar</th>
+                                <th>Etage</th>
+                                <th>Blusstof</th>
+                                <th>Laatst afgeperst</th>
+                                <th>Locatie</th>
+                                <th>Type</th>
+                                <th>Debiet</th>
+                                <th>Opmerkingen</th>
+                                <th>Goedgekeurd</th>
+                            </tr>
                             </thead>
                             <tbody id="inspections">
 
