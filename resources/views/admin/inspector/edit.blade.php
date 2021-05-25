@@ -89,7 +89,7 @@
                         <br>
                         <p class="ml-3 mt-3">Door de wachtwoorden leeg te laten worden deze niet veranderd.</p>
                         <br>
-                        <a href="{{URL::to('/inspector')}}" class="btn btn-default" title="Terug">Terug</a>
+                        <a href="{{URL::to('/inspector')}}" class="btn btn-default" title="Terug naar vorige pagina">Terug</a>
                         <button type="submit" id="saveButton" class="float-right btn btn-primary text-light" hidden>
                             Opslaan
                         </button>

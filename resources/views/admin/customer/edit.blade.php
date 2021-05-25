@@ -140,7 +140,7 @@
                             </div>
                             <p class="ml-3 mt-3">Velden met een ster (*) zijn verplicht</p>
                             <br>
-                            <a href="{{URL::to('/customer')}}" class="btn btn-default" title="Terug">Terug</a>
+                            <a href="{{URL::to('/customer')}}" class="btn btn-default" title="Terug naar vorige pagina">Terug</a>
                             <button type="submit" id="saveButton" class="float-right btn btn-primary" hidden>Opslaan
                             </button>
                         </form>

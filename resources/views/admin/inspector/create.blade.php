@@ -67,7 +67,7 @@
                         <br>
                         <p class="ml-3 mt-3">Velden met een ster (*) zijn verplicht</p>
                         <br>
-                        <a href="{{URL::to('/inspector')}}" class="btn btn-default" title="Terug">Terug</a>
+                        <a href="{{URL::to('/inspector')}}" class="btn btn-default" title="Terug naar vorige pagina">Terug</a>
                         <button type="submit" class="float-right btn btn-primary text-light">Aanmaken</button>
                     </form>
                 </div>

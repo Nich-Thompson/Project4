@@ -8,7 +8,7 @@
         <div class="row mt-3">
             <div class="col-xs-12 col-sm-12 col-md-2 text-left">
                 <a href="{{ route('getLocationEdit', [$customer_id, $location->id]) }}" class="btn btn-default"
-                   title="Terug">Terug</a>
+                   title="Terug naar vorige pagina">Terug</a>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-10 text-left">
                 <form action="{{ route('postLocationArchive', [$customer_id, $location->id]) }}" method="post">

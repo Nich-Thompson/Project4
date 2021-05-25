@@ -82,7 +82,7 @@
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-6 text-left">
                                 <a href="{{URL::to('/customer/'.$customer_id.'/edit')}}"
-                                   class="btn btn-default" title="Terug">Terug</a>
+                                   class="btn btn-default" title="Terug naar vorige pagina">Terug</a>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-6 text-right">
                                 <button type="submit" id="saveButton" class="btn btn-primary" hidden>Opslaan</button>

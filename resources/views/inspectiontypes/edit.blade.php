@@ -89,7 +89,8 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="{{URL::to('/inspectiontype')}}" class="btn btn-default" title="Terug">Terug</a>
+                        <a href="{{URL::to('/inspectiontype')}}" class="btn btn-default"
+                           title="Terug naar vorige pagina">Terug</a>
                         <button type="submit" id="saveButton" class="btn btn-primary float-right" hidden>Opslaan
                         </button>
                     </form>
