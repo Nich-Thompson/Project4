@@ -10,7 +10,7 @@
                         Bewerken
                     </button>
                     <a href="#" id="archiveButton"
-                       class="btn btn-primary float-right" hidden>Archiveren</a>
+                       class="btn btn-primary float-right" hidden title="Archiveren">Archiveren</a>
                     <p class="mb-5"></p>
                     <hr/>
                     @if ($errors->any())
@@ -63,7 +63,8 @@
                             </div>
                         </div>
                         <p class="mt-3">Velden met een ster (*) zijn verplicht</p>
-                        <a href="{{URL::to('/list/'.$list -> id.'/edit')}}" class="btn btn-default">Terug</a>
+                        <a href="{{URL::to('/list/'.$list -> id.'/edit')}}" class="btn btn-default"
+                           title="Terug">Terug</a>
                         <button type="submit" id="saveButton" class="float-right btn btn-primary text-light">Aanpassen
                         </button>
                     </form>

@@ -11,14 +11,14 @@
             <div class="bg-white overflow-hidden shadow-sm">
                 <div class="p-4 bg-white border-b border-gray-200">
                     <h1 class="float-left h2">Inspecteur overzicht</h1>
-                    <a href="{{URL::to('/inspector/create')}}" class="float-right btn border">
+                    <a href="{{URL::to('/inspector/create')}}" class="float-right btn border" title="Toevoegen">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                              class="bi bi-plus" viewBox="0 0 16 16">
                             <path
                                 d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                         </svg>
                         Toevoegen</a>
-                    <a href="{{URL::to('/inspector/archives')}}" class="float-right btn border mr-2">
+                    <a href="{{URL::to('/inspector/archives')}}" class="float-right btn border mr-2" title="Archief">
                         Archief</a>
                     <p class="mb-5"></p>
                     <hr/>

@@ -92,7 +92,7 @@
                         </div>
                         <p class="ml-3 mt-3">Velden met een ster (*) zijn verplicht</p>
                         <br>
-                        <a href="{{URL::to('/customer')}}" class="btn btn-default">Terug</a>
+                        <a href="{{URL::to('/customer')}}" class="btn btn-default" title="Terug">Terug</a>
                         <button type="submit" class="float-right btn btn-primary text-light" title="Aanmaken">Aanmaken
                         </button>
                     </form>

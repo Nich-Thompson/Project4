@@ -13,7 +13,7 @@
                             @if(Auth::user()->hasRole('admin'))
                                 <a href="{{ route('getLocationArchive', [$customer_id, $location->id]) }}"
                                    id="archiveButton"
-                                   class="btn btn-primary" hidden>Archiveren</a>
+                                   class="btn btn-primary" hidden title="Archiveren">Archiveren</a>
                             @endif
                             <button id="switchButton" onclick="enableInput()" class="btn btn-primary">Bewerken</button>
                         </h1>
@@ -82,7 +82,7 @@
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-6 text-left">
                                 <a href="{{URL::to('/customer/'.$customer_id.'/edit')}}"
-                                   class="btn btn-default">Terug</a>
+                                   class="btn btn-default" title="Terug">Terug</a>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-6 text-right">
                                 <button type="submit" id="saveButton" class="btn btn-primary" hidden>Opslaan</button>

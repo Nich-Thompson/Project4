@@ -10,7 +10,7 @@
                         Bewerken
                     </button>
                     <a href="{{ route('getInspectorArchive', $id) }}" id="archiveButton"
-                       class="btn btn-primary float-right" hidden>Archiveren</a>
+                       class="btn btn-primary float-right" hidden title="Archiveren">Archiveren</a>
                     <br><br>
                     <hr>
 
@@ -89,7 +89,7 @@
                         <br>
                         <p class="ml-3 mt-3">Door de wachtwoorden leeg te laten worden deze niet veranderd.</p>
                         <br>
-                        <a href="{{URL::to('/inspector')}}" class="btn btn-default">Terug</a>
+                        <a href="{{URL::to('/inspector')}}" class="btn btn-default" title="Terug">Terug</a>
                         <button type="submit" id="saveButton" class="float-right btn btn-primary text-light" hidden>
                             Opslaan
                         </button>

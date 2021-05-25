@@ -12,7 +12,8 @@
                     @else
                         <h2 class="float-left h4">Hoofdlijst</h2>
                     @endif
-                    <a href="{{ route('getListValueCreate', $list->id) }}" class="float-right btn border">
+                    <a href="{{ route('getListValueCreate', $list->id) }}" class="float-right btn border"
+                       title="Toevoegen">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                              class="bi bi-plus" viewBox="0 0 16 16">
                             <path

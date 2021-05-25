@@ -12,7 +12,7 @@
                             Bewerken
                         </button>
                         <a href="{{ route('getCustomerArchive', $id) }}" id="archiveButton"
-                           class="btn btn-primary float-right" hidden>Archiveren</a>
+                           class="btn btn-primary float-right" hidden title="Klant archiveren">Archiveren</a>
                         <br><br>
                         <hr>
 
@@ -140,14 +140,15 @@
                             </div>
                             <p class="ml-3 mt-3">Velden met een ster (*) zijn verplicht</p>
                             <br>
-                            <a href="{{URL::to('/customer')}}" class="btn btn-default">Terug</a>
+                            <a href="{{URL::to('/customer')}}" class="btn btn-default" title="Terug">Terug</a>
                             <button type="submit" id="saveButton" class="float-right btn btn-primary" hidden>Opslaan
                             </button>
                         </form>
                     @endif
                     <h1 class="d-inline-block">Klantnaam: {{$customer->name}}</h1>
                     <a href="{{URL::to('/inspection/'.$customer->id.'')}}"
-                       class="btn border border-1 d-inline-block float-right">Ga naar inspecties</a>
+                       class="btn border border-1 d-inline-block float-right" title="Ga naar inspecties">Ga naar
+                        inspecties</a>
                     <hr>
                     <div class="py-12">
                         <div class="px-4">
@@ -156,7 +157,7 @@
                                     <h2 class="float-left h2">Locatie overzicht</h2>
 
                                     <a href="{{URL::to('/customer/'.$id.'/location/create')}}"
-                                       class="float-right btn border">
+                                       class="float-right btn border" title="Locatie toevoegen">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                              fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                                             <path
@@ -164,7 +165,7 @@
                                         </svg>
                                         Toevoegen</a>
                                     <a href="{{URL::to('/customer/'.$id.'/location/archives')}}"
-                                       class="float-right btn border mr-2">
+                                       class="float-right btn border mr-2" title="Locatie archief">
                                         Archief</a>
 
                                     <p class="mb-5"></p>
@@ -204,7 +205,7 @@
                                                         </a>
                                                         <a href="{{ route('getLocationArchive', [$customer->id,$location->id]) }}"
                                                            id="archiveButton"
-                                                           class="btn btn-primary float-right ml-2">Archiveren</a>
+                                                           class="btn btn-primary float-right ml-2" title="Archiveren">Archiveren</a>
                                                     </div>
                                                 </div>
                                             @endforeach

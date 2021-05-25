@@ -7,7 +7,7 @@
         Weet je zeker dat je de klant wilt archiveren?
         <div class="row mt-3">
             <div class="col-xs-12 col-sm-12 col-md-2 text-left">
-                <a href="{{ route('getCustomerEdit', $id) }}" class="btn btn-default">Terug</a>
+                <a href="{{ route('getCustomerEdit', $id) }}" class="btn btn-default" title="Terug">Terug</a>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-10 text-left">
                 <form action="{{ route('postCustomerArchive', $id) }}" method="post">

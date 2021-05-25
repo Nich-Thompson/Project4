@@ -13,7 +13,7 @@
                     <h1 class="float-left h2">Archief locaties overzicht</h1>
                     @if(count($locations) > 0)
                         <a href="{{URL::to('/customer/'.$customer_id.'/location/delete')}}"
-                           class="float-right btn border mr-2">Verwijder alles</a>
+                           class="float-right btn border mr-2" title="Verwijder alles">Verwijder alles</a>
                     @endif
                     <p class="mb-5"></p>
                     <hr/>

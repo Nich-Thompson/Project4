@@ -12,7 +12,8 @@
                 <div class="p-4 bg-white border-b border-gray-200">
                     <h1 class="float-left h2">Archief klanten overzicht</h1>
                     @if(count($customers) > 0)
-                        <a href="{{URL::to('/customer/delete')}}" class="float-right btn border mr-2">Verwijder
+                        <a href="{{URL::to('/customer/delete')}}" class="float-right btn border mr-2"
+                           title="Verwijder alles">Verwijder
                             alles</a>
                     @endif
                     <p class="mb-5"></p>
