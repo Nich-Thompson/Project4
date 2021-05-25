@@ -6,7 +6,8 @@
             <div class="card">
                 <div class="card-body">
                     <h1 class="float-left h2">Inspecteur bewerken</h1>
-                    <button id="switchButton" onclick="enableInput()" class="btn btn-primary float-right ml-2">
+                    <button id="switchButton" onclick="enableInput()" class="btn btn-primary float-right ml-2"
+                            title="Bewerken/bekijken inschakelen">
                         Bewerken
                     </button>
                     <a href="{{ route('getInspectorArchive', $id) }}" id="archiveButton"

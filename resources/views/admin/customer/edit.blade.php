@@ -8,7 +8,7 @@
                     @if(Auth::user()->hasRole('admin'))
                         <h1 class="float-left h2">Klant bewerken</h1>
                         <button id="switchButton" onclick="enableInput()" class="btn btn-primary float-right ml-2"
-                                title="Bewerken">
+                                title="Bewerken/bekijken inschakelen">
                             Bewerken
                         </button>
                         <a href="{{ route('getCustomerArchive', $id) }}" id="archiveButton"

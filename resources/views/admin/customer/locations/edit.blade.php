@@ -15,7 +15,7 @@
                                    id="archiveButton"
                                    class="btn btn-primary" hidden title="Archiveren">Archiveren</a>
                             @endif
-                            <button id="switchButton" onclick="enableInput()" class="btn btn-primary">Bewerken</button>
+                            <button id="switchButton" onclick="enableInput()" class="btn btn-primary" title="Bewerken/bekijken inschakelen">Bewerken</button>
                         </h1>
                     </div>
                     @if ($errors->any())
