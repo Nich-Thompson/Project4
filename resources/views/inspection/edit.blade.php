@@ -15,7 +15,7 @@
                             @csrf
                             <div class="form-group">
                                 <p>Aangemaakt op: {{date("d-m-Y",strtotime($inspection->created_at))}} door {{$username}}</p>
-                                <select class="form-control w-25" name="inspector" id="inspector">
+                                <select class="form-select w-25" name="inspector" id="inspector">
                                     @foreach($inspectors as $inspector)
                                         @if(old('inspector') && in_array($inspector->id,old('inspector')))
                                             <option value="{{$inspector->id}}" selected>{{$inspector->name}}</option>

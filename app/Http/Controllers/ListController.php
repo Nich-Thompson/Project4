@@ -33,7 +33,11 @@ class ListController extends Controller
         $list = ListModel::find($id);
         $sublistOf = ListModel::find($list->list_model_id);
         $values = $list->values()->get();
-        return view('admin.list.edit', ['list'=>$list, 'headlist'=>$sublistOf, 'values'=>$values, 'id'=>$id]);
+        return view('admin.list.edit', [
+            'list'=>$list,
+            'headlist'=>$sublistOf,
+            'values'=>$values,
+            'id'=>$id]);
     }
 
     public function update($id, ListRequest $request)
@@ -85,8 +89,6 @@ class ListController extends Controller
             array_push($sublistvalues, $sublist -> values() -> get() ->toArray());
             $sublist = $sublist -> sublist() -> first();
         }
-        Log::debug($listValue);
-        Log::debug($sublistvalues);
         return view('admin.list.editValue', [
             'list'=>$list,
             'sublists'=>$sublists,

@@ -41,7 +41,7 @@
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <label>Icoon:</label>
                                 <div class="form-group">
-                                    <select name="icon_id" class="fontawesomeselect col-xs-12 col-sm-12 col-md-12 form-control">
+                                    <select name="icon_id" class="fontawesomeselect col-xs-12 col-sm-12 col-md-12 form-select">
                                         @foreach($icons as $icon)
                                             <option value="{{ $icon->id }}">
                                                 &#x{{ $icon->unicode }};
