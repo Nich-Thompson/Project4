@@ -44,7 +44,20 @@ class TemplateController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $labels = $request->input('labels');
+        $types = $request->input('types');
+
+        $json = [];
+        for($i = 0; $i < count($labels); $i++) {
+            $newItem = (object) array('label' => $labels[$i], 'type' => $types[$i]);
+            array_push($json, $newItem);
+        }
+
+        Template::create([
+            'inspection_type_id' => '1',
+            'json' => json_encode($json)
+        ]);
+        return redirect(route('getTemplateIndex'));
     }
 
     /**

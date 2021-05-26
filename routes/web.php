@@ -99,7 +99,7 @@ Route::prefix('list')->group(function() {
     Route::post('/{list_id}/{id}/edit-value', 'ListController@updateValue')->middleware(['role:admin'])->name('postListValueEdit');
 });
 
-//Event routes
+//Template routes
 Route::prefix('template')->group(function () {
     Route::get('/', 'TemplateController@index')->middleware(['role:admin'])->name('getTemplateIndex');
     Route::get('/create', 'TemplateController@create')->middleware(['role:admin'])->name('getTemplateCreate');
