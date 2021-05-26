@@ -21,18 +21,28 @@
                         </div>
                     @endif
 
+                    <button class="btn btn-primary" id="addText" title="Voeg tekst input toe">+Tekst input</button>
+                    <button class="btn btn-primary" id="addNumber" title="Voeg getal input toe">+Getal input</button>
+                    <button class="btn btn-primary" id="addDateTime" title="Voeg datum input toe">+Datum input</button>
+                    <button class="btn btn-primary" id="addCheckbox" title="Voeg checkbox toe">+Checkbox</button>
+                    <button class="btn btn-primary" id="addList" title="Voeg lijst toe">+Lijst</button>
 
                     <form action="{{ route('postTemplateCreate') }}" method="post">
                         @csrf
                         <div class="row">
-
+                            <div class="col-12">
+                                <div class="row" id="inputs">
+                                    {{-- inputs are generated here --}}
+                                </div>
+                            </div>
                         </div>
                         <a href="{{URL::to('/template')}}" class="btn btn-default" title="Terug naar vorige pagina">Terug</a>
-                        <button type="submit" class="float-right btn btn-primary text-light" title="Aanmaken">Aanmaken
-                        </button>
+                        <button type="submit" class="float-right btn btn-primary text-light" title="Aanmaken">Aanmaken</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 @endsection
+
+<script src="{{ asset('js/createTemplate.js') }}"></script>

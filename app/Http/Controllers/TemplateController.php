@@ -44,7 +44,8 @@ class TemplateController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $all = $request->input('labels');
+        dd($all);
     }
 
     /**
