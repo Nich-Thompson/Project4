@@ -34,7 +34,8 @@
                                 @if(!empty($sublists))
                                     <div class="form-group">
                                         <label for="sublist_value"> {{$sublists[0]['name']}} </label>
-                                        <select class="form-control" name="sublist_value" id="sublist_value" disabled>
+
+                                        <select class="form-select" name="sublist_value" id="sublist_value" disabled>
                                             @foreach($sublistvalues[0] as $value)
                                                 @if(old('sublist_value') != null)
                                                     <option
