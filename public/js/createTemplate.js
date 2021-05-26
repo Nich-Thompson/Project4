@@ -50,9 +50,11 @@ function createInput(type) {
             break;
         case 'dateTime':
             newLabel.textContent = 'Label datum input'
+            typeInput.value = 'dateTime'
             break;
         case 'checkbox':
             newLabel.textContent = 'Label checkbox'
+            typeInput.value = 'checkBox'
     }
 
     let newInput = document.createElement('input')
