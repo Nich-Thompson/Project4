@@ -193,7 +193,7 @@
                                                         </a>
 
                                                         <a id="{{$location->id}}"
-                                                           href="{{URL::to('/inspection/'.$customer->id.'/'.$location->id.'/create')}}"
+                                                           href="{{URL::to('/inspection/'.$customer->id.'/'.$location->id.'/choose_template')}}"
                                                            class="btn border float-right ml-2">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                                  height="16" fill="currentColor" class="bi bi-plus"

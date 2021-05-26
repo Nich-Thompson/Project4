@@ -17,4 +17,9 @@ class InspectionType extends Model
         'color',
         'icon_id',
     ];
+
+    public function icon()
+    {
+        return Icon::where('id', $this->icon_id)->first();
+    }
 }

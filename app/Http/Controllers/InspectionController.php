@@ -9,9 +9,11 @@ use App\Models\Customer;
 use App\Models\InspectionType;
 use App\Models\Location;
 use App\Models\Inspector;
+use App\Models\Template;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class inspectionController extends Controller
 {
@@ -26,11 +28,18 @@ class inspectionController extends Controller
         ]);
     }
 
-    public function create($Customer_id, $Location_id)
+    public function choose_template($customer_id, $location_id){
+        $templates = Template::all();
+        return view('inspection.choose_template', [
+            'templates' => $templates,
+            'location' => Location::find($location_id),
+            'customer_id' => $customer_id
+        ]);
+    }
+
+    public function create($customer_id, $location_id, $template_id)
     {
         $user_id = Auth::id();
-        $customer_id = $Customer_id;
-        $location_id = $Location_id;
         $inspection = Inspection::create([
             'user_id' => $user_id,
             'customer_id' => $customer_id,
@@ -39,18 +48,22 @@ class inspectionController extends Controller
             "locked" => true,
         ]);
 
-        return redirect()->to("inspection/inspect/" . $inspection->id . "/" . "create" );
+        return redirect()->to("inspection/inspect/" . $inspection->id . "/" . $template_id . '/' . "create" );
     }
 
-    public function inspect($id, $type)
+    public function inspect($id, $template_id, $type)
     {
+        $template = Template::find($template_id);
+        $template -> json = json_decode($template -> json);
         $inspection = Inspection::find($id);
         $inspection_types = InspectionType::all();
         $user = User::find($inspection->user_id);
+        Log::debug( $template -> json);
 
         if($type == "create"){
             return view('inspection.create', [
                 "id" => $id,
+                'template' => $template,
                 "inspection" => $inspection,
                 "username" => $user->name,
                 'inspection_types' => $inspection_types,
@@ -63,6 +76,7 @@ class inspectionController extends Controller
             )->get();
             return view('inspection.edit', [
                 "id" => $id,
+                'template' => $template,
                 "inspection" => $inspection,
                 "username" => $user->name,
                 'inspection_types' => $inspection_types,

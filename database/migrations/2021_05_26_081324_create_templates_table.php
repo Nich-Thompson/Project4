@@ -19,7 +19,7 @@ class CreateTemplatesTable extends Migration
             $table->foreign('inspection_type_id')
                 ->references('id')
                 ->on('inspection_types');
-            $table->string('json');
+            $table->text('json');
             $table->timestamps();
         });
     }

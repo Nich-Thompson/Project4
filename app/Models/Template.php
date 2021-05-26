@@ -16,6 +16,6 @@ class Template extends Model
 
     public function inspection_type()
     {
-        return $this->HasOne(InspectionType::class)->first();
+        return InspectionType::where('id', $this->inspection_type_id)->first();
     }
 }

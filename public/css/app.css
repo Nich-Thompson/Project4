@@ -14,6 +14,23 @@
     width: 11% !important;
 }
 
+.h-10em{
+    height: 10em !important;
+}
+
+/*Alignment*/
+.vertical-center {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+/*links*/
+.nounderline {
+    text-decoration: none !important
+}
+
 :root {
     --blue: #3490dc;
     --indigo: #6574cd;
