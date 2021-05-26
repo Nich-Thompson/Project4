@@ -34,6 +34,7 @@
                                 <div class="row" id="inputs">
                                     {{-- inputs are generated here --}}
                                 </div>
+                                <div id="hiddenInputs"></div>
                             </div>
                         </div>
                         <a href="{{URL::to('/template')}}" class="btn btn-default" title="Terug naar vorige pagina">Terug</a>

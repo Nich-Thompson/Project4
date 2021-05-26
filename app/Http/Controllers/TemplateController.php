@@ -45,6 +45,11 @@ class TemplateController extends Controller
     public function store(Request $request)
     {
         $all = $request->input('labels');
+
+        $all2 = json_encode($request->all());
+
+        dd($all2);
+        dd(json_decode($all2));
         dd($all);
     }
 

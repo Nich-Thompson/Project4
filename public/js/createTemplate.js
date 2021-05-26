@@ -1,3 +1,4 @@
+let json = []
 
 window.onload = function () {
     let text = document.getElementById('addText')
@@ -28,16 +29,24 @@ function addCheckbox() {
 
 function createInput(type) {
     let inputs = document.getElementById('inputs')
+    let hiddenInputs = document.getElementById('hiddenInputs')
+
     let newDiv = document.createElement('div')
     newDiv.className = 'form-group col-md-4'
+
+    let typeInput = document.createElement('input')
+    typeInput.name = 'types[]'
+    typeInput.hidden = true
     let newLabel = document.createElement('label')
     newLabel.className = 'ml-1'
     switch (type) {
         case 'text':
             newLabel.textContent = 'Label text input'
+            typeInput.value = 'text'
             break;
         case 'number':
             newLabel.textContent = 'Label getal input'
+            typeInput.value = 'number'
             break;
         case 'dateTime':
             newLabel.textContent = 'Label datum input'
@@ -52,7 +61,11 @@ function createInput(type) {
     newInput.className = 'form-control'
     newInput.placeholder = 'Labelnaam'
 
+    json.push({label:'type'})
+
     inputs.appendChild(newDiv)
     newDiv.appendChild(newLabel)
     newDiv.appendChild(newInput)
+
+    hiddenInputs.appendChild(typeInput)
 }
