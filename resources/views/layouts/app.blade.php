@@ -66,7 +66,7 @@
                                 <a class="nav-link" href="{{ route('getInspectionTypeIndex') }}">Inspectietypes</a>
                             @endif
                         </ul>
-                        
+
                         <ul class="navbar-nav dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Lijsten
@@ -82,6 +82,15 @@
                                 @endforeach
                             </div>
                         </ul>
+                        @endif
+                        @if(Auth::user()->hasRole('inspecteur'))
+                            <ul class="navbar-nav">
+                                @if(\Illuminate\Support\Facades\Route::current()->getPrefix() == '/customer')
+                                    <a class="nav-link activemenu" href="{{ route('getCustomerIndex') }}">Klanten</a>
+                                @else
+                                    <a class="nav-link" href="{{ route('getCustomerIndex') }}">Klanten</a>
+                                @endif
+                            </ul>
                         @endif
                     @endguest
 
