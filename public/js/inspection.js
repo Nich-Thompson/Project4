@@ -97,7 +97,7 @@ function renderData() {
                     td.textContent = "Nee";
                     td.className = "text-danger font-weight-bold";
                 }else if(value.type === 'datetime-local'){
-                    td.textContent = new Intl.DateTimeFormat('nl-NL').format(new Date(value.value))
+                    td.textContent = new Date(value.value).toLocaleString();
                 }else{
                     td.textContent = value.value;
                 }
@@ -117,23 +117,16 @@ document.getElementById("form").addEventListener("submit", function (event) {
         const input = document.getElementById(key);
         object[value.label] = {type: value.type, value:input.value};
         if(value.type === 'checkbox'){
-            if(input.value === "on"){
-                object[value.label] = {type: value.type, value:true};
-            }else{
-                object[value.label] = {type: value.type, value:false};
-            }
-            input.value = false;
+            object[value.label] = {type: value.type, value:input.checked};
+            input.checked = false;
         }else if(value.type !== 'select'){
             input.value = '';
         }else{
             input.childNodes[0].selected = true;
         }
     }
-    if(document.getElementById('approved').value === "on"){
-        object['approved'] = {type: 'checkbox', value:true};
-    }else{
-        object['approved'] = {type: 'checkbox', value:true};
-    }
+    object['approved'] = {type: 'checkbox', value:document.getElementById('approved').checked};
+    document.getElementById('approved').checked = true;
 
     saveNewObject(object);
     renderData();
