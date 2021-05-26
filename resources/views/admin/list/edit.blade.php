@@ -5,26 +5,29 @@
         <div class="px-4">
             <div class="bg-white overflow-hidden shadow-sm">
                 <div class="p-4 bg-white border-b border-gray-200">
-                    <span class="float-left h2">{{ $list->name }}</span>
+                    <h1 class="float-left h2">{{ $list->name }}</h1>
                     <br><br>
                     @if($headlist != null)
-                        <span class="float-left h4">Sublijst van: {{ $headlist->name }}</span>
+                        <h2 class="float-left h4">Sublijst van: {{ $headlist->name }}</h2>
                     @else
-                        <span class="float-left h4">Hoofdlijst</span>
+                        <h2 class="float-left h4">Hoofdlijst</h2>
                     @endif
-                    <a href="{{ route('getListValueCreate', $list->id) }}" class="float-right btn border">
+                    <a href="{{ route('getListValueCreate', $list->id) }}" class="float-right btn border"
+                       title="Toevoegen">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                              class="bi bi-plus" viewBox="0 0 16 16">
                             <path
                                 d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                        </svg>Toevoegen</a>
+                        </svg>
+                        Toevoegen</a>
                     <p class="mb-5"></p>
                     <hr/>
-
                     <div class="d-flex flex-column">
                         <form action="{{ route('postListEdit', $id ) }}" method="post">
                             @csrf
-                            <button type="submit" id="saveButton" class="float-right btn btn-primary text-light">Opslaan</button>
+                            <button type="submit" id="saveButton" class="float-right btn btn-primary text-light">
+                                Opslaan
+                            </button>
                             <div class="form-group ml-2 w-75">
                                 <input type="text" name="name" placeholder="Lijstnaam"
                                        class="form-control @error('first_name') is-invalid @enderror"
@@ -39,7 +42,7 @@
 
                     @if(count($values) === 0)
                         <div class="mt-4 bg-white">
-                            <p class="float-left h3">Deze lijst heeft geen waardes</p>
+                            <h2 class="float-left h3">Deze lijst heeft geen waardes</h2>
                         </div>
                     @else
                         <div class="mt-3 ml-6 d-flex">

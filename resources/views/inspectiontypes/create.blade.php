@@ -23,19 +23,27 @@
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <label>Naam van het insspectietype:</label>
                                 <div class="form-group">
-                                    <input type="text" name="name" class="form-control" value = "{{old('name')}}" placeholder="Naam type" required oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" oninput="this.setCustomValidity('')">
+                                    <input type="text" name="name" class="form-control" value="{{old('name')}}"
+                                           placeholder="Naam type" required
+                                           oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')"
+                                           oninput="this.setCustomValidity('')">
                                 </div>
                             </div>
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <label>Beschrijving:</label>
                                 <div class="form-group">
-                                    <input type="text" name="description" class="form-control" value = "{{old('description')}}" placeholder="Beschrijving" required oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" oninput="this.setCustomValidity('')">
+                                    <input type="text" name="description" class="form-control"
+                                           value="{{old('description')}}" placeholder="Beschrijving" required
+                                           oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')"
+                                           oninput="this.setCustomValidity('')">
                                 </div>
                             </div>
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <label>Kleur:</label>
                                 <div class="form-group">
-                                    <input type="color" name="color" class="form-control" value = "{{old('color')}}" required oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')" oninput="this.setCustomValidity('')">
+                                    <input type="color" name="color" class="form-control" value="{{old('color')}}"
+                                           required oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')"
+                                           oninput="this.setCustomValidity('')">
                                 </div>
                             </div>
                             <div class="col-xs-6 col-sm-6 col-md-6">
@@ -52,7 +60,8 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="{{URL::to('/inspectiontype')}}" class="btn btn-default">Terug</a>
+                        <a href="{{URL::to('/inspectiontype')}}" class="btn btn-default"
+                           title="Terug naar vorige pagina">Terug</a>
                         <button type="submit" class="btn btn-primary float-right">Aanmaken</button>
                     </form>
                 </div>
