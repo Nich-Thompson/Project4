@@ -59,28 +59,39 @@ class inspectionController extends Controller
         $inspection_types = InspectionType::all();
         $user = User::find($inspection->user_id);
 
-        $inspection->locked = Auth::id();
-        $inspection->save();
+        //check if inspection is not locked, or is locked by this inspector
+        if ($inspection->locked == null || $inspection->locked == Auth::id()) {
+            $inspection->locked = Auth::id();
+            $inspection->save();
 
-        if ($type == "create") {
-            return view('inspection.create', [
-                "id" => $id,
-                "inspection" => $inspection,
-                "username" => $user->name,
-                'inspection_types' => $inspection_types,
-            ]);
-        } else if ($type == "edit") {
-            $inspectors = User::whereHas(
-                'roles', function ($q) {
-                $q->where('name', 'inspecteur')->orWhere('name', 'admin');;
+            if ($type == "create") {
+                return view('inspection.create', [
+                    "id" => $id,
+                    "inspection" => $inspection,
+                    "username" => $user->name,
+                    'inspection_types' => $inspection_types,
+                ]);
+            } else if ($type == "edit") {
+                $inspectors = User::whereHas(
+                    'roles', function ($q) {
+                    $q->where('name', 'inspecteur')->orWhere('name', 'admin');;
+                }
+                )->get();
+                return view('inspection.edit', [
+                    "id" => $id,
+                    "inspection" => $inspection,
+                    "username" => $user->name,
+                    'inspection_types' => $inspection_types,
+                    'inspectors' => $inspectors
+                ]);
             }
-            )->get();
-            return view('inspection.edit', [
+        } else {
+            $locked_user = User::find($inspection->locked);
+            return view('inspection.view', [
                 "id" => $id,
                 "inspection" => $inspection,
                 "username" => $user->name,
-                'inspection_types' => $inspection_types,
-                'inspectors' => $inspectors
+                "locked_username" => $locked_user->first_name,
             ]);
         }
     }
