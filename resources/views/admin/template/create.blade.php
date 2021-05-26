@@ -45,5 +45,9 @@
         </div>
     </div>
 @endsection
+<script>
+    window.myArray= @json($lists)
+</script>
+
 
 <script src="{{ asset('js/createTemplate.js') }}"></script>

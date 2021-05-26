@@ -1,4 +1,4 @@
-let json = []
+let dynamicLists = window.myArray;
 
 window.onload = function () {
     let text = document.getElementById('addText')
@@ -9,6 +9,8 @@ window.onload = function () {
     dateTime.addEventListener('click', addDateTimeInput)
     let checkbox = document.getElementById('addCheckbox')
     checkbox.addEventListener('click', addCheckbox)
+    let list = document.getElementById('addList')
+    list.addEventListener('click', addList)
 }
 
 function addTextInput() {
@@ -20,11 +22,34 @@ function addNumberInput() {
 }
 
 function addDateTimeInput() {
-    createInput('dateTime')
+    createInput('datetime-local')
 }
 
 function addCheckbox() {
     createInput('checkbox')
+}
+
+function addList(){
+    let inputs = document.getElementById('inputs')
+    let hiddenInputs = document.getElementById('hiddenInputs')
+
+    let newDiv = document.createElement('div')
+    newDiv.className = 'form-group col-md-4'
+
+    const label = document.createElement('label');
+    label.textContent = 'Kies een lijst'
+
+    let select = document.createElement('select');
+    select.className = 'form-select';
+    select.name = 'selects[]';
+    dynamicLists.forEach(dynamicList => {
+        const option = document.createElement('option');
+        option.value = dynamicList.id;
+        option.textContent = dynamicList.is_main_list ? dynamicList.name + ' (Hoodflijst)' : dynamicList.name;
+        select.append(option);
+    });
+    newDiv.append(label, select);
+    inputs.append(newDiv);
 }
 
 function createInput(type) {
@@ -48,13 +73,13 @@ function createInput(type) {
             newLabel.textContent = 'Label getal input'
             typeInput.value = 'number'
             break;
-        case 'dateTime':
+        case 'datetime-local':
             newLabel.textContent = 'Label datum input'
-            typeInput.value = 'dateTime'
+            typeInput.value = 'datetime-local'
             break;
         case 'checkbox':
             newLabel.textContent = 'Label checkbox'
-            typeInput.value = 'checkBox'
+            typeInput.value = 'checkbox'
     }
 
     let newInput = document.createElement('input')
@@ -62,8 +87,6 @@ function createInput(type) {
     newInput.name = 'labels[]'
     newInput.className = 'form-control'
     newInput.placeholder = 'Labelnaam'
-
-    json.push({label:'type'})
 
     inputs.appendChild(newDiv)
     newDiv.appendChild(newLabel)

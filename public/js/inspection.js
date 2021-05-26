@@ -1,5 +1,6 @@
 let data = window.myArray[0];
 let inputFields = window.myArray[1];
+let dynamicLists = window.myArray[2];
 let tempInputFields = {};
 const inputFieldBox = document.getElementById('input-field-box');
 
@@ -28,15 +29,37 @@ function generateInputField(inputField, id){
     label.className = 'mb-0';
     label.textContent = inputField.label;
 
-    const input = document.createElement('input');
-    input.className = 'form-control';
-    input.type = inputField.type;
-    input.id = id;
-    input.name = id;
+    if(inputField.type === 'select'){
+        let select = document.createElement('select');
+        select.className = 'form-select';
+        select.id = id;
+        select.name = id;
+        dynamicLists[inputField.list_id].forEach(value => {
+            const option = document.createElement('option');
+            option.value = value.name;
+            option.textContent = value.name;
+            select.append(option);
+        });
 
-    tempInputFields[id] = {label: inputField.label, type: inputField.type};
+        tempInputFields[id] = {label: inputField.label, type: inputField.type};
 
-    formGroup.append(label, input);
+        formGroup.append(label, select);
+    }else{
+        const input = document.createElement('input');
+        if(inputField.type === 'checkbox'){
+            input.className = 'form-check';
+        }else{
+            input.className = 'form-control';
+        }
+        input.type = inputField.type;
+        input.id = id;
+        input.name = id;
+
+        tempInputFields[id] = {label: inputField.label, type: inputField.type};
+
+        formGroup.append(label, input);
+    }
+
     inputFieldBox.append(formGroup);
 }
 
@@ -65,39 +88,21 @@ function renderData() {
 
         inspections.forEach(element => {
             let tr = document.createElement("tr");
-            let position = document.createElement("td");
-            let brand = document.createElement("td");
-            let fabrication_year = document.createElement("td");
-            let floor = document.createElement("td");
-            let blusstof = document.createElement("td");
-            let lastchecked = document.createElement("td");
-            let location = document.createElement("td");
-            let type = document.createElement("td");
-            let debiet = document.createElement("td");
-            let comments = document.createElement("td");
-            let approved = document.createElement("td");
-
-            position.textContent = element.position;
-            brand.textContent = element.brand;
-            fabrication_year.textContent = element.fabrication_year;
-            floor.textContent = element.floor;
-            blusstof.textContent = element.blusstof;
-            lastchecked.textContent = element.lastchecked;
-            location.textContent = element.location;
-            type.textContent = element.type;
-            debiet.textContent = element.debiet;
-            comments.textContent = element.comments;
-
-            if (element.approved === true) {
-                approved.textContent = "Ja";
-                approved.className = "text-success font-weight-bold";
-            } else {
-                approved.textContent = "Nee";
-                approved.className = "text-danger font-weight-bold";
+            for (const [key, value] of Object.entries(element)) {
+                const td = document.createElement("td");
+                if (value.value === true) {
+                    td.textContent = "Ja";
+                    td.className = "text-success font-weight-bold";
+                } else if (value.value === false){
+                    td.textContent = "Nee";
+                    td.className = "text-danger font-weight-bold";
+                }else if(value.type === 'datetime-local'){
+                    td.textContent = new Intl.DateTimeFormat('nl-NL').format(new Date(value.value))
+                }else{
+                    td.textContent = value.value;
+                }
+                tr.append(td);
             }
-
-            tr.append(position, brand, fabrication_year, floor, blusstof, lastchecked, location, type,
-                debiet, comments, approved);
 
             div.appendChild(tr);
         })
@@ -110,14 +115,25 @@ document.getElementById("form").addEventListener("submit", function (event) {
     let object = {};
     for (const [key, value] of Object.entries(tempInputFields)) {
         const input = document.getElementById(key);
-        object[value.label] = input.value;
+        object[value.label] = {type: value.type, value:input.value};
         if(value.type === 'checkbox'){
+            if(input.value === "on"){
+                object[value.label] = {type: value.type, value:true};
+            }else{
+                object[value.label] = {type: value.type, value:false};
+            }
             input.value = false;
-        }else{
+        }else if(value.type !== 'select'){
             input.value = '';
+        }else{
+            input.childNodes[0].selected = true;
         }
     }
-    object['approved'] = document.getElementById('approved').value;
+    if(document.getElementById('approved').value === "on"){
+        object['approved'] = {type: 'checkbox', value:true};
+    }else{
+        object['approved'] = {type: 'checkbox', value:true};
+    }
 
     saveNewObject(object);
     renderData();

@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateCustomerRequest;
 use App\Models\Inspection;
 use App\Models\Customer;
 use App\Models\InspectionType;
+use App\Models\ListModel;
 use App\Models\Location;
 use App\Models\Inspector;
 use App\Models\Template;
@@ -58,7 +59,12 @@ class inspectionController extends Controller
         $inspection = Inspection::find($id);
         $inspection_types = InspectionType::all();
         $user = User::find($inspection->user_id);
-        Log::debug( $template -> json);
+
+        $lists = [];
+        foreach (ListModel::all() as $list){
+            $lists[$list->id] = $list->values() -> get() ->toArray();
+        }
+        $lists = (object) $lists;
 
         if($type == "create"){
             return view('inspection.create', [
@@ -67,6 +73,7 @@ class inspectionController extends Controller
                 "inspection" => $inspection,
                 "username" => $user->name,
                 'inspection_types' => $inspection_types,
+                'lists' => $lists
             ]);
         }else if($type == "edit"){
             $inspectors = User::whereHas(

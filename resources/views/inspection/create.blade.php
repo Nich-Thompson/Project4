@@ -61,7 +61,7 @@
         </div>
     </div>
     <script>
-        window.myArray= @json([$inspection, $template->json])
+        window.myArray= @json([$inspection, $template->json, $lists])
     </script>
 
     <script src="{{ asset('js/inspection.js') }}"></script>

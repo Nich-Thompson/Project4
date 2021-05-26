@@ -3,16 +3,16 @@ let input = null;
 const sublists = JSON.parse(window.count)[0]
 const sublistvalues = JSON.parse(window.count)[1];
 
-    window.addEventListener('load', (e) => {
-        valuesBox = document.getElementById('values-box');
-        input = document.getElementById('sublist_value');
-        if(input){
-            input.addEventListener('change', (e) => {
-                this.showValues();
-            });
+window.addEventListener('load', (e) => {
+    valuesBox = document.getElementById('values-box');
+    input = document.getElementById('sublist_value');
+    if (input) {
+        input.addEventListener('change', (e) => {
             this.showValues();
-        }
-    });
+        });
+        this.showValues();
+    }
+});
 
 function showValues(){
     valuesBox.innerHTML = '';

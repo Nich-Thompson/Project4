@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\InspectionType;
+use App\Models\ListModel;
 use App\Models\Template;
 use Illuminate\Http\Request;
 
@@ -30,9 +31,15 @@ class TemplateController extends Controller
     public function create()
     {
         $inspection_types = InspectionType::all();
+        $lists = ListModel::all();
+
+        foreach ($lists as $list){
+            $list->is_main_list = $list->sublistOf()->first() == null;
+        }
 
         return view('admin.template.create', [
-            'inspection_types' => $inspection_types
+            'inspection_types' => $inspection_types,
+            'lists' => $lists
         ]);
     }
 
@@ -46,11 +53,17 @@ class TemplateController extends Controller
     {
         $labels = $request->input('labels');
         $types = $request->input('types');
+        $selects = $request->input('selects');
 
         $json = [];
         for($i = 0; $i < count($labels); $i++) {
             $newItem = (object) array('label' => $labels[$i], 'type' => $types[$i]);
             array_push($json, $newItem);
+        }
+        foreach ($selects as $select){
+            if(ListModel::find($select) !== null){
+                array_push($json, (object) array('list_id' => $select, 'label' => ListModel::find($select)->name, 'type' => 'select'));
+            }
         }
 
         Template::create([
