@@ -23,7 +23,7 @@ class AddInspections extends Migration
             $table->integer('customer_id');
             $table->integer('location_id');
             $table->text('json')->nullable();
-            $table->boolean("locked")->default('0');
+            $table->integer("locked")->nullable();
             $table->timestamps();
             $table->softDeletes($column = 'deleted_at');
         });
