@@ -48,7 +48,15 @@ function addList(){
         option.textContent = dynamicList.is_main_list ? dynamicList.name + ' (Hoodflijst)' : dynamicList.name;
         select.append(option);
     });
-    newDiv.append(label, select);
+
+    let deleteButton = document.createElement('button')
+    deleteButton.className = 'float-right btn btn-danger'
+    deleteButton.textContent = 'X'
+    deleteButton.addEventListener('click', function () {
+        newDiv.parentNode.removeChild(newDiv)
+    })
+
+    newDiv.append(label, deleteButton, select);
     inputs.append(newDiv);
 }
 
@@ -88,8 +96,16 @@ function createInput(type) {
     newInput.className = 'form-control'
     newInput.placeholder = 'Labelnaam'
 
+    let deleteButton = document.createElement('button')
+    deleteButton.className = 'float-right btn btn-danger'
+    deleteButton.textContent = 'X'
+    deleteButton.addEventListener('click', function () {
+        newDiv.parentNode.removeChild(newDiv)
+    })
+
     inputs.appendChild(newDiv)
     newDiv.appendChild(newLabel)
+    newDiv.appendChild(deleteButton)
     newDiv.appendChild(newInput)
 
     hiddenInputs.appendChild(typeInput)
