@@ -105,7 +105,7 @@ class inspectionController extends Controller
                     "id" => $id,
                     'template' => $template,
                     "inspection" => $inspection,
-                    "username" => $user->name,
+                    "user" => $user,
                     'inspection_types' => $inspection_types,
                     'lists' => $lists
                 ]);
@@ -119,7 +119,7 @@ class inspectionController extends Controller
                     "id" => $id,
                     'template' => $template,
                     "inspection" => $inspection,
-                    "username" => $user->name,
+                    "user" => $user,
                     'inspection_types' => $inspection_types,
                     'lists' => $lists,
                     'inspectors' => $inspectors
@@ -131,7 +131,7 @@ class inspectionController extends Controller
                 "id" => $id,
                 'template' => $template,
                 "inspection" => $inspection,
-                "username" => $user->name,
+                "user" => $user,
                 "locked_username" => $locked_user->first_name,
             ]);
         }

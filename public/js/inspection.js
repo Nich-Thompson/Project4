@@ -11,10 +11,10 @@ window.addEventListener('load', (e) => {
 
 document.getElementById("offline").style.display = "none";
 
-function generateInputFields(){
+function generateInputFields() {
     let id = 1;
-    inputFields.unshift({label:'Pos.', type: 'number'});
-    inputFields.push({label:'Opmerkingen', type: 'text'});
+    inputFields.unshift({label: 'Pos.', type: 'number'});
+    inputFields.push({label: 'Opmerkingen', type: 'text'});
     inputFields.forEach(inputField => {
         generateInputField(inputField, id)
         id++;
@@ -22,7 +22,7 @@ function generateInputFields(){
     setJson();
 }
 
-function generateInputField(inputField, id){
+function generateInputField(inputField, id) {
     const formGroup = document.createElement('div');
     formGroup.className = 'form-group pl-3 col-md-4';
 
@@ -30,7 +30,7 @@ function generateInputField(inputField, id){
     label.className = 'mb-0';
     label.textContent = inputField.label;
 
-    if(inputField.type === 'select'){
+    if (inputField.type === 'select') {
         let select = document.createElement('select');
         select.className = 'form-select';
         select.id = id;
@@ -45,11 +45,11 @@ function generateInputField(inputField, id){
         tempInputFields[id] = {label: inputField.label, type: inputField.type};
 
         formGroup.append(label, select);
-    }else{
+    } else {
         const input = document.createElement('input');
-        if(inputField.type === 'checkbox'){
+        if (inputField.type === 'checkbox') {
             input.className = 'form-check';
-        }else{
+        } else {
             input.className = 'form-control';
         }
         input.type = inputField.type;
@@ -64,7 +64,7 @@ function generateInputField(inputField, id){
     inputFieldBox.append(formGroup);
 }
 
-function setJson(){
+function setJson() {
     if (data.json === "") {
         localStorage.setItem("inspections", JSON.stringify([]));
         document.getElementById("1").value = 1;
@@ -94,12 +94,12 @@ function renderData() {
                 if (value.value === true) {
                     td.textContent = "Ja";
                     td.className = "text-success font-weight-bold";
-                } else if (value.value === false){
+                } else if (value.value === false) {
                     td.textContent = "Nee";
                     td.className = "text-danger font-weight-bold";
-                }else if(value.type === 'datetime-local'){
+                } else if (value.type === 'datetime-local') {
                     td.textContent = new Date(value.value).toLocaleString();
-                }else{
+                } else {
                     td.textContent = value.value;
                 }
                 tr.append(td);
@@ -116,17 +116,18 @@ document.getElementById("form").addEventListener("submit", function (event) {
     let object = {};
     for (const [key, value] of Object.entries(tempInputFields)) {
         const input = document.getElementById(key);
-        object[value.label] = {type: value.type, value:input.value};
-        if(value.type === 'checkbox'){
-            object[value.label] = {type: value.type, value:input.checked};
+        object[input.id] = {type: value.type, value: input.value};
+        if (value.type === 'checkbox') {
+            object[input.id] = {type: value.type, value: input.checked};
             input.checked = false;
-        }else if(value.type !== 'select'){
+        } else if (value.type !== 'select') {
             input.value = '';
-        }else{
+        } else {
             input.childNodes[0].selected = true;
         }
     }
-    object['approved'] = {type: 'checkbox', value:document.getElementById('approved').checked};
+    const input = document.getElementById('approved');
+    object[input.id] = {type: 'checkbox', value: input.checked};
     document.getElementById('approved').checked = true;
 
     saveNewObject(object);
