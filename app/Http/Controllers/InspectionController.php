@@ -45,6 +45,7 @@ class inspectionController extends Controller
             'user_id' => $user_id,
             'customer_id' => $customer_id,
             'location_id' => $location_id,
+            'template_id' => $template_id,
             "json" => "",
             "locked" => $user_id,
         ]);
@@ -75,7 +76,7 @@ class inspectionController extends Controller
         if ($inspection->locked == null || $inspection->locked == Auth::id()) {
             $inspection->locked = Auth::id();
             $inspection->save();
-  
+
         $lists = [];
         foreach (ListModel::all() as $list){
             $lists[$list->id] = $list->values() -> get() ->toArray();
