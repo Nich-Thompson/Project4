@@ -55,7 +55,7 @@ class TemplateController extends Controller
             }
         }
         if ($comments_list_id) {
-            array_push($json, (object)array('isCommentsList' => true, 'list_id' => $comments_list_id, 'label' => ListModel::find($select)->name, 'type' => 'select'));
+            array_push($json, (object)array('isCommentsList' => true, 'list_id' => $comments_list_id, 'label' => ListModel::find($comments_list_id)->name, 'type' => 'select'));
         }
 
         Template::create([

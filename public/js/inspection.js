@@ -35,6 +35,16 @@ function generateInputField(inputField, id) {
         select.className = 'form-select';
         select.id = id;
         select.name = id;
+
+        //if is comment field
+        if (inputField.isCommentsList === true) {
+            select.setAttribute('is-comment', 'true');
+            select.addEventListener("change", function () {
+                console.log(document.getElementById((inputFields.length).toString()));
+                document.getElementById((inputFields.length).toString()).value = select.value.toString();
+            });
+        }
+
         for (const [key, value] of Object.entries(dynamicLists[inputField.list_id].values)) {
             const option = document.createElement('option');
             option.value = value[0].value;
@@ -110,13 +120,17 @@ function renderData() {
     }
 }
 
-
+//submit form items
 document.getElementById("form").addEventListener("submit", function (event) {
     event.preventDefault();
     let object = {};
     for (const [key, value] of Object.entries(tempInputFields)) {
         const input = document.getElementById(key);
-        object[input.id] = {type: value.type, value: input.value};
+
+        if (!input.getAttribute('is-comment')) {
+            object[input.id] = {type: value.type, value: input.value};
+        }
+
         if (value.type === 'checkbox') {
             object[input.id] = {type: value.type, value: input.checked};
             input.checked = false;
