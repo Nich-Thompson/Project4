@@ -88,7 +88,7 @@
                                 @endphp
                                 @foreach($lists as $list)
                                     <a class="dropdown-item"
-                                       href="{{ route('getListEdit', $list->id) }}">{{ $list->name }} {{$list->sublistOf()->first() == null ? '(Hoofdlijst)':''}}</a>
+                                       href="{{ route('getListEdit', $list->id) }}">{{ $list->name }} {{$list->sublist()->first() == null ? '(Hoofdlijst)':''}}</a>
                                 @endforeach
                             </div>
                         </ul>

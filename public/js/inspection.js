@@ -116,9 +116,9 @@ document.getElementById("form").addEventListener("submit", function (event) {
     let object = {};
     for (const [key, value] of Object.entries(tempInputFields)) {
         const input = document.getElementById(key);
-        object[value.label] = {type: value.type, value:input.value};
+        object[input.id] = {type: value.type, value:input.value};
         if(value.type === 'checkbox'){
-            object[value.label] = {type: value.type, value:input.checked};
+            object[input.id] = {type: value.type, value:input.checked};
             input.checked = false;
         }else if(value.type !== 'select'){
             input.value = '';
@@ -126,7 +126,8 @@ document.getElementById("form").addEventListener("submit", function (event) {
             input.childNodes[0].selected = true;
         }
     }
-    object['approved'] = {type: 'checkbox', value:document.getElementById('approved').checked};
+    const input = document.getElementById('approved');
+    object[input.id] = {type: 'checkbox', value:input.checked};
     document.getElementById('approved').checked = true;
 
     saveNewObject(object);
