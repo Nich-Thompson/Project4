@@ -15,7 +15,7 @@
                         <div class="col-md-6">
                             <a href="{{URL::to('/inspection/'.$customer_id.'/'.$location->id.'/'.$template->id.'/create')}}"
                                class="row w-75 h-10em vertical-center nounderline mb-3 rounded"
-                               style="background-color: {{$template->inspection_type()->color}}; border-color: {{$template->inspection_type()->color}}; color: #fff;">
+                               style="border: 15px solid {{$template->inspection_type()->color}}; color: #000000;">
                                 <h2 class="fw-bold"><i
                                         class="fa fa-{{ $template->inspection_type()->icon()->name }}"></i>
                                     {{$template->inspection_type()->name}} ></h2></a>

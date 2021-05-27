@@ -94,7 +94,7 @@ function addList(is_comments_list) {
 
     let select = document.createElement('select');
     select.className = 'form-select';
-    
+
     if (is_comments_list === true) {
         select.name = 'comments_list_id';
     } else {
