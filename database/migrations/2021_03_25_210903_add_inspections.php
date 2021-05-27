@@ -22,6 +22,7 @@ class AddInspections extends Migration
                 ->on('users');
             $table->integer('customer_id');
             $table->integer('location_id');
+            $table->integer('template_id');
             $table->text('json')->nullable();
             $table->integer("locked")->nullable();
             $table->timestamps();

@@ -50,7 +50,7 @@ Route::prefix('customer')->group(function () {
     });
 });
 
-//Event routes
+//Inspector routes
 Route::prefix('inspector')->group(function () {
     Route::get('/', 'InspectorController@index')->middleware(['role:admin'])->name('getInspectorIndex');
     Route::get('/create', 'InspectorController@create')->middleware(['role:admin'])->name('getInspectorCreate');
@@ -66,9 +66,10 @@ Route::prefix('inspector')->group(function () {
 //Inspection routes
 Route::prefix('inspection')->group(function () {
     Route::get('/{id}', 'InspectionController@index')->middleware(['role:admin|inspecteur'])->name('getInspectionIndex');
-    Route::get('/inspect/{id}/{type}', 'InspectionController@inspect')->middleware(['role:admin|inspecteur'])->name('getInspection');
+    Route::get('/{customer_id}/{location_id}/choose_template', 'InspectionController@choose_template')->middleware(['role:inspecteur'])->name('getChooseTemplate');
+    Route::get('/inspect/{id}/{template_id}/{type}', 'InspectionController@inspect')->middleware(['role:admin|inspecteur'])->name('getInspection');
+    Route::get('/{customer_id}/{location_id}/{template_id}/create', 'InspectionController@create')->middleware(['role:admin|inspecteur'])->name('getInspectionCreate');
     Route::get('/exit/{inspection_id}/{customer_id}', 'InspectionController@exit')->middleware(['role:inspecteur'])->name('exitInspection');
-    Route::get('/{customer_id}/{location_id}/create', 'InspectionController@create')->middleware(['role:admin|inspecteur'])->name('getInspectionCreate');
     Route::post('/create', 'InspectionController@store')->middleware(['role:admin|inspecteur'])->name('postInspectionCreate');
     Route::get('/{id}/edit', 'InspectionController@edit')->middleware(['role:admin|inspecteur'])->name('getInspectionEdit');
     Route::post('/{id}/edit', 'InspectionController@update')->middleware(['role:admin|inspecteur'])->name('postInspectionEdit');
@@ -97,4 +98,13 @@ Route::prefix('list')->group(function () {
     Route::post('/{id}/create-value', 'ListController@storeValue')->middleware(['role:admin'])->name('postListValueCreate');
     Route::get('/{list_id}/{id}/edit-value', 'ListController@editValue')->middleware(['role:admin'])->name('getListValueEdit');
     Route::post('/{list_id}/{id}/edit-value', 'ListController@updateValue')->middleware(['role:admin'])->name('postListValueEdit');
+});
+
+//Template routes
+Route::prefix('template')->group(function () {
+    Route::get('/', 'TemplateController@index')->middleware(['role:admin'])->name('getTemplateIndex');
+    Route::get('/create', 'TemplateController@create')->middleware(['role:admin'])->name('getTemplateCreate');
+    Route::post('/create', 'TemplateController@store')->middleware(['role:admin'])->name('postTemplateCreate');
+    Route::get('/{id}/edit', 'TemplateController@edit')->middleware(['role:admin'])->name('getTemplateEdit');
+    Route::post('/{id}/edit', 'TemplateController@update')->middleware(['role:admin'])->name('postTemplateEdit');
 });
