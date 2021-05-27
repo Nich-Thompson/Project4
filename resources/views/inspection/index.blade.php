@@ -27,16 +27,16 @@
                                 <h2 class="float-left h3">Geen inspecties gevonden</h2>
                             </div>
                         @else
-                            @foreach ($inspections as $inspectie)
+                            @foreach ($inspections as $inspection)
                                 <div id='customer-field'
                                      class="row m-2 p-3 rounded border border-light shadow-sm bg-white">
                                     <div class="d-flex flex-column w-50">
                                         <div id="name"
-                                             class="h5 m-0 fw-bold">{{ date('d-m-Y', strtotime($inspectie->created_at))}}</div>
+                                             class="h5 m-0 fw-bold">{{ date('d-m-Y', strtotime($inspection->created_at))}}</div>
                                     </div>
                                     <div class="d-flex flex-column justify-content-end w-50 text-right pb-2">
-                                        <a id="{{$inspectie->id}}"
-                                           href="{{/*URL::to('/inspection/'.$inspection->id.'/details')*/ route('getInspectionEdit', $inspectie->id) }}">
+                                        <a id="{{$inspection->id}}"
+                                           href="{{/*URL::to('/inspection/'.$inspection->id.'/details')*/ route('getInspectionEdit', $inspection->id) }}">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"
                                                  fill="currentColor"
                                                  class="bi bi-arrow-right-short" viewBox="0 0 16 16">

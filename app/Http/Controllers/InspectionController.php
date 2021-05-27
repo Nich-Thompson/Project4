@@ -112,6 +112,7 @@ class inspectionController extends Controller
                 "inspection" => $inspection,
                 "username" => $user->name,
                 'inspection_types' => $inspection_types,
+                'lists' => $lists,
                 'inspectors' => $inspectors
             ]);
         }
@@ -151,7 +152,7 @@ class inspectionController extends Controller
     public function edit($id)
     {
         $inspection = Inspection::find($id);
-        return redirect()->to("inspection/inspect/" . $inspection->id . "/" . "edit");
+        return redirect()->to("inspection/inspect/" . $inspection->id . "/" . $inspection->template_id . '/' . "edit");
     }
 
     public function update($id, UpdateCustomerRequest $request)
