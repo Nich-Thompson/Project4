@@ -25,11 +25,12 @@
                     <button class="btn btn-primary" id="addNumber" title="Voeg getal input toe">+Getal input</button>
                     <button class="btn btn-primary" id="addDateTime" title="Voeg datum input toe">+Datum input</button>
                     <button class="btn btn-primary" id="addCheckbox" title="Voeg checkbox toe">+Checkbox</button>
-                    <button class="btn btn-primary" id="addList" title="Voeg lijst toe">+Lijst</button>
+                    <button class="btn btn-primary" id="addList" title="Voeg lijst toe">+Dynamische Lijst</button>
+                    <button class="btn btn-primary" id="addRemarks" title="Voeg lijst toe">+Opmerkingen lijst</button>
 
                     <form action="{{ route('postTemplateCreate') }}" method="post">
                         @csrf
-                        <div class="row">
+                        <div class="row mt-4">
                             <div class="col-12">
                                 <div class="row" id="inputs">
                                     {{-- inputs are generated here --}}
