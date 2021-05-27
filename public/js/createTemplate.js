@@ -10,9 +10,9 @@ window.onload = function () {
     let checkbox = document.getElementById('addCheckbox')
     checkbox.addEventListener('click', addCheckbox)
     let list = document.getElementById('addList')
-    list.addEventListener('click', addList)
+    list.addEventListener('click', () => addList(false))
     let comments = document.getElementById('addComments')
-    comments.addEventListener('click', addComments)
+    comments.addEventListener('click', () => addList(true))
 }
 
 function addTextInput() {
@@ -82,7 +82,7 @@ function createInput(type) {
     hiddenInputs.appendChild(typeInput)
 }
 
-function addList(){
+function addList(is_comments_list) {
     let inputs = document.getElementById('inputs')
     let hiddenInputs = document.getElementById('hiddenInputs')
 
@@ -94,13 +94,20 @@ function addList(){
 
     let select = document.createElement('select');
     select.className = 'form-select';
-    select.name = 'selects[]';
+    
+    if (is_comments_list === true) {
+        select.name = 'comments_list_id';
+    } else {
+        select.name = 'selects[]';
+    }
+
     dynamicLists.forEach(dynamicList => {
         const option = document.createElement('option');
         option.value = dynamicList.id;
         option.textContent = dynamicList.is_main_list ? dynamicList.name + ' (Hoodflijst)' : dynamicList.name;
         select.append(option);
     });
+
     let deleteButton = document.createElement('button')
     deleteButton.className = 'float-right btn btn-danger'
     deleteButton.textContent = 'X'
@@ -111,36 +118,36 @@ function addList(){
     inputs.append(newDiv);
 }
 
-function addComments(){
-    const commentsList = document.getElementsByName('comments_list_id')
-    if(commentsList.length === 0){
-        let inputs = document.getElementById('inputs')
-        let hiddenInputs = document.getElementById('hiddenInputs')
-
-        let newDiv = document.createElement('div')
-        newDiv.className = 'form-group col-md-4'
-
-        const label = document.createElement('label');
-        label.textContent = 'Kies een opmerking lijst'
-
-        let select = document.createElement('select');
-        select.className = 'form-select';
-        select.name = 'comments_list_id';
-        dynamicLists.forEach(dynamicList => {
-            if(!dynamicList.is_main_list){
-                const option = document.createElement('option');
-                option.value = dynamicList.id;
-                option.textContent = dynamicList.name;
-                select.append(option);
-            }
-        });
-        let deleteButton = document.createElement('button')
-        deleteButton.className = 'float-right btn btn-danger'
-        deleteButton.textContent = 'X'
-        deleteButton.addEventListener('click', function () {
-            newDiv.parentNode.removeChild(newDiv)
-        })
-        newDiv.append(label,deleteButton, select);
-        inputs.append(newDiv);
-    }
-}
+// function addComments() {
+//     const commentsList = document.getElementsByName('comments_list_id')
+//     if (commentsList.length === 0) {
+//         let inputs = document.getElementById('inputs')
+//         let hiddenInputs = document.getElementById('hiddenInputs')
+//
+//         let newDiv = document.createElement('div')
+//         newDiv.className = 'form-group col-md-4'
+//
+//         const label = document.createElement('label');
+//         label.textContent = 'Kies een opmerking lijst'
+//
+//         let select = document.createElement('select');
+//         select.className = 'form-select';
+//         select.name = 'comments_list_id';
+//
+//         dynamicLists.forEach(dynamicList => {
+//             const option = document.createElement('option');
+//             option.value = dynamicList.id;
+//             option.textContent = dynamicList.name;
+//             select.append(option);
+//         });
+//
+//         let deleteButton = document.createElement('button')
+//         deleteButton.className = 'float-right btn btn-danger'
+//         deleteButton.textContent = 'X'
+//         deleteButton.addEventListener('click', function () {
+//             newDiv.parentNode.removeChild(newDiv)
+//         })
+//         newDiv.append(label, deleteButton, select);
+//         inputs.append(newDiv);
+//     }
+// }
