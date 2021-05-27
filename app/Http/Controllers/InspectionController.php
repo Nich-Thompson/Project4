@@ -36,10 +36,21 @@ class inspectionController extends Controller
             'customer_id' => $customer_id,
             'location_id' => $location_id,
             "json" => "",
-            "locked" => true,
+            "locked" => $user_id,
         ]);
 
-        return redirect()->to("inspection/inspect/" . $inspection->id . "/" . "create" );
+        return redirect()->to("inspection/inspect/" . $inspection->id . "/" . "create");
+    }
+
+    public function exit($inspection_id, $customer_id)
+    {
+        $inspection = Inspection::find($inspection_id);
+
+        $inspection->locked = null;
+
+        $inspection->save();
+
+        return redirect()->to("inspection/" . $customer_id);
     }
 
     public function inspect($id, $type)
@@ -48,25 +59,39 @@ class inspectionController extends Controller
         $inspection_types = InspectionType::all();
         $user = User::find($inspection->user_id);
 
-        if($type == "create"){
-            return view('inspection.create', [
-                "id" => $id,
-                "inspection" => $inspection,
-                "username" => $user->name,
-                'inspection_types' => $inspection_types,
-            ]);
-        }else if($type == "edit"){
-            $inspectors = User::whereHas(
-                'roles', function($q){
-                $q->where('name', 'inspecteur')->orWhere('name', 'admin');;
+        //check if inspection is not locked, or is locked by this inspector
+        if ($inspection->locked == null || $inspection->locked == Auth::id()) {
+            $inspection->locked = Auth::id();
+            $inspection->save();
+
+            if ($type == "create") {
+                return view('inspection.create', [
+                    "id" => $id,
+                    "inspection" => $inspection,
+                    "username" => $user->name,
+                    'inspection_types' => $inspection_types,
+                ]);
+            } else if ($type == "edit") {
+                $inspectors = User::whereHas(
+                    'roles', function ($q) {
+                    $q->where('name', 'inspecteur')->orWhere('name', 'admin');;
+                }
+                )->get();
+                return view('inspection.edit', [
+                    "id" => $id,
+                    "inspection" => $inspection,
+                    "username" => $user->name,
+                    'inspection_types' => $inspection_types,
+                    'inspectors' => $inspectors
+                ]);
             }
-            )->get();
-            return view('inspection.edit', [
+        } else {
+            $locked_user = User::find($inspection->locked);
+            return view('inspection.view', [
                 "id" => $id,
                 "inspection" => $inspection,
                 "username" => $user->name,
-                'inspection_types' => $inspection_types,
-                'inspectors' => $inspectors
+                "locked_username" => $locked_user->first_name,
             ]);
         }
     }
@@ -95,14 +120,12 @@ class inspectionController extends Controller
     public function edit($id)
     {
         $inspection = Inspection::find($id);
-        return redirect()->to("inspection/inspect/" . $inspection->id . "/" . "edit" );
+        return redirect()->to("inspection/inspect/" . $inspection->id . "/" . "edit");
     }
 
     public function update($id, UpdateCustomerRequest $request)
     {
         $inspection = Inspection::find($id);
-
-
 
         return response()->json(
             [
@@ -121,7 +144,7 @@ class inspectionController extends Controller
 
         $inspection->save();
 
-        return redirect()->to("inspection/inspect/" . $inspection->id . "/" . "edit" );
+        return redirect()->to("inspection/inspect/" . $inspection->id . "/" . "edit");
     }
 
 
