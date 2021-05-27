@@ -54,16 +54,24 @@ class TemplateController extends Controller
         $labels = $request->input('labels');
         $types = $request->input('types');
         $selects = $request->input('selects');
+        $comments_list_id = $request->input('comments_list_id');
 
         $json = [];
-        for($i = 0; $i < count($labels); $i++) {
-            $newItem = (object) array('label' => $labels[$i], 'type' => $types[$i]);
-            array_push($json, $newItem);
-        }
-        foreach ($selects as $select){
-            if(ListModel::find($select) !== null){
-                array_push($json, (object) array('list_id' => $select, 'label' => ListModel::find($select)->name, 'type' => 'select'));
+        if($labels){
+            for($i = 0; $i < count($labels); $i++) {
+                $newItem = (object) array('label' => $labels[$i], 'type' => $types[$i]);
+                array_push($json, $newItem);
             }
+        }
+        if($selects){
+            foreach ($selects as $select){
+                if(ListModel::find($select) !== null){
+                    array_push($json, (object) array('isCommentsList'=> false,'list_id' => $select, 'label' => ListModel::find($select)->name, 'type' => 'select'));
+                }
+            }
+        }
+        if($comments_list_id){
+            array_push($json, (object)array('isCommentsList'=> true,'list_id' => $comments_list_id, 'label' => ListModel::find($select)->name, 'type' => 'select'));
         }
 
         Template::create([

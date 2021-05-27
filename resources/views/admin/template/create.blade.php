@@ -26,7 +26,7 @@
                     <button class="btn btn-primary" id="addDateTime" title="Voeg datum input toe">+Datum input</button>
                     <button class="btn btn-primary" id="addCheckbox" title="Voeg checkbox toe">+Checkbox</button>
                     <button class="btn btn-primary" id="addList" title="Voeg lijst toe">+Dynamische Lijst</button>
-                    <button class="btn btn-primary" id="addRemarks" title="Voeg lijst toe">+Opmerkingen lijst</button>
+                    <button class="btn btn-primary" id="addComments" title="Voeg lijst toe">+Opmerkingen lijst</button>
 
                     <form action="{{ route('postTemplateCreate') }}" method="post">
                         @csrf

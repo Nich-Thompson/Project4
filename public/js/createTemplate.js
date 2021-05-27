@@ -11,6 +11,8 @@ window.onload = function () {
     checkbox.addEventListener('click', addCheckbox)
     let list = document.getElementById('addList')
     list.addEventListener('click', addList)
+    let comments = document.getElementById('addComments')
+    comments.addEventListener('click', addComments)
 }
 
 function addTextInput() {
@@ -27,29 +29,6 @@ function addDateTimeInput() {
 
 function addCheckbox() {
     createInput('checkbox')
-}
-
-function addList(){
-    let inputs = document.getElementById('inputs')
-    let hiddenInputs = document.getElementById('hiddenInputs')
-
-    let newDiv = document.createElement('div')
-    newDiv.className = 'form-group col-md-4'
-
-    const label = document.createElement('label');
-    label.textContent = 'Kies een lijst'
-
-    let select = document.createElement('select');
-    select.className = 'form-select';
-    select.name = 'selects[]';
-    dynamicLists.forEach(dynamicList => {
-        const option = document.createElement('option');
-        option.value = dynamicList.id;
-        option.textContent = dynamicList.is_main_list ? dynamicList.name + ' (Hoodflijst)' : dynamicList.name;
-        select.append(option);
-    });
-    newDiv.append(label, select);
-    inputs.append(newDiv);
 }
 
 function createInput(type) {
@@ -93,4 +72,55 @@ function createInput(type) {
     newDiv.appendChild(newInput)
 
     hiddenInputs.appendChild(typeInput)
+}
+
+function addList(){
+    let inputs = document.getElementById('inputs')
+    let hiddenInputs = document.getElementById('hiddenInputs')
+
+    let newDiv = document.createElement('div')
+    newDiv.className = 'form-group col-md-4'
+
+    const label = document.createElement('label');
+    label.textContent = 'Kies een dynamische lijst'
+
+    let select = document.createElement('select');
+    select.className = 'form-select';
+    select.name = 'selects[]';
+    dynamicLists.forEach(dynamicList => {
+        const option = document.createElement('option');
+        option.value = dynamicList.id;
+        option.textContent = dynamicList.is_main_list ? dynamicList.name + ' (Hoodflijst)' : dynamicList.name;
+        select.append(option);
+    });
+    newDiv.append(label, select);
+    inputs.append(newDiv);
+}
+
+function addComments(){
+    const commentsList = document.getElementsByName('commentsList')
+    if(commentsList.length === 0){
+        let inputs = document.getElementById('inputs')
+        let hiddenInputs = document.getElementById('hiddenInputs')
+
+        let newDiv = document.createElement('div')
+        newDiv.className = 'form-group col-md-4'
+
+        const label = document.createElement('label');
+        label.textContent = 'Kies een opmerking lijst'
+
+        let select = document.createElement('select');
+        select.className = 'form-select';
+        select.name = 'comments_list_id';
+        dynamicLists.forEach(dynamicList => {
+            if(!dynamicList.is_main_list){
+                const option = document.createElement('option');
+                option.value = dynamicList.id;
+                option.textContent = dynamicList.name;
+                select.append(option);
+            }
+        });
+        newDiv.append(label, select);
+        inputs.append(newDiv);
+    }
 }
