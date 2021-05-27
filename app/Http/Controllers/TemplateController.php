@@ -56,18 +56,22 @@ class TemplateController extends Controller
         $selects = $request->input('selects');
 
         $json = [];
-        for($i = 0; $i < count($labels); $i++) {
-            $newItem = (object) array('label' => $labels[$i], 'type' => $types[$i]);
-            array_push($json, $newItem);
+        if ($labels) {
+            for($i = 0; $i < count($labels); $i++) {
+                $newItem = (object) array('label' => $labels[$i], 'type' => $types[$i]);
+                array_push($json, $newItem);
+            }
         }
-        foreach ($selects as $select){
-            if(ListModel::find($select) !== null){
-                array_push($json, (object) array('list_id' => $select, 'label' => ListModel::find($select)->name, 'type' => 'select'));
+        if ($selects) {
+            foreach ($selects as $select){
+                if(ListModel::find($select) !== null){
+                    array_push($json, (object) array('list_id' => $select, 'label' => ListModel::find($select)->name, 'type' => 'select'));
+                }
             }
         }
 
         Template::create([
-            'inspection_type_id' => '1',
+            'inspection_type_id' => $request->type_id,
             'json' => json_encode($json)
         ]);
         return redirect(route('getTemplateIndex'));
