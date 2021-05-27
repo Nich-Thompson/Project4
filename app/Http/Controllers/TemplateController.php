@@ -99,19 +99,18 @@ class TemplateController extends Controller
      * @param  \App\Models\Template  $template
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
-    public function edit(Template $template, $version)
+    public function edit($id)
     {
         //
         $lists = ListModel::all();
-
+        $template = Template::find($id);
 
         foreach ($lists as $list){
             $list->is_main_list = $list->sublistOf()->first() == null;
         }
 
         return view('admin.template.edit', [
-            'version' => $version,
-            //'type' => ,
+            'template' => $template,
             'lists' => $lists
         ]);
     }

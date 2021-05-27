@@ -6,7 +6,7 @@
         <div class="row justify-content-center">
             <div class="card">
                 <div class="card-body">
-                    <h1 class="float-left h2">template versie {{ $version }}</h1>
+                    <h1 class="float-left h2">Template van {{ $template->created_at }}</h1>
                     <br><br>
                     <hr>
 
@@ -34,7 +34,7 @@
                             <div class="col-12 mb-2">
                                 <label>Inspectietype:</label>
                                 <select name="type_id" class="form-select col-md-4" title="Selecteer het inspectietype" disabled>
-{{--                                    <option value="{{ $type->id }}">{{ $type->name }}</option>--}}
+                                    <option value="{{ $template->inspection_type()->id }}">{{ $template->inspection_type()->name }}</option>
                                 </select>
                             </div>
                             <div class="col-12">
