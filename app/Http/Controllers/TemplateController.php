@@ -76,7 +76,7 @@ class TemplateController extends Controller
         }
 
         Template::create([
-            'inspection_type_id' => '1',
+            'inspection_type_id' => $request->input('type_id'),
             'json' => json_encode($json)
         ]);
         return redirect(route('getTemplateIndex'));
