@@ -31,29 +31,6 @@ function addCheckbox() {
     createInput('checkbox')
 }
 
-function addList(){
-    let inputs = document.getElementById('inputs')
-    let hiddenInputs = document.getElementById('hiddenInputs')
-
-    let newDiv = document.createElement('div')
-    newDiv.className = 'form-group col-md-4'
-
-    const label = document.createElement('label');
-    label.textContent = 'Kies een lijst'
-
-    let select = document.createElement('select');
-    select.className = 'form-select';
-    select.name = 'selects[]';
-    dynamicLists.forEach(dynamicList => {
-        const option = document.createElement('option');
-        option.value = dynamicList.id;
-        option.textContent = dynamicList.is_main_list ? dynamicList.name + ' (Hoodflijst)' : dynamicList.name;
-        select.append(option);
-    });
-    newDiv.append(label, select);
-    inputs.append(newDiv);
-}
-
 function createInput(type) {
     let inputs = document.getElementById('inputs')
     let hiddenInputs = document.getElementById('hiddenInputs')
@@ -124,12 +101,18 @@ function addList(){
         option.textContent = dynamicList.is_main_list ? dynamicList.name + ' (Hoodflijst)' : dynamicList.name;
         select.append(option);
     });
-    newDiv.append(label, select);
+    let deleteButton = document.createElement('button')
+    deleteButton.className = 'float-right btn btn-danger'
+    deleteButton.textContent = 'X'
+    deleteButton.addEventListener('click', function () {
+        newDiv.parentNode.removeChild(newDiv)
+    })
+    newDiv.append(label, deleteButton, select);
     inputs.append(newDiv);
 }
 
 function addComments(){
-    const commentsList = document.getElementsByName('commentsList')
+    const commentsList = document.getElementsByName('comments_list_id')
     if(commentsList.length === 0){
         let inputs = document.getElementById('inputs')
         let hiddenInputs = document.getElementById('hiddenInputs')
@@ -151,7 +134,13 @@ function addComments(){
                 select.append(option);
             }
         });
-        newDiv.append(label, select);
+        let deleteButton = document.createElement('button')
+        deleteButton.className = 'float-right btn btn-danger'
+        deleteButton.textContent = 'X'
+        deleteButton.addEventListener('click', function () {
+            newDiv.parentNode.removeChild(newDiv)
+        })
+        newDiv.append(label,deleteButton, select);
         inputs.append(newDiv);
     }
 }
