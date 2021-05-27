@@ -32,7 +32,7 @@ class CustomerFactory extends Factory
             'contact_name' => $this -> faker ->firstName . ' ' . $this -> faker ->lastName,
             'contact_phone_number' => $this -> faker->phoneNumber,
             'contact_email' => $this->faker->unique()->safeEmail,
-            'deleted_at' => Carbon::now()
+            'deleted_at' => null
         ];
     }
 }
