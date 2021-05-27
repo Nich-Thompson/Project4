@@ -5,6 +5,7 @@ let tempInputFields = {};
 const inputFieldBox = document.getElementById('input-field-box');
 
 window.addEventListener('load', (e) => {
+    console.log(dynamicLists);
     generateInputFields();
 });
 
@@ -34,12 +35,12 @@ function generateInputField(inputField, id){
         select.className = 'form-select';
         select.id = id;
         select.name = id;
-        dynamicLists[inputField.list_id].forEach(value => {
+        for (const [key, value] of Object.entries(dynamicLists[inputField.list_id].values)) {
             const option = document.createElement('option');
-            option.value = value.name;
-            option.textContent = value.name;
+            option.value = value[0].value;
+            option.textContent = value[0].value;
             select.append(option);
-        });
+        }
 
         tempInputFields[id] = {label: inputField.label, type: inputField.type};
 
