@@ -72,7 +72,7 @@ class TemplateController extends Controller
             }
         }
         if($comments_list_id){
-            array_push($json, (object)array('isCommentsList'=> true,'list_id' => $comments_list_id, 'label' => ListModel::find($select)->name, 'type' => 'select'));
+            array_push($json, (object)array('isCommentsList'=> true,'list_id' => $comments_list_id, 'label' => ListModel::find($comments_list_id)->name, 'type' => 'select'));
         }
 
         Template::create([
@@ -103,13 +103,16 @@ class TemplateController extends Controller
     {
         //
         $lists = ListModel::all();
-        $template = Template::find($id);
+        $dbtemplate = Template::find($id);
+        $template = json_decode($dbtemplate->json);
 
+        dd($template);
         foreach ($lists as $list){
             $list->is_main_list = $list->sublistOf()->first() == null;
         }
 
         return view('admin.template.edit', [
+            'dbtemplate' => $dbtemplate,
             'template' => $template,
             'lists' => $lists
         ]);
