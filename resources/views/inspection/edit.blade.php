@@ -14,7 +14,8 @@
                         <form action="{{ route('postInspectionEditInspector', $inspection->id) }}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <p>Aangemaakt op: {{date("d-m-Y",strtotime($inspection->created_at))}} door {{$username}}</p>
+                                <p>Aangemaakt op: {{date("d-m-Y",strtotime($inspection->created_at))}}
+                                    door {{$username}}</p>
                                 <select class="form-select w-25" name="inspector" id="inspector">
                                     @foreach($inspectors as $inspector)
                                         @if(old('inspector') && in_array($inspector->id,old('inspector')))
@@ -108,7 +109,8 @@
                                 </div>
                             </div>
                             <br>
-                            <a href="{{URL::to('/inspection/'.$inspection->customer_id.'')}}" class="btn"
+                            <a href="{{URL::to('/inspection/exit/'.$inspection->id.'/'.$inspection->customer_id)}}"
+                               class="btn"
                                title="Uitchecken">Uitchecken</a>
                             <button type="submit" class="float-right btn btn-primary text-light">Invoeren
                             </button>
