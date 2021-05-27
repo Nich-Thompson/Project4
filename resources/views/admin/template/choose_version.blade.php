@@ -35,7 +35,7 @@
                                     </div>
                                     <div class="d-flex flex-column justify-content-end w-50 text-right pb-2">
                                         <a id="{{$template->id}}"
-                                           href="{{ route('getTemplateEdit', $template->id) }}"
+                                           href="{{ route('getTemplateEdit', [$template->id, 'version' => $i]) }}"
                                            title="versies">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"
                                                  fill="currentColor"

@@ -99,9 +99,21 @@ class TemplateController extends Controller
      * @param  \App\Models\Template  $template
      * @return \Illuminate\Http\Response
      */
-    public function edit(Template $template)
+    public function edit(Template $template, $version)
     {
         //
+        $lists = ListModel::all();
+
+
+        foreach ($lists as $list){
+            $list->is_main_list = $list->sublistOf()->first() == null;
+        }
+
+        return view('admin.template.edit', [
+            'version' => $version,
+            //'type' => ,
+            'lists' => $lists
+        ]);
     }
 
     /**
