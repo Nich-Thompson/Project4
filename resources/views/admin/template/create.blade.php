@@ -31,6 +31,14 @@
                     <form action="{{ route('postTemplateCreate') }}" method="post">
                         @csrf
                         <div class="row mt-4">
+                            <div class="col-12 mb-2">
+                                <label>Selecteer het inspectietype:</label>
+                                <select name="type_id" class="form-select col-md-4" title="Selecteer het inspectietype">
+                                    @foreach($inspection_types as $type)
+                                        <option value="{{ $type->id }}">{{ $type->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                             <div class="col-12">
                                 <div class="row" id="inputs">
                                     {{-- inputs are generated here --}}
