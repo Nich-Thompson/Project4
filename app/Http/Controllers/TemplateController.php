@@ -16,7 +16,8 @@ class TemplateController extends Controller
      */
     public function index()
     {
-        $templates = Template::all();
+//        $templates = Template::all();
+        $templates = Template::query()->distinct()->get(['inspection_type_id']);
 
         return view('admin.template.index', [
             'templates' => $templates
@@ -124,5 +125,16 @@ class TemplateController extends Controller
     public function destroy(Template $template)
     {
         //
+    }
+
+    public function show_versions($type_id)
+    {
+        $inspection_type = InspectionType::find($type_id);
+        $templates = Template::query()->where('inspection_type_id', '=', $type_id)->orderBy('created_at', 'desc')->get();
+
+        return view('admin.template.choose_version', [
+            'type' => $inspection_type,
+            'templates' => $templates
+        ]);
     }
 }
