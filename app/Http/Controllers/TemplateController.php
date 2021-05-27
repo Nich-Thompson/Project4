@@ -130,7 +130,7 @@ class TemplateController extends Controller
     public function show_versions($type_id)
     {
         $inspection_type = InspectionType::find($type_id);
-        $templates = Template::query()->where('inspection_type_id', '=', $type_id)->get();
+        $templates = Template::query()->where('inspection_type_id', '=', $type_id)->orderBy('created_at', 'desc')->get();
 
         return view('admin.template.choose_version', [
             'type' => $inspection_type,

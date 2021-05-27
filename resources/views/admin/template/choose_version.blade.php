@@ -23,7 +23,7 @@
                                 <h2 class="float-left h3">Geen templates gevonden</h2>
                             </div>
                         @else
-                            <span hidden>{{ $i = 1 }}</span>
+                            <span hidden>{{ $i = count($templates) }}</span>
                             @foreach ($templates as $template)
                                 <div id='customer-field'
                                      class="row m-2 p-3 rounded border border-light shadow-sm bg-white">
@@ -46,7 +46,7 @@
                                         </a>
                                     </div>
                                 </div>
-                                <span hidden>{{ $i++ }}</span>
+                                <span hidden>{{ $i-- }}</span>
                             @endforeach
                         @endif
                     </div>
