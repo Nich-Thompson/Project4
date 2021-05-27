@@ -34,7 +34,7 @@ function showValues(){
             const formgroup = document.createElement('div');
             formgroup.className = 'form-group';
             const label = document.createElement('label');
-            label.textContent = sublistvalues[0][index].name;
+            label.textContent = getList(showValue.list_model_id).name;
             const value = document.createElement('input');
             value.className = 'form-control';
             value.id = 'notEnabled';
@@ -51,5 +51,15 @@ function showValues(){
                 });
             }
         }
+    }
+
+    function getList(id){
+        let list = null;
+        sublists.forEach(sublist=>{
+            if(sublist.id === id){
+                list = sublist;
+            }
+        });
+        return list;
     }
 }
