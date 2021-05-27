@@ -67,7 +67,7 @@
             </div>
         </div>
     </div>
-    <script>
+    <script defer>
         window.myArray = @json([$inspection, $template->json, $lists])
     </script>
 

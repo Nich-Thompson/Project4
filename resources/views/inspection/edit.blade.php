@@ -69,7 +69,11 @@
                             <tr>
                                 <th>Positie</th>
                                 @foreach($template->json as $input)
-                                    <th>{{$input -> label}}</th>
+                                    @if($input->type == "select" && $input->isCommentsList != true)
+                                        <th>{{$input -> label}}</th>
+                                    @elseif($input->type != "select")
+                                        <th>{{$input -> label}}</th>
+                                    @endif
                                 @endforeach
                                 <th>Opmerkingen</th>
                                 <th>Goedgekeurd</th>
@@ -85,7 +89,7 @@
             </div>
         </div>
     </div>
-    <script>
+    <script defer>
         window.myArray = @json([$inspection, $template->json, $lists])
     </script>
 

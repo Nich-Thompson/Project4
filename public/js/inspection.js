@@ -13,7 +13,7 @@ document.getElementById("offline").style.display = "none";
 
 function generateInputFields() {
     let id = 1;
-    inputFields.unshift({label: 'Pos.', type: 'number'});
+    inputFields.unshift({label: 'Pos.', type: 'text'});
     inputFields.push({label: 'Opmerkingen', type: 'text'});
     inputFields.forEach(inputField => {
         generateInputField(inputField, id)
@@ -40,7 +40,6 @@ function generateInputField(inputField, id) {
         if (inputField.isCommentsList === true) {
             select.setAttribute('is-comment', 'true');
             select.addEventListener("change", function () {
-                console.log(document.getElementById((inputFields.length).toString()));
                 document.getElementById((inputFields.length).toString()).value = select.value.toString();
             });
         }
@@ -108,7 +107,17 @@ function renderData() {
                     td.textContent = "Nee";
                     td.className = "text-danger font-weight-bold";
                 } else if (value.type === 'datetime-local') {
-                    td.textContent = new Date(value.value).toLocaleString();
+                    if (value.value) {
+                        td.textContent = new Date(value.value).toLocaleString([], {
+                            day: '2-digit',
+                            month: '2-digit',
+                            year: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        });
+                    } else {
+                        td.textContent = "";
+                    }
                 } else {
                     td.textContent = value.value;
                 }
