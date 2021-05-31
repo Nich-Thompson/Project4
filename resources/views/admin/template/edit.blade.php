@@ -32,9 +32,12 @@
                         @csrf
                         <div class="row mt-4">
                             <div class="col-12 mb-2">
-                                <label>Inspectietype:</label>
-                                <select name="type_id" class="form-select col-md-4" title="Selecteer het inspectietype" disabled>
+                                <label>Selecteer het inspectietype:</label>
+                                <select name="type_id" class="form-select col-md-4" title="Selecteer het inspectietype">
                                     <option value="{{ $dbtemplate->inspection_type()->id }}">{{ $dbtemplate->inspection_type()->name }}</option>
+                                    @foreach($inspection_types as $type)
+                                        <option value="{{ $type->id }}">{{ $type->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-12">

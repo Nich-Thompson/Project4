@@ -103,6 +103,9 @@ class TemplateController extends Controller
         $lists = ListModel::all();
         $dbtemplate = Template::find($id);
         $template = json_decode($dbtemplate->json);
+        $inspection_types = InspectionType::all();
+
+        $inspection_types->forget($dbtemplate->inspection_type()->id - 1);
 
         foreach ($lists as $list){
             $list->is_main_list = $list->sublistOf()->first() == null;
@@ -111,7 +114,8 @@ class TemplateController extends Controller
         return view('admin.template.edit', [
             'dbtemplate' => $dbtemplate,
             'template' => $template,
-            'lists' => $lists
+            'lists' => $lists,
+            'inspection_types' => $inspection_types,
         ]);
     }
 

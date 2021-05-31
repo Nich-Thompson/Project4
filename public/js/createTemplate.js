@@ -20,23 +20,23 @@ window.onload = function () {
     }
 }
 
-function addTextInput() {
-    createInput('text')
+function addTextInput(name = null) {
+    createInput('text', name)
 }
 
-function addNumberInput() {
-    createInput('number')
+function addNumberInput(name = null) {
+    createInput('number', name)
 }
 
-function addDateTimeInput() {
-    createInput('datetime-local')
+function addDateTimeInput(name = null) {
+    createInput('datetime-local', name)
 }
 
-function addCheckbox() {
-    createInput('checkbox')
+function addCheckbox(name = null) {
+    createInput('checkbox', name)
 }
 
-function createInput(type) {
+function createInput(type, name = null) {
     let inputs = document.getElementById('inputs')
     let hiddenInputs = document.getElementById('hiddenInputs')
 
@@ -71,6 +71,10 @@ function createInput(type) {
     newInput.name = 'labels[]'
     newInput.className = 'form-control'
     newInput.placeholder = 'Labelnaam'
+    // Need to do this check otherwise because method receives mouseEvents as name on new inputs
+    if (typeof name === "string") {
+        newInput.value = name
+    }
 
     let deleteButton = document.createElement('button')
     deleteButton.className = 'float-right btn btn-danger'
@@ -87,7 +91,7 @@ function createInput(type) {
     hiddenInputs.appendChild(typeInput)
 }
 
-function addList(){
+function addList(name = null) {
     let inputs = document.getElementById('inputs')
     let hiddenInputs = document.getElementById('hiddenInputs')
 
@@ -116,9 +120,9 @@ function addList(){
     inputs.append(newDiv);
 }
 
-function addComments(){
+function addComments() {
     const commentsList = document.getElementsByName('comments_list_id')
-    if(commentsList.length === 0){
+    if (commentsList.length === 0) {
         let inputs = document.getElementById('inputs')
         let hiddenInputs = document.getElementById('hiddenInputs')
 
@@ -132,7 +136,7 @@ function addComments(){
         select.className = 'form-select';
         select.name = 'comments_list_id';
         dynamicLists.forEach(dynamicList => {
-            if(!dynamicList.is_main_list){
+            if (!dynamicList.is_main_list) {
                 const option = document.createElement('option');
                 option.value = dynamicList.id;
                 option.textContent = dynamicList.name;
@@ -145,13 +149,29 @@ function addComments(){
         deleteButton.addEventListener('click', function () {
             newDiv.parentNode.removeChild(newDiv)
         })
-        newDiv.append(label,deleteButton, select);
+        newDiv.append(label, deleteButton, select);
         inputs.append(newDiv);
     }
 }
 
 function loadOldInputs() {
     oldTemplate.forEach(field => {
-        addTextInput()
+        switch (field.type) {
+            case 'text':
+                addTextInput(field.label)
+                break;
+            case 'number':
+                addNumberInput(field.label)
+                break;
+            case 'datetime-local':
+                addDateTimeInput(field.label)
+                break;
+            case 'checkbox':
+                addCheckbox(field.label)
+                break;
+            case 'select':
+                //
+                break;
+        }
     })
 }
