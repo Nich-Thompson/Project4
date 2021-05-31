@@ -91,7 +91,7 @@ function createInput(type, name = null) {
     hiddenInputs.appendChild(typeInput)
 }
 
-function addList(name = null) {
+function addList(listId = null) {
     let inputs = document.getElementById('inputs')
     let hiddenInputs = document.getElementById('hiddenInputs')
 
@@ -109,7 +109,12 @@ function addList(name = null) {
         option.value = dynamicList.id;
         option.textContent = dynamicList.is_main_list ? dynamicList.name + ' (Hoodflijst)' : dynamicList.name;
         select.append(option);
-    });
+    })
+    // Need to do this check otherwise because method receives mouseEvents as listId on new inputs
+    if (typeof listId === "string") {
+        select.value = listId
+    }
+
     let deleteButton = document.createElement('button')
     deleteButton.className = 'float-right btn btn-danger'
     deleteButton.textContent = 'X'
@@ -120,7 +125,7 @@ function addList(name = null) {
     inputs.append(newDiv);
 }
 
-function addComments() {
+function addComments(listId = null) {
     const commentsList = document.getElementsByName('comments_list_id')
     if (commentsList.length === 0) {
         let inputs = document.getElementById('inputs')
@@ -143,6 +148,11 @@ function addComments() {
                 select.append(option);
             }
         });
+        // Need to do this check otherwise because method receives mouseEvents as listId on new inputs
+        if (typeof listId === "string") {
+            select.value = listId
+        }
+
         let deleteButton = document.createElement('button')
         deleteButton.className = 'float-right btn btn-danger'
         deleteButton.textContent = 'X'
@@ -170,7 +180,12 @@ function loadOldInputs() {
                 addCheckbox(field.label)
                 break;
             case 'select':
-                //
+                if (!field.isCommentsList) {
+                    addList(field.list_id)
+                }
+                else {
+                    addComments(field.list_id)
+                }
                 break;
         }
     })

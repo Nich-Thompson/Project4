@@ -110,7 +110,7 @@ class TemplateController extends Controller
         foreach ($lists as $list){
             $list->is_main_list = $list->sublistOf()->first() == null;
         }
-//        dd($lists);
+
         return view('admin.template.edit', [
             'dbtemplate' => $dbtemplate,
             'template' => $template,

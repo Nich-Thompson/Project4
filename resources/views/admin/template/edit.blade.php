@@ -47,8 +47,8 @@
                                 <div id="hiddenInputs"></div>
                             </div>
                         </div>
-                        <a href="{{URL::to('/template')}}" class="btn btn-default" title="Terug naar vorige pagina">Terug</a>
-                        <button type="submit" class="float-right btn btn-primary text-light" title="Aanmaken">Aanmaken</button>
+                        <a href="{{ route('getTemplateVersions', $dbtemplate->inspection_type()->id) }}" class="btn btn-default" title="Terug naar vorige pagina">Terug</a>
+                        <button type="submit" class="float-right btn btn-primary text-light" title="Aanmaken">Maak kopie aan</button>
                     </form>
                 </div>
             </div>
