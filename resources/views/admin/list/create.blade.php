@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="card">
                 <div class="card-body">
-                    <span class="float-left h2">Nieuwe lijst maken</span>
+                    <h1 class="float-left h2">Nieuwe lijst maken</h1>
                     <p class="mb-5"></p>
                     <hr/>
 
@@ -26,13 +26,16 @@
                             <div class="col">
                                 <div class="form-group ml-3">
                                     <label class="ml-1">Lijstnaam*</label>
-                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value = "{{old('name')}}" placeholder="Vul de lijstnaam in">
+                                    <input type="text" name="name"
+                                           class="form-control @error('name') is-invalid @enderror"
+                                           value="{{old('name')}}" placeholder="Vul de lijstnaam in">
                                 </div>
                                 <div class="form-group ml-3">
                                     <label class="ml-1">Sublijst van</label>
-                                    <select name="list_model_id" class="col-xs-12 col-sm-12 col-md-12 form-control">
+                                    <select name="list_model_id" class="form-select col-xs-12 col-sm-12 col-md-12"
+                                            title="Sublijst van">
                                         <option value="">
-                                            Geen
+                                            Hoofdlijst aanmaken
                                         </option>
                                         @foreach($lists as $list)
                                             <option value="{{ $list->id }}">
@@ -46,7 +49,8 @@
                         <br>
                         <p class="ml-3 mt-3">Velden met een ster (*) zijn verplicht</p>
                         <br>
-                        <a href="{{URL::to('/list')}}" class="btn btn-default">Terug</a>
+                        <a href="{{URL::to('/list')}}" class="btn btn-default"
+                           title="Terug naar vorige pagina">Terug</a>
                         <button type="submit" class="float-right btn btn-primary text-light">Aanmaken</button>
                     </form>
                 </div>

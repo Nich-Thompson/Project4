@@ -7,7 +7,8 @@
         <B>Weet je zeker dat je alle gearchiveerde locaties wilt verwijderen</B>?
         <div class="row mt-3">
             <div class="col-xs-12 col-sm-12 col-md-2 text-left">
-                <a href="{{ route('getCustomerEdit', $customer_id)}}" class="btn btn-default">Terug</a>
+                <a href="{{ route('getCustomerEdit', $customer_id)}}" class="btn btn-default"
+                   title="Terug naar vorige pagina">Terug</a>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-10 text-left">
                 <form action="{{ route('postDeleteArchiveLocation', $customer_id) }}" method="post">
