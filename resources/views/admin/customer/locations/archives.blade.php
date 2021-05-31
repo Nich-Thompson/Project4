@@ -31,11 +31,23 @@
                                         <div id="name"
                                              class="h5 m-0 fw-bold">{{ $location->name }}</div>
                                         <p class="m-0">
-                                            @if($location->street != null or $location->number != null or $location->building_number != null)
-                                                {{ $location->street }} {{ $location->number }} {{ $location->building_number }},
+                                            @if($location->street != null and $location->postal_code != null and $location->building_number == null and $location->number == null)
+                                                {{ $location->street }},
+                                                @else
+                                                {{ $location->street }}
                                             @endif
-                                            @if($location->postal_code != null)
-                                             {{ $location->postal_code }}
+                                            @if($location->number != null and $location->postal_code != null and $location->building_number == null)
+                                                {{ $location->number }},
+                                                @else
+                                                    {{ $location->number }}
+                                            @endif
+                                                @if($location->building_number != null and $location->postal_code != null)
+                                                    {{ $location->building_number }},
+                                                    @else
+                                                    {{ $location->building_number }}
+                                                @endif
+                                                @if($location->postal_code != null)
+                                                    {{ $location->postal_code }}
                                                 @endif
                                             @if($location->city != null)
                                                 te {{ $location->city }}
