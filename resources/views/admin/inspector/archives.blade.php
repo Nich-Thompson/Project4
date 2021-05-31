@@ -11,6 +11,8 @@
             <div class="bg-white overflow-hidden shadow-sm">
                 <div class="p-4 bg-white border-b border-gray-200">
                     <h1 class="float-left h2">Archief inspecteurs overzicht</h1>
+                    <a href="{{ route('getInspectorIndex')}}" class="float-right btn btn-default" title="Terug naar vorige pagina">Terug</a>
+
                     <p class="mb-5"></p>
                     <hr/>
                     <div id="customers">
