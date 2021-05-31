@@ -108,7 +108,7 @@ class TemplateController extends Controller
         $inspection_types->forget($dbtemplate->inspection_type()->id - 1);
 
         foreach ($lists as $list){
-            $list->is_main_list = $list->sublistOf()->first() == null;
+            $list->is_main_list = $list->sublist()->first() == null;
         }
 
         return view('admin.template.edit', [
