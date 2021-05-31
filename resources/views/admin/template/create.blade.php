@@ -55,7 +55,7 @@
     </div>
 @endsection
 <script>
-    window.myArray= @json($lists)
+    window.myArray= @json([$lists])
 </script>
 
 

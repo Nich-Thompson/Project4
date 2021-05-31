@@ -1,4 +1,5 @@
-let dynamicLists = window.myArray;
+let dynamicLists = window.myArray[0];
+let oldTemplate = window.myArray[1];
 
 window.onload = function () {
     let text = document.getElementById('addText')
@@ -13,6 +14,10 @@ window.onload = function () {
     list.addEventListener('click', addList)
     let comments = document.getElementById('addComments')
     comments.addEventListener('click', addComments)
+
+    if (oldTemplate) {
+        loadOldInputs()
+    }
 }
 
 function addTextInput() {
@@ -143,4 +148,10 @@ function addComments(){
         newDiv.append(label,deleteButton, select);
         inputs.append(newDiv);
     }
+}
+
+function loadOldInputs() {
+    oldTemplate.forEach(field => {
+        addTextInput()
+    })
 }

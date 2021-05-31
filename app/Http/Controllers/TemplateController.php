@@ -16,7 +16,6 @@ class TemplateController extends Controller
      */
     public function index()
     {
-//        $templates = Template::all();
         $templates = Template::query()->distinct()->get(['inspection_type_id']);
 
         return view('admin.template.index', [
@@ -101,16 +100,14 @@ class TemplateController extends Controller
      */
     public function edit($id)
     {
-        //
         $lists = ListModel::all();
         $dbtemplate = Template::find($id);
         $template = json_decode($dbtemplate->json);
 
-        dd($template);
         foreach ($lists as $list){
             $list->is_main_list = $list->sublistOf()->first() == null;
         }
-
+//        dd($lists);
         return view('admin.template.edit', [
             'dbtemplate' => $dbtemplate,
             'template' => $template,
