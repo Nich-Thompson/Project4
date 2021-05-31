@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreTemplateRequest;
 use App\Models\InspectionType;
 use App\Models\ListModel;
 use App\Models\Template;
@@ -49,7 +50,7 @@ class TemplateController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store(StoreTemplateRequest $request)
     {
         $labels = $request->input('labels');
         $types = $request->input('types');
