@@ -185,7 +185,7 @@ class inspectionController extends Controller
 
         $inspection->save();
 
-        return redirect()->to("inspection/inspect/" . $inspection->id . "/" . "edit");
+        return redirect()->back();
     }
 
 

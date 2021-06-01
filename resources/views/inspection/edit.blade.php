@@ -11,7 +11,9 @@
                         <br>
                         <br>
 
-                        <form action="{{ route('postInspectionEditInspector', $inspection->id) }}" method="POST">
+                        <form
+                            action="{{ route('postInspectionEditInspector', $inspection->id) }}"
+                            method="POST">
                             @csrf
                             <div class="form-group">
                                 <p>Aangemaakt op: {{date("d-m-Y",strtotime($inspection->created_at))}}
