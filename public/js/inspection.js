@@ -3,8 +3,10 @@ let inputFields = window.myArray[1];
 let dynamicLists = window.myArray[2];
 let tempInputFields = {};
 const inputFieldBox = document.getElementById('input-field-box');
+let id = 0;
 
 window.addEventListener('load', (e) => {
+    console.log(inputFields)
     console.log(dynamicLists);
     generateInputFields();
 });
@@ -12,12 +14,11 @@ window.addEventListener('load', (e) => {
 document.getElementById("offline").style.display = "none";
 
 function generateInputFields() {
-    let id = 1;
     inputFields.unshift({label: 'Pos.', type: 'text'});
     inputFields.push({label: 'Opmerkingen', type: 'text'});
     inputFields.forEach(inputField => {
-        generateInputField(inputField, id)
         id++;
+        generateInputField(inputField, id)
     });
     setJson();
 }
@@ -30,30 +31,31 @@ function generateInputField(inputField, id) {
     label.className = 'mb-0';
     label.textContent = inputField.label;
 
+    let itemsToAppend = [];
+
     if (inputField.type === 'select') {
-        let select = document.createElement('select');
-        select.className = 'form-select';
-        select.id = id;
-        select.name = id;
+        let select = createSelect(inputField, formGroup, label, id);
 
-        //if is comment field
-        if (inputField.isCommentsList === true) {
-            select.setAttribute('is-comment', 'true');
-            select.addEventListener("change", function () {
-                document.getElementById((inputFields.length).toString()).value = select.value.toString();
-            });
+        if (dynamicLists[inputField.list_id].values[0].length > 1) {
+            let length = dynamicLists[inputField.list_id].values[0].length;
+
+            for (let i = 1; i < length; i++) {
+                id++;
+
+                let list = dynamicLists[dynamicLists[inputField.list_id].values[0][i].id];
+                itemsToAppend.push(createListSelect(list, id));
+            }
+
+            select.addEventListener("change", (e) => {
+                let items = filterDynamicList(dynamicLists[inputField.list_id], select.value);
+
+                for (let x = 0; x < itemsToAppend.length; x++) {
+                    itemsToAppend[x].childNodes[1].value = items[x + 1].value;
+                    console.log(items[x + 1].value);
+                }
+            })
+
         }
-
-        for (const [key, value] of Object.entries(dynamicLists[inputField.list_id].values)) {
-            const option = document.createElement('option');
-            option.value = value[0].value;
-            option.textContent = value[0].value;
-            select.append(option);
-        }
-
-        tempInputFields[id] = {label: inputField.label, type: inputField.type};
-
-        formGroup.append(label, select);
     } else {
         const input = document.createElement('input');
         if (inputField.type === 'checkbox') {
@@ -71,6 +73,74 @@ function generateInputField(inputField, id) {
     }
 
     inputFieldBox.append(formGroup);
+
+    itemsToAppend.forEach(i => {
+        inputFieldBox.append(i);
+    })
+}
+
+function createSelect(inputField, formGroup, label, id) {
+    let select = document.createElement('select');
+    select.className = 'form-select';
+    select.id = id;
+    select.name = id;
+
+    //if is comment field
+    if (inputField.isCommentsList === true) {
+        select.setAttribute('is-comment', 'true');
+        select.addEventListener("change", function () {
+            document.getElementById((inputFields.length).toString()).value = select.value.toString();
+        });
+    }
+
+    for (const [key, value] of Object.entries(dynamicLists[inputField.list_id].values)) {
+        const option = document.createElement('option');
+        option.value = value[0].value;
+        option.textContent = value[0].value;
+        select.append(option);
+    }
+
+    tempInputFields[id] = {label: inputField.label, type: inputField.type};
+
+    formGroup.append(label, select);
+
+    return select;
+}
+
+function createListSelect(list, id) {
+    const formGroup = document.createElement('div');
+    formGroup.className = 'form-group pl-3 col-md-4';
+
+    const label = document.createElement('label');
+    label.className = 'mb-0';
+    label.textContent = list.name;
+
+    let select = document.createElement('select');
+    select.className = 'form-select';
+    select.id = id;
+    select.name = id;
+    select.disabled = true;
+
+    for (const [key, value] of Object.entries(list.values)) {
+        const option = document.createElement('option');
+        option.value = value[0].value;
+        option.textContent = value[0].value;
+        select.append(option);
+    }
+
+    tempInputFields[id] = {label: list.name, type: "select"};
+
+    formGroup.append(label, select);
+
+    return formGroup;
+}
+
+function filterDynamicList(list, selected_value) {
+    for (let x = 0; x < list.values.length; x++) {
+        if (list.values[x][0].value === selected_value) {
+            return list.values[x];
+        }
+    }
 }
 
 function setJson() {

@@ -93,7 +93,7 @@ class inspectionController extends Controller
                     $valueLink = [(object)['name' => $value->model()->name, 'value' => $value->name]];
                     while ($value->linked_value() != null) {
                         $value = $value->linked_value();
-                        array_push($valueLink, (object)['name' => $value->model()->name, 'value' => $value->name]);
+                        array_push($valueLink, (object)['id' => $value->model()->id, 'value' => $value->name]);
                     }
                     array_push($lists[$list->id]->values, $valueLink);
                 }
