@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCustomerRequest;
 use App\Http\Requests\UpdateCustomerRequest;
-use App\Models\customer;
+use App\Models\Customer;
 use App\Models\Location;
 use Illuminate\Http\Request;
 
-class customerController extends Controller
+class CustomerController extends Controller
 {
     public function index() {
-        $customers = customer::orderBy('name', 'ASC')->get();
+        $customers = Customer::orderBy('name', 'ASC')->get();
         return view('admin.customer.index', [
             'customers' => $customers,
         ]);
@@ -34,7 +34,7 @@ class customerController extends Controller
         $contact_phone_number = $phoneNumbersOnly;
         $contact_email = $request->input('contact_email');
 
-        customer::create([
+        Customer::create([
             'name' => $name,
             'city' => $city,
             'street' => $street,
@@ -49,7 +49,7 @@ class customerController extends Controller
     }
 
     public function edit($id) {
-        $customer = customer::find($id);
+        $customer = Customer::find($id);
         $locations = Location::query()->where('customer_id', '=', $id)->get();
         if($customer === null) {
             abort(404, 'customer with that ID does not exist');
@@ -62,7 +62,7 @@ class customerController extends Controller
     }
 
     public function update($id, UpdateCustomerRequest $request) {
-        $customer = customer::find($id);
+        $customer = Customer::find($id);
 
         $customer->name = $request->input('name');
         $customer->city = $request->input('city');
@@ -82,7 +82,7 @@ class customerController extends Controller
     }
 
     public function remove($id) {
-        $customer = customer::find($id);
+        $customer = Customer::find($id);
         if($customer === null) {
             abort(404, 'customer with that ID does not exist');
         }
@@ -93,26 +93,26 @@ class customerController extends Controller
     }
 
     public function archive($id) {
-        $customer = customer::find($id);
+        $customer = Customer::find($id);
         $customer->delete();
         return redirect(route('getCustomerIndex'));
     }
 
     public function archives() {
-        $customers = customer::onlyTrashed()->orderBy('deleted_at', 'ASC')->get();
+        $customers = Customer::onlyTrashed()->orderBy('deleted_at', 'ASC')->get();
         return view('admin.customer.archives', [
             'customers' => $customers,
         ]);
     }
 
     public function restore($id) {
-        $customer = customer::withTrashed()->find($id);
+        $customer = Customer::withTrashed()->find($id);
         $customer->restore();
         return redirect(route('getCustomerArchives'));
     }
 
     public function deletes(){
-        $customers = customer::onlyTrashed()->orderBy('deleted_at', 'ASC')->get();
+        $customers = Customer::onlyTrashed()->orderBy('deleted_at', 'ASC')->get();
         foreach($customers as $customer){
             $customer->forceDelete();
         }
