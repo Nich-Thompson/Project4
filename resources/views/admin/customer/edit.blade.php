@@ -147,7 +147,8 @@
                     @endif
                     <h1 class="d-inline-block">Klantnaam: {{$customer->name}}</h1>
                     <a href="{{URL::to('/inspection/'.$customer->id.'')}}"
-                       class="btn border border-1 d-inline-block float-right" title="Ga naar inspecties">Ga naar
+                       class="btn border border-1 d-inline-block float-right" title="Ga naar de aangemaakte inspecties">Ga
+                        naar
                         inspecties</a>
                     <hr>
                     <div class="py-12">
@@ -165,9 +166,9 @@
                                         </svg>
                                         Toevoegen</a>
                                     @if(Auth::user()->hasRole('admin'))
-                                    <a href="{{URL::to('/customer/'.$id.'/location/archives')}}"
-                                       class="float-right btn border mr-2" title="Locatie archief">
-                                        Archief</a>
+                                        <a href="{{URL::to('/customer/'.$id.'/location/archives')}}"
+                                           class="float-right btn border mr-2" title="Locatie archief">
+                                            Archief</a>
                                     @endif
                                     <p class="mb-5"></p>
                                     <hr/>
@@ -208,27 +209,36 @@
                                                         </p>
                                                     </div>
                                                     <div class="w-50 text-right pb-2">
-                                                        <a id="{{$location->id}}"
-                                                           href="{{route('getLocationEdit', [$customer->id, $location->id]) }}"
-                                                           class="btn btn-primary">
-                                                            Bewerken
-                                                        </a>
+
                                                         @if(Auth::user()->hasRole('inspecteur'))
-                                                        <a id="{{$location->id}}"
-                                                           href="{{URL::to('/inspection/'.$customer->id.'/'.$location->id.'/choose_template')}}"
-                                                           class="btn border float-right ml-2">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                 height="16" fill="currentColor" class="bi bi-plus"
-                                                                 viewBox="0 0 16 16">
-                                                                <path
-                                                                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                                                            </svg>
-                                                            Maak inspectie aan</a>
+                                                            <a id="{{$location->id}}"
+                                                               href="{{route('getLocationEdit', [$customer->id, $location->id]) }}"
+                                                               class="btn btn-outline-secondary"
+                                                               title="Locatie bekijken">
+                                                                Bekijken
+                                                            </a>
+                                                            <a id="{{$location->id}}"
+                                                               href="{{URL::to('/inspection/'.$customer->id.'/'.$location->id.'/choose_template')}}"
+                                                               class="btn btn-primary border float-right ml-2">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                     height="16" fill="currentColor" class="bi bi-plus"
+                                                                     viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                                                </svg>
+                                                                Maak inspectie aan</a>
                                                         @endif
                                                         @if(Auth::user()->hasRole('admin'))
-                                                        <a href="{{ route('getLocationArchive', [$customer->id,$location->id]) }}"
-                                                           id="archiveButton"
-                                                           class="btn btn-primary float-right ml-2" title="Archiveren">Archiveren</a>
+                                                            <a href="{{ route('getLocationArchive', [$customer->id,$location->id]) }}"
+                                                               id="archiveButton"
+                                                               class="btn btn-outline-secondary ml-2"
+                                                               title="Klant archiveren">Archiveren</a>
+                                                            <a id="{{$location->id}}"
+                                                               href="{{route('getLocationEdit', [$customer->id, $location->id]) }}"
+                                                               class="btn btn-primary float-right ml-2"
+                                                               title="Locatie bekijken">
+                                                                Bekijken
+                                                            </a>
                                                         @endif
                                                     </div>
                                                 </div>
