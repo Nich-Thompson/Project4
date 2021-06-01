@@ -18,10 +18,11 @@ use Illuminate\Support\Facades\Log;
 
 class inspectionController extends Controller
 {
-    public function index($Customer_id)
+    public function index($Customer_id, $Location_id)
     {
         $customer_id = $Customer_id;
-        $inspections = Inspection::query()->where('customer_id', '=', $customer_id)->get();
+        $location_id = $Location_id;
+        $inspections = Inspection::query()->where('customer_id', '=', $customer_id)->where('location_id', '=', $location_id)->get();
         $inspectionTypes = InspectionType::all();
         return view('inspection.index', [
             'inspections' => $inspections,
