@@ -107,7 +107,7 @@ function addList(listId = null) {
     dynamicLists.forEach(dynamicList => {
         const option = document.createElement('option');
         option.value = dynamicList.id;
-        option.textContent = dynamicList.is_main_list ? dynamicList.name + ' (Hoodflijst)' : dynamicList.name;
+        option.textContent = dynamicList.is_main_list ? dynamicList.name + ' (Hoofdlijst)' : dynamicList.name;
         select.append(option);
     })
     // Need to do this check otherwise because method receives mouseEvents as listId on new inputs
