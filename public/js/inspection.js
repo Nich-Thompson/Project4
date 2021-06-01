@@ -95,7 +95,7 @@ function createSelect(inputField, formGroup, label) {
     //if is comment field
     if (inputField.isCommentsList === true) {
         select.setAttribute('is-comment', 'true');
-        select.addEventListener("change", function () {
+        select.addEventListener("click", function () {
             console.log(document.querySelectorAll('[is-comment-input]'));
             document.querySelectorAll('[is-comment-input]')[0].value = select.value.toString();
         });
