@@ -8,6 +8,7 @@ use App\Http\Controllers\TemplateController;
 use App\Http\Requests\ListRequest;
 use App\Http\Requests\StoreInspectorRequest;
 use App\Http\Requests\StoreListValueRequest;
+use App\Http\Requests\StoreTemplateRequest;
 use App\Http\Requests\UpdateInspectorRequest;
 use App\Models\Icon;
 use App\Models\InspectionType;
@@ -59,6 +60,17 @@ class TemplateTest extends TestCase
         $response->assertStatus(200);
     }
 
+    public function test_template_choose_version_screen_can_be_rendered()
+    {
+        Template::create([
+            'inspection_type_id' => $this->inspection_type->id,
+            'json' => '[]',
+        ]);
+        $response = $this->get('/template/'.$this->inspection_type->id.'/versions');
+
+        $response->assertStatus(200);
+    }
+
 
     public function test_create_screen_can_be_rendered()
     {
@@ -76,12 +88,23 @@ class TemplateTest extends TestCase
         $templates = Template::all();
         $oldTemplate = $templates[count($templates)-1];
         $controller = new TemplateController();
-        $controller->store(new Request([
+        $controller->store(new StoreTemplateRequest([
             'type_id' => $this->inspection_type->id
         ]));
 
         $templates = Template::all();
         $newTemplate = $templates[count($templates)-1];
         $this->assertFalse($oldTemplate->is($newTemplate));
+    }
+
+    public function test_edit_screen_can_be_rendered()
+    {
+        $template = Template::create([
+            'inspection_type_id' => $this->inspection_type->id,
+            'json' => '[]',
+        ]);
+        $response = $this->get('/template/'.$template->id.'/edit');
+
+        $response->assertStatus(200);
     }
 }
