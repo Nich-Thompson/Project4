@@ -141,7 +141,7 @@ function addComments(listId = null) {
         select.className = 'form-select';
         select.name = 'comments_list_id';
         dynamicLists.forEach(dynamicList => {
-            if (!dynamicList.is_main_list) {
+            if (dynamicList.is_main_list) {
                 const option = document.createElement('option');
                 option.value = dynamicList.id;
                 option.textContent = dynamicList.name;
