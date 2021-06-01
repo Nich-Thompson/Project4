@@ -16,6 +16,7 @@
                            title="Verwijder alles">Verwijder
                             alles</a>
                     @endif
+                    <a href="{{ route('getCustomerIndex')}}" class="float-right btn btn-default" title="Terug naar vorige pagina">Terug</a>
                     <p class="mb-5"></p>
                     <hr/>
                     <div class="input-group border w-25">
