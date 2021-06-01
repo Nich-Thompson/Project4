@@ -15,15 +15,17 @@ document.getElementById("offline").style.display = "none";
 
 function generateInputFields() {
     inputFields.unshift({label: 'Pos.', type: 'text'});
-    inputFields.push({label: 'Opmerkingen', type: 'text'});
+    inputFields.push({label: 'Opmerkingen', type: 'text', isCommentsList: true});
+
     inputFields.forEach(inputField => {
         id++;
-        generateInputField(inputField, id)
+        generateInputField(inputField)
     });
+
     setJson();
 }
 
-function generateInputField(inputField, id) {
+function generateInputField(inputField) {
     const formGroup = document.createElement('div');
     formGroup.className = 'form-group pl-3 col-md-4';
 
@@ -34,7 +36,7 @@ function generateInputField(inputField, id) {
     let itemsToAppend = [];
 
     if (inputField.type === 'select') {
-        let select = createSelect(inputField, formGroup, label, id);
+        let select = createSelect(inputField, formGroup, label);
 
         if (dynamicLists[inputField.list_id].values[0].length > 1) {
             let length = dynamicLists[inputField.list_id].values[0].length;
@@ -43,7 +45,7 @@ function generateInputField(inputField, id) {
                 id++;
 
                 let list = dynamicLists[dynamicLists[inputField.list_id].values[0][i].id];
-                itemsToAppend.push(createListSelect(list, id));
+                itemsToAppend.push(createListSelect(list));
             }
 
             select.addEventListener("change", (e) => {
@@ -58,6 +60,11 @@ function generateInputField(inputField, id) {
         }
     } else {
         const input = document.createElement('input');
+
+        if (inputField.isCommentsList === true) {
+            input.setAttribute('is-comment-input', 'true');
+        }
+
         if (inputField.type === 'checkbox') {
             input.className = 'form-check';
         } else {
@@ -79,7 +86,7 @@ function generateInputField(inputField, id) {
     })
 }
 
-function createSelect(inputField, formGroup, label, id) {
+function createSelect(inputField, formGroup, label) {
     let select = document.createElement('select');
     select.className = 'form-select';
     select.id = id;
@@ -89,7 +96,8 @@ function createSelect(inputField, formGroup, label, id) {
     if (inputField.isCommentsList === true) {
         select.setAttribute('is-comment', 'true');
         select.addEventListener("change", function () {
-            document.getElementById((inputFields.length).toString()).value = select.value.toString();
+            console.log(document.querySelectorAll('[is-comment-input]'));
+            document.querySelectorAll('[is-comment-input]')[0].value = select.value.toString();
         });
     }
 
@@ -107,7 +115,7 @@ function createSelect(inputField, formGroup, label, id) {
     return select;
 }
 
-function createListSelect(list, id) {
+function createListSelect(list) {
     const formGroup = document.createElement('div');
     formGroup.className = 'form-group pl-3 col-md-4';
 
@@ -215,9 +223,10 @@ document.getElementById("form").addEventListener("submit", function (event) {
             input.checked = false;
         } else if (value.type !== 'select') {
             input.value = '';
-        } else {
-            input.childNodes[0].selected = true;
         }
+        // else {
+        //     input.childNodes[0].selected = true;
+        // }
     }
     const input = document.getElementById('approved');
     object[input.id] = {type: 'checkbox', value: input.checked};
