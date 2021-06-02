@@ -18,9 +18,9 @@ use Illuminate\Support\Facades\Log;
 
 class InspectionController extends Controller
 {
-    public function index($customer_id)
+    public function index($customer_id, $location_id)
     {
-        $inspections = Inspection::query()->where('customer_id', '=', $customer_id)->get()->sortByDesc("created_at");;
+        $inspections = Inspection::query()->where('customer_id', '=', $customer_id)->where('location_id', '=', $location_id)->get();
         $inspectionTypes = InspectionType::all();
         $users = User::all();
 
