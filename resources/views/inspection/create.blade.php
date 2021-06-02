@@ -49,7 +49,7 @@
                                 @foreach($template->json as $input)
                                     @if($input->type == "select" && $input->isCommentsList != true)
                                         <th>{{$input -> label}}</th>
-                                        @if(count($lists->{$input->list_id}->values[0]) > 1)
+                                        @if(count($lists->{$input->list_id}->values) !== 0 && count($lists->{$input->list_id}->values[0]) > 1)
                                             @for($x =1; $x < count($lists->{$input->list_id}->values[0]); $x++)
                                                 <th>{{$lists->{$input->list_id}->values[0][$x]->name}}</th>
                                             @endfor

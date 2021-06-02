@@ -38,7 +38,7 @@ function generateInputField(inputField) {
     if (inputField.type === 'select') {
         let select = createSelect(inputField, formGroup, label);
 
-        if (dynamicLists[inputField.list_id].values[0].length > 1) {
+        if (dynamicLists[inputField.list_id].values.length !== 0 && dynamicLists[inputField.list_id].values[0].length > 1) {
             let length = dynamicLists[inputField.list_id].values[0].length;
 
             for (let i = 1; i < length; i++) {
