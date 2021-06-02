@@ -21,7 +21,7 @@
                             De internet connectie is verloren, je werkt nu offline!
                         </div>
 
-                        <a href="{{URL::to('/inspection/'.$inspection->customer_id)}}"
+                        <a href="{{URL::to('/inspection/'.$inspection->customer_id . '/' . $inspection->location_id)}}"
                            class="btn btn-outline-secondary"
                            title="Terug naar inspecties">Terug</a>
                         <br/>

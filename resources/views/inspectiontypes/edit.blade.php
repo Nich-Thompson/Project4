@@ -81,10 +81,17 @@
                                     <select name="icon_id" class="fontawesomeselect col-xs-12 col-sm-12 col-md-12 form-select" disabled>
 
                                         @foreach($icons as $icon)
-                                            <option value="{{ $icon->id }}">
-                                                &#x{{ $icon->unicode }};
-                                                {{ ucfirst(preg_replace("/[\W]/", ' ',$icon->name)) }}
-                                            </option>
+                                            @if($type->icon()->id == $icon->id)
+                                                <option value="{{ $icon->id }}" selected>
+                                                    &#x{{ $icon->unicode }};
+                                                    {{ ucfirst(preg_replace("/[\W]/", ' ',$icon->name)) }}
+                                                </option>
+                                            @else
+                                                <option value="{{ $icon->id }}">
+                                                    &#x{{ $icon->unicode }};
+                                                    {{ ucfirst(preg_replace("/[\W]/", ' ',$icon->name)) }}
+                                                </option>
+                                            @endif
                                         @endforeach
                                     </select>
                                 </div>

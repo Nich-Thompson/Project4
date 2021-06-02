@@ -26,10 +26,10 @@
                                     </div>
 
                                     <div class="row">
-                                        <div class="form-group ml-3">
-                                            <input type="checkbox" id="approved" name="approved"
-                                                   checked>
+                                        <div class="form-group pl-3 col-md-4">
                                             <label for="approved">Goedgekeurd</label>
+                                            <input type="checkbox" class="form-check" id="approved" name="approved"
+                                                   checked>
                                         </div>
                                     </div>
                                 </div>

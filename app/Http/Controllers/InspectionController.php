@@ -72,7 +72,7 @@ class InspectionController extends Controller
 
         $inspection->save();
 
-        return redirect()->to("inspection/" . $customer_id);
+        return redirect()->to("inspection/" . $customer_id . "/" . $inspection->location_id);
     }
 
     public function inspect($id, $template_id, $type)
@@ -163,6 +163,8 @@ class InspectionController extends Controller
     public function edit($id)
     {
         $inspection = Inspection::find($id);
+        $inspection->locked = Auth::id();
+        $inspection->save();
         return redirect()->to("inspection/inspect/" . $inspection->id . "/" . $inspection->template_id . '/' . "edit");
     }
 
