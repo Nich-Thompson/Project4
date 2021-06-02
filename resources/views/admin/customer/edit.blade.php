@@ -211,7 +211,7 @@
                                                         </a>
                                                         @if(Auth::user()->hasRole('inspecteur'))
                                                             <a href="{{URL::to('/inspection/'.$customer->id.'/'.$location->id.'')}}"
-                                                               class="btn border border-1 d-inline-block float-right"
+                                                               class="btn ml-2 border border-1 d-inline-block float-right"
                                                                title="Ga naar inspecties">Ga naar
                                                                 inspecties</a>
                                                             <a id="{{$location->id}}"
