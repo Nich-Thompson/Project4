@@ -14,12 +14,12 @@ class AlterLocations extends Migration
     public function up()
     {
         Schema::table('locations', function($table) {
-            $table->string('contact_name');
-            $table->string('phone1');
-            $table->string('phone2');
-            $table->string('email1');
-            $table->string('email2');
-            $table->string('comment');
+            $table->string('contact_name')->nullable();
+            $table->string('phone1')->nullable();
+            $table->string('phone2')->nullable();
+            $table->string('email1')->nullable();
+            $table->string('email2')->nullable();
+            $table->string('comment')->nullable();
             $table->string('number')->change();
         });
     }
