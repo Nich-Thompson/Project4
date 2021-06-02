@@ -176,7 +176,7 @@
                                             @foreach ($locations as $location)
                                                 <div id='customer-field'
                                                      class="row m-2 p-3 rounded border border-light shadow-sm bg-white">
-                                                    <div class="d-flex flex-column w-50">
+                                                    <div class="d-flex flex-column w-25">
                                                         <div id="name"
                                                              class="h5 m-0 fw-bold">{{ $location->name }}</div>
                                                         <p>
@@ -203,37 +203,27 @@
                                                             @endif
                                                         </p>
                                                     </div>
-                                                    <div class="w-50 text-right pb-2">
-                                                        <div class="row">
-                                                            <a id="{{$location->id}}"
-                                                               href="{{route('getLocationEdit', [$customer->id, $location->id]) }}"
-                                                               class="btn btn-primary col m-2">
-                                                                Bekijken
-                                                            </a>
-                                                            @if(Auth::user()->hasRole('admin'))
-                                                                <a href="{{ route('getLocationArchive', [$customer->id,$location->id]) }}"
-                                                                   id="archiveButton"
-                                                                   class="btn btn-primary m-2 float-left col"
-                                                                   title="Archiveren">Archiveren</a>
-                                                            @endif
-                                                        </div>
+                                                    <div class="w-75 text-right pb-2">
+                                                        <a id="{{$location->id}}"
+                                                           href="{{route('getLocationEdit', [$customer->id, $location->id]) }}"
+                                                           class="btn btn-primary ml-2 float-right">
+                                                            Bekijken
+                                                        </a>
 
-                                                        <div class="row">
-                                                            <a href="{{URL::to('/inspection/'.$customer->id.'/'.$location->id.'')}}"
-                                                               class="btn m-2 border border-1 float-right col"
-                                                               title="Ga naar inspecties">Ga naar
-                                                                inspecties</a>
-                                                            <a id="{{$location->id}}"
-                                                               href="{{URL::to('/inspection/'.$customer->id.'/'.$location->id.'/choose_template')}}"
-                                                               class="btn m-2 border float-right col">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                     height="16" fill="currentColor" class="bi bi-plus"
-                                                                     viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                                                                </svg>
-                                                                Maak inspectie aan</a>
-                                                        </div>
+                                                        <a href="{{URL::to('/inspection/'.$customer->id.'/'.$location->id.'')}}"
+                                                           class="btn ml-2 border border-1 float-right"
+                                                           title="Ga naar inspecties">Ga naar
+                                                            inspecties</a>
+                                                        <a id="{{$location->id}}"
+                                                           href="{{URL::to('/inspection/'.$customer->id.'/'.$location->id.'/choose_template')}}"
+                                                           class="btn ml-2 border float-right">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                 height="16" fill="currentColor" class="bi bi-plus"
+                                                                 viewBox="0 0 16 16">
+                                                                <path
+                                                                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                                            </svg>
+                                                            Maak inspectie aan</a>
                                                     </div>
                                                 </div>
                                             @endforeach
