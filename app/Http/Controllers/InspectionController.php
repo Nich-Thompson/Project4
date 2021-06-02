@@ -22,10 +22,12 @@ class InspectionController extends Controller
     {
         $inspections = Inspection::query()->where('customer_id', '=', $customer_id)->get()->sortByDesc("created_at");;
         $inspectionTypes = InspectionType::all();
+        $users = User::all();
 
         return view('inspection.index', [
             'inspections' => $inspections,
             'inspectionTypes' => $inspectionTypes,
+            "users" => $users
         ]);
     }
 
