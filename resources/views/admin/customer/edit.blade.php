@@ -214,16 +214,18 @@
                                                            class="btn ml-2 border border-1 float-right"
                                                            title="Ga naar inspecties">Ga naar
                                                             inspecties</a>
-                                                        <a id="{{$location->id}}"
-                                                           href="{{URL::to('/inspection/'.$customer->id.'/'.$location->id.'/choose_template')}}"
-                                                           class="btn ml-2 border float-right">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                 height="16" fill="currentColor" class="bi bi-plus"
-                                                                 viewBox="0 0 16 16">
-                                                                <path
-                                                                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                                                            </svg>
-                                                            Maak inspectie aan</a>
+                                                        @if(Auth::user()->hasRole('inspecteur'))
+                                                            <a id="{{$location->id}}"
+                                                               href="{{URL::to('/inspection/'.$customer->id.'/'.$location->id.'/choose_template')}}"
+                                                               class="btn ml-2 border float-right">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                     height="16" fill="currentColor" class="bi bi-plus"
+                                                                     viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                                                </svg>
+                                                                Maak inspectie aan</a>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             @endforeach
