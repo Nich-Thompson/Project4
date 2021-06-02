@@ -6,6 +6,7 @@
             <div class="bg-white overflow-hidden shadow-sm">
                 <div class="p-4 bg-white border-b border-gray-200">
                     <h1 class="float-left h2">{{ $list->name }}</h1>
+                    @include('components.help-lijsten')
                     <br><br>
                     @if($headlist != null)
                         <h2 class="float-left h4">Sublijst van: {{ $headlist->name }}</h2>

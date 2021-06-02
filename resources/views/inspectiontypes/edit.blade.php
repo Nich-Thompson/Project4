@@ -13,8 +13,9 @@
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-12 text-right">
                             <h1>
-                                <a href="{{ route('getInspectionTypeDelete', $id) }}" id="archiveButton"
-                                   class="btn btn-primary" hidden title="Archiveren">Archiveren</a>
+                     <!--          <a href="{{ route('getInspectionTypeDelete', $id) }}" id="archiveButton"
+                                   class="btn btn-primary" hidden title="Archiveren">Archiveren</a> -->
+
                                 <button id="switchButton" onclick="enableInput()" class="btn btn-primary"
                                         title="Bewerken/bekijken inschakelen">Bewerken
                                 </button>

@@ -6,7 +6,7 @@
 
         <B>Weet je zeker dat je alle gearchiveerde klanten wilt verwijderen</B>?
         <br>
-        (Bijbehorende locaties van de klanten word ook verwijdert)
+        (Bijbehorende locaties en inspecties van de klanten worden ook verwijdert)
         <div class="row mt-3">
             <div class="col-xs-12 col-sm-12 col-md-2 text-left">
                 <a href="{{ route('getCustomerArchives')}}" class="btn btn-default" title="Terug naar vorige pagina">Terug</a>
