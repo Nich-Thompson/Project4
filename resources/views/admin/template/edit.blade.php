@@ -6,7 +6,7 @@
         <div class="row justify-content-center">
             <div class="card">
                 <div class="card-body">
-                    <h1 class="float-left h2">Nieuwe template aanmaken</h1>
+                    <h1 class="float-left h2">Template van {{ $dbtemplate->created_at }}</h1>
                     <br><br>
                     <hr>
 
@@ -34,6 +34,7 @@
                             <div class="col-12 mb-2">
                                 <label>Selecteer het inspectietype:</label>
                                 <select name="type_id" class="form-select col-md-4" title="Selecteer het inspectietype">
+                                    <option value="{{ $dbtemplate->inspection_type()->id }}">{{ $dbtemplate->inspection_type()->name }}</option>
                                     @foreach($inspection_types as $type)
                                         <option value="{{ $type->id }}">{{ $type->name }}</option>
                                     @endforeach
@@ -46,17 +47,16 @@
                                 <div id="hiddenInputs"></div>
                             </div>
                         </div>
-                        <a href="{{URL::to('/template')}}" class="btn btn-default" title="Terug naar vorige pagina">Terug</a>
-                        <button type="submit" class="float-right btn btn-primary text-light" title="Aanmaken">Aanmaken</button>
+                        <a href="{{ route('getTemplateVersions', $dbtemplate->inspection_type()->id) }}" class="btn btn-default" title="Terug naar vorige pagina">Terug</a>
+                        <button type="submit" class="float-right btn btn-primary text-light" title="Aanmaken">Maak kopie aan</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 @endsection
+
 <script>
-    window.myArray= @json([$lists])
+    window.myArray= @json([$lists, $template])
 </script>
-
-
 <script src="{{ asset('js/createTemplate.js') }}"></script>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreTemplateRequest;
 use App\Models\InspectionType;
 use App\Models\ListModel;
 use App\Models\Template;
@@ -11,7 +12,7 @@ class TemplateController extends Controller
 {
     public function index()
     {
-        $templates = Template::all();
+        $templates = Template::query()->distinct()->get(['inspection_type_id']);
 
         return view('admin.template.index', [
             'templates' => $templates
@@ -23,8 +24,8 @@ class TemplateController extends Controller
         $inspection_types = InspectionType::all();
         $lists = ListModel::all();
 
-        foreach ($lists as $list) {
-            $list->is_main_list = $list->sublistOf()->first() == null;
+        foreach ($lists as $list){
+            $list->is_main_list = $list->sublist()->first() == null;
         }
 
         return view('admin.template.create', [
@@ -33,7 +34,7 @@ class TemplateController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(StoreTemplateRequest $request)
     {
         $labels = $request->input('labels');
         $types = $request->input('types');
@@ -82,9 +83,25 @@ class TemplateController extends Controller
      * @param \App\Models\Template $template
      * @return \Illuminate\Http\Response
      */
-    public function edit(Template $template)
+    public function edit($id)
     {
-        //
+        $lists = ListModel::all();
+        $dbtemplate = Template::find($id);
+        $template = json_decode($dbtemplate->json);
+        $inspection_types = InspectionType::all();
+
+        $inspection_types->forget($dbtemplate->inspection_type()->id - 1);
+
+        foreach ($lists as $list){
+            $list->is_main_list = $list->sublist()->first() == null;
+        }
+
+        return view('admin.template.edit', [
+            'dbtemplate' => $dbtemplate,
+            'template' => $template,
+            'lists' => $lists,
+            'inspection_types' => $inspection_types,
+        ]);
     }
 
     /**
@@ -108,5 +125,16 @@ class TemplateController extends Controller
     public function destroy(Template $template)
     {
         //
+    }
+
+    public function show_versions($type_id)
+    {
+        $inspection_type = InspectionType::find($type_id);
+        $templates = Template::query()->where('inspection_type_id', '=', $type_id)->orderBy('created_at', 'desc')->get();
+
+        return view('admin.template.choose_version', [
+            'type' => $inspection_type,
+            'templates' => $templates
+        ]);
     }
 }

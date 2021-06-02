@@ -43,7 +43,8 @@ class listSeeder extends Seeder
         ]);
         ListValue::create([
             'name' => 'Poeder',
-            'list_model_id' => '2'
+            'list_model_id' => '2',
+            'list_value_id' => '2'
         ]);
         ListValue::create([
             'name' => 'EPS6',

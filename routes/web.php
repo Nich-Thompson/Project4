@@ -106,5 +106,6 @@ Route::prefix('template')->group(function () {
     Route::get('/create', 'TemplateController@create')->middleware(['role:admin'])->name('getTemplateCreate');
     Route::post('/create', 'TemplateController@store')->middleware(['role:admin'])->name('postTemplateCreate');
     Route::get('/{id}/edit', 'TemplateController@edit')->middleware(['role:admin'])->name('getTemplateEdit');
-    Route::post('/{id}/edit', 'TemplateController@update')->middleware(['role:admin'])->name('postTemplateEdit');
+    Route::post('/{inspection_type_id}/edit', 'TemplateController@update')->middleware(['role:admin'])->name('postTemplateEdit');
+    Route::get('/{inspection_type_id}/versions', 'TemplateController@show_versions')->middleware(['role:admin'])->name('getTemplateVersions');
 });

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Customer;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,7 +20,8 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             InspectionTypeSeeder::class,
-            ListSeeder::class
+            ListSeeder::class,
+            CustomerSeeder::class
         ]);
     }
 }
