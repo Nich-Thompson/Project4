@@ -204,20 +204,27 @@
                                                         </p>
                                                     </div>
                                                     <div class="w-50 text-right pb-2">
-                                                        <a id="{{$location->id}}"
-                                                           href="{{route('getLocationEdit', [$customer->id, $location->id]) }}"
-                                                           class="btn btn-primary ml-2 float-right">
-                                                            Bekijken
-                                                        </a>
-
                                                         <a href="{{URL::to('/inspection/'.$customer->id.'/'.$location->id.'')}}"
-                                                           class="btn ml-2 border border-1 float-right"
+                                                           class="btn ml-2 border border-1"
                                                            title="Ga naar inspecties">Ga naar
                                                             inspecties</a>
                                                         @if(Auth::user()->hasRole('inspecteur'))
                                                             <a id="{{$location->id}}"
+                                                               href="{{route('getLocationEdit', [$customer->id, $location->id]) }}"
+                                                               class="btn border ml-2">
+                                                                Bekijken
+                                                            </a>
+                                                        @else
+                                                            <a id="{{$location->id}}"
+                                                               href="{{route('getLocationEdit', [$customer->id, $location->id]) }}"
+                                                               class="btn btn-primary ml-2">
+                                                                Bekijken
+                                                            </a>
+                                                        @endif
+                                                        @if(Auth::user()->hasRole('inspecteur'))
+                                                            <a id="{{$location->id}}"
                                                                href="{{URL::to('/inspection/'.$customer->id.'/'.$location->id.'/choose_template')}}"
-                                                               class="btn ml-2 border float-right">
+                                                               class="btn btn-primary ml-2 float-right">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                                      height="16" fill="currentColor" class="bi bi-plus"
                                                                      viewBox="0 0 16 16">

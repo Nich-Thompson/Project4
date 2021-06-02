@@ -50,10 +50,10 @@
                                     </div>
 
                                     <div class="row">
-                                        <div class="form-group ml-3">
-                                            <input type="checkbox" id="approved" name="approved"
-                                                   checked>
+                                        <div class="form-group pl-3 col-md-4">
                                             <label for="approved">Goedgekeurd</label>
+                                            <input type="checkbox" class="form-check" id="approved" name="approved"
+                                                   checked>
                                         </div>
                                     </div>
                                 </div>
@@ -73,7 +73,7 @@
                                 @foreach($template->json as $input)
                                     @if($input->type == "select" && $input->isCommentsList != true)
                                         <th>{{$input -> label}}</th>
-                                        @if(count($lists->{$input->list_id}->values[0]) > 1)
+                                        @if(count($lists->{$input->list_id}->values) != 0 && count($lists->{$input->list_id}->values[0]) > 1)
                                             @for($x =1; $x < count($lists->{$input->list_id}->values[0]); $x++)
                                                 <th>{{$lists->{$input->list_id}->values[0][$x]->name}}</th>
                                             @endfor

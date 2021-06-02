@@ -40,7 +40,7 @@
                                     </div>
                                     <div class="d-flex flex-column justify-content-end w-50 text-right pb-2">
                                         <a id="{{$inspection->id}}"
-                                           href="{{/*URL::to('/inspection/'.$inspection->id.'/details')*/ route('getInspectionEdit', $inspection->id) }}">
+                                           href="{{URL::to('/inspection/'.$inspection->id.'/edit') /*route('getInspectionEdit', $inspection->id)*/ }}">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"
                                                  fill="currentColor"
                                                  class="bi bi-arrow-right-short" viewBox="0 0 16 16">
