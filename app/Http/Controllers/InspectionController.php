@@ -16,11 +16,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
-class inspectionController extends Controller
+class InspectionController extends Controller
 {
     public function index($customer_id)
     {
-        $inspections = Inspection::query()->where('customer_id', '=', $customer_id)->get();
+        $inspections = Inspection::query()->where('customer_id', '=', $customer_id)->get()->sortByDesc("created_at");;
         $inspectionTypes = InspectionType::all();
 
         return view('inspection.index', [

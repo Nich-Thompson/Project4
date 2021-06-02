@@ -13,13 +13,13 @@
                     <h1 class="float-left h2">Inspecties overzicht</h1>
                     <p class="mb-5"></p>
                     <hr/>
-                    <p class="font-italic">Zoek op Inspectietype</p>
-                    <label>Selecteer Inspectietype</label>
-                    <select>
-                        @foreach($inspectionTypes as $inspectionType)
-                            <option class="form-select">{{$inspectionType->name}}</option>
-                        @endforeach
-                    </select>
+{{--                    <p class="font-italic">Zoek op Inspectietype</p>--}}
+                    {{--                    <label>Selecteer Inspectietype</label>--}}
+                    {{--                    <select>--}}
+                    {{--                        @foreach($inspectionTypes as $inspectionType)--}}
+                    {{--                            <option class="form-select">{{$inspectionType->name}}</option>--}}
+                    {{--                        @endforeach--}}
+                    {{--                    </select>--}}
 
                     <div id="customers">
                         @if(count($inspections) === 0)
