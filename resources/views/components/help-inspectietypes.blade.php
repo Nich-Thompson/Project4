@@ -12,10 +12,10 @@
             Swal.fire({
                 icon: 'info',
                 title: 'InspectieTypes Handleiding',
-                html: '<p>Bij de inspectietypes overzicht word er de aangemaakt inspectietypes weergeven</p>,' +
-                    '<p>Bij het Toevoegen van een inspectietype, kun je de naam, beschrijving, kleur en icon vaan een inspectietype aanmaken</p>' +
-                    '<p>Door een inspectietype aan te passen, moet u het blauwe pijl klikken om bij de detail pagina te komen van een inspectietype,' +
-                    'hieruit kun je via het "Bewerken" button de inspectietype aanpassen',
+                html: '<p>Bij het inspectietypes overzicht worden de aangemaakt inspectietypes weergegeven.</p>,' +
+                    '<p>Bij het Toevoegen van een inspectietype kunt u de naam, beschrijving, kleur en icoon van een inspectietype instellen.</p>' +
+                    '<p>Om een inspectietype aan te passen kunt u op de blauwe pijl klikken om bij de detail pagina te komen van een inspectietype,' +
+                    'hieruit kunt u via de "Bewerken" knop het inspectietype aanpassen.',
                 showCloseButton: true,
                 confirmButtonText: '<i class="fa fa-thumbs-up"></i> Ik begrijp het'
 

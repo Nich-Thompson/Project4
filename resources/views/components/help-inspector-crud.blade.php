@@ -13,10 +13,10 @@
             Swal.fire({
                 icon: 'info',
                 title: 'Inspecteurs CRUD Handleiding',
-                html: '<p>Het aanmaken van de inspecteurs wordt gedaan door op de toevoegen knop te drukken. Hierna kan de informatie van de inspecteur ingevuld worden.</p>,' +
-                    '<p>Naast het aanmaken kun je inspecteurs ook bewerken en verwijderen. Doe dit door op een inspecteur te drukken in de lijst.</p>' +
+                html: '<p>Het aanmaken van de inspecteurs wordt gedaan door op de toevoegen knop te drukken. Hierna kunt u de informatie van de inspecteur invullen.</p>,' +
+                    '<p>Naast het aanmaken kunt u inspecteurs ook bewerken en archiveren. Doe dit door op een inspecteur te klikken in de lijst.</p>' +
                     '<p>Het archief is hier ook te vinden en is beschikbaar onder het knopje Archief,' +
-                    ' hier kun je verwijderde inspecteurs terughalen of alle verwijderde inspecteurs definitief verwijderen',
+                    ' hier kunt u gearchiveerde inspecteurs terughalen of alle gearchiveerde inspecteurs definitief verwijderen',
                 showCloseButton: true,
                 confirmButtonText: '<i class="fa fa-thumbs-up"></i> Ik begrijp het'
 
