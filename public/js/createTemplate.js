@@ -11,9 +11,9 @@ window.onload = function () {
     let checkbox = document.getElementById('addCheckbox')
     checkbox.addEventListener('click', addCheckbox)
     let list = document.getElementById('addList')
-    list.addEventListener('click', () => addList(false))
+    list.addEventListener('click', () => addList(null, false))
     let comments = document.getElementById('addComments')
-    comments.addEventListener('click', () => addList(true))
+    comments.addEventListener('click', () => addList(null, true))
     if (oldTemplate) {
         loadOldInputs()
     }
@@ -91,43 +91,52 @@ function createInput(type, name = null) {
 }
 
 function addList(listId = null, is_comments_list) {
-    let inputs = document.getElementById('inputs')
-    let hiddenInputs = document.getElementById('hiddenInputs')
+    const commentsList = document.getElementsByName('comments_list_id')
+    if (!is_comments_list || commentsList.length === 0) {
+        let inputs = document.getElementById('inputs')
 
-    let newDiv = document.createElement('div')
-    newDiv.className = 'form-group col-md-4'
+        let newDiv = document.createElement('div')
+        newDiv.className = 'form-group col-md-4'
 
-    const label = document.createElement('label');
-    label.textContent = 'Kies een dynamische lijst'
+        const label = document.createElement('label');
+        if (is_comments_list) {
+            label.textContent = 'Kies een opmerking lijst'
+        }
+        else {
+            label.textContent = 'Kies een dynamische lijst'
+        }
 
-    let select = document.createElement('select');
-    select.className = 'form-select';
+        let select = document.createElement('select');
+        select.className = 'form-select';
 
-    if (is_comments_list === true) {
-        select.name = 'comments_list_id';
-    } else {
-        select.name = 'selects[]';
+        if (is_comments_list === true) {
+            select.name = 'comments_list_id';
+        } else {
+            select.name = 'selects[]';
+        }
+
+        dynamicLists.forEach(dynamicList => {
+            if (!is_comments_list || dynamicList.is_main_list) {
+                const option = document.createElement('option');
+                option.value = dynamicList.id;
+                option.textContent = dynamicList.is_main_list ? dynamicList.name + ' (Hoofdlijst)' : dynamicList.name;
+                select.append(option);
+            }
+        })
+        // Need to do this check otherwise because method receives mouseEvents as listId on new inputs
+        if (typeof listId === "string") {
+            select.value = listId
+        }
+
+        let deleteButton = document.createElement('button')
+        deleteButton.className = 'float-right btn btn-danger'
+        deleteButton.textContent = 'X'
+        deleteButton.addEventListener('click', function () {
+            newDiv.parentNode.removeChild(newDiv)
+        })
+        newDiv.append(label, deleteButton, select);
+        inputs.append(newDiv);
     }
-
-    dynamicLists.forEach(dynamicList => {
-        const option = document.createElement('option');
-        option.value = dynamicList.id;
-        option.textContent = dynamicList.is_main_list ? dynamicList.name + ' (Hoofdlijst)' : dynamicList.name;
-        select.append(option);
-    })
-    // Need to do this check otherwise because method receives mouseEvents as listId on new inputs
-    if (typeof listId === "string") {
-        select.value = listId
-    }
-
-    let deleteButton = document.createElement('button')
-    deleteButton.className = 'float-right btn btn-danger'
-    deleteButton.textContent = 'X'
-    deleteButton.addEventListener('click', function () {
-        newDiv.parentNode.removeChild(newDiv)
-    })
-    newDiv.append(label, deleteButton, select);
-    inputs.append(newDiv);
 }
 
 function loadOldInputs() {
@@ -147,10 +156,10 @@ function loadOldInputs() {
                 break;
             case 'select':
                 if (!field.isCommentsList) {
-                    addList(field.list_id)
+                    addList(field.list_id, false)
                 }
                 else {
-                    addComments(field.list_id)
+                    addList(field.list_id, true)
                 }
                 break;
         }
