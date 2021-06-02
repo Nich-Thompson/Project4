@@ -16,20 +16,23 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
-class inspectionController extends Controller
+class InspectionController extends Controller
 {
-    public function index($Customer_id)
+    public function index($customer_id)
     {
-        $customer_id = $Customer_id;
         $inspections = Inspection::query()->where('customer_id', '=', $customer_id)->get();
         $inspectionTypes = InspectionType::all();
+        $users = User::all();
+
         return view('inspection.index', [
             'inspections' => $inspections,
             'inspectionTypes' => $inspectionTypes,
+            "users" => $users
         ]);
     }
 
-    public function choose_template($customer_id, $location_id){
+    public function choose_template($customer_id, $location_id)
+    {
         $templates = Template::all();
         return view('inspection.choose_template', [
             'templates' => $templates,
@@ -50,7 +53,7 @@ class inspectionController extends Controller
             "locked" => $user_id,
         ]);
 
-        return redirect()->to("inspection/inspect/" . $inspection->id . "/" . $template_id . '/' . "create" );
+        return redirect()->to("inspection/inspect/" . $inspection->id . "/" . $template_id . '/' . "create");
     }
 
     public function exit($inspection_id, $customer_id)
@@ -67,7 +70,7 @@ class inspectionController extends Controller
     public function inspect($id, $template_id, $type)
     {
         $template = Template::find($template_id);
-        $template -> json = json_decode($template -> json);
+        $template->json = json_decode($template->json);
         $inspection = Inspection::find($id);
         $inspection_types = InspectionType::all();
         $user = User::find($inspection->user_id);
@@ -77,45 +80,45 @@ class inspectionController extends Controller
             $inspection->locked = Auth::id();
             $inspection->save();
 
-        $lists = [];
-        foreach (ListModel::all() as $list){
-            $lists[$list->id] = (object)['name' => $list->name, 'values' => []];
-            foreach ($list->values()->get() as $value) {
-                $valueLink = [(object)['name' => $value->model()->name, 'value' => $value->name]];
-                while ($value->linked_value() != null) {
-                    $value = $value->linked_value();
-                    array_push($valueLink, (object)['name' => $value->model()->name, 'value' => $value->name]);
+            $lists = [];
+            foreach (ListModel::all() as $list) {
+                $lists[$list->id] = (object)['name' => $list->name, 'values' => []];
+                foreach ($list->values()->get() as $value) {
+                    $valueLink = [(object)['name' => $value->model()->name, 'value' => $value->name]];
+                    while ($value->linked_value() != null) {
+                        $value = $value->linked_value();
+                        array_push($valueLink, (object)['name' => $value->model()->name, 'value' => $value->name]);
+                    }
+                    array_push($lists[$list->id]->values, $valueLink);
                 }
-                array_push($lists[$list->id]->values, $valueLink);
             }
-        }
-        $lists = (object) $lists;
+            $lists = (object)$lists;
 
-        if($type == "create"){
-            return view('inspection.create', [
-                "id" => $id,
-                'template' => $template,
-                "inspection" => $inspection,
-                "username" => $user->name,
-                'inspection_types' => $inspection_types,
-                'lists' => $lists
-            ]);
-        }else if($type == "edit"){
-            $inspectors = User::whereHas(
-                'roles', function($q){
-                $q->where('name', 'inspecteur')->orWhere('name', 'admin');;
+            if ($type == "create") {
+                return view('inspection.create', [
+                    "id" => $id,
+                    'template' => $template,
+                    "inspection" => $inspection,
+                    "username" => $user->name,
+                    'inspection_types' => $inspection_types,
+                    'lists' => $lists
+                ]);
+            } else if ($type == "edit") {
+                $inspectors = User::whereHas(
+                    'roles', function ($q) {
+                    $q->where('name', 'inspecteur')->orWhere('name', 'admin');;
+                }
+                )->get();
+                return view('inspection.edit', [
+                    "id" => $id,
+                    'template' => $template,
+                    "inspection" => $inspection,
+                    "username" => $user->name,
+                    'inspection_types' => $inspection_types,
+                    'lists' => $lists,
+                    'inspectors' => $inspectors
+                ]);
             }
-            )->get();
-            return view('inspection.edit', [
-                "id" => $id,
-                'template' => $template,
-                "inspection" => $inspection,
-                "username" => $user->name,
-                'inspection_types' => $inspection_types,
-                'lists' => $lists,
-                'inspectors' => $inspectors
-            ]);
-        }
         } else {
             $locked_user = User::find($inspection->locked);
             return view('inspection.view', [
