@@ -1,8 +1,8 @@
 
 <div class="ml-3 float-left">
-    <button style="border:none" id="btn">
+    <a href="#" id="btn">
         <img src="{{URL::asset('/images/helpicon.png')}}" width='30' height='30' alt="HelpIcon">
-    </button>
+    </a>
 </div>
 
 
