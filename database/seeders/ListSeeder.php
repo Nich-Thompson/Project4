@@ -20,11 +20,11 @@ class listSeeder extends Seeder
             'name' => 'Blus - Merken'
         ]);
         ListModel::create([
-            'name' => 'Blus - Blusstoffen',
+            'name' => 'Blus - Types',
             'list_model_id' => '1'
         ]);
         ListModel::create([
-            'name' => 'Blus - Types',
+            'name' => 'Blus - Materialen',
             'list_model_id' => '2'
         ]);
 

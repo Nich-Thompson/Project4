@@ -69,20 +69,20 @@ class InspectionTypeSeeder extends Seeder
         ]);
 
         InspectionType::create([
-            'name' => 'Brandblussers',
-            'description' => 'Alle brandblussers moeten niet over de datum zijn.',
+            'name' => 'blusmiddelen',
+            'description' => 'Blusmiddelen moeten niet over de datum zijn.',
             'color' => '#FF3333',
             'icon_id' => '3'
         ]);
         InspectionType::create([
-            'name' => 'Wifi',
-            'description' => 'De wifi moet het doen.',
+            'name' => 'Keerkleppen',
+            'description' => '',
             'color' => '#4dff58',
             'icon_id' => '5'
         ]);
         InspectionType::create([
-            'name' => 'Bedrading',
-            'description' => 'De bedrading moet kloppen',
+            'name' => 'Noodverlichting',
+            'description' => 'Verlichting moet werken',
             'color' => '#335BFF',
             'icon_id' => '6'
         ]);
