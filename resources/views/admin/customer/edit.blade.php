@@ -176,7 +176,7 @@
                                             @foreach ($locations as $location)
                                                 <div id='customer-field'
                                                      class="row m-2 p-3 rounded border border-light shadow-sm bg-white">
-                                                    <div class="d-flex flex-column w-25">
+                                                    <div class="d-flex flex-column w-50">
                                                         <div id="name"
                                                              class="h5 m-0 fw-bold">{{ $location->name }}</div>
                                                         <p>
@@ -203,7 +203,7 @@
                                                             @endif
                                                         </p>
                                                     </div>
-                                                    <div class="w-75 text-right pb-2">
+                                                    <div class="w-50 text-right pb-2">
                                                         <a id="{{$location->id}}"
                                                            href="{{route('getLocationEdit', [$customer->id, $location->id]) }}"
                                                            class="btn btn-primary ml-2 float-right">
