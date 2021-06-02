@@ -34,19 +34,17 @@
                                         <div id="name"
                                              class="h5 m-0 fw-bold">{{ date('d-m-Y', strtotime($inspection->created_at))}}</div>
                                     </div>
-                                    @if(Auth::user()->hasRole('inspecteur'))
-                                        <div class="d-flex flex-column justify-content-end w-50 text-right pb-2">
-                                            <a id="{{$inspection->id}}"
-                                               href="{{/*URL::to('/inspection/'.$inspection->id.'/details')*/ route('getInspectionEdit', $inspection->id) }}">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"
-                                                     fill="currentColor"
-                                                     class="bi bi-arrow-right-short" viewBox="0 0 16 16">
-                                                    <path fill-rule="evenodd"
-                                                          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    @endif
+                                    <div class="d-flex flex-column justify-content-end w-50 text-right pb-2">
+                                        <a id="{{$inspection->id}}"
+                                           href="{{/*URL::to('/inspection/'.$inspection->id.'/details')*/ route('getInspectionEdit', $inspection->id) }}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"
+                                                 fill="currentColor"
+                                                 class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                      d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
+                                            </svg>
+                                        </a>
+                                    </div>
                                 </div>
                             @endforeach
                         @endif
