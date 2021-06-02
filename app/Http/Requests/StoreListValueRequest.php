@@ -26,7 +26,7 @@ class StoreListValueRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:20',
+            'name' => 'required|max:100',
         ];
     }
 
@@ -34,7 +34,7 @@ class StoreListValueRequest extends FormRequest
     {
         return [
             'name.required' => 'Het type naam is vereist',
-            'name.max' => 'Het type naam  mag maximaal 20 tekens lang zijn.',
+            'name.max' => 'Het type naam  mag maximaal 100 tekens lang zijn.',
         ];
     }
 

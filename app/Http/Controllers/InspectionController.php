@@ -20,7 +20,7 @@ class InspectionController extends Controller
 {
     public function index($customer_id)
     {
-        $inspections = Inspection::query()->where('customer_id', '=', $customer_id)->get();
+        $inspections = Inspection::query()->where('customer_id', '=', $customer_id)->get()->sortByDesc("created_at");;
         $inspectionTypes = InspectionType::all();
         $users = User::all();
 
@@ -33,7 +33,15 @@ class InspectionController extends Controller
 
     public function choose_template($customer_id, $location_id)
     {
-        $templates = Template::all();
+        $inspection_type_ids = Template::distinct()->get("inspection_type_id");
+
+        $templates = array();
+
+        foreach ($inspection_type_ids as $inspection_type_id) {
+            $template = Template::all()->where('inspection_type_id', $inspection_type_id->inspection_type_id)->sortByDesc('created_at')->first();
+            array_push($templates, $template);
+        }
+
         return view('inspection.choose_template', [
             'templates' => $templates,
             'location' => Location::find($location_id),
@@ -87,7 +95,7 @@ class InspectionController extends Controller
                     $valueLink = [(object)['name' => $value->model()->name, 'value' => $value->name]];
                     while ($value->linked_value() != null) {
                         $value = $value->linked_value();
-                        array_push($valueLink, (object)['name' => $value->model()->name, 'value' => $value->name]);
+                        array_push($valueLink, (object)['id' => $value->model()->id, 'name' => $value->model()->name, 'value' => $value->name]);
                     }
                     array_push($lists[$list->id]->values, $valueLink);
                 }
@@ -99,7 +107,7 @@ class InspectionController extends Controller
                     "id" => $id,
                     'template' => $template,
                     "inspection" => $inspection,
-                    "username" => $user->name,
+                    "user" => $user,
                     'inspection_types' => $inspection_types,
                     'lists' => $lists
                 ]);
@@ -113,7 +121,7 @@ class InspectionController extends Controller
                     "id" => $id,
                     'template' => $template,
                     "inspection" => $inspection,
-                    "username" => $user->name,
+                    "user" => $user,
                     'inspection_types' => $inspection_types,
                     'lists' => $lists,
                     'inspectors' => $inspectors
@@ -125,7 +133,7 @@ class InspectionController extends Controller
                 "id" => $id,
                 'template' => $template,
                 "inspection" => $inspection,
-                "username" => $user->name,
+                "user" => $user,
                 "locked_username" => $locked_user->first_name,
             ]);
         }
@@ -179,7 +187,7 @@ class InspectionController extends Controller
 
         $inspection->save();
 
-        return redirect()->to("inspection/inspect/" . $inspection->id . "/" . "edit");
+        return redirect()->back();
     }
 
 

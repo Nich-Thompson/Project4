@@ -3,26 +3,29 @@ let inputFields = window.myArray[1];
 let dynamicLists = window.myArray[2];
 let tempInputFields = {};
 const inputFieldBox = document.getElementById('input-field-box');
+let id = 0;
 
 window.addEventListener('load', (e) => {
+    console.log(inputFields)
     console.log(dynamicLists);
     generateInputFields();
 });
 
 document.getElementById("offline").style.display = "none";
 
-function generateInputFields(){
-    let id = 1;
-    inputFields.unshift({label:'Pos.', type: 'number'});
-    inputFields.push({label:'Opmerkingen', type: 'text'});
+function generateInputFields() {
+    inputFields.unshift({label: 'Pos.', type: 'text'});
+    inputFields.push({label: 'Opmerkingen', type: 'text', isCommentsList: true});
+
     inputFields.forEach(inputField => {
-        generateInputField(inputField, id)
         id++;
+        generateInputField(inputField)
     });
+
     setJson();
 }
 
-function generateInputField(inputField, id){
+function generateInputField(inputField) {
     const formGroup = document.createElement('div');
     formGroup.className = 'form-group pl-3 col-md-4';
 
@@ -30,26 +33,41 @@ function generateInputField(inputField, id){
     label.className = 'mb-0';
     label.textContent = inputField.label;
 
-    if(inputField.type === 'select'){
-        let select = document.createElement('select');
-        select.className = 'form-select';
-        select.id = id;
-        select.name = id;
-        for (const [key, value] of Object.entries(dynamicLists[inputField.list_id].values)) {
-            const option = document.createElement('option');
-            option.value = value[0].value;
-            option.textContent = value[0].value;
-            select.append(option);
+    let itemsToAppend = [];
+
+    if (inputField.type === 'select') {
+        let select = createSelect(inputField, formGroup, label);
+
+        if (dynamicLists[inputField.list_id].values[0].length > 1) {
+            let length = dynamicLists[inputField.list_id].values[0].length;
+
+            for (let i = 1; i < length; i++) {
+                id++;
+
+                let list = dynamicLists[dynamicLists[inputField.list_id].values[0][i].id];
+                itemsToAppend.push(createListSelect(list));
+            }
+
+            select.addEventListener("change", (e) => {
+                let items = filterDynamicList(dynamicLists[inputField.list_id], select.value);
+
+                for (let x = 0; x < itemsToAppend.length; x++) {
+                    itemsToAppend[x].childNodes[1].value = items[x + 1].value;
+                    console.log(items[x + 1].value);
+                }
+            })
+
+        }
+    } else {
+        const input = document.createElement('input');
+
+        if (inputField.isCommentsList === true) {
+            input.setAttribute('is-comment-input', 'true');
         }
 
-        tempInputFields[id] = {label: inputField.label, type: inputField.type};
-
-        formGroup.append(label, select);
-    }else{
-        const input = document.createElement('input');
-        if(inputField.type === 'checkbox'){
+        if (inputField.type === 'checkbox') {
             input.className = 'form-check';
-        }else{
+        } else {
             input.className = 'form-control';
         }
         input.type = inputField.type;
@@ -62,9 +80,78 @@ function generateInputField(inputField, id){
     }
 
     inputFieldBox.append(formGroup);
+
+    itemsToAppend.forEach(i => {
+        inputFieldBox.append(i);
+    })
 }
 
-function setJson(){
+function createSelect(inputField, formGroup, label) {
+    let select = document.createElement('select');
+    select.className = 'form-select';
+    select.id = id;
+    select.name = id;
+
+    //if is comment field
+    if (inputField.isCommentsList === true) {
+        select.setAttribute('is-comment', 'true');
+        select.addEventListener("click", function () {
+            console.log(document.querySelectorAll('[is-comment-input]'));
+            document.querySelectorAll('[is-comment-input]')[0].value = select.value.toString();
+        });
+    }
+
+    for (const [key, value] of Object.entries(dynamicLists[inputField.list_id].values)) {
+        const option = document.createElement('option');
+        option.value = value[0].value;
+        option.textContent = value[0].value;
+        select.append(option);
+    }
+
+    tempInputFields[id] = {label: inputField.label, type: inputField.type};
+
+    formGroup.append(label, select);
+
+    return select;
+}
+
+function createListSelect(list) {
+    const formGroup = document.createElement('div');
+    formGroup.className = 'form-group pl-3 col-md-4';
+
+    const label = document.createElement('label');
+    label.className = 'mb-0';
+    label.textContent = list.name;
+
+    let select = document.createElement('select');
+    select.className = 'form-select';
+    select.id = id;
+    select.name = id;
+    select.disabled = true;
+
+    for (const [key, value] of Object.entries(list.values)) {
+        const option = document.createElement('option');
+        option.value = value[0].value;
+        option.textContent = value[0].value;
+        select.append(option);
+    }
+
+    tempInputFields[id] = {label: list.name, type: "select"};
+
+    formGroup.append(label, select);
+
+    return formGroup;
+}
+
+function filterDynamicList(list, selected_value) {
+    for (let x = 0; x < list.values.length; x++) {
+        if (list.values[x][0].value === selected_value) {
+            return list.values[x];
+        }
+    }
+}
+
+function setJson() {
     if (data.json === "") {
         localStorage.setItem("inspections", JSON.stringify([]));
         document.getElementById("1").value = 1;
@@ -94,12 +181,22 @@ function renderData() {
                 if (value.value === true) {
                     td.textContent = "Ja";
                     td.className = "text-success font-weight-bold";
-                } else if (value.value === false){
+                } else if (value.value === false) {
                     td.textContent = "Nee";
                     td.className = "text-danger font-weight-bold";
-                }else if(value.type === 'datetime-local'){
-                    td.textContent = new Date(value.value).toLocaleString();
-                }else{
+                } else if (value.type === 'datetime-local') {
+                    if (value.value) {
+                        td.textContent = new Date(value.value).toLocaleString([], {
+                            day: '2-digit',
+                            month: '2-digit',
+                            year: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        });
+                    } else {
+                        td.textContent = "";
+                    }
+                } else {
                     td.textContent = value.value;
                 }
                 tr.append(td);
@@ -110,23 +207,29 @@ function renderData() {
     }
 }
 
-
+//submit form items
 document.getElementById("form").addEventListener("submit", function (event) {
     event.preventDefault();
     let object = {};
     for (const [key, value] of Object.entries(tempInputFields)) {
         const input = document.getElementById(key);
-        object[value.label] = {type: value.type, value:input.value};
-        if(value.type === 'checkbox'){
-            object[value.label] = {type: value.type, value:input.checked};
-            input.checked = false;
-        }else if(value.type !== 'select'){
-            input.value = '';
-        }else{
-            input.childNodes[0].selected = true;
+
+        if (!input.getAttribute('is-comment')) {
+            object[input.id] = {type: value.type, value: input.value};
         }
+
+        if (value.type === 'checkbox') {
+            object[input.id] = {type: value.type, value: input.checked};
+            input.checked = false;
+        } else if (value.type !== 'select') {
+            input.value = '';
+        }
+        // else {
+        //     input.childNodes[0].selected = true;
+        // }
     }
-    object['approved'] = {type: 'checkbox', value:document.getElementById('approved').checked};
+    const input = document.getElementById('approved');
+    object[input.id] = {type: 'checkbox', value: input.checked};
     document.getElementById('approved').checked = true;
 
     saveNewObject(object);
