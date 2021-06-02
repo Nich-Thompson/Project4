@@ -20,7 +20,8 @@ class InspectionController extends Controller
 {
     public function index($customer_id, $location_id)
     {
-        $inspections = Inspection::query()->where('customer_id', '=', $customer_id)->where('location_id', '=', $location_id)->get();
+        $inspections = Inspection::query()->where('customer_id', '=', $customer_id)
+            ->where('location_id', '=', $location_id)->get()->sortByDesc("created_at");
         $inspectionTypes = InspectionType::all();
         $users = User::all();
 
@@ -83,24 +84,24 @@ class InspectionController extends Controller
         $inspection_types = InspectionType::all();
         $user = User::find($inspection->user_id);
 
+        $lists = [];
+        foreach (ListModel::all() as $list) {
+            $lists[$list->id] = (object)['name' => $list->name, 'values' => []];
+            foreach ($list->values()->get() as $value) {
+                $valueLink = [(object)['name' => $value->model()->name, 'value' => $value->name]];
+                while ($value->linked_value() != null) {
+                    $value = $value->linked_value();
+                    array_push($valueLink, (object)['id' => $value->model()->id, 'name' => $value->model()->name, 'value' => $value->name]);
+                }
+                array_push($lists[$list->id]->values, $valueLink);
+            }
+        }
+        $lists = (object)$lists;
+
         //check if inspection is not locked, or is locked by this inspector
         if ($inspection->locked == null || $inspection->locked == Auth::id()) {
             $inspection->locked = Auth::id();
             $inspection->save();
-
-            $lists = [];
-            foreach (ListModel::all() as $list) {
-                $lists[$list->id] = (object)['name' => $list->name, 'values' => []];
-                foreach ($list->values()->get() as $value) {
-                    $valueLink = [(object)['name' => $value->model()->name, 'value' => $value->name]];
-                    while ($value->linked_value() != null) {
-                        $value = $value->linked_value();
-                        array_push($valueLink, (object)['id' => $value->model()->id, 'name' => $value->model()->name, 'value' => $value->name]);
-                    }
-                    array_push($lists[$list->id]->values, $valueLink);
-                }
-            }
-            $lists = (object)$lists;
 
             if ($type == "create") {
                 return view('inspection.create', [
@@ -134,6 +135,7 @@ class InspectionController extends Controller
                 'template' => $template,
                 "inspection" => $inspection,
                 "user" => $user,
+                'lists' => $lists,
                 "locked_username" => $locked_user->first_name,
             ]);
         }
@@ -163,8 +165,6 @@ class InspectionController extends Controller
     public function edit($id)
     {
         $inspection = Inspection::find($id);
-        $inspection->locked = Auth::id();
-        $inspection->save();
         return redirect()->to("inspection/inspect/" . $inspection->id . "/" . $inspection->template_id . '/' . "edit");
     }
 

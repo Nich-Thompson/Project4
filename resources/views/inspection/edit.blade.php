@@ -84,7 +84,6 @@
                                 @endforeach
                                 <th>Opmerkingen</th>
                                 <th>Goedgekeurd</th>
-                                <th></th>
                             </tr>
                             </thead>
                             <tbody id="inspections">
