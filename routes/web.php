@@ -68,12 +68,13 @@ Route::prefix('inspection')->group(function () {
     Route::get('/{id}', 'InspectionController@index')->middleware(['role:admin|inspecteur'])->name('getInspectionIndex');
     Route::get('/{customer_id}/{location_id}/choose_template', 'InspectionController@choose_template')->middleware(['role:inspecteur'])->name('getChooseTemplate');
     Route::get('/inspect/{id}/{template_id}/{type}', 'InspectionController@inspect')->middleware(['role:admin|inspecteur'])->name('getInspection');
-    Route::get('/{customer_id}/{location_id}/{template_id}/create', 'InspectionController@create')->middleware(['role:inspecteur'])->name('getInspectionCreate');
+    Route::get('/{customer_id}/{location_id}/{template_id}/create', 'InspectionController@create')->middleware(['role:admin|inspecteur'])->name('getInspectionCreate');
     Route::get('/exit/{inspection_id}/{customer_id}', 'InspectionController@exit')->middleware(['role:inspecteur'])->name('exitInspection');
-    Route::post('/create', 'InspectionController@store')->middleware(['role:inspecteur'])->name('postInspectionCreate');
-    Route::get('/{id}/edit', 'InspectionController@edit')->middleware(['role:inspecteur'])->name('getInspectionEdit');
-    Route::post('/{id}/edit', 'InspectionController@update')->middleware(['role:inspecteur'])->name('postInspectionEdit');
-    Route::post('/save/{id}', 'InspectionController@save')->middleware(['role:inspecteur'])->name('saveInspectionJson');
+    Route::post('/create', 'InspectionController@store')->middleware(['role:admin|inspecteur'])->name('postInspectionCreate');
+    Route::get('/{id}/edit', 'InspectionController@edit')->middleware(['role:admin|inspecteur'])->name('getInspectionEdit');
+    Route::post('/{id}/edit', 'InspectionController@update')->middleware(['role:admin|inspecteur'])->name('postInspectionEdit');
+    Route::post('/save/{id}', 'InspectionController@save')->middleware(['role:admin|inspecteur'])->name('saveInspectionJson');
+    Route::post('/{id}/editInspector', 'InspectionController@updateInspector')->middleware(['role:admin|inspecteur'])->name('postInspectionEditInspector');
 });
 
 //Inspection type routes
@@ -83,7 +84,6 @@ Route::prefix('inspectiontype')->group(function () {
     Route::post('/create', 'InspectionTypeController@store')->middleware(['role:admin'])->name('postInspectionTypeCreate');
     Route::get('/{id}/edit', 'InspectionTypeController@edit')->middleware(['role:admin'])->name('getInspectionTypeEdit');
     Route::post('/{id}/edit', 'InspectionTypeController@update')->middleware(['role:admin'])->name('postInspectionTypeEdit');
-    Route::post('/{id}/editInspector', 'InspectionController@updateInspector')->middleware(['role:admin|inspecteur'])->name('postInspectionEditInspector');
     Route::get('/{id}/archive', 'InspectionTypeController@delete')->middleware(['role:admin'])->name('getInspectionTypeDelete');
     Route::post('/{id}/archive', 'InspectionTypeController@destroy')->middleware(['role:admin'])->name('postInspectionTypeDelete');
 });

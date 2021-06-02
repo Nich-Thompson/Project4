@@ -11,10 +11,9 @@ window.onload = function () {
     let checkbox = document.getElementById('addCheckbox')
     checkbox.addEventListener('click', addCheckbox)
     let list = document.getElementById('addList')
-    list.addEventListener('click', addList)
+    list.addEventListener('click', () => addList(false))
     let comments = document.getElementById('addComments')
-    comments.addEventListener('click', addComments)
-
+    comments.addEventListener('click', () => addList(true))
     if (oldTemplate) {
         loadOldInputs()
     }
@@ -91,7 +90,7 @@ function createInput(type, name = null) {
     hiddenInputs.appendChild(typeInput)
 }
 
-function addList(listId = null) {
+function addList(listId = null, is_comments_list) {
     let inputs = document.getElementById('inputs')
     let hiddenInputs = document.getElementById('hiddenInputs')
 
@@ -103,7 +102,13 @@ function addList(listId = null) {
 
     let select = document.createElement('select');
     select.className = 'form-select';
-    select.name = 'selects[]';
+
+    if (is_comments_list === true) {
+        select.name = 'comments_list_id';
+    } else {
+        select.name = 'selects[]';
+    }
+
     dynamicLists.forEach(dynamicList => {
         const option = document.createElement('option');
         option.value = dynamicList.id;
@@ -123,6 +128,33 @@ function addList(listId = null) {
     })
     newDiv.append(label, deleteButton, select);
     inputs.append(newDiv);
+}
+
+function loadOldInputs() {
+    oldTemplate.forEach(field => {
+        switch (field.type) {
+            case 'text':
+                addTextInput(field.label)
+                break;
+            case 'number':
+                addNumberInput(field.label)
+                break;
+            case 'datetime-local':
+                addDateTimeInput(field.label)
+                break;
+            case 'checkbox':
+                addCheckbox(field.label)
+                break;
+            case 'select':
+                if (!field.isCommentsList) {
+                    addList(field.list_id)
+                }
+                else {
+                    addComments(field.list_id)
+                }
+                break;
+        }
+    })
 }
 
 function addComments(listId = null) {
@@ -162,31 +194,4 @@ function addComments(listId = null) {
         newDiv.append(label, deleteButton, select);
         inputs.append(newDiv);
     }
-}
-
-function loadOldInputs() {
-    oldTemplate.forEach(field => {
-        switch (field.type) {
-            case 'text':
-                addTextInput(field.label)
-                break;
-            case 'number':
-                addNumberInput(field.label)
-                break;
-            case 'datetime-local':
-                addDateTimeInput(field.label)
-                break;
-            case 'checkbox':
-                addCheckbox(field.label)
-                break;
-            case 'select':
-                if (!field.isCommentsList) {
-                    addList(field.list_id)
-                }
-                else {
-                    addComments(field.list_id)
-                }
-                break;
-        }
-    })
 }
