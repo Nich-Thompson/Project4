@@ -76,15 +76,15 @@ class InspectionTypeSeeder extends Seeder
         ]);
         InspectionType::create([
             'name' => 'Keerkleppen',
-            'description' => '',
+            'description' => 'Keerkleppen moeten degelijk zijn',
             'color' => '#4dff58',
-            'icon_id' => '5'
+            'icon_id' => '1'
         ]);
         InspectionType::create([
             'name' => 'Noodverlichting',
             'description' => 'Verlichting moet werken',
             'color' => '#335BFF',
-            'icon_id' => '6'
+            'icon_id' => '8'
         ]);
     }
 }
