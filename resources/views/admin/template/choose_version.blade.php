@@ -30,6 +30,9 @@
                                     <div class="d-flex flex-column w-50">
                                         <div id="name"
                                              class="h5 m-0 fw-bold">{{ $template->created_at->format('Y-m-d H:i') }}
+                                            @if($i == count($templates))
+                                                [Actieve versie]
+                                            @endif
                                         </div>
                                         <label class="">Versie {{ $i }}</label>
                                     </div>
@@ -51,7 +54,8 @@
                         @endif
                     </div>
                     <br>
-                    <a href="{{URL::to('/template')}}" class="btn btn-default" title="Terug naar vorige pagina">Terug</a>
+                    <a href="{{URL::to('/template')}}" class="btn btn-default"
+                       title="Terug naar vorige pagina">Terug</a>
                 </div>
             </div>
         </div>
