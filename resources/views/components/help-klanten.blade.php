@@ -1,14 +1,14 @@
 
 <div class="ml-3 float-left">
-    <button style="border:none" id="btn">
+    <a href="#" id="btncustomer">
         <img src="{{URL::asset('/images/helpicon.png')}}" width='30' height='30' alt="HelpIcon">
-    </button>
+    </a>
 </div>
 
 
 <script>
     $(function() {
-        $('#btn').click(function () {
+        $('#btncustomer').click(function () {
 
             Swal.fire({
                 icon: 'info',
