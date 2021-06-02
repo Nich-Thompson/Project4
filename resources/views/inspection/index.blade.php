@@ -13,13 +13,13 @@
                     <h1 class="float-left h2">Inspecties overzicht</h1>
                     <p class="mb-5"></p>
                     <hr/>
-                    <p class="font-italic">Zoek op Inspectietype</p>
-                    <label>Selecteer Inspectietype</label>
-                    <select>
-                        @foreach($inspectionTypes as $inspectionType)
-                            <option class="form-select">{{$inspectionType->name}}</option>
-                        @endforeach
-                    </select>
+{{--                    <p class="font-italic">Zoek op Inspectietype</p>--}}
+                    {{--                    <label>Selecteer Inspectietype</label>--}}
+                    {{--                    <select>--}}
+                    {{--                        @foreach($inspectionTypes as $inspectionType)--}}
+                    {{--                            <option class="form-select">{{$inspectionType->name}}</option>--}}
+                    {{--                        @endforeach--}}
+                    {{--                    </select>--}}
 
                     <div id="customers">
                         @if(count($inspections) === 0)
@@ -33,6 +33,10 @@
                                     <div class="d-flex flex-column w-50">
                                         <div id="name"
                                              class="h5 m-0 fw-bold">{{ date('d-m-Y', strtotime($inspection->created_at))}}</div>
+                                        @if(!is_null($inspection->locked))
+                                            <p class="text-danger">Nog niet uitgechecked
+                                                door {{$users->firstWhere('id',$inspection->locked)->first_name . " " . $users->firstWhere('id',$inspection->locked)->last_name}}</p>
+                                        @endif
                                     </div>
                                     <div class="d-flex flex-column justify-content-end w-50 text-right pb-2">
                                         <a id="{{$inspection->id}}"

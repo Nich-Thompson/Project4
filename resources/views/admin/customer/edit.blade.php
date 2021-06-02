@@ -208,7 +208,7 @@
                                                             <a id="{{$location->id}}"
                                                                href="{{route('getLocationEdit', [$customer->id, $location->id]) }}"
                                                                class="btn btn-primary col m-2">
-                                                                Bewerken
+                                                                Bekijken
                                                             </a>
                                                             @if(Auth::user()->hasRole('admin'))
                                                                 <a href="{{ route('getLocationArchive', [$customer->id,$location->id]) }}"
