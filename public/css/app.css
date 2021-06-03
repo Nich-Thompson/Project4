@@ -14,7 +14,7 @@
     width: 11% !important;
 }
 
-.h-10em{
+.h-10em {
     height: 10em !important;
 }
 
@@ -2691,8 +2691,8 @@ fieldset:disabled a.btn {
 
 .btn-primary {
     color: #fff;
-    background-color: #3490dc;
-    border-color: #3490dc;
+    background-color: #0074d4;
+    border-color: #0074d4;
 }
 
 .btn-primary:hover {
@@ -10754,7 +10754,7 @@ a.text-warning:focus {
 }
 
 .text-danger {
-    color: #e3342f !important;
+    color: #d80600 !important;
 }
 
 a.text-danger:hover,
