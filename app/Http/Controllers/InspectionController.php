@@ -99,44 +99,54 @@ class InspectionController extends Controller
         $lists = (object)$lists;
 
         //check if inspection is not locked, or is locked by this inspector
-        if ($inspection->locked == null || $inspection->locked == Auth::id()) {
-            $inspection->locked = Auth::id();
-            $inspection->save();
+        if (Auth::user()->hasRole("inspecteur")) {
+            if (($inspection->locked == null || $inspection->locked == Auth::id())) {
+                $inspection->locked = Auth::id();
+                $inspection->save();
 
-            if ($type == "create") {
-                return view('inspection.create', [
-                    "id" => $id,
-                    'template' => $template,
-                    "inspection" => $inspection,
-                    "user" => $user,
-                    'inspection_types' => $inspection_types,
-                    'lists' => $lists
-                ]);
-            } else if ($type == "edit") {
-                $inspectors = User::whereHas(
-                    'roles', function ($q) {
-                    $q->where('name', 'inspecteur')->orWhere('name', 'admin');;
+                if ($type == "create") {
+                    return view('inspection.create', [
+                        "id" => $id,
+                        'template' => $template,
+                        "inspection" => $inspection,
+                        "user" => $user,
+                        'inspection_types' => $inspection_types,
+                        'lists' => $lists
+                    ]);
+                } else if ($type == "edit") {
+                    $inspectors = User::whereHas(
+                        'roles', function ($q) {
+                        $q->where('name', 'inspecteur')->orWhere('name', 'admin');;
+                    }
+                    )->get();
+                    return view('inspection.edit', [
+                        "id" => $id,
+                        'template' => $template,
+                        "inspection" => $inspection,
+                        "user" => $user,
+                        'inspection_types' => $inspection_types,
+                        'lists' => $lists,
+                        'inspectors' => $inspectors
+                    ]);
                 }
-                )->get();
-                return view('inspection.edit', [
+            } else {
+                $locked_user = User::find($inspection->locked);
+                return view('inspection.view', [
                     "id" => $id,
                     'template' => $template,
                     "inspection" => $inspection,
                     "user" => $user,
-                    'inspection_types' => $inspection_types,
                     'lists' => $lists,
-                    'inspectors' => $inspectors
+                    "locked_username" => $locked_user->first_name,
                 ]);
             }
         } else {
-            $locked_user = User::find($inspection->locked);
             return view('inspection.view', [
                 "id" => $id,
                 'template' => $template,
                 "inspection" => $inspection,
                 "user" => $user,
                 'lists' => $lists,
-                "locked_username" => $locked_user->first_name,
             ]);
         }
     }
@@ -149,7 +159,6 @@ class InspectionController extends Controller
         $inspection = Inspection::find($id);
 
         $inspection->json = $payload["json"];
-
 
         $inspection->save();
 

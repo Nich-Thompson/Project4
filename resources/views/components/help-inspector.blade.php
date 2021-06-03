@@ -1,10 +1,10 @@
 <a href="#" class="dropdown-item" id="btnInspector">
-        help <img src="{{URL::asset('/images/helpicon.png')}}" width='15' height='15' alt="HelpIcon">
+    Help <img src="{{URL::asset('/images/helpicon.png')}}" width='15' height='15' alt="HelpIcon">
 </a>
 
 
 <script>
-    $(function() {
+    $(function () {
         $('#btnInspector').click(function () {
 
             Swal.fire({
