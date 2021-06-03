@@ -80,6 +80,7 @@ function createInput(type, name = null) {
     deleteButton.textContent = 'X'
     deleteButton.addEventListener('click', function () {
         newDiv.parentNode.removeChild(newDiv)
+        hiddenInputs.removeChild(typeInput)
     })
 
     inputs.appendChild(newDiv)
