@@ -25,17 +25,17 @@
                             </div>
                         @else
                             @foreach ($templates as $template)
-                                <div id='customer-field'
-                                     class="row m-2 p-3 rounded border border-light shadow-sm bg-white">
+                                <div class="row m-2 p-3 rounded border border-light shadow-sm bg-white">
                                     <div class="d-flex flex-column w-50">
-                                        <div id="name"
-                                             class="h5 m-0 fw-bold">{{ $template->inspection_type()->name }}</div>
+                                        <div class="h5 m-0 fw-bold">{{ $template->inspection_type()->name }}</div>
                                     </div>
                                     <div class="d-flex flex-column justify-content-end w-50 text-right pb-2">
                                         <a id="{{$template->id}}"
                                            href="{{ route('getTemplateVersions', $template->inspection_type_id) }}"
                                            title="versies">
-                                            <button class="float-right btn btn-outline-primary border" title="Versies">Versies</button>
+                                            <button class="float-right btn btn-outline-primary border" title="Versies">
+                                                Versies
+                                            </button>
                                         </a>
                                     </div>
                                 </div>

@@ -13,7 +13,7 @@
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-12 text-right">
                             <h1>
-                     <!--          <a href="{{ route('getInspectionTypeDelete', $id) }}" id="archiveButton"
+                            <!--          <a href="{{ route('getInspectionTypeDelete', $id) }}" id="archiveButton"
                                    class="btn btn-primary" hidden title="Archiveren">Archiveren</a> -->
 
                                 <button id="switchButton" onclick="enableInput()" class="btn btn-primary"
@@ -65,7 +65,8 @@
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <label>Kleur:</label>
                                 <div class="form-group">
-                                    <input type="color" name="color" class="form-control" disabled required
+                                    <input type="color" name="color" class="form-control" title="Kleur selecteren"
+                                           disabled required
                                            oninvalid="this.setCustomValidity('Dit veld mag niet leeg zijn.')"
                                            oninput="this.setCustomValidity('')"
                                            @if(old('color') != null)
@@ -78,7 +79,9 @@
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <label>Icoon:</label>
                                 <div class="form-group">
-                                    <select name="icon_id" class="fontawesomeselect col-xs-12 col-sm-12 col-md-12 form-select" disabled>
+                                    <select name="icon_id"
+                                            class="fontawesomeselect col-xs-12 col-sm-12 col-md-12 form-select"
+                                            title="Icoon selecteren" disabled>
 
                                         @foreach($icons as $icon)
                                             @if($type->icon()->id == $icon->id)

@@ -215,15 +215,13 @@
                                                                 Bekijken
                                                             </a>
                                                         @else
-                                                            <a id="{{$location->id}}"
-                                                               href="{{route('getLocationEdit', [$customer->id, $location->id]) }}"
+                                                            <a href="{{route('getLocationEdit', [$customer->id, $location->id]) }}"
                                                                class="btn btn-primary ml-2">
                                                                 Bekijken
                                                             </a>
                                                         @endif
                                                         @if(Auth::user()->hasRole('inspecteur'))
-                                                            <a id="{{$location->id}}"
-                                                               href="{{URL::to('/inspection/'.$customer->id.'/'.$location->id.'/choose_template')}}"
+                                                            <a href="{{URL::to('/inspection/'.$customer->id.'/'.$location->id.'/choose_template')}}"
                                                                class="btn btn-primary ml-2 float-right">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                                      height="16" fill="currentColor" class="bi bi-plus"
