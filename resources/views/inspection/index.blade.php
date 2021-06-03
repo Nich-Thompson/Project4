@@ -13,7 +13,7 @@
                     <h1 class="float-left h2">Inspecties overzicht</h1>
                     <p class="mb-5"></p>
                     <hr/>
-{{--                    <p class="font-italic">Zoek op Inspectietype</p>--}}
+                    {{--                    <p class="font-italic">Zoek op Inspectietype</p>--}}
                     {{--                    <label>Selecteer Inspectietype</label>--}}
                     {{--                    <select>--}}
                     {{--                        @foreach($inspectionTypes as $inspectionType)--}}
@@ -28,11 +28,10 @@
                             </div>
                         @else
                             @foreach ($inspections as $inspection)
-                                <div id='customer-field'
-                                     class="row m-2 p-3 rounded border border-light shadow-sm bg-white">
+                                <div class="row m-2 p-3 rounded border border-light shadow-sm bg-white">
                                     <div class="d-flex flex-column w-50">
-                                        <div id="name"
-                                             class="h5 m-0 fw-bold">{{ date('d-m-Y', strtotime($inspection->created_at))}}</div>
+                                        <div
+                                            class="h5 m-0 fw-bold">{{ date('d-m-Y', strtotime($inspection->created_at))}}</div>
                                         @if(!is_null($inspection->locked))
                                             <p class="text-danger">Nog niet uitgechecked
                                                 door {{$users->firstWhere('id',$inspection->locked)->first_name . " " . $users->firstWhere('id',$inspection->locked)->last_name}}</p>
@@ -40,7 +39,8 @@
                                     </div>
                                     <div class="d-flex flex-column justify-content-end w-50 text-right pb-2">
                                         <a id="{{$inspection->id}}"
-                                           href="{{URL::to('/inspection/'.$inspection->id.'/edit') /*route('getInspectionEdit', $inspection->id)*/ }}">
+                                           href="{{URL::to('/inspection/'.$inspection->id.'/edit') /*route('getInspectionEdit', $inspection->id)*/ }}"
+                                           title="Inspectie openen">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"
                                                  fill="currentColor"
                                                  class="bi bi-arrow-right-short" viewBox="0 0 16 16">
