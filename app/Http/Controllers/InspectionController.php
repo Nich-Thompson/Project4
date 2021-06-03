@@ -20,7 +20,8 @@ class InspectionController extends Controller
 {
     public function index($customer_id, $location_id)
     {
-        $inspections = Inspection::query()->where('customer_id', '=', $customer_id)->where('location_id', '=', $location_id)->get();
+        $inspections = Inspection::query()->where('customer_id', '=', $customer_id)
+            ->where('location_id', '=', $location_id)->get()->sortByDesc("created_at");
         $inspectionTypes = InspectionType::all();
         $users = User::all();
 
