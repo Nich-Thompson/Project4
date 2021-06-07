@@ -36,7 +36,7 @@ function generateInputField(inputField) {
     let itemsToAppend = [];
 
     if (inputField.type === 'select') {
-        if (dynamicLists[inputField.list_id].values.length !== 0) {
+        if (dynamicLists[inputField.list_id].values.length !== 0 && dynamicLists[inputField.list_id].values[0].length > 1) {
             let length = dynamicLists[inputField.list_id].values[0].length;
 
             let copyId = id;
@@ -68,6 +68,8 @@ function generateInputField(inputField) {
                     });
                 }
             }
+        }else{
+            createSelect(inputField, formGroup, label);
         }
     } else {
         const input = document.createElement('input');
