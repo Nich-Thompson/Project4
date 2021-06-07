@@ -161,8 +161,9 @@ function createListSelect(list, disabled) {
 
 function filterDynamicList(list, select, selected_value) {
     select.disabled = false;
-        Array.prototype.forEach.call(select.options, o=> o.remove());
-    getValuesForSelect(list, selected_value).forEach(value => {
+    select.length = 0;
+    const values = getValuesForSelect(list, selected_value);
+    values.forEach(value => {
         const option = document.createElement('option');
         option.value = value;
         option.textContent = value;
