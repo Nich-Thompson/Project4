@@ -88,12 +88,12 @@ class InspectionController extends Controller
         foreach (ListModel::all() as $list) {
             $lists[$list->id] = (object)['name' => $list->name, 'values' => []];
             foreach ($list->values()->get() as $value) {
-                $valueLink = [(object)['name' => $value->model()->name, 'value' => $value->name]];
+                $valueLink = [(object)['id' => $value->model()->id, 'name' => $value->model()->name, 'value' => $value->name]];
                 while ($value->linked_value() != null) {
                     $value = $value->linked_value();
                     array_push($valueLink, (object)['id' => $value->model()->id, 'name' => $value->model()->name, 'value' => $value->name]);
                 }
-                array_push($lists[$list->id]->values, $valueLink);
+                array_push($lists[$list->id]->values, array_reverse($valueLink));
             }
         }
         $lists = (object)$lists;
