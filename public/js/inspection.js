@@ -36,27 +36,40 @@ function generateInputField(inputField) {
     let itemsToAppend = [];
 
     if (inputField.type === 'select') {
-        let select = createSelect(inputField, formGroup, label);
-
         if (dynamicLists[inputField.list_id].values.length !== 0 && dynamicLists[inputField.list_id].values[0].length > 1) {
             let length = dynamicLists[inputField.list_id].values[0].length;
 
-            for (let i = 1; i < length; i++) {
-                id++;
+            let copyId = id;
+            let ids = [copyId];
+            for(let i = 0; i < length; i++){
+                ids.push(++copyId);
+            }
+            for (let i = 0; i < length; i++) {
 
                 let list = dynamicLists[dynamicLists[inputField.list_id].values[0][i].id];
-                itemsToAppend.push(createListSelect(list));
-            }
-
-            select.addEventListener("change", (e) => {
-                let items = filterDynamicList(dynamicLists[inputField.list_id], select.value);
-
-                for (let x = 0; x < itemsToAppend.length; x++) {
-                    itemsToAppend[x].childNodes[1].value = items[x + 1].value;
-                    console.log(items[x + 1].value);
+                if (i === 0) {
+                    itemsToAppend.push(createListSelect(list, false));
+                } else {
+                    itemsToAppend.push(createListSelect(list, true));
                 }
-            })
-
+                id++;
+            }
+            if(itemsToAppend.length > 1){
+                for(let x = 0; x < itemsToAppend.length-1; x++){
+                    itemsToAppend[x].addEventListener('click', (e) =>{
+                        e.preventDefault();
+                        filterDynamicList(dynamicLists[dynamicLists[inputField.list_id].values[0][x+1].id],itemsToAppend[x+1].childNodes[1], itemsToAppend[x].childNodes[1].value);
+                        let check = x+ 2;
+                        while(check <= itemsToAppend.length-1){
+                            itemsToAppend[check].childNodes[1].disabled = true;
+                            Array.prototype.forEach.call(itemsToAppend[check].childNodes[1].options, o=> o.remove());
+                            check++;
+                        }
+                    });
+                }
+            }
+        }else{
+            createSelect(inputField, formGroup, label);
         }
     } else {
         const input = document.createElement('input');
@@ -79,7 +92,9 @@ function generateInputField(inputField) {
         formGroup.append(label, input);
     }
 
-    inputFieldBox.append(formGroup);
+    if (formGroup.innerHTML) {
+        inputFieldBox.append(formGroup);
+    }
 
     itemsToAppend.forEach(i => {
         inputFieldBox.append(i);
@@ -96,7 +111,6 @@ function createSelect(inputField, formGroup, label) {
     if (inputField.isCommentsList === true) {
         select.setAttribute('is-comment', 'true');
         select.addEventListener("click", function () {
-            console.log(document.querySelectorAll('[is-comment-input]'));
             document.querySelectorAll('[is-comment-input]')[0].value = select.value.toString();
         });
     }
@@ -115,7 +129,7 @@ function createSelect(inputField, formGroup, label) {
     return select;
 }
 
-function createListSelect(list) {
+function createListSelect(list, disabled) {
     const formGroup = document.createElement('div');
     formGroup.className = 'form-group pl-3 col-md-4';
 
@@ -127,13 +141,15 @@ function createListSelect(list) {
     select.className = 'form-select';
     select.id = id;
     select.name = id;
-    select.disabled = true;
+    select.disabled = disabled;
 
-    for (const [key, value] of Object.entries(list.values)) {
-        const option = document.createElement('option');
-        option.value = value[0].value;
-        option.textContent = value[0].value;
-        select.append(option);
+    if (!disabled) {
+        for (const [key, value] of Object.entries(list.values)) {
+            const option = document.createElement('option');
+            option.value = value[value.length - 1].value;
+            option.textContent = value[value.length - 1].value;
+            select.append(option);
+        }
     }
 
     tempInputFields[id] = {label: list.name, type: "select"};
@@ -143,12 +159,26 @@ function createListSelect(list) {
     return formGroup;
 }
 
-function filterDynamicList(list, selected_value) {
-    for (let x = 0; x < list.values.length; x++) {
-        if (list.values[x][0].value === selected_value) {
-            return list.values[x];
+function filterDynamicList(list, select, selected_value) {
+    select.disabled = false;
+    select.length = 0;
+    const values = getValuesForSelect(list, selected_value);
+    values.forEach(value => {
+        const option = document.createElement('option');
+        option.value = value;
+        option.textContent = value;
+        select.append(option);
+    });
+}
+
+function getValuesForSelect(list, selected_value){
+    let values = [];
+    for (const [key, value] of Object.entries(list.values)) {
+        if(value[value.length-2].value === selected_value){
+            values.push(value[value.length-1].value)
         }
     }
+    return values;
 }
 
 function setJson() {
@@ -242,10 +272,33 @@ function saveNewObject(object) {
     if (!(storage instanceof Array))
         storage = [storage];
     storage.push(object);
+    storage.sort(alphaNumericSort);
 
     localStorage.setItem("inspections", JSON.stringify(storage));
 
     syncData();
+}
+
+function alphaNumericSort(as, bs){
+    as = as[1].value;
+    bs = bs[1].value;
+    let a, b, a1, b1, i= 0, n, L,
+        rx=/(\.\d+)|(\d+(\.\d+)?)|([^\d.]+)|(\.\D+)|(\.$)/g;
+    if(as=== bs) return 0;
+    a= as.toLowerCase().match(rx);
+    b= bs.toLowerCase().match(rx);
+    L= a.length;
+    while(i<L){
+        if(!b[i]) return 1;
+        a1= a[i],
+            b1= b[i++];
+        if(a1!== b1){
+            n= a1-b1;
+            if(!isNaN(n)) return n;
+            return a1>b1? 1:-1;
+        }
+    }
+    return b[i]? -1:0;
 }
 
 function syncData() {
