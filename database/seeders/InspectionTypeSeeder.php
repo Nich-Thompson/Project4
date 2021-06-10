@@ -69,8 +69,8 @@ class InspectionTypeSeeder extends Seeder
         ]);
 
         InspectionType::create([
-            'name' => 'blusmiddelen',
-            'description' => 'Blusmiddelen moeten niet over de datum zijn.',
+            'name' => 'Blusmiddelen',
+            'description' => 'Blusmiddelen mogen niet over de datum zijn.',
             'color' => '#FF3333',
             'icon_id' => '3'
         ]);
