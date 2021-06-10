@@ -41,7 +41,7 @@ function generateInputField(inputField) {
 
             let copyId = id;
             let ids = [copyId];
-            for(let i = 0; i < length; i++){
+            for (let i = 0; i < length; i++) {
                 ids.push(++copyId);
             }
             for (let i = 0; i < length; i++) {
@@ -54,21 +54,21 @@ function generateInputField(inputField) {
                 }
                 id++;
             }
-            if(itemsToAppend.length > 1){
-                for(let x = 0; x < itemsToAppend.length-1; x++){
-                    itemsToAppend[x].addEventListener('click', (e) =>{
+            if (itemsToAppend.length > 1) {
+                for (let x = 0; x < itemsToAppend.length - 1; x++) {
+                    itemsToAppend[x].addEventListener('click', (e) => {
                         e.preventDefault();
-                        filterDynamicList(dynamicLists[dynamicLists[inputField.list_id].values[0][x+1].id],itemsToAppend[x+1].childNodes[1], itemsToAppend[x].childNodes[1].value);
-                        let check = x+ 2;
-                        while(check <= itemsToAppend.length-1){
+                        filterDynamicList(dynamicLists[dynamicLists[inputField.list_id].values[0][x + 1].id], itemsToAppend[x + 1].childNodes[1], itemsToAppend[x].childNodes[1].value);
+                        let check = x + 2;
+                        while (check <= itemsToAppend.length - 1) {
                             itemsToAppend[check].childNodes[1].disabled = true;
-                            Array.prototype.forEach.call(itemsToAppend[check].childNodes[1].options, o=> o.remove());
+                            Array.prototype.forEach.call(itemsToAppend[check].childNodes[1].options, o => o.remove());
                             check++;
                         }
                     });
                 }
             }
-        }else{
+        } else {
             createSelect(inputField, formGroup, label);
         }
     } else {
@@ -171,11 +171,11 @@ function filterDynamicList(list, select, selected_value) {
     });
 }
 
-function getValuesForSelect(list, selected_value){
+function getValuesForSelect(list, selected_value) {
     let values = [];
     for (const [key, value] of Object.entries(list.values)) {
-        if(value[value.length-2].value === selected_value){
-            values.push(value[value.length-1].value)
+        if (value[value.length - 2].value === selected_value) {
+            values.push(value[value.length - 1].value)
         }
     }
     return values;
@@ -287,29 +287,31 @@ function saveNewObject(object) {
 
     localStorage.setItem("inspections", JSON.stringify(storage));
 
-    syncData();
+    if (navigator.onLine) {
+        syncData();
+    }
 }
 
-function alphaNumericSort(as, bs){
+function alphaNumericSort(as, bs) {
     as = as[1].value;
     bs = bs[1].value;
-    let a, b, a1, b1, i= 0, n, L,
-        rx=/(\.\d+)|(\d+(\.\d+)?)|([^\d.]+)|(\.\D+)|(\.$)/g;
-    if(as=== bs) return 0;
-    a= as.toLowerCase().match(rx);
-    b= bs.toLowerCase().match(rx);
-    L= a.length;
-    while(i<L){
-        if(!b[i]) return 1;
-        a1= a[i],
-            b1= b[i++];
-        if(a1!== b1){
-            n= a1-b1;
-            if(!isNaN(n)) return n;
-            return a1>b1? 1:-1;
+    let a, b, a1, b1, i = 0, n, L,
+        rx = /(\.\d+)|(\d+(\.\d+)?)|([^\d.]+)|(\.\D+)|(\.$)/g;
+    if (as === bs) return 0;
+    a = as.toLowerCase().match(rx);
+    b = bs.toLowerCase().match(rx);
+    L = a.length;
+    while (i < L) {
+        if (!b[i]) return 1;
+        a1 = a[i],
+            b1 = b[i++];
+        if (a1 !== b1) {
+            n = a1 - b1;
+            if (!isNaN(n)) return n;
+            return a1 > b1 ? 1 : -1;
         }
     }
-    return b[i]? -1:0;
+    return b[i] ? -1 : 0;
 }
 
 function syncData() {

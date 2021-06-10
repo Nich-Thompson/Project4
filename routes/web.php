@@ -71,7 +71,7 @@ Route::prefix('inspection')->group(function () {
     Route::get('/{customer_id}/{location_id}/choose_template', 'InspectionController@choose_template')->middleware(['role:inspecteur'])->name('getChooseTemplate');
     Route::get('/inspect/{id}/{template_id}/{type}', 'InspectionController@inspect')->middleware(['role:admin|inspecteur'])->name('getInspection');
     Route::get('/{customer_id}/{location_id}/{template_id}/create', 'InspectionController@create')->middleware(['role:admin|inspecteur'])->name('getInspectionCreate');
-    Route::get('/exit/{inspection_id}/{customer_id}', 'InspectionController@exit')->middleware(['role:inspecteur'])->name('exitInspection');
+    Route::get('/exit/{inspection_id}/{customer_id}', 'InspectionController@exit')->middleware(['role:admin|inspecteur'])->name('exitInspection');
     Route::post('/create', 'InspectionController@store')->middleware(['role:admin|inspecteur'])->name('postInspectionCreate');
     Route::post('/save/{id}', 'InspectionController@save')->middleware(['role:admin|inspecteur'])->name('saveInspectionJson');
     Route::post('/{id}/editInspector', 'InspectionController@updateInspector')->middleware(['role:admin|inspecteur'])->name('postInspectionEditInspector');
