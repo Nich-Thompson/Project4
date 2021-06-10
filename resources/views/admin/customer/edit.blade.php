@@ -211,12 +211,12 @@
                                                         @if(Auth::user()->hasRole('inspecteur'))
                                                             <a id="{{$location->id}}"
                                                                href="{{route('getLocationEdit', [$customer->id, $location->id]) }}"
-                                                               class="btn border ml-2">
+                                                               class="btn border ml-2" title="Locatie bekijken">
                                                                 Bekijken
                                                             </a>
                                                         @else
                                                             <a href="{{route('getLocationEdit', [$customer->id, $location->id]) }}"
-                                                               class="btn btn-primary ml-2">
+                                                               class="btn btn-primary ml-2" title="Locatie bekijken">
                                                                 Bekijken
                                                             </a>
                                                         @endif

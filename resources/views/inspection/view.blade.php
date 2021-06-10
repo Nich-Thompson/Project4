@@ -14,16 +14,9 @@
                             door: {{$user->first_name}} {{$user->last_name}}</p>
                         <hr>
 
-                        @role("inspecteur")
                         <div class="alert alert-info" role="alert">
                             Op dit moment is {{$locked_username}} bezig met deze inspectie, je kan dus alleen bekijken
                         </div>
-                        @endrole
-                        @role("admin")
-                        <div class="alert alert-info" role="alert">
-                            Je kan deze inspectie alleen bekijken, omdat je als administrator bent ingelogd
-                        </div>
-                        @endrole
                         <div class="alert alert-danger" role="alert" id="offline">
                             De internet connectie is verloren, je werkt nu offline!
                         </div>
