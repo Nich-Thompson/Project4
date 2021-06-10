@@ -195,7 +195,18 @@ function setJson() {
 function renderData() {
     if (localStorage.getItem("inspections") !== null && localStorage.getItem("inspections") !== "") {
         let inspections = JSON.parse(localStorage.getItem("inspections"));
-        document.getElementById("1").value = inspections.length + 1;
+        let highestPos = 0;
+        inspections.forEach(inspection => {
+            const matches = inspection[1].value.match(/(\d+)/);
+
+            if (matches) {
+                const pos = parseInt(matches[0])
+                if(pos > highestPos){
+                    highestPos = pos
+                }
+            }
+        });
+        document.getElementById("1").value = highestPos+1;
         let div = document.getElementById("inspections");
 
         div.innerHTML = "";
