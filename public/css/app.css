@@ -18,6 +18,10 @@
     height: 10em !important;
 }
 
+.vh-40 {
+    height: 40vh;
+}
+
 /*Alignment*/
 .vertical-center {
     display: flex;

@@ -33,32 +33,33 @@
                             <button type="submit" class="float-right btn btn-primary text-light">Invoeren
                             </button>
                         </form>
-
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>Positie</th>
-                                @foreach($template->json as $input)
-                                    @if($input->type == "select" && $input->isCommentsList != true)
-                                        @if(count($lists->{$input->list_id}->values) !== 0)
-                                            @for($x = 0; $x < count($lists->{$input->list_id}->values[0]); $x++)
-                                                <th>{{$lists->{$input->list_id}->values[0][$x]->name}}</th>
-                                            @endfor
+                        <div class="vh-40 overflow-scroll">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Positie</th>
+                                    @foreach($template->json as $input)
+                                        @if($input->type == "select" && $input->isCommentsList != true)
+                                            @if(count($lists->{$input->list_id}->values) !== 0)
+                                                @for($x = 0; $x < count($lists->{$input->list_id}->values[0]); $x++)
+                                                    <th>{{$lists->{$input->list_id}->values[0][$x]->name}}</th>
+                                                @endfor
+                                            @endif
+                                        @elseif($input->type != "select")
+                                            <th>{{$input -> label}}</th>
                                         @endif
-                                    @elseif($input->type != "select")
-                                        <th>{{$input -> label}}</th>
-                                    @endif
-                                @endforeach
-                                <th>Opmerkingen</th>
-                                <th>Goedgekeurd</th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                            </thead>
-                            <tbody id="inspections">
+                                    @endforeach
+                                    <th>Opmerkingen</th>
+                                    <th>Goedgekeurd</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody id="inspections">
 
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
