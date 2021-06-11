@@ -24,14 +24,6 @@
                                     <div class="row" id='input-field-box'>
 
                                     </div>
-
-                                    <div class="row">
-                                        <div class="form-group pl-3 col-md-4">
-                                            <label for="approved">Goedgekeurd</label>
-                                            <input type="checkbox" class="form-check" id="approved" name="approved"
-                                                   checked>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                             <br>
@@ -59,6 +51,8 @@
                                 @endforeach
                                 <th>Opmerkingen</th>
                                 <th>Goedgekeurd</th>
+                                <th></th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody id="inspections">

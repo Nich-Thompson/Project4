@@ -16,6 +16,7 @@ document.getElementById("offline").style.display = "none";
 function generateInputFields() {
     inputFields.unshift({label: 'Pos.', type: 'text'});
     inputFields.push({label: 'Opmerkingen', type: 'text', isCommentsList: true});
+    inputFields.push({label: 'Goedgekeurd', type: 'checkbox', default: true});
 
     inputFields.forEach(inputField => {
         id++;
@@ -80,6 +81,11 @@ function generateInputField(inputField) {
 
         if (inputField.type === 'checkbox') {
             input.className = 'form-check';
+            if (inputField.default !== null) {
+                if (inputField.default === true) {
+                    input.defaultChecked = true;
+                }
+            }
         } else {
             input.className = 'form-control';
         }
@@ -182,6 +188,7 @@ function getValuesForSelect(list, selected_value) {
 }
 
 function setJson() {
+    localStorage.setItem("edit", JSON.stringify(0));
     if (data.json === "") {
         localStorage.setItem("inspections", JSON.stringify([]));
         document.getElementById("1").value = 1;
@@ -216,10 +223,11 @@ function renderData() {
 
 
         inspections.forEach((element, element_key) => {
+            console.log(element)
+
             let tr = document.createElement("tr");
             for (const [key, value] of Object.entries(element)) {
 
-                console.log("key: " + element_key + " " + element)
 
                 const td = document.createElement("td");
                 if (value.value === true) {
@@ -246,7 +254,21 @@ function renderData() {
                 tr.append(td);
             }
 
-            const td = document.createElement("td");
+            const td1 = document.createElement("td");
+
+            let edit_button = document.createElement("button");
+            edit_button.className = "btn btn-outline-info";
+            edit_button.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                      <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                                    </svg>`;
+
+            edit_button.addEventListener("click", () => {
+                editObject(element_key)
+            })
+
+            td1.append(edit_button);
+
+            const td2 = document.createElement("td");
 
             let delete_button = document.createElement("button");
             delete_button.className = "btn btn-outline-danger";
@@ -259,9 +281,10 @@ function renderData() {
                 deleteObject(element_key)
             })
 
-            td.append(delete_button);
+            td2.append(delete_button);
 
-            tr.append(td);
+            tr.append(td1);
+            tr.append(td2);
 
             table.appendChild(tr);
         })
@@ -271,6 +294,7 @@ function renderData() {
 //submit form items
 document.getElementById("form").addEventListener("submit", function (event) {
     event.preventDefault();
+
     let object = {};
     for (const [key, value] of Object.entries(tempInputFields)) {
         const input = document.getElementById(key);
@@ -286,9 +310,6 @@ document.getElementById("form").addEventListener("submit", function (event) {
             input.value = '';
         }
     }
-    const input = document.getElementById('approved');
-    object[input.id] = {type: 'checkbox', value: input.checked};
-    document.getElementById('approved').checked = true;
 
     saveNewObject(object);
 });
@@ -312,6 +333,35 @@ function deleteObject(id) {
     storage.splice(id, 1);
 
     sortAndStore(storage);
+}
+
+function editObject(element_key) {
+    window.scrollTo(0, 0);
+
+    localStorage.setItem("edit", JSON.stringify(element_key));
+
+    let storage = JSON.parse(localStorage.getItem("inspections"));
+
+    if (!(storage instanceof Array))
+        storage = [storage];
+
+    for (const [id, value] of Object.entries(storage[element_key])) {
+        if (value.type === "checkbox") {
+            document.getElementById(id).checked = value.value;
+        } else {
+            if (value.type === "select") {
+                let event = new Event('click', {
+                    'bubbles': true,
+                    'cancelable': false
+                });
+                document.getElementById(id).disabled = false;
+                document.getElementById(id).value = value.value;
+                document.getElementById(id).dispatchEvent(event);
+            } else {
+                document.getElementById(id).value = value.value;
+            }
+        }
+    }
 }
 
 function sortAndStore(storage) {
