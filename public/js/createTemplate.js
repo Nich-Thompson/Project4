@@ -17,6 +17,17 @@ window.onload = function () {
     if (oldTemplate) {
         loadOldInputs()
     }
+    let inputs = document.getElementById('inputs')
+    inputs.addEventListener('dragover', e => {
+        e.preventDefault()
+        const afterElement = getDragAfterElement(inputs, e.clientX, e.clientY)
+        const draggable = document.querySelector('.dragging')
+        if (afterElement == null) {
+            inputs.appendChild(draggable)
+        } else {
+            inputs.insertBefore(draggable, afterElement)
+        }
+    })
 }
 
 function addTextInput(name = null) {
@@ -40,7 +51,9 @@ function createInput(type, name = null) {
     let hiddenInputs = document.getElementById('hiddenInputs')
 
     let newDiv = document.createElement('div')
-    newDiv.className = 'form-group col-md-4'
+    newDiv.className = 'form-group col-md-4 draggable'
+    newDiv.draggable = true
+
 
     let typeInput = document.createElement('input')
     typeInput.name = 'types[]'
@@ -83,6 +96,7 @@ function createInput(type, name = null) {
         hiddenInputs.removeChild(typeInput)
     })
 
+    dragHandler(newDiv)
     inputs.appendChild(newDiv)
     newDiv.appendChild(newLabel)
     newDiv.appendChild(deleteButton)
@@ -97,13 +111,13 @@ function addList(listId = null, is_comments_list) {
         let inputs = document.getElementById('inputs')
 
         let newDiv = document.createElement('div')
-        newDiv.className = 'form-group col-md-4'
+        newDiv.className = 'form-group col-md-4 draggable'
+        newDiv.draggable = true
 
         const label = document.createElement('label');
         if (is_comments_list) {
             label.textContent = 'Kies een opmerking lijst'
-        }
-        else {
+        } else {
             label.textContent = 'Kies een dynamische lijst'
         }
 
@@ -136,6 +150,7 @@ function addList(listId = null, is_comments_list) {
             newDiv.parentNode.removeChild(newDiv)
         })
         newDiv.append(label, deleteButton, select);
+        dragHandler(newDiv)
         inputs.append(newDiv);
     }
 }
@@ -158,8 +173,7 @@ function loadOldInputs() {
             case 'select':
                 if (!field.isCommentsList) {
                     addList(field.list_id, false)
-                }
-                else {
+                } else {
                     addList(field.list_id, true)
                 }
                 break;
@@ -174,7 +188,8 @@ function addComments(listId = null) {
         let hiddenInputs = document.getElementById('hiddenInputs')
 
         let newDiv = document.createElement('div')
-        newDiv.className = 'form-group col-md-4'
+        newDiv.className = 'form-group col-md-4 draggable'
+        newDiv.draggable = true
 
         const label = document.createElement('label');
         label.textContent = 'Kies een opmerking lijst'
@@ -202,6 +217,32 @@ function addComments(listId = null) {
             newDiv.parentNode.removeChild(newDiv)
         })
         newDiv.append(label, deleteButton, select);
+        dragHandler(newDiv)
         inputs.append(newDiv);
     }
+}
+
+function dragHandler(draggable) {
+    draggable.addEventListener('dragstart', () => {
+        draggable.classList.add('dragging')
+        console.log(draggable)
+    })
+
+    draggable.addEventListener('dragend', () => {
+        draggable.classList.remove('dragging')
+        console.log(draggable)
+    })
+}
+
+function getDragAfterElement(container, x, y) {
+    const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')]
+    return draggableElements.reduce((closest, child) => {
+        const box = child.getBoundingClientRect()
+        const offset = x - box.left - box.width / 2
+        if (offset < 0 && offset > closest.offset && box.top < y && box.bottom > y) {
+            return {offset: offset, element: child}
+        } else {
+            return closest
+        }
+    }, {offset: Number.NEGATIVE_INFINITY}).element
 }
