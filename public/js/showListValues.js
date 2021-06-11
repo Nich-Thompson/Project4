@@ -1,11 +1,12 @@
 let valuesBox = null;
 let input = null;
-const sublistvalues = JSON.parse(window.count);
+const sublists = JSON.parse(window.count)[0]
+const sublistvalues = JSON.parse(window.count)[1];
 
 window.addEventListener('load', (e) => {
     valuesBox = document.getElementById('values-box');
     input = document.getElementById('sublist_value');
-    if(input){
+    if (input) {
         input.addEventListener('change', (e) => {
             this.showValues();
         });
@@ -17,14 +18,14 @@ function showValues(){
     valuesBox.innerHTML = '';
     const id = parseInt(input.value);
     let value_id = null;
-    sublistvalues[1][0].forEach(value => {
+    sublistvalues[0].forEach(value => {
         if(value.id === id){
             value_id = value.list_value_id;
         }
     });
-    for(let index = 1; index < sublistvalues[1].length; index++){
+    for(let index = 1; index < sublistvalues.length; index++){
         showValue = null;
-        sublistvalues[1][index].forEach(value => {
+        sublistvalues[index].forEach(value => {
             if(value.id === value_id){
                 showValue = value;
             }
@@ -33,7 +34,7 @@ function showValues(){
             const formgroup = document.createElement('div');
             formgroup.className = 'form-group';
             const label = document.createElement('label');
-            label.textContent = sublistvalues[0][index].name;
+            label.textContent = getList(showValue.list_model_id).name;
             const value = document.createElement('input');
             value.className = 'form-control';
             value.id = 'notEnabled';
@@ -42,13 +43,23 @@ function showValues(){
             value.value = showValue.name
             formgroup.append(label, value);
             valuesBox.appendChild(formgroup);
-            if(sublistvalues[1].length >= index+2){
-                sublistvalues[1][index].forEach(value => {
+            if(sublistvalues.length >= index+2){
+                sublistvalues[index].forEach(value => {
                     if(value.id === value_id){
                         value_id = value.list_value_id;
                     }
                 });
             }
         }
+    }
+
+    function getList(id){
+        let list = null;
+        sublists.forEach(sublist=>{
+            if(sublist.id === id){
+                list = sublist;
+            }
+        });
+        return list;
     }
 }

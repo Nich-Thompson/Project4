@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @push('head')
@@ -11,18 +10,20 @@
         <div class="px-4">
             <div class="bg-white overflow-hidden shadow-sm">
                 <div class="p-4 bg-white border-b border-gray-200">
-                    <span class="float-left h2">Archief inspecteurs overzicht</span>
+                    <h1 class="float-left h2">Archief inspecteurs overzicht</h1>
+                    <a href="{{ route('getInspectorIndex')}}" class="float-right btn btn-default" title="Terug naar vorige pagina">Terug</a>
+
                     <p class="mb-5"></p>
                     <hr/>
-                    </div>
-                    <div id = "customers">
+                    <div id="customers">
                         @if(count($inspectors) === 0)
                             <div class="mt-4 bg-white">
-                                <p class="float-left h3">Geen inspecteurs gevonden</p>
+                                <h2 class="float-left h3">Geen inspecteurs gevonden</h2>
                             </div>
                         @else
                             @foreach ($inspectors as $inspector)
-                                <div id = 'customer-field' class="row m-2 p-3 rounded border border-light shadow-sm bg-white">
+                                <div id='customer-field'
+                                     class="row m-2 p-3 rounded border border-light shadow-sm bg-white">
                                     <div class="d-flex flex-column w-50">
                                         <div id="name"
                                              class="h5 m-0 fw-bold">{{ $inspector->first_name}} {{ $inspector->last_name }}</div>

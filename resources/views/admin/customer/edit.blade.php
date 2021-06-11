@@ -6,12 +6,13 @@
             <div class="card">
                 <div class="card-body">
                     @if(Auth::user()->hasRole('admin'))
-                        <span class="float-left h2">Klant bewerken</span>
-                        <button id="switchButton" onclick="enableInput()" class="btn btn-primary float-right ml-2">
+                        <h1 class="float-left h2">Klant bewerken</h1>
+                        <button id="switchButton" onclick="enableInput()" class="btn btn-primary float-right ml-2"
+                                title="Bewerken/bekijken inschakelen">
                             Bewerken
                         </button>
                         <a href="{{ route('getCustomerArchive', $id) }}" id="archiveButton"
-                           class="btn btn-primary float-right" hidden>Archiveren</a>
+                           class="btn btn-primary float-right" hidden title="Klant archiveren">Archiveren</a>
                         <br><br>
                         <hr>
 
@@ -139,26 +140,29 @@
                             </div>
                             <p class="ml-3 mt-3">Velden met een ster (*) zijn verplicht</p>
                             <br>
-                            <a href="{{URL::to('/customer')}}" class="btn btn-default">Terug</a>
+                            <a href="{{URL::to('/customer')}}" class="btn btn-default" title="Terug naar vorige pagina">Terug</a>
                             <button type="submit" id="saveButton" class="float-right btn btn-primary" hidden>Opslaan
                             </button>
                         </form>
                     @endif
                     <h1 class="d-inline-block">Klantnaam: {{$customer->name}}</h1>
-                        <a href="{{URL::to('/inspection/'.$customer->id.'')}}" class="btn border border-1 d-inline-block float-right">Ga naar inspecties</a>
-                        <hr>
                     <div class="py-12">
                         <div class="px-4">
                             <div class="bg-white overflow-hidden shadow-sm">
                                 <div class="p-4 bg-white border-b border-gray-200">
-                                    <span class="float-left h2">Locatie overzicht</span>
+                                    <h2 class="float-left h2">Locatie overzicht</h2>
 
-                                    <a href="{{URL::to('/customer/'.$id.'/location/create')}}" class="float-right btn border">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-                                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                                        </svg>Toevoegen</a>
+                                    <a href="{{URL::to('/customer/'.$id.'/location/create')}}"
+                                       class="float-right btn border" title="Locatie toevoegen">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                             fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                            <path
+                                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                        </svg>
+                                        Toevoegen</a>
                                     @if(Auth::user()->hasRole('admin'))
-                                        <a href="{{URL::to('/customer/'.$id.'/location/archives')}}" class="float-right btn border mr-2">
+                                        <a href="{{URL::to('/customer/'.$id.'/location/archives')}}"
+                                           class="float-right btn border mr-2" title="Locatie archief">
                                             Archief</a>
                                     @endif
                                     <p class="mb-5"></p>
@@ -166,7 +170,7 @@
                                     <div id="customers">
                                         @if(count($locations) === 0)
                                             <div class="mt-4 bg-white">
-                                                <p class="float-left h3">Geen locaties gevonden</p>
+                                                <h2 class="float-left h3">Geen locaties gevonden</h2>
                                             </div>
                                         @else
                                             @foreach ($locations as $location)
@@ -175,29 +179,58 @@
                                                     <div class="d-flex flex-column w-50">
                                                         <div id="name"
                                                              class="h5 m-0 fw-bold">{{ $location->name }}</div>
-                                                        <p>{{ $location->street }} {{ $location->number }} {{ $location->building_number }}
-                                                            , {{ $location->postal_code }} te {{ $location->city }}</p>
+                                                        <p>
+                                                            @if($location->street != null and $location->postal_code != null and $location->building_number == null and $location->number == null)
+                                                                {{ $location->street }},
+                                                            @else
+                                                                {{ $location->street }}
+                                                            @endif
+                                                            @if($location->number != null and $location->postal_code != null and $location->building_number == null)
+                                                                {{ $location->number }},
+                                                            @else
+                                                                {{ $location->number }}
+                                                            @endif
+                                                            @if($location->building_number != null and $location->postal_code != null)
+                                                                {{ $location->building_number }},
+                                                            @else
+                                                                {{ $location->building_number }}
+                                                            @endif
+                                                            @if($location->postal_code != null)
+                                                                {{ $location->postal_code }}
+                                                            @endif
+                                                            @if($location->city != null)
+                                                                te {{ $location->city }}
+                                                            @endif
+                                                        </p>
                                                     </div>
                                                     <div class="w-50 text-right pb-2">
-                                                        <a id="{{$location->id}}"
-                                                           href="{{route('getLocationEdit', [$customer->id, $location->id]) }}"
-                                                           class="btn btn-primary">
-                                                            Bewerken
-                                                        </a>
-
-                                                        <a id="{{$location->id}}"
-                                                           href="{{URL::to('/inspection/'.$customer->id.'/'.$location->id.'/create')}}"
-                                                           class="btn border float-right ml-2">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                 height="16" fill="currentColor" class="bi bi-plus"
-                                                                 viewBox="0 0 16 16">
-                                                                <path
-                                                                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                                                            </svg>
-                                                            Maak inspectie aan</a>
-                                                        </a>
-                                                        <a href="{{ route('getLocationArchive', [$customer->id,$location->id]) }}" id="archiveButton"
-                                                           class="btn btn-primary float-right ml-2">Archiveren</a>
+                                                        <a href="{{URL::to('/inspection/'.$customer->id.'/'.$location->id.'')}}"
+                                                           class="btn ml-2 border border-1"
+                                                           title="Ga naar inspecties">Ga naar
+                                                            inspecties</a>
+                                                        @if(Auth::user()->hasRole('inspecteur'))
+                                                            <a id="{{$location->id}}"
+                                                               href="{{route('getLocationEdit', [$customer->id, $location->id]) }}"
+                                                               class="btn border ml-2" title="Locatie bekijken">
+                                                                Bekijken
+                                                            </a>
+                                                        @else
+                                                            <a href="{{route('getLocationEdit', [$customer->id, $location->id]) }}"
+                                                               class="btn btn-primary ml-2" title="Locatie bekijken">
+                                                                Bekijken
+                                                            </a>
+                                                        @endif
+                                                        @if(Auth::user()->hasRole('inspecteur'))
+                                                            <a href="{{URL::to('/inspection/'.$customer->id.'/'.$location->id.'/choose_template')}}"
+                                                               class="btn btn-primary ml-2 float-right">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                     height="16" fill="currentColor" class="bi bi-plus"
+                                                                     viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                                                </svg>
+                                                                Maak inspectie aan</a>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             @endforeach

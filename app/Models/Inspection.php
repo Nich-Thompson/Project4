@@ -15,6 +15,7 @@ class Inspection extends Model
         'user_id',
         'customer_id',
         'location_id',
+        'template_id',
         "json",
         "locked",
     ];
