@@ -146,7 +146,7 @@
         @if (session('success'))
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="alert alert-success col-11">
+                    <div class="alert alert-success">
                         {{ session('success') }}
                     </div>
                 </div>
