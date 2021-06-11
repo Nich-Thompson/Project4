@@ -15,7 +15,7 @@ class ListController extends Controller
     {
         $headlists = ListModel::query()->whereNotNull('list_model_id')->pluck('list_model_id')->all();
         $listsWithNoSublist = ListModel::query()->whereNotIn('id', $headlists)->get();
-        return view('admin.list.create', ['lists'=>$listsWithNoSublist]);
+        return view('admin.list.create', ['lists' => $listsWithNoSublist]);
     }
 
     public function store(ListRequest $request)
@@ -25,7 +25,7 @@ class ListController extends Controller
             'list_model_id' => $request->input('list_model_id'),
         ]);
 
-        return redirect()->route('getCustomerIndex');
+        return redirect()->route('getCustomerIndex')->with('success', "De lijst is succesvol aangemaakt!");
     }
 
     public function edit($id)
@@ -34,10 +34,10 @@ class ListController extends Controller
         $sublistOf = ListModel::find($list->list_model_id);
         $values = $list->values()->get();
         return view('admin.list.edit', [
-            'list'=>$list,
-            'headlist'=>$sublistOf,
-            'values'=>$values,
-            'id'=>$id]);
+            'list' => $list,
+            'headlist' => $sublistOf,
+            'values' => $values,
+            'id' => $id]);
     }
 
     public function update($id, ListRequest $request)
@@ -46,27 +46,29 @@ class ListController extends Controller
         $list->name = $request->input('name');
         $list->save();
 
-        return redirect()->route('getListEdit', $id);
+        return redirect()->route('getListEdit', $id)->with('success', "De lijst is succesvol bewerkt!");
     }
 
-    public function createValue($id){
+    public function createValue($id)
+    {
         $list = ListModel::find($id);
         $sublists = [];
         $sublistvalues = [];
-        $sublist = $list -> sublist() -> first();
-        while(!is_null($sublist)){
-            array_push($sublists, $sublist ->toArray());
-            array_push($sublistvalues, $sublist -> values() -> get() ->toArray());
-            $sublist = $sublist -> sublist() -> first();
+        $sublist = $list->sublist()->first();
+        while (!is_null($sublist)) {
+            array_push($sublists, $sublist->toArray());
+            array_push($sublistvalues, $sublist->values()->get()->toArray());
+            $sublist = $sublist->sublist()->first();
         }
         return view('admin.list.createValue', [
-            'list'=>$list,
-            'sublists'=>$sublists,
+            'list' => $list,
+            'sublists' => $sublists,
             'sublistvalues' => $sublistvalues
         ]);
     }
 
-    public function storeValue(StoreListValueRequest $request, $id){
+    public function storeValue(StoreListValueRequest $request, $id)
+    {
         $name = $request->input('name');
         $list_value_id = $request->input('sublist_value');
         ListValue::create([
@@ -75,38 +77,40 @@ class ListController extends Controller
             'list_value_id' => $list_value_id
         ]);
 
-        return redirect(route('getListEdit', $id));
+        return redirect(route('getListEdit', $id))->with('success', "De lijstwaarde is succesvol aangemaakt!");
     }
 
-    public function editValue($list_id, $id){
+    public function editValue($list_id, $id)
+    {
         $listValue = ListValue::find($id);
         $list = ListModel::find($list_id);
         $sublists = [];
         $sublistvalues = [];
-        $sublist = $list -> sublist() -> first();
-        while(!is_null($sublist)){
-            array_push($sublists, $sublist ->toArray());
-            array_push($sublistvalues, $sublist -> values() -> get() ->toArray());
-            $sublist = $sublist -> sublist() -> first();
+        $sublist = $list->sublist()->first();
+        while (!is_null($sublist)) {
+            array_push($sublists, $sublist->toArray());
+            array_push($sublistvalues, $sublist->values()->get()->toArray());
+            $sublist = $sublist->sublist()->first();
         }
         return view('admin.list.editValue', [
-            'list'=>$list,
-            'sublists'=>$sublists,
+            'list' => $list,
+            'sublists' => $sublists,
             'sublistvalues' => $sublistvalues,
             'listValue' => $listValue
         ]);
     }
 
-    public function updateValue(StoreListValueRequest $request, $list_id, $id){
+    public function updateValue(StoreListValueRequest $request, $list_id, $id)
+    {
         $name = $request->input('name');
         $list_value_id = $request->input('sublist_value');
 
         $listValue = ListValue::find($id);
-        $listValue -> list_value_id = $list_value_id;
-        $listValue -> name = $name;
+        $listValue->list_value_id = $list_value_id;
+        $listValue->name = $name;
 
         $listValue->save();
 
-        return redirect(route('getListEdit', $list_id));
+        return redirect(route('getListEdit', $list_id))->with('success', "De lijstwaarde is succesvol bewerkt!");
     }
 }
