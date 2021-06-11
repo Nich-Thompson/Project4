@@ -2,6 +2,7 @@ let data = window.myArray[0];
 let inputFields = window.myArray[1];
 let dynamicLists = window.myArray[2];
 let tempInputFields = {};
+let disableSelectsAfterSubmit = [];
 const inputFieldBox = document.getElementById('input-field-box');
 let id = 0;
 
@@ -51,7 +52,9 @@ function generateInputField(inputField) {
                 if (i === 0) {
                     itemsToAppend.push(createListSelect(list, false));
                 } else {
-                    itemsToAppend.push(createListSelect(list, true));
+                    const tempFormGroup = createListSelect(list, true);
+                    disableSelectsAfterSubmit.push(tempFormGroup.childNodes[1])
+                    itemsToAppend.push(tempFormGroup);
                 }
                 id++;
             }
@@ -310,6 +313,11 @@ document.getElementById("form").addEventListener("submit", function (event) {
             input.value = '';
         }
     }
+
+    disableSelectsAfterSubmit.forEach(select =>{
+        select.disabled = true;
+        select.length = 0;
+    });
 
     saveNewObject(object);
 });
