@@ -33,7 +33,7 @@
                             <button type="submit" class="float-right btn btn-primary text-light">Invoeren
                             </button>
                         </form>
-                        <div class="vh-40 overflow-scroll">
+                        <div class="tableFixHead">
                             <table class="table">
                                 <thead>
                                 <tr>
