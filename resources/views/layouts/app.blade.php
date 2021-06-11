@@ -143,6 +143,15 @@
     </nav>
 
     <main class="container mt-4">
+        @if (session('success'))
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="alert alert-success col-11">
+                        {{ session('success') }}
+                    </div>
+                </div>
+            </div>
+        @endif
         @yield('content')
     </main>
 </div>
