@@ -191,7 +191,7 @@ function getValuesForSelect(list, selected_value) {
 }
 
 function setJson() {
-    localStorage.setItem("edit", JSON.stringify(0));
+    localStorage.setItem("edit", JSON.stringify("false"));
     if (data.json === "") {
         localStorage.setItem("inspections", JSON.stringify([]));
         document.getElementById("1").value = 1;
@@ -314,7 +314,7 @@ document.getElementById("form").addEventListener("submit", function (event) {
         }
     }
 
-    disableSelectsAfterSubmit.forEach(select =>{
+    disableSelectsAfterSubmit.forEach(select => {
         select.disabled = true;
         select.length = 0;
     });
@@ -324,12 +324,19 @@ document.getElementById("form").addEventListener("submit", function (event) {
 
 function saveNewObject(object) {
     let storage = JSON.parse(localStorage.getItem("inspections"));
+    let edit = JSON.parse(localStorage.getItem("edit"));
 
     if (!(storage instanceof Array))
         storage = [storage];
-    storage.push(object);
+
+    if (parseInt(edit) >= 0) {
+        storage[edit] = object;
+    } else {
+        storage.push(object);
+    }
 
     sortAndStore(storage);
+    localStorage.setItem("edit", JSON.stringify("false"));
 }
 
 function deleteObject(id) {
@@ -341,6 +348,7 @@ function deleteObject(id) {
     storage.splice(id, 1);
 
     sortAndStore(storage);
+    localStorage.setItem("edit", JSON.stringify("false"));
 }
 
 function editObject(element_key) {
