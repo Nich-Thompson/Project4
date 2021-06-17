@@ -19,4 +19,11 @@ class HomeController extends Controller
             return redirect('customer');
         }
     }
+
+    public function helpInspector(){
+
+    }
+    public function helpAdmin(){
+
+    }
 }

@@ -21,7 +21,9 @@ Route::get('/', function () {
 Route::group(['middleware' => ['role:admin|inspecteur']], function () {
     Route::get('/home', 'HomeController@index')->name('getHomeIndex');
 });
-
+//Help routes
+Route::get('/help', 'HomeController@helpInspector')->middleware(['role: inspecteur'])->name('getInspectorHelp');
+Route::get('/help', 'HomeController@helpAdmin')->middleware(['role: admin'])->name('getAdminHelp');
 //Customer routes
 Route::prefix('customer')->group(function () {
     Route::get('/', 'CustomerController@index')->middleware(['role:admin|inspecteur'])->name('getCustomerIndex');

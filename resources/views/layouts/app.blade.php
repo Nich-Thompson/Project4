@@ -122,7 +122,7 @@
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 @if(Auth::user()->hasRole('inspecteur'))
-                                    @include('components.help-inspector')
+                                    @include('inspector.help-inspector')
                                 @endif
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
