@@ -13,10 +13,10 @@ NEW_DATABASE_PASSWORD = ''
 NEW_DATABASE_DATABASE = 'project4'
 
 def gather_old_data(tablename):
-    connection = pymysql.connect(host='localhost',
-                             user='root',
-                             password='',
-                             database='fxentxbkke',
+    connection = pymysql.connect(host=OLD_DATABASE_HOST,
+                             user=OLD_DATABASE_USER,
+                             password=OLD_DATABASE_PASSWORD,
+                             database=OLD_DATABASE_DATABASE,
                              cursorclass=pymysql.cursors.DictCursor)
 
     with connection:
@@ -110,10 +110,10 @@ def test_data(old, new, names, testname):
 
 
 def get_categories_from_table(tablename):
-    connection = pymysql.connect(host='localhost',
-                             user='root',
-                             password='',
-                             database='fxentxbkke',
+    connection = pymysql.connect(host=OLD_DATABASE_HOST,
+                             user=OLD_DATABASE_USER,
+                             password=OLD_DATABASE_PASSWORD,
+                             database=OLD_DATABASE_DATABASE,
                              cursorclass=pymysql.cursors.DictCursor)
 
     with connection:
