@@ -68,5 +68,3 @@
     </div>
 @endsection
 
-<script src="{{ asset('js/searchCustomer.js') }}"></script>
-
