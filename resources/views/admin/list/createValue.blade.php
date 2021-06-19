@@ -21,7 +21,7 @@
                     <form action="{{ route('postListValueCreate', $list  -> id) }}" method="POST">
                         @csrf
                         <div class="row">
-                            <div class="col">
+                            <div class="row order-2">
                                 @if(!empty($sublists))
                                     <div class="form-group">
                                         <label for="sublist_value"> {{$sublists[0]['name']}} </label>
@@ -39,10 +39,10 @@
                                     </div>
                                 @endif
                             </div>
-                            <div id="values-box">
+                            <div id="values-box" class="row order-1">
 
                             </div>
-                            <div class="form-group">
+                            <div class="form-group order-last">
                                 <label class="ml-1">Typenaam*</label>
                                 <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
                                        value="{{old('name')}}" placeholder="Vul type naam in">
