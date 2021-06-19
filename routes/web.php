@@ -65,6 +65,7 @@ Route::prefix('inspector')->group(function () {
 
 //Inspection routes
 Route::prefix('inspection')->group(function () {
+//    Route::get('/{id}/copy', 'InspectionController@copy')->middleware(['role:admin|inspecteur'])->name('getInspectionCopy');
     Route::get('/{id}/edit', 'InspectionController@edit')->middleware(['role:admin|inspecteur'])->name('getInspectionEdit');
     Route::post('/{id}/edit', 'InspectionController@update')->middleware(['role:admin|inspecteur'])->name('postInspectionEdit');
     Route::get('/{id}/{location_id}', 'InspectionController@index')->middleware(['role:admin|inspecteur'])->name('getInspectionIndex');
@@ -76,6 +77,8 @@ Route::prefix('inspection')->group(function () {
     Route::post('/save/{id}', 'InspectionController@save')->middleware(['role:admin|inspecteur'])->name('saveInspectionJson');
     Route::post('/{id}/editInspector', 'InspectionController@updateInspector')->middleware(['role:admin|inspecteur'])->name('postInspectionEditInspector');
 });
+
+Route::get('/inspection-copy/{id}', [\App\Http\Controllers\InspectionController::class, 'copy'])->name('getInspectionCopy');
 
 //Inspection type routes
 Route::prefix('inspectiontype')->group(function () {

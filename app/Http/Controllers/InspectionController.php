@@ -210,4 +210,9 @@ class InspectionController extends Controller
         $inspection->delete();
         return redirect(route('getLocationIndex'))->with('success', "De inspectie is succesvol gearchiveerd!");
     }
+
+    public function copy($id)
+    {
+        dd();
+    }
 }
