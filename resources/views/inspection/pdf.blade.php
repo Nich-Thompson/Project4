@@ -23,32 +23,25 @@
             </div>
         </div>
         <div class="col">
-            <img class="round" src="{{ public_path().'/images/Noodverlichting.jpg' }}" alt="type">
+            <a class="round"alt="type">{!! $icon->unicode !!}</a>
         </div>
     </div>
 </div>
 <div class="row m-10">
     <div class="Logos">
         <p>In opdracht van:</p>
-
         {{$customer->name}}
-    <!---Logo Data
-        <img src="{{ public_path().'/images/'.$inspectedCompany.'.jpg' }}" width="200" height="90" alt="type">
-        -->
-    <!-- Logo inspectiebedrijf
-        <p>Uitgevoerd door:</p
-        <img src="{{ public_path().'/images/BCO.jpg' }}" width="200" height="100" alt="type">
-        -->
+
     </div>
     <div class="CompanyInfo">
         <h3>{{$customer->name}}</h3>
         <br>
-        <p>{{$address}}</p>
+
         <br>
         <p>Uitvoerdatum:            {{$inspection->created_at}}</p>
         <p>Uitgevoerd door:         {{$user->first_name}} {{$user->last_name}}</p>
-        <p>Aantal gecontroleerd:    {{count($lists)}}</p>
-        <p>Aantal afgekeurd:        {{count($lists)}}</p>
+        <p>Aantal gecontroleerd:    {{count(array($lists))}}</p>
+        <p>Aantal afgekeurd:        {{count(array($lists))}}</p>
     </div>
     <hr class="mt-20">
     <span></span>

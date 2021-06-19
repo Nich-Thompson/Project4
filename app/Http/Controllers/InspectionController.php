@@ -204,7 +204,6 @@ class InspectionController extends Controller
         $inspection_type = InspectionType::find($template->inspection_type_id);
         $icon = Icon::find($inspection_type->icon_id);
 
-
         $lists = [];
         foreach (ListModel::all() as $list) {
             $lists[$list->id] = (object)['name' => $list->name, 'values' => []];
@@ -219,7 +218,13 @@ class InspectionController extends Controller
         }
         $lists = (object)$lists;
 
-        $pdf = PDF::loadView('inspection.pdf', [$inspection, $customer, $inspection_type, $template, $lists])->setPaper('a4', 'landscape');
+        $pdf = PDF::loadView('inspection.pdf', ['inspection'=>$inspection,
+            'customer'=>$customer,
+            'inspection_type'=>$inspection_type,
+            'template'=>$template,
+            'lists'=>$lists,
+            'user'=>$user,
+            'icon'=>$icon])->setPaper('a4', 'landscape');
         return $pdf->stream();
     }
 

@@ -65,6 +65,7 @@ Route::prefix('inspector')->group(function () {
 
 //Inspection routes
 Route::prefix('inspection')->group(function () {
+    Route::get('/{id}/PDF', 'InspectionController@exportPDF')->middleware('role:admin|inspecteur')->name('getInspectionPDF');
     Route::get('/{id}/edit', 'InspectionController@edit')->middleware(['role:admin|inspecteur'])->name('getInspectionEdit');
     Route::post('/{id}/edit', 'InspectionController@update')->middleware(['role:admin|inspecteur'])->name('postInspectionEdit');
     Route::get('/{id}/{location_id}', 'InspectionController@index')->middleware(['role:admin|inspecteur'])->name('getInspectionIndex');
@@ -75,7 +76,7 @@ Route::prefix('inspection')->group(function () {
     Route::post('/create', 'InspectionController@store')->middleware(['role:admin|inspecteur'])->name('postInspectionCreate');
     Route::post('/save/{id}', 'InspectionController@save')->middleware(['role:admin|inspecteur'])->name('saveInspectionJson');
     Route::post('/{id}/editInspector', 'InspectionController@updateInspector')->middleware(['role:admin|inspecteur'])->name('postInspectionEditInspector');
-    Route::get('/{id}', 'InspectionController@exportPDF')->middleware('role:admin|inspecteur')->name('getInspectionPDF');
+
 });
 
 //Inspection type routes

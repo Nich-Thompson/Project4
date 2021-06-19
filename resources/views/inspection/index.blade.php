@@ -38,7 +38,7 @@
                                         @endif
                                     </div>
                                     <div class="d-flex justify-content-end w-50 text-right pb-2">
-                                        <a href="{{route('getInspectionPDF',['id'=>$inspection->id])}}" class="fa fa-file-pdf-o align-self-center pr-3 text-dark pdf-icon"></a>
+                                        <a href="{{route('getInspectionPDF',$inspection->id)}}" class="fa fa-file-pdf-o align-self-center pr-3 text-dark pdf-icon"></a>
                                         <a id="{{$inspection->id}}"
                                            href="{{URL::to('/inspection/'.$inspection->id.'/edit') /*route('getInspectionEdit', $inspection->id)*/ }}"
                                            title="Inspectie openen">
