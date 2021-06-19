@@ -17,12 +17,13 @@
                     <label>Selecteer Inspectietype</label>
                     <form method="POST" action="{{route('postInspectionIndex', [$customer_id, $location_id]) }}">
                         @csrf
-                        <select class="form-control d-inline-block w-25" name="inspectionType">
+                        <select class="form-select d-inline-block w-25" name="inspectionType">
+                            <option>Geen</option>
                             @foreach($inspectionTypes as $inspectionType)
                                 <option class="form-select">{{$inspectionType->name}}</option>
                             @endforeach
                         </select>
-                        <input class="btn btn-success d-inline-block" type="submit" value="Filter">
+                        <input class="btn btn-primary d-inline-block ml-2" type="submit" value="Filter">
                     </form>
 
 

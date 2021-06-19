@@ -39,16 +39,18 @@ class InspectionController extends Controller
         $inspections = Inspection::query()->where('customer_id', '=', $customer_id)
             ->where('location_id', '=', $location_id)->get()->sortByDesc("created_at");
         $selected_type = $request->input('inspectionType');
-        $selected_type_id = InspectionType::where('name', $selected_type)->first();
-        $template_ids = Template::where('inspection_type_id', $selected_type_id->id)->distinct('id')->pluck('id');
-        $filtered_inspections = $inspections->whereIn('template_id', $template_ids);
+        if ($selected_type != 'Geen') {
+            $selected_type_id = InspectionType::where('name', $selected_type)->first();
+            $template_ids = Template::where('inspection_type_id', $selected_type_id->id)->distinct('id')->pluck('id');
+            $inspections = $inspections->whereIn('template_id', $template_ids);
+        }
         $inspectionTypes = InspectionType::all();
         $users = User::all();
 
         return view('inspection.index', [
             'customer_id' => $customer_id,
             'location_id' => $location_id,
-            'inspections' => $filtered_inspections,
+            'inspections' => $inspections,
             'inspectionTypes' => $inspectionTypes,
             "users" => $users
         ]);
