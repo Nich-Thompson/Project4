@@ -44,6 +44,7 @@
                                 <div class="row" id="inputs">
                                     {{-- inputs are generated here --}}
                                 </div>
+                                <div></div>
                                 <div id="hiddenInputs"></div>
                             </div>
                         </div>

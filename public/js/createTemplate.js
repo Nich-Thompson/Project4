@@ -18,15 +18,16 @@ window.onload = function () {
         loadOldInputs()
     }
     let inputs = document.getElementById('inputs')
-    inputs.addEventListener('dragover', e => {
+    inputs.addEventListener('dragend', e => {
         e.preventDefault()
         const afterElement = getDragAfterElement(inputs, e.clientX, e.clientY)
         const draggable = document.querySelector('.dragging')
         if (afterElement == null) {
-            inputs.appendChild(draggable)
+            //inputs.appendChild(draggable)
         } else {
             inputs.insertBefore(draggable, afterElement)
         }
+        draggable.classList.remove('dragging')
     })
 }
 
@@ -111,8 +112,12 @@ function addList(listId = null, is_comments_list) {
         let inputs = document.getElementById('inputs')
 
         let newDiv = document.createElement('div')
-        newDiv.className = 'form-group col-md-4 draggable'
-        newDiv.draggable = true
+        if(!is_comments_list) {
+            newDiv.className = 'form-group col-md-4 draggable'
+            newDiv.draggable = true
+        } else {
+            newDiv.className = 'form-group col-md-4'
+        }
 
         const label = document.createElement('label');
         if (is_comments_list) {
@@ -150,7 +155,9 @@ function addList(listId = null, is_comments_list) {
             newDiv.parentNode.removeChild(newDiv)
         })
         newDiv.append(label, deleteButton, select);
-        dragHandler(newDiv)
+        if(!is_comments_list) {
+            dragHandler(newDiv);
+        }
         inputs.append(newDiv);
     }
 }
@@ -223,14 +230,9 @@ function addComments(listId = null) {
 }
 
 function dragHandler(draggable) {
-    draggable.addEventListener('dragstart', () => {
-        draggable.classList.add('dragging')
-        console.log(draggable)
-    })
-
-    draggable.addEventListener('dragend', () => {
-        draggable.classList.remove('dragging')
-        console.log(draggable)
+    draggable.addEventListener('dragstart', (e) => {
+        draggable.classList.add('dragging');
+        e.dataTransfer.effectAllowed = "copyMove";
     })
 }
 
