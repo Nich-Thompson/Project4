@@ -18,6 +18,15 @@
     height: 10em !important;
 }
 
+.vh-40 {
+    height: 40vh;
+}
+
+
+/*table overflow*/
+.tableFixHead          { overflow: auto; height: 40vh; }
+.tableFixHead thead { background: white; position: sticky; top: 0; z-index: 1; box-shadow: 0 3px 2px -2px  #000;}
+
 /*Alignment*/
 .vertical-center {
     display: flex;

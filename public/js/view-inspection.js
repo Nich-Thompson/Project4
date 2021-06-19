@@ -36,7 +36,17 @@ function renderData() {
                     td.textContent = "Nee";
                     td.className = "text-danger font-weight-bold";
                 } else if (value.type === 'datetime-local') {
-                    td.textContent = new Date(value.value).toLocaleString();
+                    if (value.value) {
+                        td.textContent = new Date(value.value).toLocaleString([], {
+                            day: '2-digit',
+                            month: '2-digit',
+                            year: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        });
+                    } else {
+                        td.textContent = "";
+                    }
                 } else {
                     td.textContent = value.value;
                 }

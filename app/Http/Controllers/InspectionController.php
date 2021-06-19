@@ -73,7 +73,7 @@ class InspectionController extends Controller
 
         $inspection->save();
 
-        return redirect()->to("inspection/" . $customer_id . "/" . $inspection->location_id);
+        return redirect()->to("inspection/" . $customer_id . "/" . $inspection->location_id)->with('success', "De inspectie is succesvol uitgechecked!");
     }
 
     public function inspect($id, $template_id, $type)
@@ -188,7 +188,7 @@ class InspectionController extends Controller
 
         $inspection->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', "De inspecteur van de inspectie is succesvol aangepast!");
     }
 
 
@@ -208,6 +208,6 @@ class InspectionController extends Controller
     {
         $inspection = Inspection::find($id);
         $inspection->delete();
-        return redirect(route('getLocationIndex'));
+        return redirect(route('getLocationIndex'))->with('success', "De inspectie is succesvol gearchiveerd!");
     }
 }
