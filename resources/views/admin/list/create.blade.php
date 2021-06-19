@@ -31,7 +31,7 @@
                                            value="{{old('name')}}" placeholder="Vul de lijstnaam in">
                                 </div>
                                 <div class="form-group ml-3">
-                                    <label class="ml-1">Sublijst van</label>
+                                    <label class="ml-1">Koppelen aan</label>
                                     <select name="list_model_id" class="form-select col-xs-12 col-sm-12 col-md-12"
                                             title="Sublijst van">
                                         <option value="">
