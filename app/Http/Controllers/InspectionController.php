@@ -12,6 +12,7 @@ use App\Models\Location;
 use App\Models\Inspector;
 use App\Models\Template;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -213,6 +214,13 @@ class InspectionController extends Controller
 
     public function copy($id)
     {
-        dd();
+        $inspection = Inspection::find($id);
+        $copyInspection = $inspection->replicate();
+
+        $copyInspection->created_at = Carbon::now();
+        $copyInspection->updated_at = Carbon::now();
+        $copyInspection->save();
+
+        return redirect()->back();
     }
 }
