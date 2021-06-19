@@ -11,8 +11,8 @@
             <div class="bg-white overflow-hidden shadow-sm">
                 <div class="p-4 bg-white border-b border-gray-200">
                     <h1 class="float-left h2">Klanten overzicht</h1>
-                    @if(Auth::user()->hasRole('admin'))
                         @include('components.help-klanten')
+                    @if(Auth::user()->hasRole('admin'))
                         <a href="{{URL::to('/customer/create')}}" class="float-right btn border" title="Toevoegen">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                  class="bi bi-plus" viewBox="0 0 16 16">
