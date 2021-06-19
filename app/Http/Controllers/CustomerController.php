@@ -10,18 +10,30 @@ use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $customers = Customer::orderBy('name', 'ASC')->cursorPaginate(10);
         return view('admin.customer.index', [
             'customers' => $customers,
         ]);
     }
 
-    public function create() {
+    public function search(Request $request)
+    {
+        $customers = Customer::query()->where('name', 'LIKE', '%' . $request->searchTerm . '%')->cursorPaginate(100);
+
+        return view('admin.customer.index', [
+            'customers' => $customers,
+        ]);
+    }
+
+    public function create()
+    {
         return view('admin.customer.create');
     }
 
-    public function store(StoreCustomerRequest $request) {
+    public function store(StoreCustomerRequest $request)
+    {
         $name = $request->input('name');
         $city = $request->input('city');
         $street = $request->input('street');
@@ -48,10 +60,11 @@ class CustomerController extends Controller
         return redirect(route('getCustomerIndex'));
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         $customer = Customer::find($id);
         $locations = Location::query()->where('customer_id', '=', $id)->cursorPaginate(5);
-        if($customer === null) {
+        if ($customer === null) {
             abort(404, 'customer with that ID does not exist');
         }
         return view('admin.customer.edit', [
@@ -61,7 +74,8 @@ class CustomerController extends Controller
         ]);
     }
 
-    public function update($id, UpdateCustomerRequest $request) {
+    public function update($id, UpdateCustomerRequest $request)
+    {
         $customer = Customer::find($id);
 
         $customer->name = $request->input('name');
@@ -70,7 +84,7 @@ class CustomerController extends Controller
         $customer->number = $request->input('number');
         $customer->postal_code = $request->input('postal_code');
         $phoneNumbersOnly = preg_replace("/[^0-9]/", '', $request->input('phone_number'));
-        $customer -> phone_number = $phoneNumbersOnly;
+        $customer->phone_number = $phoneNumbersOnly;
         $customer->contact_name = $request->input('contact_name');
         $phoneNumbersOnly = preg_replace("/[^0-9]/", '', $request->input('contact_phone_number'));
         $customer->contact_phone_number = $phoneNumbersOnly;
@@ -81,9 +95,10 @@ class CustomerController extends Controller
         return redirect(route('getCustomerIndex', $id));
     }
 
-    public function remove($id) {
+    public function remove($id)
+    {
         $customer = Customer::find($id);
-        if($customer === null) {
+        if ($customer === null) {
             abort(404, 'customer with that ID does not exist');
         }
         return view('admin.customer.archive', [
@@ -92,33 +107,39 @@ class CustomerController extends Controller
         ]);
     }
 
-    public function archive($id) {
+    public function archive($id)
+    {
         $customer = Customer::find($id);
         $customer->delete();
         return redirect(route('getCustomerIndex'));
     }
 
-    public function archives() {
+    public function archives()
+    {
         $customers = Customer::onlyTrashed()->orderBy('deleted_at', 'ASC')->cursorPaginate(10);
         return view('admin.customer.archives', [
             'customers' => $customers,
         ]);
     }
 
-    public function restore($id) {
+    public function restore($id)
+    {
         $customer = Customer::withTrashed()->find($id);
         $customer->restore();
         return redirect(route('getCustomerArchives'));
     }
 
-    public function deletes(){
+    public function deletes()
+    {
         $customers = Customer::onlyTrashed()->orderBy('deleted_at', 'ASC')->get();
-        foreach($customers as $customer){
+        foreach ($customers as $customer) {
             $customer->forceDelete();
         }
         return redirect(route('getCustomerIndex'));
     }
-    public function delete() {
+
+    public function delete()
+    {
         return view('admin.customer.delete');
     }
 }

@@ -27,6 +27,7 @@ Route::get('/Admin-Handleiding', 'HomeController@helpAdmin')->middleware(['role:
 //Customer routes
 Route::prefix('customer')->group(function () {
     Route::get('/', 'CustomerController@index')->middleware(['role:admin|inspecteur'])->name('getCustomerIndex');
+    Route::get('/search', 'CustomerController@search')->middleware(['role:admin|inspecteur'])->name('getSearchCustomers');
     Route::get('/create', 'CustomerController@create')->middleware(['role:admin'])->name('getCustomerCreate');
     Route::post('/create', 'CustomerController@store')->middleware(['role:admin'])->name('postCustomerCreate');
     Route::get('/{id}/edit', 'CustomerController@edit')->middleware(['role:admin|inspecteur'])->name('getCustomerEdit');
