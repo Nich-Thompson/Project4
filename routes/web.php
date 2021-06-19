@@ -75,6 +75,7 @@ Route::prefix('inspection')->group(function () {
     Route::post('/create', 'InspectionController@store')->middleware(['role:admin|inspecteur'])->name('postInspectionCreate');
     Route::post('/save/{id}', 'InspectionController@save')->middleware(['role:admin|inspecteur'])->name('saveInspectionJson');
     Route::post('/{id}/editInspector', 'InspectionController@updateInspector')->middleware(['role:admin|inspecteur'])->name('postInspectionEditInspector');
+    Route::get('/{id}', 'InspectionController@exportPDF')->middleware('role:admin|inspecteur')->name('getInspectionPDF');
 });
 
 //Inspection type routes

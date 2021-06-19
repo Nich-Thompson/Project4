@@ -1,0 +1,92 @@
+@font-face{
+    font-family: 'Nunito';
+    src: url('fonts\Nunito-Regular.ttf') format("truetype");
+    font-weight: 500;
+    font-style: normal;
+}
+
+body {
+    font-family: 'Nunito', sans-serif !important;
+}
+
+.header h1, h2 {
+    color: #ffffff;
+    align-content: center;
+    display:inline-block;
+    font-size: 35px;
+    margin-bottom: 10px;
+    font-weight: 400;
+}
+
+.header{
+    padding: 2%;
+}
+
+h2{
+    font-size: 17px;
+    font-style: oblique;
+    font-weight: normal;
+}
+
+.round{
+    border-radius:70px;
+    width: 140px;
+    height: 140px;
+    background-color: #fff;
+    padding: 4px;
+    float: right;
+}
+.Logos{
+    height: 100px;
+    width: 30%;
+    float: left;
+    position:relative;
+}
+.Logos:after{
+    content:"";
+    position:absolute;
+    top:5%;
+    right:0;
+    width:2px;
+    height:30%;
+    background:#D3D3D3;
+}
+
+.CompanyInfo{
+    height: 300px;
+    padding-left: 60px;
+    width: 40%;
+    float: left;
+}
+.CompanyInfo p {
+    margin: 0;
+}
+
+.m-10{
+    margin: 10px 0px;
+}
+
+.mt-20{
+    margin-top: 20em;
+}
+
+.next-page{
+    margin-top: 60em;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 10px;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
