@@ -72,6 +72,9 @@
                             @endforeach
                         @endif
                     </div>
+                    <div class="mt-4 ml-2">
+                        {{$customers->links()}}
+                    </div>
                 </div>
             </div>
         </div>

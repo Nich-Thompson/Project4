@@ -235,6 +235,9 @@
                                                 </div>
                                             @endforeach
                                         @endif
+                                            <div class="mt-4 ml-2">
+                                                {{$locations->links()}}
+                                            </div>
                                     </div>
                                 </div>
                             </div>

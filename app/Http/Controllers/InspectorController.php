@@ -20,7 +20,7 @@ class InspectorController extends Controller
             'roles', function ($q) {
             $q->where('name', 'inspecteur');
         }
-        )->orderBy('first_name', 'ASC')->orderBy('last_name', 'ASC')->get();
+        )->orderBy('first_name', 'ASC')->orderBy('last_name', 'ASC')->cursorPaginate(10);
         return view('admin.inspector.index', [
             'inspectors' => $inspectors
         ]);
@@ -98,7 +98,7 @@ class InspectorController extends Controller
 
     public function archives()
     {
-        $inspectors = User::onlyTrashed()->orderBy('deleted_at', 'ASC')->get();
+        $inspectors = User::onlyTrashed()->orderBy('deleted_at', 'ASC')->cursorPaginate(10);
         return view('admin.inspector.archives', [
             'inspectors' => $inspectors,
         ]);

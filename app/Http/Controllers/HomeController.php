@@ -21,9 +21,10 @@ class HomeController extends Controller
     }
 
     public function helpInspector(){
-
+        return view('inspector.help-inspector');
     }
-    public function helpAdmin(){
 
+    public function helpAdmin(){
+        return view('admin.help-admin');
     }
 }

@@ -68,6 +68,9 @@
                                 </div>
                             @endforeach
                         @endif
+                            <div class="mt-4 ml-2">
+                                {{$inspectors->links()}}
+                            </div>
                     </div>
                 </div>
             </div>

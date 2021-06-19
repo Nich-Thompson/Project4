@@ -52,6 +52,9 @@
                                 <span hidden>{{ $i-- }}</span>
                             @endforeach
                         @endif
+                            <div class="mt-4 ml-2">
+                                {{$templates->links()}}
+                            </div>
                     </div>
                     <br>
                     <a href="{{URL::to('/template')}}" class="btn btn-default"

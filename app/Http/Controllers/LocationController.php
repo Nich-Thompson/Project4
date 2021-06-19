@@ -83,7 +83,7 @@ class LocationController extends Controller
     }
 
     public function archives($id) {
-        $locations = Location::onlyTrashed()->where('customer_id','=', $id)->orderBy('deleted_at', 'ASC')->get();
+        $locations = Location::onlyTrashed()->where('customer_id','=', $id)->orderBy('deleted_at', 'ASC')->cursorPaginate(10);
         return view('admin.customer.locations.archives', [
             'locations' => $locations,
             'customer_id' => $id

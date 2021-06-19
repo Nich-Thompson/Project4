@@ -52,6 +52,9 @@
                                 </div>
                             @endforeach
                         @endif
+                            <div class="mt-4 ml-2">
+                                {{$inspections->links()}}
+                            </div>
                     </div>
                 </div>
             </div>
