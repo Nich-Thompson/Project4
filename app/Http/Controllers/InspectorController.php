@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreInspectorRequest;
 use App\Http\Requests\UpdateInspectorRequest;
+use App\Mail\InspectorAccountEmail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use phpDocumentor\Reflection\Project;
 
 class InspectorController extends Controller
@@ -42,6 +44,11 @@ class InspectorController extends Controller
         ]);
 
         $inspecteur->assignRole('inspecteur');
+
+        $data = ["firstname" => $request->input('first_name'), "lastname" => $request->input('last_name'),
+            "email" => $request->input('email'), "password" => $request->input('password')];
+
+        Mail::to($request->input('email'))->send(new InspectorAccountEmail($data));
 
         return redirect()->route('getInspectorIndex')->with('success', "De inspecteur is succesvol aangemaakt!");
     }
