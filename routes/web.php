@@ -68,6 +68,7 @@ Route::prefix('inspection')->group(function () {
     Route::get('/{id}/edit', 'InspectionController@edit')->middleware(['role:admin|inspecteur'])->name('getInspectionEdit');
     Route::post('/{id}/edit', 'InspectionController@update')->middleware(['role:admin|inspecteur'])->name('postInspectionEdit');
     Route::get('/{id}/{location_id}', 'InspectionController@index')->middleware(['role:admin|inspecteur'])->name('getInspectionIndex');
+    Route::post('/{id}/{location_id}', 'InspectionController@filteredIndex')->middleware(['role:admin|inspecteur'])->name('postInspectionIndex');
     Route::get('/{customer_id}/{location_id}/choose_template', 'InspectionController@choose_template')->middleware(['role:inspecteur'])->name('getChooseTemplate');
     Route::get('/inspect/{id}/{template_id}/{type}', 'InspectionController@inspect')->middleware(['role:admin|inspecteur'])->name('getInspection');
     Route::get('/{customer_id}/{location_id}/{template_id}/create', 'InspectionController@create')->middleware(['role:admin|inspecteur'])->name('getInspectionCreate');
