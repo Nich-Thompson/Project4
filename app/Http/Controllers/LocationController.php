@@ -12,13 +12,15 @@ use Illuminate\Http\Request;
 class LocationController extends Controller
 {
 
-    public function create($id) {
+    public function create($id)
+    {
         return view('admin.customer.locations.create', [
             'customer_id' => $id
         ]);
     }
 
-    public function store(StoreLocationRequest $request, $id) {
+    public function store(StoreLocationRequest $request, $id)
+    {
         $name = $request->input('name');
         $city = $request->input('city');
         $street = $request->input('street');
@@ -35,12 +37,13 @@ class LocationController extends Controller
             'building_number' => $building_number,
             'customer_id' => $id
         ]);
-        return redirect(route('getCustomerEdit', $id));
+        return redirect(route('getCustomerEdit', $id))->with('success', "De locatie is succesvol aangemaakt!");
     }
 
-    public function edit($id, $location_id) {
+    public function edit($id, $location_id)
+    {
         $location = Location::find($location_id);
-        if($location === null) {
+        if ($location === null) {
             abort(404, 'location with that ID does not exist');
         }
         return view('admin.customer.locations.edit', [
@@ -49,7 +52,8 @@ class LocationController extends Controller
         ]);
     }
 
-    public function update($id, $location_id, StoreLocationRequest $request) {
+    public function update($id, $location_id, StoreLocationRequest $request)
+    {
         $location = Location::find($location_id);
 
         $location->name = $request->input('name');
@@ -62,12 +66,13 @@ class LocationController extends Controller
 
         $location->save();
 
-        return redirect(route('getCustomerEdit', $id));
+        return redirect(route('getCustomerEdit', $id))->with('success', "De locatie is succesvol bewerkt!");
     }
 
-    public function remove($id, $location_id) {
+    public function remove($id, $location_id)
+    {
         $location = Location::find($location_id);
-        if($location === null) {
+        if ($location === null) {
             abort(404, 'location with that ID does not exist');
         }
         return view('admin.customer.locations.archive', [
@@ -76,36 +81,40 @@ class LocationController extends Controller
         ]);
     }
 
-    public function archive($id, $location_id) {
+    public function archive($id, $location_id)
+    {
         $location = Location::find($location_id);
         $location->delete();
-        return redirect(route('getCustomerEdit', $id));
+        return redirect(route('getCustomerEdit', $id))->with('success', "De locatie is succesvol gearchiveerd!");
     }
 
     public function archives($id) {
         $locations = Location::onlyTrashed()->where('customer_id','=', $id)->orderBy('deleted_at', 'ASC')->cursorPaginate(10);
+
         return view('admin.customer.locations.archives', [
             'locations' => $locations,
             'customer_id' => $id
         ]);
     }
 
-    public function restore($id, $location_id) {
+    public function restore($id, $location_id)
+    {
         $location = Location::withTrashed()->find($location_id);
         $location->restore();
-        return redirect(route('getLocationArchives', $id));
+        return redirect(route('getLocationArchives', $id))->with('success', "De locatie is succesvol hersteld!");
     }
 
-    public function deletes($id){
-        $locations = Location::onlyTrashed()->where('customer_id','=', $id)->orderBy('deleted_at', 'ASC')->get();
-        foreach($locations as $location){
+    public function deletes($id)
+    {
+        $locations = Location::onlyTrashed()->where('customer_id', '=', $id)->orderBy('deleted_at', 'ASC')->get();
+        foreach ($locations as $location) {
             $location->forceDelete();
         }
-        return redirect(route('getCustomerEdit', $id));
+        return redirect(route('getCustomerEdit', $id))->with('success', "Het locatie archief van deze klant is succesvol opgeschoond!");
     }
 
-    public function delete($id) {
-
+    public function delete($id)
+    {
         return view('admin.customer.locations.delete',
             ['customer_id' => $id]
         );

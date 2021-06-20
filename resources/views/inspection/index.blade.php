@@ -39,6 +39,13 @@
                                         @endif
                                     </div>
                                     <div class="d-flex flex-column justify-content-end w-50 text-right pb-2">
+                                        @if(is_null($inspection->locked))
+                                            <a
+                                                href="{{ route('getInspectionCopy', $inspection->id) }}"
+                                                title="Inspectie kopiëren">
+                                                Kopiëer
+                                            </a>
+                                        @endif
                                         <a id="{{$inspection->id}}"
                                            href="{{URL::to('/inspection/'.$inspection->id.'/edit') /*route('getInspectionEdit', $inspection->id)*/ }}"
                                            title="Inspectie openen">

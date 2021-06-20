@@ -23,6 +23,7 @@ function showValues(){
             value_id = value.list_value_id;
         }
     });
+    let $order = 10;
     for(let index = 1; index < sublistvalues.length; index++){
         showValue = null;
         sublistvalues[index].forEach(value => {
@@ -32,7 +33,8 @@ function showValues(){
         });
         if(showValue){
             const formgroup = document.createElement('div');
-            formgroup.className = 'form-group';
+            formgroup.className = 'form-group order-' + $order;
+            $order--;
             const label = document.createElement('label');
             label.textContent = getList(showValue.list_model_id).name;
             const value = document.createElement('input');

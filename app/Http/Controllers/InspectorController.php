@@ -50,7 +50,7 @@ class InspectorController extends Controller
 
         Mail::to($request->input('email'))->send(new InspectorAccountEmail($data));
 
-        return redirect()->route('getInspectorIndex');
+        return redirect()->route('getInspectorIndex')->with('success', "De inspecteur is succesvol aangemaakt!");
     }
 
     public function edit($id)
@@ -74,7 +74,7 @@ class InspectorController extends Controller
 
         $user->save();
 
-        return redirect()->route('getInspectorIndex');
+        return redirect()->route('getInspectorIndex')->with('success', "De klant is succesvol bewerkt!");
     }
 
     public function remove($id)
@@ -93,7 +93,7 @@ class InspectorController extends Controller
     {
         $inspector = User::find($id);
         $inspector->delete();
-        return redirect(route('getInspectorIndex'));
+        return redirect(route('getInspectorIndex'))->with('success', "De inspecteur is succesvol gearchiveerd!");
     }
 
     public function archives()
@@ -107,6 +107,6 @@ class InspectorController extends Controller
     public function delete($id)
     {
         $user = User::find($id);
-        return view('admin.inspector.archive', ['user' => $user, 'id' => $id]);
+        return view('admin.inspector.archive', ['user' => $user, 'id' => $id])->with('success', "De inspecteur is succesvol verwijderd!");
     }
 }

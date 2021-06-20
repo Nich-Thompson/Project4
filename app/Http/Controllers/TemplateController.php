@@ -24,7 +24,7 @@ class TemplateController extends Controller
         $inspection_types = InspectionType::all();
         $lists = ListModel::all();
 
-        foreach ($lists as $list){
+        foreach ($lists as $list) {
             $list->is_main_list = $list->sublist()->first() == null;
         }
 
@@ -63,7 +63,7 @@ class TemplateController extends Controller
             'inspection_type_id' => $request->input('type_id'),
             'json' => json_encode($json)
         ]);
-        return redirect(route('getTemplateIndex'));
+        return redirect(route('getTemplateIndex'))->with('success', "De template is succesvol aangemaakt!");
     }
 
     /**
@@ -92,7 +92,7 @@ class TemplateController extends Controller
 
         $inspection_types->forget($dbtemplate->inspection_type()->id - 1);
 
-        foreach ($lists as $list){
+        foreach ($lists as $list) {
             $list->is_main_list = $list->sublist()->first() == null;
         }
 

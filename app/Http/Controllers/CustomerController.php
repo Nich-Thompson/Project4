@@ -13,6 +13,7 @@ class CustomerController extends Controller
     public function index()
     {
         $customers = Customer::orderBy('name', 'ASC')->cursorPaginate(10);
+        $customers = Customer::orderBy('name', 'ASC')->get();
         return view('admin.customer.index', [
             'customers' => $customers,
         ]);
@@ -57,7 +58,7 @@ class CustomerController extends Controller
             'contact_phone_number' => $contact_phone_number,
             'contact_email' => $contact_email,
         ]);
-        return redirect(route('getCustomerIndex'));
+        return redirect(route('getCustomerIndex'))->with('success', "De klant is succesvol aangemaakt!");
     }
 
     public function edit($id)
@@ -92,7 +93,7 @@ class CustomerController extends Controller
 
         $customer->save();
 
-        return redirect(route('getCustomerIndex', $id));
+        return redirect(route('getCustomerIndex', $id))->with('success', "De klant is succesvol aangepast!");
     }
 
     public function remove($id)
@@ -111,7 +112,7 @@ class CustomerController extends Controller
     {
         $customer = Customer::find($id);
         $customer->delete();
-        return redirect(route('getCustomerIndex'));
+        return redirect(route('getCustomerIndex'))->with('success', "De klant is succesvol gearchiveerd!");
     }
 
     public function archives()
@@ -126,7 +127,7 @@ class CustomerController extends Controller
     {
         $customer = Customer::withTrashed()->find($id);
         $customer->restore();
-        return redirect(route('getCustomerArchives'));
+        return redirect(route('getCustomerArchives'))->with('success', "De klant is succesvol hersteld!");
     }
 
     public function deletes()
@@ -135,7 +136,7 @@ class CustomerController extends Controller
         foreach ($customers as $customer) {
             $customer->forceDelete();
         }
-        return redirect(route('getCustomerIndex'));
+        return redirect(route('getCustomerIndex'))->with('success', "Het klanten archief is opgeschoond!");
     }
 
     public function delete()

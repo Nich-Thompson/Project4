@@ -35,7 +35,7 @@ class InspectionTypeController extends Controller
             'icon_id' => $request->input('icon_id'),
         ]);
 
-        return redirect()->route('getInspectionTypeIndex');
+        return redirect()->route('getInspectionTypeIndex')->with('success', "Het inspectietype is succesvol aangemaakt!");
     }
 
     public function edit($id)
@@ -59,13 +59,13 @@ class InspectionTypeController extends Controller
 
         $type->save();
 
-        return redirect()->route('getInspectionTypeIndex');
+        return redirect()->route('getInspectionTypeIndex')->with('success', "Het inspectietype is succesvol bewerkt!");
     }
 
     public function delete($id)
     {
         $type = InspectionType::find($id);
-        return view('inspectiontypes.archive', ['type'=>$type, 'id'=>$id]);
+        return view('inspectiontypes.archive', ['type' => $type, 'id' => $id]);
     }
 
     public function destroy($id, Request $request)
@@ -73,6 +73,6 @@ class InspectionTypeController extends Controller
         $type = InspectionType::find($id);
         $type->delete();
 
-        return redirect()->route('getInspectionTypeIndex');
+        return redirect()->route('getInspectionTypeIndex')->with('success', "Het inspectietype is succesvol verwijderd!");
     }
 }
