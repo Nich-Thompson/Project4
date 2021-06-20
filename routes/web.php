@@ -21,10 +21,13 @@ Route::get('/', function () {
 Route::group(['middleware' => ['role:admin|inspecteur']], function () {
     Route::get('/home', 'HomeController@index')->name('getHomeIndex');
 });
-
+//Help routes
+Route::get('/Inspecteur-Handleiding', 'HomeController@helpInspector')->middleware(['role:inspecteur'])->name('getInspectorHelp');
+Route::get('/Admin-Handleiding', 'HomeController@helpAdmin')->middleware(['role:admin'])->name('getAdminHelp');
 //Customer routes
 Route::prefix('customer')->group(function () {
     Route::get('/', 'CustomerController@index')->middleware(['role:admin|inspecteur'])->name('getCustomerIndex');
+    Route::get('/search', 'CustomerController@search')->middleware(['role:admin|inspecteur'])->name('getSearchCustomers');
     Route::get('/create', 'CustomerController@create')->middleware(['role:admin'])->name('getCustomerCreate');
     Route::post('/create', 'CustomerController@store')->middleware(['role:admin'])->name('postCustomerCreate');
     Route::get('/{id}/edit', 'CustomerController@edit')->middleware(['role:admin|inspecteur'])->name('getCustomerEdit');

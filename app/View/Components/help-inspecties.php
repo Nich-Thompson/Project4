@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class HelpInspector extends Component
+class help-inspecties extends Component
 {
     /**
      * Create a new component instance.
@@ -19,10 +19,10 @@ class HelpInspector extends Component
     /**
      * Get the view / contents that represent the component.
      *
-     * @return \Illuminate\Contracts\View\View|string
+     * @return \Illuminate\Contracts\View\View|\Closure|string
      */
     public function render()
     {
-        return view('components.help-inspector');
+        return view('components.help-inspecties');
     }
 }

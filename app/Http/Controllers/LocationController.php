@@ -88,9 +88,9 @@ class LocationController extends Controller
         return redirect(route('getCustomerEdit', $id))->with('success', "De locatie is succesvol gearchiveerd!");
     }
 
-    public function archives($id)
-    {
-        $locations = Location::onlyTrashed()->where('customer_id', '=', $id)->orderBy('deleted_at', 'ASC')->get();
+    public function archives($id) {
+        $locations = Location::onlyTrashed()->where('customer_id','=', $id)->orderBy('deleted_at', 'ASC')->cursorPaginate(10);
+
         return view('admin.customer.locations.archives', [
             'locations' => $locations,
             'customer_id' => $id

@@ -151,7 +151,7 @@
                             <div class="bg-white overflow-hidden shadow-sm">
                                 <div class="p-4 bg-white border-b border-gray-200">
                                     <h2 class="float-left h2">Locatie overzicht</h2>
-
+                                    @include('components.help-locatie')
                                     <a href="{{URL::to('/customer/'.$id.'/location/create')}}"
                                        class="float-right btn border" title="Locatie toevoegen">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -235,6 +235,9 @@
                                                 </div>
                                             @endforeach
                                         @endif
+                                            <div class="mt-4 ml-2">
+                                                {{$locations->links()}}
+                                            </div>
                                     </div>
                                 </div>
                             </div>

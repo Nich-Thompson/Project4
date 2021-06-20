@@ -12,7 +12,16 @@ class CustomerController extends Controller
 {
     public function index()
     {
-        $customers = Customer::orderBy('name', 'ASC')->get();
+        $customers = Customer::orderBy('name', 'ASC')->cursorPaginate(10);
+        return view('admin.customer.index', [
+            'customers' => $customers,
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        $customers = Customer::query()->where('name', 'LIKE', '%' . $request->searchTerm . '%')->cursorPaginate(100);
+
         return view('admin.customer.index', [
             'customers' => $customers,
         ]);
@@ -54,9 +63,9 @@ class CustomerController extends Controller
     public function edit($id)
     {
         $customer = Customer::find($id);
-        $locations = Location::query()->where('customer_id', '=', $id)->get();
+        $locations = Location::query()->where('customer_id', '=', $id)->cursorPaginate(5);
         if ($customer === null) {
-            abort(404, 'Customer with that ID does not exist');
+            abort(404, 'customer with that ID does not exist');
         }
         return view('admin.customer.edit', [
             'locations' => $locations,
@@ -107,7 +116,7 @@ class CustomerController extends Controller
 
     public function archives()
     {
-        $customers = Customer::onlyTrashed()->orderBy('deleted_at', 'ASC')->get();
+        $customers = Customer::onlyTrashed()->orderBy('deleted_at', 'ASC')->cursorPaginate(10);
         return view('admin.customer.archives', [
             'customers' => $customers,
         ]);

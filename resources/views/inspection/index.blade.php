@@ -11,6 +11,7 @@
             <div class="bg-white overflow-hidden shadow-sm">
                 <div class="p-4 bg-white border-b border-gray-200">
                     <h1 class="float-left h2">Inspecties overzicht</h1>
+                    @include('components.help-inspecties')
                     <p class="mb-5"></p>
                     <hr/>
                     {{--                    <p class="font-italic">Zoek op Inspectietype</p>--}}
@@ -59,6 +60,9 @@
                                 </div>
                             @endforeach
                         @endif
+                            <div class="mt-4 ml-2">
+                                {{$inspections->links()}}
+                            </div>
                     </div>
                 </div>
             </div>
