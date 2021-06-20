@@ -6,6 +6,7 @@
     <title>Onderhoudsrapport</title>
 </head>
 <style>
+
     .headerWrapper {
         background-color: {{$inspection_type->color}};
         border-radius: 10px 75px 68px 10px;
@@ -23,7 +24,7 @@
             </div>
         </div>
         <div class="col">
-            <a class="round"alt="type">{!! $icon->unicode !!}</a>
+            <div class="round fa"> &#x{{$icon->unicode }}</div>
         </div>
     </div>
 </div>
@@ -36,7 +37,6 @@
     <div class="CompanyInfo">
         <h3>{{$customer->name}}</h3>
         <br>
-
         <br>
         <p>Uitvoerdatum:            {{$inspection->created_at}}</p>
         <p>Uitgevoerd door:         {{$user->first_name}} {{$user->last_name}}</p>
@@ -72,10 +72,5 @@
         </table>
     </div>
 </div>
-<script>
-    window.myArray = @json([$inspection])
-</script>
-
-<script src="{{ asset('js/view-inspection.js') }}"></script>
 </body>
 </html>

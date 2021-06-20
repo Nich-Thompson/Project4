@@ -196,6 +196,8 @@ class InspectionController extends Controller
     public function exportPDF($id){
 
         $inspection = Inspection::find($id);
+
+
         $customer = Customer::find($inspection->customer_id);
         $user = User::find($inspection->user_id);
         $template = Template::find($inspection->template_id);
@@ -203,6 +205,9 @@ class InspectionController extends Controller
         $user = User::find($inspection->user_id);
         $inspection_type = InspectionType::find($template->inspection_type_id);
         $icon = Icon::find($inspection_type->icon_id);
+        $inspection->json = json_decode($inspection->json, true);
+        $outputs = $inspection['text'];
+
 
         $lists = [];
         foreach (ListModel::all() as $list) {
@@ -218,13 +223,15 @@ class InspectionController extends Controller
         }
         $lists = (object)$lists;
 
+
         $pdf = PDF::loadView('inspection.pdf', ['inspection'=>$inspection,
             'customer'=>$customer,
             'inspection_type'=>$inspection_type,
             'template'=>$template,
             'lists'=>$lists,
             'user'=>$user,
-            'icon'=>$icon])->setPaper('a4', 'landscape');
+            'icon'=>$icon,
+            ])->setPaper('a4', 'landscape');
         return $pdf->stream();
     }
 
