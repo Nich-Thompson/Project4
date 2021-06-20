@@ -13,7 +13,6 @@ class CustomerController extends Controller
     public function index()
     {
         $customers = Customer::orderBy('name', 'ASC')->cursorPaginate(10);
-        $customers = Customer::orderBy('name', 'ASC')->get();
         return view('admin.customer.index', [
             'customers' => $customers,
         ]);
