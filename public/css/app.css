@@ -10942,3 +10942,12 @@ a.text-dark:focus {
 .fontawesomeselect {
     font-family: fontAwesome
 }
+
+.draggable {
+    cursor: move;
+}
+
+.draggable.dragging {
+    opacity: .5;
+}
+
