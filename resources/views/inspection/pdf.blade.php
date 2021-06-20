@@ -72,5 +72,10 @@
         </table>
     </div>
 </div>
+<script>
+    window.myArray = @json([$inspection])
+</script>
+
+<script src="{{ asset('js/view-inspection.js') }}"></script>
 </body>
 </html>
