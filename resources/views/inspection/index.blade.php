@@ -46,7 +46,7 @@
                                     </div>
 
                                     <div class="d-flex justify-content-end w-50 text-right pb-2">
-                                        @if(Auth::user()->hasRole('inspecteur'))
+                                        @if(Auth::user()->hasRole('admin'))
                                         <a href="{{route('getInspectionPDF',$inspection->id)}}" class="fa fa-file-pdf-o align-self-center pr-3 text-dark pdf-icon"></a>
                                         @endif
                                         @if(is_null($inspection->locked))
