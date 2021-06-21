@@ -231,6 +231,7 @@ class InspectionController extends Controller
         $inspection_type = InspectionType::find($template->inspection_type_id);
         $icon = Icon::find($inspection_type->icon_id);
         $inspection->json = json_decode($inspection->json, true);
+        dd($inspection->json);
 
         $lists = [];
         foreach (ListModel::all() as $list) {
@@ -244,6 +245,7 @@ class InspectionController extends Controller
                 array_push($lists[$list->id]->values, array_reverse($valueLink));
             }
         }
+
         $lists = (object)$lists;
 
 
