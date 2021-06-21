@@ -38,7 +38,7 @@
                                 <div class="row m-2 p-3 rounded border border-light shadow-sm bg-white">
                                     <div class="d-flex flex-column w-50">
                                         <div
-                                            class="h5 m-0 fw-bold">{{ date('d-m-Y', strtotime($inspection->created_at)).' - Template: '.$inspection->template_id}}</div>
+                                            class="h5 m-0 fw-bold">{{ date('d-m-Y', strtotime($inspection->created_at)).' - Template: '.$inspection->template()->inspection_type()->name}}</div>
                                         @if(!is_null($inspection->locked))
                                             <p class="text-danger">Nog niet uitgechecked
                                                 door {{$users->firstWhere('id',$inspection->locked)->first_name . " " . $users->firstWhere('id',$inspection->locked)->last_name}}</p>

@@ -24,4 +24,8 @@ class Inspection extends Model
     {
         return User::where('id', $this->user_id)->first();
     }
+
+    public function template(){
+        return Template::where('id', $this->template_id)->first();
+    }
 }
