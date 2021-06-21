@@ -2,7 +2,7 @@
   "id": "fa2081a7-4033-48a4-bb3b-3bc16a4bf1a1",
   "version": "2.0",
   "name": "Inspectietool",
-  "url": "http://127.0.0.1:8000",
+  "url": "http://project4.test",
   "tests": [{
     "id": "446eac24-3d59-4481-a038-0c355ae70810",
     "name": "1. AdminCreate",
@@ -32,19 +32,19 @@
       ],
       "value": ""
     }, {
+      "id": "bef0751b-3471-4a01-9d1c-1c65264198ee",
+      "comment": "",
+      "command": "type",
+      "target": "id=email",
+      "targets": [],
+      "value": "admin@inspectietool.nl"
+    }, {
       "id": "d4ea46ae-fa6d-4a9a-be92-79bff66f18ba",
       "comment": "",
-      "command": "click",
+      "command": "type",
       "target": "id=password",
-      "targets": [
-        ["id=password", "id"],
-        ["name=password", "name"],
-        ["css=#password", "css:finder"],
-        ["xpath=//input[@id='password']", "xpath:attributes"],
-        ["xpath=//div[@id='app']/main/div/div/div/div/div[2]/form/div[2]/div/input", "xpath:idRelative"],
-        ["xpath=//div[2]/div/input", "xpath:position"]
-      ],
-      "value": ""
+      "targets": [],
+      "value": "password"
     }, {
       "id": "ce943fe4-04a9-42c3-8226-213eac285d9b",
       "comment": "",
@@ -1444,6 +1444,13 @@
       ],
       "value": "inspector@inspectietool.nl"
     }, {
+      "id": "530af309-fb12-4c03-b620-6aaeac6f18fd",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [],
+      "value": "password"
+    }, {
       "id": "3a4578ee-705c-49da-a3b3-bd7f1782ee5e",
       "comment": "",
       "command": "click",
@@ -1876,6 +1883,20 @@
       "targets": [],
       "value": ""
     }, {
+      "id": "2261c294-cf80-4012-91b5-4929e0353d2b",
+      "comment": "",
+      "command": "type",
+      "target": "id=email",
+      "targets": [],
+      "value": "admin@inspectietool.nl"
+    }, {
+      "id": "1d40c062-a988-4abd-8b37-1c0822108d3c",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [],
+      "value": "password"
+    }, {
       "id": "5ed11c1a-b14f-4c57-a8db-10bdbe570a4f",
       "comment": "",
       "command": "click",
@@ -1932,6 +1953,6 @@
     "timeout": 300,
     "tests": ["446eac24-3d59-4481-a038-0c355ae70810"]
   }],
-  "urls": ["http://127.0.0.1:8000/"],
+  "urls": ["http://127.0.0.1:8000/", "http://project4.test/"],
   "plugins": []
 }
