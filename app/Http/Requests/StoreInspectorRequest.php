@@ -37,8 +37,8 @@ class StoreInspectorRequest extends FormRequest
     {
         return [
             'password.same' => 'De wachtwoorden komen niet overeen.',
-            'password.min' => 'Je wachtwoord moet minstens 6 tekens lang zijn.',
-            'password.max' => 'Je wachtwoord mag maximaal 45 tekens lang zijn.',
+            'password.min' => 'Het wachtwoord moet minstens 6 tekens lang zijn.',
+            'password.max' => 'Het wachtwoord mag maximaal 45 tekens lang zijn.',
             'email.max' => 'Je e-mailadres is te lang.',
             'first_name.max' => 'Je voornaam is te lang',
             'last_name.max' => 'Je voornaam is te lang',
@@ -57,13 +57,6 @@ class StoreInspectorRequest extends FormRequest
             // Check if the email is formatted correctly
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $validator->errors()->add('field', 'Dit e-mailadres is niet correct geformatteerd.');
-            }
-
-            // Check if the phone number is valid
-            $phone = $this->phone_number;
-            $phoneNumbersOnly = preg_replace("/[^0-9]/", '', $phone);
-            if(!preg_match("/^[0-9]{10}$/", $phoneNumbersOnly)) {
-                $validator->errors()->add('field', 'Dit telefoonnummer is niet correct geformatteerd.');
             }
 
             // Check if password contains at least 1 lowercase, uppercase, number and special character

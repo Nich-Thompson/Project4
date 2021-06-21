@@ -3,13 +3,6 @@ let customerFields;
 
 window.onload = function () {
     searchInput = document.getElementById('search');
-    searchInput.addEventListener('keyup',(e) => {
-        search();
-    });
-    document.getElementById('searchBtn').addEventListener('click', (e) => {
-        e.preventDefault();
-        search();
-    })
     customerFields = document.querySelectorAll('[id=customer-field]');
 };
 
@@ -36,11 +29,11 @@ function getFilteredFields(){
 function check(customerFields){
     const nameField = customerFields.querySelector('[id=name]');
     const name = nameField.textContent.replace("Klant ", "");
-    return name.toLowerCase().includes(searchInput.value.toLowerCase());
+    return name.toLowerCase()[0].includes(searchInput.value[0].toLowerCase()) && name.toLowerCase().includes(searchInput.value.toLowerCase());
 }
 
 function showFilteredFields(filteredFields){
-    let customers = document.getElementById('customer');
+    let customers = document.getElementById('customers');
     customers.innerHTML = null;
     if(filteredFields.length === 0){
         customers.innerHTML = ' <div class="mt-4 bg-white">\n' +

@@ -1,34 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="py-12 px-4">
+        <h1>Verwijder alle klanten</h1>
 
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <span class="float-left h2">Archive {{ $customer->name }}</span>
-                    <a href="{{URL::to('/customer')}}" class="float-right btn btn-primary">Back</a>
-                    <br><br>
-                    Name: {{ $customer->name }}
-                    <br>
-                    City: {{ $customer->city }}
-                    <br>
-                    Address: {{ $customer->street }} {{ $customer->number }} {{ $customer->postal_code }}
-                    <br>
-                    Contact info:
-                    {{ $customer->contact_name }}
-                    {{ $customer->contact_phone_number }}
-                    {{ $customer->contact_email }}
-                    <br>
-                    <br>
-                    <form action="{{ route('postCustomerArchive', $id) }}" method="post">
-                        @csrf
-                        <button type="submit" class="btn btn-danger">Archive</button>
-                    </form>
-                </div>
+        <B>Weet je zeker dat je alle gearchiveerde klanten wilt verwijderen</B>?
+        <br>
+        (Bijbehorende locaties en inspecties van de klanten worden ook verwijdert)
+        <div class="row mt-3">
+            <div class="col-xs-12 col-sm-12 col-md-2 text-left">
+                <a href="{{ route('getCustomerArchives')}}" class="btn btn-default" title="Terug naar vorige pagina">Terug</a>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-10 text-left">
+                <form action="{{ route('postDeleteArchive') }}" method="post">
+                    @csrf
+                    <button type="submit" class="btn btn-primary" title="Alles verwijderen">Alles verwijderen</button>
+                </form>
+                {{--<a href="{{ route('postCustomerDelete', $id) }}" class="btn btn-primary">Archiveren</a>--}}
             </div>
         </div>
     </div>
 @endsection
-
-
