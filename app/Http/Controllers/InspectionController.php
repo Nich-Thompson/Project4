@@ -231,7 +231,6 @@ class InspectionController extends Controller
         $inspection_type = InspectionType::find($template->inspection_type_id);
         $icon = Icon::find($inspection_type->icon_id);
         $inspection->json = json_decode($inspection->json, true);
-        dd($inspection->json);
 
         $lists = [];
         foreach (ListModel::all() as $list) {
