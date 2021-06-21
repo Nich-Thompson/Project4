@@ -41,14 +41,18 @@
         <h3>{{$customer->name}}</h3>
         <br>
         <br>
-        <p>Uitvoerdatum:            {{$inspection->created_at}}</p>
-        <p>Uitgevoerd door:         {{$user->first_name}} {{$user->last_name}}</p>
-        <p>Aantal gecontroleerd:    {{count($inspection->json)}}</p>
+        <p>Uitvoerdatum: {{$inspection->created_at}}</p>
+        <p>Uitgevoerd door: {{$user->first_name}} {{$user->last_name}}</p>
+        @if($inspection->json)
+            <p>Aantal gecontroleerd: {{count($inspection->json)}}</p>
+        @else
+            <p>Aantal gecontroleerd: 0</p>
+        @endif
     </div>
     <hr class="mt-20">
     <span></span>
     <div class="next-page">
-
+        @if($inspection->json)
         <table class="table">
             <thead>
             <tr>
@@ -69,32 +73,39 @@
             </tr>
             </thead>
             <tbody id="inspections">
-            @foreach($inspection->json as $output)
-                <tr>
-                    @foreach($output as $value)
+                @foreach($inspection->json as $output)
+                    <tr>
+                        @foreach($output as $value)
 
                             @if($value['value'] === true)
                                 <td class="text-success font-weight-bold">
                                     Ja
                                 </td>
-                                @elseif($value['value'] === false)
+                            @elseif($value['value'] === false)
                                 <td class="text-danger font-weight-bold">
                                     Nee
                                 </td>
-                                @elseif($value['type'] === 'datetime-local')
-                                <td  type="date">
-                                 {{date('d-m-Y h:m',strtotime($value['value']))}}
+                            @elseif($value['type'] === 'datetime-local')
+                                @if($value['value'] != null)
+                                <td type="date">
+                                    {{date('d-m-Y h:m',strtotime($value['value']))}}
                                 </td>
                                 @else
+                                    <td></td>
+                                    @endif
+                            @else
                                 <td>
                                     {{$value['value']}}
                                 </td>
-                        @endif
-                    @endforeach
-                </tr>
+                            @endif
+                        @endforeach
+                    </tr>
                 @endforeach
             </tbody>
         </table>
+        @else
+            <p>Er zijn geen inspectieregels</p>
+        @endif
     </div>
 </div>
 </body>
