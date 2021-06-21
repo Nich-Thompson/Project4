@@ -244,6 +244,7 @@ class InspectionController extends Controller
                 array_push($lists[$list->id]->values, array_reverse($valueLink));
             }
         }
+
         $lists = (object)$lists;
 
 
