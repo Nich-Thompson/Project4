@@ -36,7 +36,6 @@
     <div class="Logos">
         <p>In opdracht van:</p>
         {{$customer->name}}
-
     </div>
     <div class="CompanyInfo">
         <h3>{{$customer->name}}</h3>
@@ -68,17 +67,6 @@
                 <th>Opmerkingen</th>
                 <th>Goedgekeurd</th>
             </tr>
-            if (value.value === true) {
-            td.textContent = "Ja";
-            td.className = "text-success font-weight-bold";
-            } else if (value.value === false) {
-            td.textContent = "Nee";
-            td.className = "text-danger font-weight-bold";
-            } else if (value.type === 'datetime-local') {
-            td.textContent = new Date(value.value).toLocaleString();
-            } else {
-            td.textContent = value.value;
-            }
             </thead>
             <tbody id="inspections">
             @foreach($inspection->json as $output)
