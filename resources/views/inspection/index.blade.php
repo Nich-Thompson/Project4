@@ -14,13 +14,19 @@
                     @include('components.help-inspecties')
                     <p class="mb-5"></p>
                     <hr/>
-                    {{--                    <p class="font-italic">Zoek op Inspectietype</p>--}}
-                    {{--                    <label>Selecteer Inspectietype</label>--}}
-                    {{--                    <select>--}}
-                    {{--                        @foreach($inspectionTypes as $inspectionType)--}}
-                    {{--                            <option class="form-select">{{$inspectionType->name}}</option>--}}
-                    {{--                        @endforeach--}}
-                    {{--                    </select>--}}
+                    <p class="font-italic">Filter op Inspectietype</p>
+                    <label>Selecteer Inspectietype</label>
+                    <form method="POST" action="{{route('postInspectionIndex', [$customer_id, $location_id]) }}">
+                        @csrf
+                        <select class="form-select d-inline-block w-25" name="inspectionType">
+                            <option>Geen</option>
+                            @foreach($inspectionTypes as $inspectionType)
+                                <option class="form-select">{{$inspectionType->name}}</option>
+                            @endforeach
+                        </select>
+                        <input class="btn btn-primary d-inline-block ml-2" type="submit" value="Filter">
+                    </form>
+
 
                     <div id="customers">
                         @if(count($inspections) === 0)
@@ -32,7 +38,7 @@
                                 <div class="row m-2 p-3 rounded border border-light shadow-sm bg-white">
                                     <div class="d-flex flex-column w-50">
                                         <div
-                                            class="h5 m-0 fw-bold">{{ date('d-m-Y', strtotime($inspection->created_at))}}</div>
+                                            class="h5 m-0 fw-bold">{{ date('d-m-Y', strtotime($inspection->created_at)).' - Template: '.$inspection->template_id}}</div>
                                         @if(!is_null($inspection->locked))
                                             <p class="text-danger">Nog niet uitgechecked
                                                 door {{$users->firstWhere('id',$inspection->locked)->first_name . " " . $users->firstWhere('id',$inspection->locked)->last_name}}</p>

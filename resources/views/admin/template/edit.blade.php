@@ -49,7 +49,7 @@
                             </div>
                         </div>
                         <a href="{{ route('getTemplateVersions', $dbtemplate->inspection_type()->id) }}" class="btn btn-default" title="Terug naar vorige pagina">Terug</a>
-                        <button type="submit" class="float-right btn btn-primary text-light" title="Aanmaken">Maak kopie aan</button>
+                        <button type="submit" class="float-right btn btn-primary text-light" title="Aanmaken">Maak een nieuwe versie aan</button>
                     </form>
                 </div>
             </div>
