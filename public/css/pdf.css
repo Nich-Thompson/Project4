@@ -42,7 +42,9 @@ h2{
 
 }
 .align-icon{
-    margin-left: 35px;
+    margin-left: 10px;
+    transform: translate(20%, 5%);
+    margin-top: -5px;
 }
 
 .Logos{

@@ -24,6 +24,7 @@ Route::group(['middleware' => ['role:admin|inspecteur']], function () {
 //Help routes
 Route::get('/Inspecteur-Handleiding', 'HomeController@helpInspector')->middleware(['role:inspecteur'])->name('getInspectorHelp');
 Route::get('/Admin-Handleiding', 'HomeController@helpAdmin')->middleware(['role:admin'])->name('getAdminHelp');
+
 //Customer routes
 Route::prefix('customer')->group(function () {
     Route::get('/', 'CustomerController@index')->middleware(['role:admin|inspecteur'])->name('getCustomerIndex');
@@ -68,6 +69,7 @@ Route::prefix('inspector')->group(function () {
 
 //Inspection routes
 Route::prefix('inspection')->group(function () {
+    Route::post('/save/{id}', 'InspectionController@save')->middleware(['role:admin|inspecteur'])->name('saveInspectionJson');
     Route::get('/{id}/PDF', 'InspectionController@exportPDF')->middleware('role:admin|inspecteur')->name('getInspectionPDF');
     Route::get('/{id}/edit', 'InspectionController@edit')->middleware(['role:admin|inspecteur'])->name('getInspectionEdit');
     Route::post('/{id}/edit', 'InspectionController@update')->middleware(['role:admin|inspecteur'])->name('postInspectionEdit');
@@ -78,7 +80,6 @@ Route::prefix('inspection')->group(function () {
     Route::get('/{customer_id}/{location_id}/{template_id}/create', 'InspectionController@create')->middleware(['role:admin|inspecteur'])->name('getInspectionCreate');
     Route::get('/exit/{inspection_id}/{customer_id}', 'InspectionController@exit')->middleware(['role:admin|inspecteur'])->name('exitInspection');
     Route::post('/create', 'InspectionController@store')->middleware(['role:admin|inspecteur'])->name('postInspectionCreate');
-    Route::post('/save/{id}', 'InspectionController@save')->middleware(['role:admin|inspecteur'])->name('saveInspectionJson');
     Route::post('/{id}/editInspector', 'InspectionController@updateInspector')->middleware(['role:admin|inspecteur'])->name('postInspectionEditInspector');
 
 });
