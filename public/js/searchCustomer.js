@@ -3,13 +3,6 @@ let customerFields;
 
 window.onload = function () {
     searchInput = document.getElementById('search');
-    searchInput.addEventListener('keyup',(e) => {
-        search();
-    });
-    document.getElementById('searchBtn').addEventListener('click', (e) => {
-        e.preventDefault();
-        search();
-    })
     customerFields = document.querySelectorAll('[id=customer-field]');
 };
 

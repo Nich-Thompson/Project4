@@ -38,7 +38,7 @@
                                 <div class="row m-2 p-3 rounded border border-light shadow-sm bg-white">
                                     <div class="d-flex flex-column w-50">
                                         <div
-                                            class="h5 m-0 fw-bold">{{ date('d-m-Y', strtotime($inspection->created_at)).' - Template: '.$inspection->template_id}}</div>
+                                            class="h5 m-0 fw-bold">{{ date('d-m-Y', strtotime($inspection->created_at)).' - Template: '.$inspection->template()->inspection_type()->name}}</div>
                                         @if(!is_null($inspection->locked))
                                             <p class="text-danger">Nog niet uitgechecked
                                                 door {{$users->firstWhere('id',$inspection->locked)->first_name . " " . $users->firstWhere('id',$inspection->locked)->last_name}}</p>
@@ -46,7 +46,9 @@
                                     </div>
 
                                     <div class="d-flex justify-content-end w-50 text-right pb-2">
+                                        @if(Auth::user()->hasRole('admin'))
                                         <a href="{{route('getInspectionPDF',$inspection->id)}}" class="fa fa-file-pdf-o align-self-center pr-3 text-dark pdf-icon"></a>
+                                        @endif
                                         @if(is_null($inspection->locked))
                                             <a class="vertical-center pl-2 pr-2"
                                                 href="{{ route('getInspectionCopy', $inspection->id) }}"
