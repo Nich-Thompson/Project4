@@ -2,6 +2,7 @@ let data = window.myArray[0];
 let inputFields = window.myArray[1];
 let dynamicLists = window.myArray[2];
 let tempInputFields = {};
+let disableSelectsAfterSubmit = [];
 const inputFieldBox = document.getElementById('input-field-box');
 let id = 0;
 
@@ -16,6 +17,7 @@ document.getElementById("offline").style.display = "none";
 function generateInputFields() {
     inputFields.unshift({label: 'Pos.', type: 'text'});
     inputFields.push({label: 'Opmerkingen', type: 'text', isCommentsList: true});
+    inputFields.push({label: 'Goedgekeurd', type: 'checkbox', default: true});
 
     inputFields.forEach(inputField => {
         id++;
@@ -50,7 +52,9 @@ function generateInputField(inputField) {
                 if (i === 0) {
                     itemsToAppend.push(createListSelect(list, false));
                 } else {
-                    itemsToAppend.push(createListSelect(list, true));
+                    const tempFormGroup = createListSelect(list, true);
+                    disableSelectsAfterSubmit.push(tempFormGroup.childNodes[1])
+                    itemsToAppend.push(tempFormGroup);
                 }
                 id++;
             }
@@ -80,6 +84,11 @@ function generateInputField(inputField) {
 
         if (inputField.type === 'checkbox') {
             input.className = 'form-check';
+            if (inputField.default !== null) {
+                if (inputField.default === true) {
+                    input.defaultChecked = true;
+                }
+            }
         } else {
             input.className = 'form-control';
         }
@@ -182,6 +191,7 @@ function getValuesForSelect(list, selected_value) {
 }
 
 function setJson() {
+    localStorage.setItem("edit", JSON.stringify("false"));
     if (data.json === "") {
         localStorage.setItem("inspections", JSON.stringify([]));
         document.getElementById("1").value = 1;
@@ -201,23 +211,27 @@ function renderData() {
 
             if (matches) {
                 const pos = parseInt(matches[0])
-                if(pos > highestPos){
+                if (pos > highestPos) {
                     highestPos = pos
                 }
             }
         });
-        document.getElementById("1").value = highestPos+1;
-        let div = document.getElementById("inspections");
+        document.getElementById("1").value = highestPos + 1;
+        let table = document.getElementById("inspections");
 
-        div.innerHTML = "";
+        table.innerHTML = "";
 
         if (!(inspections instanceof Array))
             inspections = [inspections];
 
 
-        inspections.forEach(element => {
+        inspections.forEach((element, element_key) => {
+            console.log(element)
+
             let tr = document.createElement("tr");
             for (const [key, value] of Object.entries(element)) {
+
+
                 const td = document.createElement("td");
                 if (value.value === true) {
                     td.textContent = "Ja";
@@ -243,7 +257,39 @@ function renderData() {
                 tr.append(td);
             }
 
-            div.appendChild(tr);
+            const td1 = document.createElement("td");
+
+            let edit_button = document.createElement("button");
+            edit_button.className = "btn btn-outline-info";
+            edit_button.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                      <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                                    </svg>`;
+
+            edit_button.addEventListener("click", () => {
+                editObject(element_key)
+            })
+
+            td1.append(edit_button);
+
+            const td2 = document.createElement("td");
+
+            let delete_button = document.createElement("button");
+            delete_button.className = "btn btn-outline-danger";
+            delete_button.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                      <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                      <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                    </svg>`;
+
+            delete_button.addEventListener("click", () => {
+                deleteObject(element_key)
+            })
+
+            td2.append(delete_button);
+
+            tr.append(td1);
+            tr.append(td2);
+
+            table.appendChild(tr);
         })
     }
 }
@@ -251,6 +297,7 @@ function renderData() {
 //submit form items
 document.getElementById("form").addEventListener("submit", function (event) {
     event.preventDefault();
+
     let object = {};
     for (const [key, value] of Object.entries(tempInputFields)) {
         const input = document.getElementById(key);
@@ -265,24 +312,75 @@ document.getElementById("form").addEventListener("submit", function (event) {
         } else if (value.type !== 'select') {
             input.value = '';
         }
-        // else {
-        //     input.childNodes[0].selected = true;
-        // }
     }
-    const input = document.getElementById('approved');
-    object[input.id] = {type: 'checkbox', value: input.checked};
-    document.getElementById('approved').checked = true;
+
+    disableSelectsAfterSubmit.forEach(select => {
+        select.disabled = true;
+        select.length = 0;
+    });
 
     saveNewObject(object);
-    renderData();
 });
 
 function saveNewObject(object) {
     let storage = JSON.parse(localStorage.getItem("inspections"));
+    let edit = JSON.parse(localStorage.getItem("edit"));
 
     if (!(storage instanceof Array))
         storage = [storage];
-    storage.push(object);
+
+    if (parseInt(edit) >= 0) {
+        storage[edit] = object;
+    } else {
+        storage.push(object);
+    }
+
+    sortAndStore(storage);
+    localStorage.setItem("edit", JSON.stringify("false"));
+}
+
+function deleteObject(id) {
+    let storage = JSON.parse(localStorage.getItem("inspections"));
+
+    if (!(storage instanceof Array))
+        storage = [storage];
+
+    storage.splice(id, 1);
+
+    sortAndStore(storage);
+    localStorage.setItem("edit", JSON.stringify("false"));
+}
+
+function editObject(element_key) {
+    window.scrollTo(0, 0);
+
+    localStorage.setItem("edit", JSON.stringify(element_key));
+
+    let storage = JSON.parse(localStorage.getItem("inspections"));
+
+    if (!(storage instanceof Array))
+        storage = [storage];
+
+    for (const [id, value] of Object.entries(storage[element_key])) {
+        if (value.type === "checkbox") {
+            document.getElementById(id).checked = value.value;
+        } else {
+            if (value.type === "select") {
+                let event = new Event('click', {
+                    'bubbles': true,
+                    'cancelable': false
+                });
+                document.getElementById(id).disabled = false;
+                document.getElementById(id).value = value.value;
+                document.getElementById(id).dispatchEvent(event);
+            } else {
+                document.getElementById(id).value = value.value;
+            }
+        }
+    }
+}
+
+function sortAndStore(storage) {
     storage.sort(alphaNumericSort);
 
     localStorage.setItem("inspections", JSON.stringify(storage));
@@ -290,6 +388,8 @@ function saveNewObject(object) {
     if (navigator.onLine) {
         syncData();
     }
+
+    renderData();
 }
 
 function alphaNumericSort(as, bs) {

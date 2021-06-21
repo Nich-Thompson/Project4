@@ -122,7 +122,13 @@
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 @if(Auth::user()->hasRole('inspecteur'))
-                                    @include('components.help-inspector')
+                                    <a href="{{ route('getInspectorHelp') }}" class="dropdown-item" id="btnInspector">
+                                        Help <img src="{{URL::asset('/images/helpicon.png')}}" width='15' height='15' alt="HelpIcon">
+                                    </a>
+                                @elseif(Auth::user()->hasRole('admin'))
+                                    <a href="{{ route('getAdminHelp') }}" class="dropdown-item" id="btnInspector">
+                                        Help <img src="{{URL::asset('/images/helpicon.png')}}" width='15' height='15' alt="HelpIcon">
+                                    </a>
                                 @endif
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
@@ -143,6 +149,15 @@
     </nav>
 
     <main class="container mt-4">
+        @if (session('success'))
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                </div>
+            </div>
+        @endif
         @yield('content')
     </main>
 </div>

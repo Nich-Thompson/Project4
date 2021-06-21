@@ -48,14 +48,6 @@
                                     <div class="row" id='input-field-box'>
 
                                     </div>
-
-                                    <div class="row">
-                                        <div class="form-group pl-3 col-md-4">
-                                            <label for="approved">Goedgekeurd</label>
-                                            <input type="checkbox" class="form-check" id="approved" name="approved"
-                                                   checked>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                             <br>
@@ -65,31 +57,34 @@
                             <button type="submit" class="float-right btn btn-primary text-light">Invoeren
                             </button>
                         </form>
-
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>Positie</th>
-                                @foreach($template->json as $input)
-                                    @if($input->type == "select" && $input->isCommentsList != true)
-                                        <th>{{$input -> label}}</th>
-                                        @if(count($lists->{$input->list_id}->values) != 0 && count($lists->{$input->list_id}->values[0]) > 1)
-                                            @for($x =1; $x < count($lists->{$input->list_id}->values[0]); $x++)
-                                                <th>{{$lists->{$input->list_id}->values[0][$x]->name}}</th>
-                                            @endfor
+                        <div class="tableFixHead">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Positie</th>
+                                    @foreach($template->json as $input)
+                                        @if($input->type == "select" && $input->isCommentsList != true)
+                                            <th>{{$input -> label}}</th>
+                                            @if(count($lists->{$input->list_id}->values) != 0 && count($lists->{$input->list_id}->values[0]) > 1)
+                                                @for($x =1; $x < count($lists->{$input->list_id}->values[0]); $x++)
+                                                    <th>{{$lists->{$input->list_id}->values[0][$x]->name}}</th>
+                                                @endfor
+                                            @endif
+                                        @elseif($input->type != "select")
+                                            <th>{{$input -> label}}</th>
                                         @endif
-                                    @elseif($input->type != "select")
-                                        <th>{{$input -> label}}</th>
-                                    @endif
-                                @endforeach
-                                <th>Opmerkingen</th>
-                                <th>Goedgekeurd</th>
-                            </tr>
-                            </thead>
-                            <tbody id="inspections">
+                                    @endforeach
+                                    <th>Opmerkingen</th>
+                                    <th>Goedgekeurd</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody id="inspections">
 
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

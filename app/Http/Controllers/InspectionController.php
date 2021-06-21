@@ -13,6 +13,7 @@ use App\Models\Location;
 use App\Models\Inspector;
 use App\Models\Template;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -23,7 +24,7 @@ class InspectionController extends Controller
     public function index($customer_id, $location_id)
     {
         $inspections = Inspection::query()->where('customer_id', '=', $customer_id)
-            ->where('location_id', '=', $location_id)->get()->sortByDesc("created_at");
+            ->where('location_id', '=', $location_id)->orderByDesc("created_at")->cursorPaginate(10);
         $inspectionTypes = InspectionType::all();
         $users = User::all();
 
@@ -75,7 +76,7 @@ class InspectionController extends Controller
 
         $inspection->save();
 
-        return redirect()->to("inspection/" . $customer_id . "/" . $inspection->location_id);
+        return redirect()->to("inspection/" . $customer_id . "/" . $inspection->location_id)->with('success', "De inspectie is succesvol uitgechecked!");
     }
 
     public function inspect($id, $template_id, $type)
@@ -190,7 +191,7 @@ class InspectionController extends Controller
 
         $inspection->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', "De inspecteur van de inspectie is succesvol aangepast!");
     }
 
     public function exportPDF($id){
@@ -250,6 +251,18 @@ class InspectionController extends Controller
     {
         $inspection = Inspection::find($id);
         $inspection->delete();
-        return redirect(route('getLocationIndex'));
+        return redirect(route('getLocationIndex'))->with('success', "De inspectie is succesvol gearchiveerd!");
+    }
+
+    public function copy($id)
+    {
+        $inspection = Inspection::find($id);
+        $copyInspection = $inspection->replicate();
+
+        $copyInspection->created_at = Carbon::now();
+        $copyInspection->updated_at = Carbon::now();
+        $copyInspection->save();
+
+        return redirect()->back();
     }
 }

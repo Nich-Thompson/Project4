@@ -19,4 +19,12 @@ class HomeController extends Controller
             return redirect('customer');
         }
     }
+
+    public function helpInspector(){
+        return view('inspector.help-inspector');
+    }
+
+    public function helpAdmin(){
+        return view('admin.help-admin');
+    }
 }

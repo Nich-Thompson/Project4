@@ -11,6 +11,7 @@
             <div class="bg-white overflow-hidden shadow-sm">
                 <div class="p-4 bg-white border-b border-gray-200">
                     <h1 class="float-left h2">Inspecties overzicht</h1>
+                    @include('components.help-inspecties')
                     <p class="mb-5"></p>
                     <hr/>
                     {{--                    <p class="font-italic">Zoek op Inspectietype</p>--}}
@@ -37,8 +38,19 @@
                                                 door {{$users->firstWhere('id',$inspection->locked)->first_name . " " . $users->firstWhere('id',$inspection->locked)->last_name}}</p>
                                         @endif
                                     </div>
+
                                     <div class="d-flex justify-content-end w-50 text-right pb-2">
                                         <a href="{{route('getInspectionPDF',$inspection->id)}}" class="fa fa-file-pdf-o align-self-center pr-3 text-dark pdf-icon"></a>
+
+                                    <div class="d-flex flex-column justify-content-end w-50 text-right pb-2">
+                                        @if(is_null($inspection->locked))
+                                            <a
+                                                href="{{ route('getInspectionCopy', $inspection->id) }}"
+                                                title="Inspectie kopiëren">
+                                                Kopiëer
+                                            </a>
+                                        @endif
+
                                         <a id="{{$inspection->id}}"
                                            href="{{URL::to('/inspection/'.$inspection->id.'/edit') /*route('getInspectionEdit', $inspection->id)*/ }}"
                                            title="Inspectie openen">
@@ -53,6 +65,9 @@
                                 </div>
                             @endforeach
                         @endif
+                            <div class="mt-4 ml-2">
+                                {{$inspections->links()}}
+                            </div>
                     </div>
                 </div>
             </div>
