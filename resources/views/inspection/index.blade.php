@@ -41,17 +41,15 @@
 
                                     <div class="d-flex justify-content-end w-50 text-right pb-2">
                                         <a href="{{route('getInspectionPDF',$inspection->id)}}" class="fa fa-file-pdf-o align-self-center pr-3 text-dark pdf-icon"></a>
-
-                                    <div class="d-flex flex-column justify-content-end w-50 text-right pb-2">
                                         @if(is_null($inspection->locked))
-                                            <a
+                                            <a class="vertical-center pl-2 pr-2"
                                                 href="{{ route('getInspectionCopy', $inspection->id) }}"
                                                 title="Inspectie kopiëren">
                                                 Kopiëer
                                             </a>
                                         @endif
 
-                                        <a id="{{$inspection->id}}"
+                                        <a id="{{$inspection->id}}" class="vertical-center"
                                            href="{{URL::to('/inspection/'.$inspection->id.'/edit') /*route('getInspectionEdit', $inspection->id)*/ }}"
                                            title="Inspectie openen">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"
