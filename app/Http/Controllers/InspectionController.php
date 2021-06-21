@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCustomerRequest;
 use App\Http\Requests\UpdateCustomerRequest;
+use App\Models\Icon;
 use App\Models\Inspection;
 use App\Models\Customer;
 use App\Models\InspectionType;
@@ -16,6 +17,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class InspectionController extends Controller
 {
@@ -214,6 +216,46 @@ class InspectionController extends Controller
         $inspection->save();
 
         return redirect()->back()->with('success', "De inspecteur van de inspectie is succesvol aangepast!");
+    }
+
+    public function exportPDF($id){
+
+        $inspection = Inspection::find($id);
+
+
+        $customer = Customer::find($inspection->customer_id);
+        $user = User::find($inspection->user_id);
+        $template = Template::find($inspection->template_id);
+        $template->json = json_decode($template->json);
+        $user = User::find($inspection->user_id);
+        $inspection_type = InspectionType::find($template->inspection_type_id);
+        $icon = Icon::find($inspection_type->icon_id);
+        $inspection->json = json_decode($inspection->json, true);
+
+        $lists = [];
+        foreach (ListModel::all() as $list) {
+            $lists[$list->id] = (object)['name' => $list->name, 'values' => []];
+            foreach ($list->values()->get() as $value) {
+                $valueLink = [(object)['id' => $value->model()->id, 'name' => $value->model()->name, 'value' => $value->name]];
+                while ($value->linked_value() != null) {
+                    $value = $value->linked_value();
+                    array_push($valueLink, (object)['id' => $value->model()->id, 'name' => $value->model()->name, 'value' => $value->name]);
+                }
+                array_push($lists[$list->id]->values, array_reverse($valueLink));
+            }
+        }
+        $lists = (object)$lists;
+
+
+        $pdf = PDF::loadView('inspection.pdf', ['inspection'=>$inspection,
+            'customer'=>$customer,
+            'inspection_type'=>$inspection_type,
+            'template'=>$template,
+            'lists'=>$lists,
+            'user'=>$user,
+            'icon'=>$icon,
+            ])->setPaper('a4', 'landscape');
+        return $pdf->stream();
     }
 
 
