@@ -2,6 +2,8 @@
 <html >
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+          rel="stylesheet">
     <link rel="stylesheet" href="{{public_path('css/pdf.css')}}">
     <title>Onderhoudsrapport</title>
 </head>
@@ -24,7 +26,9 @@
             </div>
         </div>
         <div class="col">
-            <div class="round fa"> &#x{{$icon->unicode }}</div>
+            <div class="round">
+                <i class="fa fa-{{$icon->name}} align-icon"></i>
+            </div>
         </div>
     </div>
 </div>
@@ -40,8 +44,7 @@
         <br>
         <p>Uitvoerdatum:            {{$inspection->created_at}}</p>
         <p>Uitgevoerd door:         {{$user->first_name}} {{$user->last_name}}</p>
-        <p>Aantal gecontroleerd:    {{count(array($lists))}}</p>
-        <p>Aantal afgekeurd:        {{count(array($lists))}}</p>
+        <p>Aantal gecontroleerd:    {{count($inspection->json)}}</p>
     </div>
     <hr class="mt-20">
     <span></span>
@@ -65,12 +68,47 @@
                 <th>Opmerkingen</th>
                 <th>Goedgekeurd</th>
             </tr>
+            if (value.value === true) {
+            td.textContent = "Ja";
+            td.className = "text-success font-weight-bold";
+            } else if (value.value === false) {
+            td.textContent = "Nee";
+            td.className = "text-danger font-weight-bold";
+            } else if (value.type === 'datetime-local') {
+            td.textContent = new Date(value.value).toLocaleString();
+            } else {
+            td.textContent = value.value;
+            }
             </thead>
             <tbody id="inspections">
+            @foreach($inspection->json as $output)
+                <tr>
+                    @foreach($output as $value)
 
+                            @if($value['value'] === true)
+                                <td class="text-success font-weight-bold">
+                                    Ja
+                                </td>
+                                @elseif($value['value'] === false)
+                                <td class="text-danger font-weight-bold">
+                                    Nee
+                                </td>
+                                @elseif($value['type'] === 'datetime-local')
+                                <td  type="date">
+                                 {{date('d-m-Y h:m',strtotime($value['value']))}}
+                                </td>
+                                @else
+                                <td>
+                                    {{$value['value']}}
+                                </td>
+                        @endif
+                    @endforeach
+                </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
 </div>
 </body>
+
 </html>
